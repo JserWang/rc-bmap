@@ -1,0 +1,25 @@
+{
+  "name": "rc-bmap",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-scripts-ts": "2.16.0",
+    "tslint-eslint-rules": "^5.3.1"
+  },
+  "scripts": {
+    "start": "react-scripts-ts start",
+    "build": "react-scripts-ts build",
+    "test": "react-scripts-ts test --env=jsdom",
+    "eject": "react-scripts-ts eject"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.1",
+    "@types/node": "^10.5.3",
+    "@types/react": "^16.4.7",
+    "@types/react-dom": "^16.0.6",
+    "typescript": "^2.9.2"
+  }
+}
