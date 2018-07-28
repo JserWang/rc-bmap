@@ -1,0 +1,4 @@
+export default {
+  METRIC: 'BMAP_UNIT_METRIC',
+  IMPERIAL: 'BMAP_UNIT_IMPERIAL',
+};
