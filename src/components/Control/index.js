@@ -1,38 +1,28 @@
 import { render as reactRender } from 'react-dom';
 import { getSize } from '../_base/util';
+import Base from '../Base';
 import CONTROL_ANCHOR from '../../constants/ControlAnchor';
 
 const top = window || global;
 
-class Control {
-  constructor(opts) {
+class Control extends Base {
+  constructor(props) {
+    super(props);
     const {
       anchor = CONTROL_ANCHOR.TOP_LEFT,
       offset = {
         width: 0,
         height: 0,
       },
-    } = opts;
-
+    } = props;
     const BaseCtrl = function(defaultAnchor, defaultOffset) {
       this.defaultAnchor = defaultAnchor;
       this.defaultOffset = defaultOffset;
     };
+
     BaseCtrl.prototype = new top.BMap.Control();
-    this.controlInstance = new BaseCtrl(top[anchor], getSize(offset.width, offset.height));
-    this.state = {};
-    this.map = top.b;
-    // 设置默认停靠位置和偏移量
-
-  }
-
-  setState = (param) => {
-    if (param !== null) {
-      this.state = Object.assign(this.state, param);
-    }
-    if (this.render) {
-      reactRender(this.render(), this.container);
-    }
+    BaseCtrl.prototype.initialize = this.initialize.bind(this);
+    this.instance = new BaseCtrl(top[anchor], getSize(offset.width, offset.height));
   }
 
   initialize() {
@@ -48,7 +38,7 @@ class Control {
   }
 
   destroy = () => {
-    this.map.removeControl(this.controlInstance);
+    this.map.removeControl(this.instance);
   }
 }
 

@@ -1,16 +1,29 @@
 {
-  "name": "map",
+  "name": "rc-bmap",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
+  "main": "lib/index.js",
+  "dependencies": {},
+  "scripts": {
+    "build:lib": "rm -rf lib && babel src -d lib",
+    "build:dist": "webpack",
+    "build": "npm run build:lib && npm run build:dist",
+    "test": "npm run build:lib && npm run build:dist && npm link & npm run examples:build",
+    "prepublish": "npm run build",
+    "pub": "npm run prepublish && npm publish",
+    "examples:build": "webpack --config ./examples/webpack.config.js",
+    "examples": "webpack-dev-server --config ./examples/webpack.config.js"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0"
   }
 }

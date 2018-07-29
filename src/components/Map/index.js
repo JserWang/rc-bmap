@@ -1,5 +1,4 @@
 import * as React from 'react';
-import './index.css';
 import PropTypes from 'prop-types';
 import { MAP_SET_OPTIONS, MAP_BOOLEAN_OPTIONS } from '../_base/options';
 import { replaceInitialToUpper, getPoint, isPoint } from '../_base/util';
@@ -33,7 +32,6 @@ export default class Map extends React.Component {
     ]),
     children: PropTypes.any,
     ak: PropTypes.string,
-    placeHolder: PropTypes.any,
     minZoom: PropTypes.number,
     maxZoom: PropTypes.number,
     defaultCursor: PropTypes.string,
@@ -86,6 +84,8 @@ export default class Map extends React.Component {
     if (renderCallBack) {
       renderCallBack();
     }
+    // 加载完地图后，强制刷新
+    this.forceUpdate();
   }
 
   processMapOptions = (props) => {
@@ -170,7 +170,6 @@ export default class Map extends React.Component {
     if (!this.map || !children) {
       return null;
     }
-
     return React.Children.map(children, (child) => {
       if (child) {
         return React.cloneElement(child);
@@ -183,7 +182,7 @@ export default class Map extends React.Component {
     const { placeHolder } = this.props;
     return (
       <div style={{ width: '100%', height: '100%' }}>
-        <div ref={this.mapContainerRef} className="mapContainer">
+        <div ref={this.mapContainerRef} style={{ width: '100%', height: '100%' }}>
           {placeHolder}
         </div>
         {this.renderChildren()}
