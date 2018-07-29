@@ -1,4 +1,4 @@
-export const MAP_EVENTS = [
+export const MAP = [
   'click',
   'dblclick',
   'rightclick',
@@ -32,4 +32,14 @@ export const MAP_EVENTS = [
   'touchmove',
   'touchend',
   'longpress',
+];
+
+export const OVERVIEW_MAP = [
+  'viewchanged',
+  'viewchanging',
+];
+
+export const GEOLOCATION =[
+  'locationSuccess',
+  'locationError',
 ];

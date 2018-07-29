@@ -1,7 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { MAP_SET_OPTIONS, MAP_BOOLEAN_OPTIONS } from '../_base/options';
-import { replaceInitialToUpper, getPoint, isPoint } from '../_base/util';
+import { replaceInitialToUpper, getPoint, isPoint, bindEvents } from '../_base/util';
 import { MAP_EVENTS } from '../_base/events';
 
 const top = window || global;
@@ -80,7 +80,7 @@ export default class Map extends React.Component {
     });
     top.bMapInstance = map;
     this.processMapOptions(resetProps);
-    this.bindEvents();
+    bindEvents(map, 'MAP', this.props.events);
     if (renderCallBack) {
       renderCallBack();
     }
@@ -119,19 +119,19 @@ export default class Map extends React.Component {
     }
   }
 
-  bindEvents = () => {
-    const { map } = this;
-    const { events } = this.props;
-    if (events) {
-      MAP_EVENTS.forEach((eventName) => {
-        if (events[eventName]) {
-          map.addEventListener(eventName, (...args) => {
-            events[eventName].apply(null, args);
-          });
-        }
-      });
-    }
-  }
+  // bindEvents = () => {
+  //   const { map } = this;
+  //   const { events } = this.props;
+  //   if (events) {
+  //     MAP_EVENTS.forEach((eventName) => {
+  //       if (events[eventName]) {
+  //         map.addEventListener(eventName, (...args) => {
+  //           events[eventName].apply(null, args);
+  //         });
+  //       }
+  //     });
+  //   }
+  // }
 
   getMapScript = () => {
     const { ak } = this.props;

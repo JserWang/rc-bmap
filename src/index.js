@@ -12,6 +12,10 @@ export { default as Navigation } from './components/Control/Navigation';
 export { default as OverviewMap } from './components/Control/OverviewMap';
 export { default as Scale } from './components/Control/Scale';
 export { default as MapTypeCtrl } from './components/Control/MapType';
+export { default as Copyright } from './components/Control/Copyright';
+export { default as Geolocation } from './components/Control/Geolocation';
+export { default as Panorama } from './components/Control/Panorama';
+export { default as CityList } from './components/Control/CityList';
 
 /**
  * 常量

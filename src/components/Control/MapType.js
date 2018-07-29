@@ -21,7 +21,8 @@ class MapType {
 
     const types = mapTypes.map((item) => {
       return top[item];
-    })
+    });
+    
     const opts = {
       anchor: top[anchor],
       offset: getSize(offset.width, offset.height),

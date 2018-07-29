@@ -1,6 +1,7 @@
-import { getSize } from '../_base/util';
+import { getSize, bindEvents } from '../_base/util';
 import ANCHOR from '../../constants/ControlAnchor';
 import ReactComponent from '../ReactComponent';
+import {} from '../_base/events';
 
 const top = window || global;
 
@@ -18,6 +19,7 @@ class OverviewMap {
         height: 150,
       },
       isOpen = false,
+      events,
     } = props;
 
     const opts = {
@@ -28,6 +30,7 @@ class OverviewMap {
     };
 
     this.instance = new top.BMap.OverviewMapControl(opts);
+    bindEvents(this.instance, 'OVERVIEW_MAP', events);
   }
 
   destroy = () => {

@@ -1,5 +1,16 @@
 import React, {Component} from 'react';
-import { Map, Navigation, OverviewMap, Scale, MapTypeCtrl, MapType } from '../../src';
+import { 
+  Map, 
+  Navigation,
+  OverviewMap,
+  Scale,
+  MapTypeCtrl, 
+  MapType,
+  Copyright,
+  Geolocation,
+  Panorama,
+  CityList,
+} from '../../src';
 import CustomControl from './CustomControl';
 
 export default class App extends Component {
@@ -15,7 +26,8 @@ export default class App extends Component {
     return (
       <Map
         ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv"
-        events={{ click: (...args) => {console.log(args); } }}
+        events={{ click: (args) => {console.log(args); } }}
+        scrollWheelZoom
       >
         <Navigation offset={{ width: 5, height: 5 }} />
         <CustomControl />
@@ -26,6 +38,19 @@ export default class App extends Component {
             MapType.NORMAL,
             MapType.PERSPECTIVE
           ]}
+        />
+        <Copyright content={'这是我的个人版权信息'}/>
+        <Geolocation 
+          locationIcon={{
+            url: 'http://api0.map.bdimg.com/images/copyright_logo.png',
+            size: {width: 100, height: 100},
+          }}
+        />
+        <Panorama />
+        <CityList 
+          offset={{
+            width: 300,
+          }}
         />
       </Map>
     )

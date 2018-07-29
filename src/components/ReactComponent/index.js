@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import Control from '../Control';
 
 const top = window || global;
 
