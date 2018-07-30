@@ -14,12 +14,19 @@ import {
 import CustomControl from './CustomControl';
 
 export default class App extends Component {
-  getEvents() {
-    return {
-      click: (e) => {
-        console.log('map click event', e, type);
-      }
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      label: '啊啊啊123',
+    };
+  }
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        label: '啊啊啊456'
+      })
+    }, 2000);
   }
 
   render() {
@@ -30,7 +37,9 @@ export default class App extends Component {
         scrollWheelZoom
       >
         <Navigation offset={{ width: 5, height: 5 }} />
-        <CustomControl />
+        <CustomControl 
+          label={this.state.label}
+        />
         <OverviewMap />
         <Scale />
         <MapTypeCtrl 

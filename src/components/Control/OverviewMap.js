@@ -1,13 +1,14 @@
+import BaseControl from './BaseControl';
 import { getSize, bindEvents } from '../_base/util';
 import ANCHOR from '../../constants/ControlAnchor';
 import ReactComponent from '../ReactComponent';
-import {} from '../_base/events';
+
 
 const top = window || global;
 
 @ReactComponent
-class OverviewMap {
-  constructor(props) {
+class OverviewMap extends BaseControl {
+  init() {
     const {
       anchor = ANCHOR.BOTTOM_RIGHT,
       offset = {
@@ -20,7 +21,7 @@ class OverviewMap {
       },
       isOpen = false,
       events,
-    } = props;
+    } = this.props;
 
     const opts = {
       anchor: top[anchor],
@@ -31,10 +32,6 @@ class OverviewMap {
 
     this.instance = new top.BMap.OverviewMapControl(opts);
     bindEvents(this.instance, 'OVERVIEW_MAP', events);
-  }
-
-  destroy = () => {
-    this.map.removeControl(this.instance);
   }
 }
 

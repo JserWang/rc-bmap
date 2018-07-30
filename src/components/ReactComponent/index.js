@@ -7,30 +7,26 @@ export default function ReactComponent(Wrapped) {
     constructor(props) {
       super(props);
       this.map = top.bMapInstance;
+      this.wrapped = new Wrapped(props);
     }
 
     componentDidMount() {
       if (!this.map) {
         return;
       }
-      const props = this.props;
-      const wrapped = this.wrapped = new Wrapped(props);
-      if (wrapped.instance && wrapped.instance instanceof top.BMap.Control) {
-        this.map.addControl(wrapped.instance);
-      } else {
-        switch (Wrapped.name) {
-          case 'Polyline':
-            this.addPolyline(wrapped);
-            break;
-          default:
-            break;
-        }
-      }
+
+      // const props = this.props;
+      // const wrapped = this.wrapped = new Wrapped(props);
+      // if (wrapped.instance && wrapped.instance instanceof top.BMap.Control) {
+      //   this.map.addControl(wrapped.instance);
+      // } else if (wrapped.instance && wrapped.instance instanceof top.BMap.Overlay) {
+      //   this.map.addOverlay(wrapped.instance);
+      // }
     }
 
-    componentDidUpdate() {
-      if (this.wrapped.componentDidUpdate) {
-        this.wrapped.componentDidUpdate();
+    componentWillReceiveProps(nextProps) {
+      if (this.wrapped.componentWillReceiveProps) {
+        this.wrapped.componentWillReceiveProps(nextProps);
       }
     }
 

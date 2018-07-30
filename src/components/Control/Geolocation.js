@@ -1,12 +1,14 @@
+import BaseControl from './BaseControl';
 import { getSize, bindEvents, createIcon } from '../_base/util';
 import ANCHOR from '../../constants/ControlAnchor';
 import ReactComponent from '../ReactComponent';
 
+
 const top = window || global;
 
 @ReactComponent
-class Geolocation {
-  constructor(props) {
+class Geolocation extends BaseControl {
+  init() {
     const {
       anchor = ANCHOR.BOTTOM_LEFT,
       offset = {
@@ -17,7 +19,7 @@ class Geolocation {
       enableAutoLocation = false,
       locationIcon,
       events,
-    } = props;
+    } = this.props;
 
     
     const opts = {
@@ -33,10 +35,6 @@ class Geolocation {
 
     this.instance = new top.BMap.GeolocationControl(opts);
     bindEvents(this.instance, 'GEOLOCATION', events);
-  }
-
-  destroy = () => {
-    this.map.removeControl(this.instance);
   }
 }
 

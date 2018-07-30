@@ -1,3 +1,4 @@
+import BaseControl from './BaseControl';
 import { getSize } from '../_base/util';
 import ANCHOR from '../../constants/ControlAnchor';
 import ReactComponent from '../ReactComponent';
@@ -5,15 +6,15 @@ import ReactComponent from '../ReactComponent';
 const top = window || global;
 
 @ReactComponent
-class Panorama {
-  constructor(props) {
+class Panorama extends BaseControl{
+  init() {
     const {
       anchor = ANCHOR.TOP_RIGHT,
       offset = {
         width: 0,
         height: 0,
       },
-    } = props;
+    } = this.props;
 
     const opts = {
       anchor: top[anchor],
@@ -21,10 +22,6 @@ class Panorama {
     };
 
     this.instance = new top.BMap.PanoramaControl(opts);
-  }
-
-  destroy = () => {
-    this.map.removeControl(this.instance);
   }
 }
 

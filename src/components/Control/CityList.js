@@ -1,12 +1,14 @@
+import BaseControl from './BaseControl';
 import { getSize } from '../_base/util';
 import ANCHOR from '../../constants/ControlAnchor';
 import ReactComponent from '../ReactComponent';
 
+
 const top = window || global;
 
 @ReactComponent
-class CityList {
-  constructor(props) {
+class CityList extends BaseControl {
+  init() {
     const {
       anchor = ANCHOR.TOP_LEFT,
       offset = {
@@ -15,7 +17,7 @@ class CityList {
       },
       onChangeBefore,
       onChangeAfter,
-    } = props;
+    } = this.props;
 
     const opts = {
       anchor: top[anchor],
@@ -25,10 +27,6 @@ class CityList {
     };
 
     this.instance = new top.BMap.CityListControl(opts);
-  }
-
-  destroy = () => {
-    this.map.removeControl(this.instance);
   }
 }
 

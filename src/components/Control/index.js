@@ -1,25 +1,26 @@
 import { render as reactRender } from 'react-dom';
 import { getSize } from '../_base/util';
-import Base from '../Base';
+import BaseControl from './BaseControl';
 import CONTROL_ANCHOR from '../../constants/ControlAnchor';
 
 const top = window || global;
 
-class Control extends Base {
-  constructor(props) {
-    super(props);
+const BaseCtrl = function(defaultAnchor, defaultOffset) {
+  this.defaultAnchor = defaultAnchor;
+  this.defaultOffset = defaultOffset;
+};
+
+class Control extends BaseControl {
+
+  init() {
     const {
       anchor = CONTROL_ANCHOR.TOP_LEFT,
       offset = {
         width: 0,
         height: 0,
       },
-    } = props;
-    const BaseCtrl = function(defaultAnchor, defaultOffset) {
-      this.defaultAnchor = defaultAnchor;
-      this.defaultOffset = defaultOffset;
-    };
-
+    } = this.props;
+    
     BaseCtrl.prototype = new top.BMap.Control();
     BaseCtrl.prototype.initialize = this.initialize.bind(this);
     this.instance = new BaseCtrl(top[anchor], getSize(offset.width, offset.height));
@@ -35,10 +36,6 @@ class Control extends Base {
     this.map.getContainer().appendChild(container);
     // 将DOM元素返回
     return container;
-  }
-
-  destroy = () => {
-    this.map.removeControl(this.instance);
   }
 }
 

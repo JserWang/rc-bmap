@@ -1,3 +1,4 @@
+import BaseControl from './BaseControl';
 import { getSize } from '../_base/util';
 import ANCHOR from '../../constants/ControlAnchor';
 import ReactComponent from '../ReactComponent';
@@ -5,8 +6,8 @@ import ReactComponent from '../ReactComponent';
 const top = window || global;
 
 @ReactComponent
-class Copyright {
-  constructor(props) {
+class Copyright extends BaseControl {
+  init() {
     const {
       anchor = ANCHOR.BOTTOM_LEFT,
       offset = {
@@ -14,7 +15,7 @@ class Copyright {
         height: 0,
       },
       content,
-    } = props;
+    } = this.props;
 
     const opts = {
       anchor: top[anchor],
@@ -26,11 +27,7 @@ class Copyright {
       id: 1,
       content,
       bounds: top.bMapInstance.getBounds()
-    })
-  }
-
-  destroy = () => {
-    this.map.removeControl(this.instance);
+    });
   }
 }
 

@@ -39,7 +39,23 @@ export const OVERVIEW_MAP = [
   'viewchanging',
 ];
 
-export const GEOLOCATION =[
+export const GEOLOCATION = [
   'locationSuccess',
   'locationError',
+];
+
+export const MARKER = [
+  'click',
+  'dblclick',
+  'mousedown',
+  'mouseup',
+  'mouseout',
+  'mouseover',
+  'remove',
+  'infowindowclose',
+  'infowindowopen',
+  'dragstart',
+  'dragging',
+  'dragend',
+  'rightclick',
 ];

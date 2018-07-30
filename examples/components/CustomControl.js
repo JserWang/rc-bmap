@@ -3,9 +3,11 @@ import { ReactComponent, Control } from '../../src';
 
 @ReactComponent
 class CustomControl extends Control {
-  render = () => (
-    <div>这是一个自定义组件</div>
-  )
+  render() {
+    return (
+      <div>{this.props.label}</div>
+    )
+  }
 }
 
 export default CustomControl;

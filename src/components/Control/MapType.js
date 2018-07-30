@@ -1,3 +1,4 @@
+import BaseControl from './BaseControl';
 import { getSize } from '../_base/util';
 import ANCHOR from '../../constants/ControlAnchor';
 import TYPE from '../../constants/MapTypeControlType';
@@ -7,8 +8,8 @@ import ReactComponent from '../ReactComponent';
 const top = window || global;
 
 @ReactComponent
-class MapType {
-  constructor(props) {
+class MapType extends BaseControl {
+  init() {
     const {
       anchor = ANCHOR.TOP_RIGHT,
       offset = {
@@ -17,7 +18,7 @@ class MapType {
       },
       type = TYPE.HORIZONTAL,
       mapTypes = [MAP_TYPE.NORMAL, MAP_TYPE.PERSPECTIVE, MAP_TYPE.SATELLITE, MAP_TYPE.HYBRID],
-    } = props;
+    } = this.props;
 
     const types = mapTypes.map((item) => {
       return top[item];
@@ -31,10 +32,6 @@ class MapType {
     };
 
     this.instance = new top.BMap.MapTypeControl(opts);
-  }
-
-  destroy = () => {
-    this.map.removeControl(this.instance);
   }
 }
 

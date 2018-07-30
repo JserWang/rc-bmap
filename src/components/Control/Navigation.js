@@ -1,3 +1,4 @@
+import BaseControl from './BaseControl';
 import { getSize } from '../_base/util';
 import ANCHOR from '../../constants/ControlAnchor';
 import TYPE from '../../constants/NavigationType';
@@ -6,8 +7,8 @@ import ReactComponent from '../ReactComponent';
 const top = window || global;
 
 @ReactComponent
-class Navigation {
-  constructor(props) {
+class Navigation extends BaseControl {
+  init() {
     const {
       anchor = ANCHOR.TOP_LEFT,
       offset = {
@@ -17,7 +18,7 @@ class Navigation {
       type = TYPE.LARGE,
       showZoomInfo = true,
       enableGeolocation = false,
-    } = props;
+    } = this.props;
 
     const opts = {
       anchor: top[anchor],
@@ -28,10 +29,6 @@ class Navigation {
     };
 
     this.instance = new top.BMap.NavigationControl(opts);
-  }
-
-  destroy = () => {
-    this.map.removeControl(this.instance);
   }
 }
 

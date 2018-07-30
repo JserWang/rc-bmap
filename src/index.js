@@ -3,6 +3,7 @@
  */
 export { default as Map } from './components/Map';
 export { default as Control } from './components/Control';
+export { default as Overlay } from './components/Overlay';
 export { default as ReactComponent } from './components/ReactComponent';
 
 /**
@@ -16,6 +17,11 @@ export { default as Copyright } from './components/Control/Copyright';
 export { default as Geolocation } from './components/Control/Geolocation';
 export { default as Panorama } from './components/Control/Panorama';
 export { default as CityList } from './components/Control/CityList';
+
+/**
+ * 常用覆盖物
+ */
+export { default as Marker } from './components/Overlay/Marker';
 
 /**
  * 常量

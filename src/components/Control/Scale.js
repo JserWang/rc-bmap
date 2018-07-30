@@ -2,12 +2,14 @@ import { getSize } from '../_base/util';
 import CONTROL_ANCHOR from '../../constants/ControlAnchor';
 import LENGTH_UNIT from '../../constants/LengthUnit';
 import ReactComponent from '../ReactComponent';
+import BaseControl from './BaseControl';
 
 const top = window || global;
 
 @ReactComponent
-class Scale {
-  constructor(props) {
+class Scale extends BaseControl {
+
+  init() {
     const {
       anchor = CONTROL_ANCHOR.TOP_LEFT,
       offset = {
@@ -15,7 +17,7 @@ class Scale {
         height: 18,
       },
       unit = LENGTH_UNIT.METRIC,
-    } = props;
+    } = this.props;
 
     const opts = {
       anchor: top[anchor],
@@ -24,10 +26,7 @@ class Scale {
 
     this.instance = new top.BMap.ScaleControl(opts);
     this.instance.setUnit(top[unit]);
-  }
-
-  destroy = () => {
-    this.map.removeControl(this.instance);
+    this.map.addControl(this.instance);
   }
 }
 
