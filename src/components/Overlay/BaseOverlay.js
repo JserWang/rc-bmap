@@ -1,5 +1,6 @@
 
 import { render as reactRender } from 'react-dom';
+import { getPoint } from '../_base/util';
 
 class BaseOverlay {
   constructor(props) {
@@ -8,14 +9,31 @@ class BaseOverlay {
     this.map = global.bMapInstance;
 
     this.init();
-    this.map.addOverlay(this.instance);
+    this.addOverlay();
+  }
+
+  addOverlay() {
+    if (this.instance instanceof global.BMap.InfoWindow) {
+      const { point } = this.props;
+      this.map.openInfoWindow(this.instance, getPoint(point.lng, point.lat));
+    } else {
+      this.map.addOverlay(this.instance);
+    }
+  }
+
+  removeOverlay() {
+    if (this.instance instanceof global.BMap.InfoWindow) {
+      this.map.closeInfoWindow();
+    } else {
+      this.map.removeOverlay(this.instance);
+    }
   }
 
   onPropsUpdate(newProps) {
     this.props = newProps;
     this.destroy();
     this.init();
-    this.map.addOverlay(this.instance);
+    this.addOverlay();
   }
 
   setState = (param) => {
@@ -28,7 +46,7 @@ class BaseOverlay {
   }
 
   destroy = () => {
-    this.map.removeOverlay(this.instance);
+    this.removeOverlay();
     this.instance = null;
   }
 }

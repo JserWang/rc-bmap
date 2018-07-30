@@ -27,10 +27,10 @@ class Marker extends BaseOverlay {
       animation,
     } = this.props;
 
-    const oPoint = getPoint(point.lng, point.lat);
+    const oPoint = point && getPoint(point.lng, point.lat);
 
     const markerOpts = {
-      offset: getSize(offset.width, offset.height),
+      offset: offset && getSize(offset.width, offset.height),
       enableMassClear: massClear,
       enableDragging: dragging,
       enableClicking: clicking,

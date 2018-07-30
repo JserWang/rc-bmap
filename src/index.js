@@ -24,6 +24,9 @@ export { default as CityList } from './components/Control/CityList';
 export { default as Marker } from './components/Overlay/Marker';
 export { default as Label } from './components/Overlay/Label';
 export { default as Polyline } from './components/Overlay/Polyline';
+export { default as Polygon } from './components/Overlay/Polygon';
+export { default as Circle } from './components/Overlay/Circle';
+export { default as InfoWindow } from './components/Overlay/InfoWindow';
 
 /**
  * 常量

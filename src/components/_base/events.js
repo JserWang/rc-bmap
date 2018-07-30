@@ -81,3 +81,33 @@ export const POLYLINE = [
   'remove',
   'lineupdate',
 ];
+
+export const POLYGON = [
+  'click',
+  'dblclick',
+  'mousedown',
+  'mouseup',
+  'mouseout',
+  'mouseover',
+  'remove',
+  'lineupdate',
+];
+
+export const CIRCLE = [
+  'click',
+  'dblclick',
+  'mousedown',
+  'mouseup',
+  'mouseout',
+  'mouseover',
+  'remove',
+  'lineupdate',
+];
+
+export const INFO_WINDOW = [
+  'close',
+  'open',
+  'maximize',
+  'restore',
+  'clickclose',
+];

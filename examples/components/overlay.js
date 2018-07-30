@@ -9,6 +9,9 @@ import {
   Geolocation,
   Panorama,
   CityList,
+  Polygon,
+  Circle,
+  InfoWindow,
 } from '../../src';
 import CustomOverlay from './CustomOverlay';
 
@@ -80,6 +83,42 @@ export default class App extends Component {
           strokeColor="blue"
           strokeWeight={2}
           strokeOpacity={0.5}
+        />
+
+        <Polygon 
+          points={[{
+            lng: 116.387112,
+            lat: 39.920977,
+          }, {
+            lng: 116.385243,
+            lat: 39.913063,
+          }, {
+            lng: 116.394226,
+            lat: 39.917988
+          }, {
+            lng: 116.401772,
+            lat: 39.921364
+          }, {
+            lng: 116.41248,
+            lat: 39.927893
+          }]}
+          strokeColor="blue"
+          strokeWeight={2}
+          strokeOpacity={0.5}
+        />
+
+        <Circle
+          point={{
+            lng: 116.404, 
+            lat: 39.915
+          }}
+          radius={500}
+        />
+
+        <InfoWindow 
+          point={this.point}
+          content="aaa"
+          title="bbb"
         />
       </Map>
     )
