@@ -3,8 +3,6 @@ import { getSize } from '../_base/util';
 import ANCHOR from '../../constants/ControlAnchor';
 import ReactComponent from '../ReactComponent';
 
-const top = window || global;
-
 @ReactComponent
 class Copyright extends BaseControl {
   init() {
@@ -18,15 +16,15 @@ class Copyright extends BaseControl {
     } = this.props;
 
     const opts = {
-      anchor: top[anchor],
+      anchor: global[anchor],
       offset: getSize(offset.width, offset.height),
     };
 
-    this.instance = new top.BMap.CopyrightControl(opts);
+    this.instance = new global.BMap.CopyrightControl(opts);
     this.instance.addCopyright({
       id: 1,
       content,
-      bounds: top.bMapInstance.getBounds()
+      bounds: global.bMapInstance.getBounds()
     });
   }
 }

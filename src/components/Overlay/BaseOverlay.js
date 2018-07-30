@@ -1,12 +1,11 @@
 
 import { render as reactRender } from 'react-dom';
-const top = window || global;
 
 class BaseOverlay {
   constructor(props) {
     this.props = props;
     this.state = {};
-    this.map = top.bMapInstance;
+    this.map = global.bMapInstance;
 
     this.init();
     this.map.addOverlay(this.instance);

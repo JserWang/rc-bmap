@@ -2,10 +2,9 @@ import React, {Component} from 'react';
 import { 
   Map, 
   Marker,
-  OverviewMap,
-  Scale,
-  MapTypeCtrl, 
-  MapType,
+  Label,
+  Polyline,
+  Animation,
   Copyright,
   Geolocation,
   Panorama,
@@ -55,12 +54,33 @@ export default class App extends Component {
           point={this.point}
           size={this.size}
         />
-        {
-          this.state.showMarker && <Marker 
-            point={this.state.markerPoint}
-          />
-        }
-        
+        <Marker 
+          point={this.state.markerPoint}
+          label={<Label content="bbb" title="bbb" />}
+          animation={Animation.BOUNCE}
+        />
+
+        <Label 
+          content="aaa"
+          point={this.point}
+          title="bbb"
+        />
+
+        <Polyline 
+          points={[{
+            lng: 116.399,
+            lat: 39.910,
+          }, {
+            lng: 116.405,
+            lat: 39.920,
+          }, {
+            lng: 116.425,
+            lat: 39.900
+          }]}
+          strokeColor="blue"
+          strokeWeight={2}
+          strokeOpacity={0.5}
+        />
       </Map>
     )
   }

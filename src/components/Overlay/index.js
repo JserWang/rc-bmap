@@ -6,7 +6,7 @@ import MAP_PANE from '../../constants/MapPane';
 class Overlay extends BaseOverlay {
   init() {
     const BaseOverlay = function() {}
-    BaseOverlay.prototype = new top.BMap.Overlay();
+    BaseOverlay.prototype = new global.BMap.Overlay();
     BaseOverlay.prototype.initialize = this.initialize.bind(this);
     BaseOverlay.prototype.draw = this.draw.bind(this);
     this.instance = new BaseOverlay();

@@ -1,11 +1,10 @@
 import { render as reactRender } from 'react-dom';
-const top = window || global;
 
 class Base {
   constructor(props) {
     this.props = props;
     this.state = {};
-    this.map = top.bMapInstance;
+    this.map = global.bMapInstance;
   }
 
   setState = (param) => {

@@ -59,3 +59,25 @@ export const MARKER = [
   'dragend',
   'rightclick',
 ];
+
+export const LABEL = [
+  'click',
+  'dblclick',
+  'mousedown',
+  'mouseup',
+  'mouseout',
+  'mouseover',
+  'remove',
+  'rightclick',
+];
+
+export const POLYLINE = [
+  'click',
+  'dblclick',
+  'mousedown',
+  'mouseup',
+  'mouseout',
+  'mouseover',
+  'remove',
+  'lineupdate',
+];

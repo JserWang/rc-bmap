@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MAP_SET_OPTIONS, MAP_BOOLEAN_OPTIONS } from '../_base/options';
-import { replaceInitialToUpper, getPoint, isPoint, bindEvents } from '../_base/util';
+import { replaceInitialToUpper, getPoint, isPoint, bindEvents, processSetOptions } from '../_base/util';
 
-const top = window || global;
 const fillStyle = {
   width: '100%',
   height: '100%'
@@ -81,7 +80,7 @@ export default class Map extends React.Component {
       enableAutoResize: autoResize,
       enableMapClick: mapClick,
     });
-    top.bMapInstance = map;
+    global.bMapInstance = map;
     this.processMapOptions(resetProps);
     bindEvents(map, 'MAP', this.props.events);
     if (renderCallBack) {
@@ -93,12 +92,7 @@ export default class Map extends React.Component {
 
   processMapOptions = (props) => {
     const { map } = this;
-    MAP_SET_OPTIONS.forEach((key) => {
-      if (props[key]) {
-        const upKey = replaceInitialToUpper(key);
-        map[`set${upKey}`](props[key]);
-      }
-    });
+    processSetOptions(map, 'MAP_SET_OPTIONS', props);
 
     MAP_BOOLEAN_OPTIONS.forEach((key) => {
       const upKey = replaceInitialToUpper(key);
@@ -117,32 +111,32 @@ export default class Map extends React.Component {
     }
 
     if (props.mapType) {
-      map.setMapType(top[props.mapType]);
+      map.setMapType(global[props.mapType]);
     }
   }
 
   getMapScript = () => {
     const { ak } = this.props;
-    top.BMap = top.BMap || {};
-    if (Object.keys(top.BMap).length === 0) {
-      top.BMap._preloader = new Promise((resolve, reject) => {
-        top._initBaiduMap = function initBaiduMap() {
-          resolve(top.BMap);
-          top.document.body.removeChild($script);
-          top.BMap._preloader = null;
-          top._initBaiduMap = null;
+    global.BMap = global.BMap || {};
+    if (Object.keys(global.BMap).length === 0) {
+      global.BMap._preloader = new Promise((resolve, reject) => {
+        global._initBaiduMap = function initBaiduMap() {
+          resolve(global.BMap);
+          global.document.body.removeChild($script);
+          global.BMap._preloader = null;
+          global._initBaiduMap = null;
         };
 
         const $script = document.createElement('script');
-        top.document.body.appendChild($script);
+        global.document.body.appendChild($script);
         $script.src = `https://api.map.baidu.com/api?v=3.0&ak=${ak}&callback=_initBaiduMap`;
       });
 
-      return top.BMap._preloader;
-    } else if (!top.BMap._preloader) {
-      return Promise.resolve(top.BMap);
+      return global.BMap._preloader;
+    } else if (!global.BMap._preloader) {
+      return Promise.resolve(global.BMap);
     }
-    return top.BMap._preloader;
+    return global.BMap._preloader;
   }
 
   componentDidMount() {
@@ -182,7 +176,6 @@ export default class Map extends React.Component {
   }
 
   render() {
-    console.log('map render');
     const { placeHolder } = this.props;
     return (
       <div style={fillStyle}>

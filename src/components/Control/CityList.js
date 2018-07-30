@@ -3,8 +3,6 @@ import { getSize } from '../_base/util';
 import ANCHOR from '../../constants/ControlAnchor';
 import ReactComponent from '../ReactComponent';
 
-const top = window || global;
-
 @ReactComponent
 class CityList extends BaseControl {
   init() {
@@ -19,13 +17,13 @@ class CityList extends BaseControl {
     } = this.props;
 
     const opts = {
-      anchor: top[anchor],
+      anchor: global[anchor],
       offset: getSize(offset.width, offset.height),
       onChangeBefore,
       onChangeAfter,
     };
 
-    this.instance = new top.BMap.CityListControl(opts);
+    this.instance = new global.BMap.CityListControl(opts);
   }
 }
 

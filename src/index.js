@@ -22,6 +22,8 @@ export { default as CityList } from './components/Control/CityList';
  * 常用覆盖物
  */
 export { default as Marker } from './components/Overlay/Marker';
+export { default as Label } from './components/Overlay/Label';
+export { default as Polyline } from './components/Overlay/Polyline';
 
 /**
  * 常量
@@ -30,3 +32,7 @@ export { default as MapType } from './constants/MapType';
 export { default as ControlAnchor } from './constants/ControlAnchor';
 export { default as NavigationType } from './constants/NavigationType';
 export { default as LengthUnit } from './constants/LengthUnit';
+export { default as MapPane } from './constants/MapPane';
+export { default as MapTypeControlType } from './constants/MapTypeControlType';
+export { default as StatusCode } from './constants/StatusCode';
+export { default as Animation } from './constants/Animation';

@@ -1,12 +1,10 @@
 import { PureComponent } from 'react';
 
-const top = window || global;
-
 export default function ReactComponent(Wrapped) {
   return class Proxy extends PureComponent {
     constructor(props) {
       super(props);
-      this.map = top.bMapInstance;
+      this.map = global.bMapInstance;
       this.wrapped = new Wrapped(props);
     }
 

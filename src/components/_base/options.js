@@ -18,3 +18,17 @@ export const MAP_BOOLEAN_OPTIONS = [
   'pinchToZoom',
   'autoResize',
 ];
+
+export const MARKER_SET_OPTIONS = [
+  'label',
+  'zIndex',
+  'top',
+  'icon',
+  'shadow',
+];
+
+export const LABEL_SET_OPTIONS = [
+  'title',
+  'zIndex',
+  'style',
+];

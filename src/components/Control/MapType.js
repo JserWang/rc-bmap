@@ -5,8 +5,6 @@ import TYPE from '../../constants/MapTypeControlType';
 import MAP_TYPE from '../../constants/MapType';
 import ReactComponent from '../ReactComponent';
 
-const top = window || global;
-
 @ReactComponent
 class MapType extends BaseControl {
   init() {
@@ -21,17 +19,17 @@ class MapType extends BaseControl {
     } = this.props;
 
     const types = mapTypes.map((item) => {
-      return top[item];
+      return global[item];
     });
     
     const opts = {
-      anchor: top[anchor],
+      anchor: global[anchor],
       offset: getSize(offset.width, offset.height),
-      type: top[type],
+      type: global[type],
       mapTypes: types
     };
 
-    this.instance = new top.BMap.MapTypeControl(opts);
+    this.instance = new global.BMap.MapTypeControl(opts);
   }
 }
 

@@ -3,8 +3,6 @@ import { getSize } from '../_base/util';
 import BaseControl from './BaseControl';
 import CONTROL_ANCHOR from '../../constants/ControlAnchor';
 
-const top = window || global;
-
 const BaseCtrl = function(defaultAnchor, defaultOffset) {
   this.defaultAnchor = defaultAnchor;
   this.defaultOffset = defaultOffset;
@@ -21,9 +19,9 @@ class Control extends BaseControl {
       },
     } = this.props;
     
-    BaseCtrl.prototype = new top.BMap.Control();
+    BaseCtrl.prototype = new global.BMap.Control();
     BaseCtrl.prototype.initialize = this.initialize.bind(this);
-    this.instance = new BaseCtrl(top[anchor], getSize(offset.width, offset.height));
+    this.instance = new BaseCtrl(global[anchor], getSize(offset.width, offset.height));
   }
 
   initialize() {

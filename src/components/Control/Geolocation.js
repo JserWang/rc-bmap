@@ -3,8 +3,6 @@ import { getSize, bindEvents, createIcon } from '../_base/util';
 import ANCHOR from '../../constants/ControlAnchor';
 import ReactComponent from '../ReactComponent';
 
-const top = window || global;
-
 @ReactComponent
 class Geolocation extends BaseControl {
   init() {
@@ -15,24 +13,24 @@ class Geolocation extends BaseControl {
         height: 0,
       },
       showAddressBar = true,
-      enableAutoLocation = false,
+      autoLocation = false,
       locationIcon,
       events,
     } = this.props;
 
     
     const opts = {
-      anchor: top[anchor],
+      anchor: global[anchor],
       offset: getSize(offset.width, offset.height),
       showAddressBar,
-      enableAutoLocation,
+      enableAutoLocation: autoLocation,
     };
 
     if (locationIcon) {
       opts.locationIcon = createIcon(locationIcon);
     }
 
-    this.instance = new top.BMap.GeolocationControl(opts);
+    this.instance = new global.BMap.GeolocationControl(opts);
     bindEvents(this.instance, 'GEOLOCATION', events);
   }
 }

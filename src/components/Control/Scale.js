@@ -4,8 +4,6 @@ import LENGTH_UNIT from '../../constants/LengthUnit';
 import ReactComponent from '../ReactComponent';
 import BaseControl from './BaseControl';
 
-const top = window || global;
-
 @ReactComponent
 class Scale extends BaseControl {
 
@@ -20,12 +18,12 @@ class Scale extends BaseControl {
     } = this.props;
 
     const opts = {
-      anchor: top[anchor],
+      anchor: global[anchor],
       offset: getSize(offset.width, offset.height),
     };
 
-    this.instance = new top.BMap.ScaleControl(opts);
-    this.instance.setUnit(top[unit]);
+    this.instance = new global.BMap.ScaleControl(opts);
+    this.instance.setUnit(global[unit]);
     this.map.addControl(this.instance);
   }
 }

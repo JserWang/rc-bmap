@@ -3,9 +3,6 @@ import { getSize, bindEvents } from '../_base/util';
 import ANCHOR from '../../constants/ControlAnchor';
 import ReactComponent from '../ReactComponent';
 
-
-const top = window || global;
-
 @ReactComponent
 class OverviewMap extends BaseControl {
   init() {
@@ -24,13 +21,13 @@ class OverviewMap extends BaseControl {
     } = this.props;
 
     const opts = {
-      anchor: top[anchor],
+      anchor: global[anchor],
       offset: getSize(offset.width, offset.height),
       size: getSize(size.width, size.height),
       isOpen,
     };
 
-    this.instance = new top.BMap.OverviewMapControl(opts);
+    this.instance = new global.BMap.OverviewMapControl(opts);
     bindEvents(this.instance, 'OVERVIEW_MAP', events);
   }
 }

@@ -4,8 +4,6 @@ import ANCHOR from '../../constants/ControlAnchor';
 import TYPE from '../../constants/NavigationType';
 import ReactComponent from '../ReactComponent';
 
-const top = window || global;
-
 @ReactComponent
 class Navigation extends BaseControl {
   init() {
@@ -17,18 +15,18 @@ class Navigation extends BaseControl {
       },
       type = TYPE.LARGE,
       showZoomInfo = true,
-      enableGeolocation = false,
+      geolocation = false,
     } = this.props;
 
     const opts = {
-      anchor: top[anchor],
+      anchor: global[anchor],
       offset: getSize(offset.width, offset.height),
-      type: top[type],
+      type: global[type],
       showZoomInfo,
-      enableGeolocation,
+      enableGeolocation: geolocation,
     };
 
-    this.instance = new top.BMap.NavigationControl(opts);
+    this.instance = new global.BMap.NavigationControl(opts);
   }
 }
 
