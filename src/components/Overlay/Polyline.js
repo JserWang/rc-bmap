@@ -28,7 +28,7 @@ class Polyline extends BaseOverlay {
       enableMassClear: massClear,
       // TODO: 补全icons实现
       icons,
-    }
+    };
 
     let pList = points.map((item) => {
       return getPoint(item.lng, item.lat);

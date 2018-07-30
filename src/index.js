@@ -27,6 +27,9 @@ export { default as Polyline } from './components/Overlay/Polyline';
 export { default as Polygon } from './components/Overlay/Polygon';
 export { default as Circle } from './components/Overlay/Circle';
 export { default as InfoWindow } from './components/Overlay/InfoWindow';
+export { default as Ground } from './components/Overlay/Ground';
+export { default as PointCollection } from './components/Overlay/PointCollection';
+export { default as Symbol } from './components/Overlay/Symbol';
 
 /**
  * 常量
@@ -39,3 +42,6 @@ export { default as MapPane } from './constants/MapPane';
 export { default as MapTypeControlType } from './constants/MapTypeControlType';
 export { default as StatusCode } from './constants/StatusCode';
 export { default as Animation } from './constants/Animation';
+export { default as ShapeType } from './constants/ShapeType';
+export { default as SizeType } from './constants/SizeType';
+export { default as SymbolShapeType } from './constants/SymbolShapeType';

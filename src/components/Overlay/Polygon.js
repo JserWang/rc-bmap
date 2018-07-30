@@ -29,7 +29,7 @@ class Polygon extends BaseOverlay {
       enableEditing: editing,
       enableClicking: clicking,
       enableMassClear: massClear,
-    }
+    };
 
     let pList = points.map((item) => {
       return getPoint(item.lng, item.lat);

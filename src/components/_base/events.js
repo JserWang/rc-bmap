@@ -111,3 +111,14 @@ export const INFO_WINDOW = [
   'restore',
   'clickclose',
 ];
+
+export const GROUND = [
+  'click',
+  'dbclick',
+];
+
+export const POINT_COLLECTION = [
+  'click',
+  'mouseover',
+  'mouseout',
+];

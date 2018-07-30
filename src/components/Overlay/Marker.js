@@ -38,16 +38,21 @@ class Marker extends BaseOverlay {
       draggingCursor,
       rotation,
       title,
-    }
+    };
     
     this.instance = new global.BMap.Marker(oPoint, markerOpts);
     const setOpts = {
       label: label && createLabel(label.props),
-      icon: icon && createIcon(icon),
       shadow: shadow && createIcon(shadow),
       zIndex,
       top,
     };
+
+    if (icon && icon instanceof global.BMap.Symbol) {
+      setOpts.icon = icon;
+    } else if (icon) {
+      setOpts.icon = createIcon(icon);
+    }
 
     bindEvents(this.instance, 'MARKER', events);
 

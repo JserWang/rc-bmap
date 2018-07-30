@@ -29,7 +29,7 @@ class InfoWindow extends BaseOverlay {
       enableCloseOnClick: closeOnClick,
       enableMessage: displayMessage,
       message,
-    }
+    };
 
     this.instance = new global.BMap.InfoWindow(content, opts);
 

@@ -5,13 +5,13 @@ import {
   Label,
   Polyline,
   Animation,
-  Copyright,
-  Geolocation,
-  Panorama,
-  CityList,
+  ShapeType,
+  SymbolShapeType,
   Polygon,
   Circle,
   InfoWindow,
+  Ground,
+  Symbol,
 } from '../../src';
 import CustomOverlay from './CustomOverlay';
 
@@ -52,22 +52,33 @@ export default class App extends Component {
         ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv"
         events={{ click: (args) => {console.log(args); } }}
         scrollWheelZoom
+        zoom={12}
       >
         <CustomOverlay 
           point={this.point}
           size={this.size}
         />
-        <Marker 
+        {/* <Marker 
           point={this.state.markerPoint}
-          label={<Label content="bbb" title="bbb" />}
+          // label={<Label content="bbb" title="bbb" />}
           animation={Animation.BOUNCE}
+        /> */}
+
+        <Symbol
+          path={SymbolShapeType.FORWARD_CLOSED_ARROW}
+          scale={5}
+          strokeWeight={1}
+          rotation={0}
+          fillColor="red"
+          fillOpacity={0.8}
+          point={this.state.markerPoint}
         />
 
-        <Label 
+        {/* <Label 
           content="aaa"
           point={this.point}
           title="bbb"
-        />
+        /> */}
 
         <Polyline 
           points={[{
@@ -115,11 +126,29 @@ export default class App extends Component {
           radius={500}
         />
 
-        <InfoWindow 
+        {/* <InfoWindow 
           point={this.point}
           content="aaa"
           title="bbb"
-        />
+        /> */}
+
+        {/* <Ground 
+          bounds={{
+            sw: {
+              lng: 116.29579,
+              lat: 39.837146
+            },
+            ne: {
+              lng: 116.475451,
+              lat: 39.9764
+            }
+          }}
+          imageURL="http://lbsyun.baidu.com/jsdemo/img/si-huan.png"
+          opacity={1}
+          displayOnMinLevel={10}
+          displayOnMaxLevel={14}
+        /> */}
+
       </Map>
     )
   }

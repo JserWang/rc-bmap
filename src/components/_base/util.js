@@ -15,6 +15,11 @@ export function getSize(width, height) {
   return new global.BMap.Size(width, height);
 }
 
+export function getBound(bounds) {
+  const { sw, ne } = bounds;
+  return new global.BMap.Bounds(getPoint(sw.lng, sw.lat), getPoint(ne.lng, ne.lat));
+}
+
 export const isPoint = obj => obj.lng && obj.lat;
 
 export function bindEvents(target, eventKey, events) {
@@ -74,6 +79,14 @@ export function createLabel(options = {}) {
   };
   processSetOptions(label, 'LABEL_SET_OPTIONS', setOpts);
   return label
+}
+
+export function createSymbol(options = {}) {
+  const { path, opts = {} } = options;
+  const sPath = global[path] || path;
+  return new global.BMap.Symbol(sPath, {
+    ...opts,
+  });
 }
 
 export function processSetOptions(target, optionKey, opts) {
