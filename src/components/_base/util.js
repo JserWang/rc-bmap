@@ -22,9 +22,14 @@ export function bindEvents(target, eventKey, events) {
   if (events && EVENT[eventKey]) {
     EVENT[eventKey].forEach((eventName) => {
       if (events[eventName]) {
-        target.addEventListener(eventName, (...args) => {
+        const callBack = (...args) => {
           events[eventName].call(null, ...args);
-        });
+        };
+        if (target[`_${eventName}`]) {
+          target.removeEventListener(eventName, target[`_${eventName}`]);
+        }
+        target.addEventListener(eventName, callBack);
+        target[`_${eventName}`] = callBack;
       }
     });
   }

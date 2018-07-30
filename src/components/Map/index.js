@@ -1,10 +1,13 @@
-import * as React from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { MAP_SET_OPTIONS, MAP_BOOLEAN_OPTIONS } from '../_base/options';
 import { replaceInitialToUpper, getPoint, isPoint, bindEvents } from '../_base/util';
-import { MAP_EVENTS } from '../_base/events';
 
 const top = window || global;
+const fillStyle = {
+  width: '100%',
+  height: '100%'
+};
 
 export default class Map extends React.Component {
 
@@ -60,7 +63,7 @@ export default class Map extends React.Component {
   constructor(props) {
     super(props);
 
-        // React 16
+    // React 16
     if (React.createRef) {
       this.mapContainerRef = React.createRef();
     } else {
@@ -105,7 +108,6 @@ export default class Map extends React.Component {
       }
       map[`${prefix}${upKey}`]();
     });
-
     if (props.center) {
       let center = props.center;
       if (isPoint(center)) {
@@ -118,20 +120,6 @@ export default class Map extends React.Component {
       map.setMapType(top[props.mapType]);
     }
   }
-
-  // bindEvents = () => {
-  //   const { map } = this;
-  //   const { events } = this.props;
-  //   if (events) {
-  //     MAP_EVENTS.forEach((eventName) => {
-  //       if (events[eventName]) {
-  //         map.addEventListener(eventName, (...args) => {
-  //           events[eventName].apply(null, args);
-  //         });
-  //       }
-  //     });
-  //   }
-  // }
 
   getMapScript = () => {
     const { ak } = this.props;
@@ -162,7 +150,22 @@ export default class Map extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.processMapOptions(nextProps);
+    const props = this.processProps(nextProps);
+    this.processMapOptions(props);
+    bindEvents(this.map, 'MAP', this.props.events);
+  }
+
+  processProps(nextProps) {
+    let props = nextProps;
+    if (JSON.stringify(nextProps.center) === JSON.stringify(this.props.center)) {
+      const {center, ...resetProps} = nextProps;
+      props = resetProps;
+    }
+
+    if (props.zoom === this.props.zoom) {
+      delete props.zoom
+    }
+    return props;
   }
 
   renderChildren = () => {
@@ -179,10 +182,11 @@ export default class Map extends React.Component {
   }
 
   render() {
+    console.log('map render');
     const { placeHolder } = this.props;
     return (
-      <div style={{ width: '100%', height: '100%' }}>
-        <div ref={this.mapContainerRef} style={{ width: '100%', height: '100%' }}>
+      <div style={fillStyle}>
+        <div ref={this.mapContainerRef} style={fillStyle}>
           {placeHolder}
         </div>
         {this.renderChildren()}

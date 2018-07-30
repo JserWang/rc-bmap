@@ -1,45 +1,23 @@
-import { Component } from 'react';
+import { PureComponent } from 'react';
 
 const top = window || global;
 
 export default function ReactComponent(Wrapped) {
-  return class Proxy extends Component {
+  return class Proxy extends PureComponent {
     constructor(props) {
       super(props);
       this.map = top.bMapInstance;
       this.wrapped = new Wrapped(props);
     }
 
-    componentDidMount() {
-      if (!this.map) {
-        return;
-      }
-
-      // const props = this.props;
-      // const wrapped = this.wrapped = new Wrapped(props);
-      // if (wrapped.instance && wrapped.instance instanceof top.BMap.Control) {
-      //   this.map.addControl(wrapped.instance);
-      // } else if (wrapped.instance && wrapped.instance instanceof top.BMap.Overlay) {
-      //   this.map.addOverlay(wrapped.instance);
-      // }
-    }
-
-    componentWillReceiveProps(nextProps) {
-      if (this.wrapped.componentWillReceiveProps) {
-        this.wrapped.componentWillReceiveProps(nextProps);
+    componentDidUpdate() {
+      if (this.wrapped.onPropsUpdate) {
+        this.wrapped.onPropsUpdate(this.props);
       }
     }
 
     componentWillUnmount() {
       this.wrapped.destroy();
-    }
-
-    addPolyline(wrapped) {
-      const { props } = this;
-      props.map.addOverlay(wrapped.polyline);
-      if (props.getPolyline) {
-        props.getPolyline(wrapped.polyline);
-      }
     }
 
     render() {

@@ -3,7 +3,6 @@ import { getSize, bindEvents, createIcon } from '../_base/util';
 import ANCHOR from '../../constants/ControlAnchor';
 import ReactComponent from '../ReactComponent';
 
-
 const top = window || global;
 
 @ReactComponent

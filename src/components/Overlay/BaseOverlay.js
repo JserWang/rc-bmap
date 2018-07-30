@@ -2,21 +2,21 @@
 import { render as reactRender } from 'react-dom';
 const top = window || global;
 
-class BaseControl {
+class BaseOverlay {
   constructor(props) {
     this.props = props;
     this.state = {};
     this.map = top.bMapInstance;
 
     this.init();
-    this.map.addControl(this.instance);
+    this.map.addOverlay(this.instance);
   }
 
   onPropsUpdate(newProps) {
     this.props = newProps;
     this.destroy();
     this.init();
-    this.map.addControl(this.instance);
+    this.map.addOverlay(this.instance);
   }
 
   setState = (param) => {
@@ -29,9 +29,9 @@ class BaseControl {
   }
 
   destroy = () => {
-    this.map.removeControl(this.instance);
+    this.map.removeOverlay(this.instance);
     this.instance = null;
   }
 }
 
-export default BaseControl;
+export default BaseOverlay;

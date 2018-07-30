@@ -1,9 +1,10 @@
+import BaseOverlay from './BaseOverlay';
 import { getPoint, getSize, bindEvents } from '../_base/util';
 import ReactComponent from '../ReactComponent';
 
 @ReactComponent
-class Marker {
-  constructor(props) {
+class Marker extends BaseOverlay {
+  init() {
     const {
       point,
       offset = {
@@ -20,7 +21,7 @@ class Marker {
       shadow,
       title,
       events,
-    } = props;
+    } = this.props;
 
     const oPoint = getPoint(point.lng, point.lat);
 
@@ -45,10 +46,6 @@ class Marker {
 
     this.instance = new top.BMap.Marker(oPoint, opts);
     bindEvents(this.instance, 'MARKER', events);
-  }
-
-  destroy = () => {
-    this.map.removeOverlay(this);
   }
 }
 

@@ -1,12 +1,10 @@
 import { render as reactRender } from 'react-dom';
+import BaseOverlay from './BaseOverlay';
 import { getPoint } from '../_base/util';
-import Base from '../Base';
 import MAP_PANE from '../../constants/MapPane';
 
-class Overlay extends Base {
-  constructor(props) {
-    super(props);
-
+class Overlay extends BaseOverlay {
+  init() {
     const BaseOverlay = function() {}
     BaseOverlay.prototype = new top.BMap.Overlay();
     BaseOverlay.prototype.initialize = this.initialize.bind(this);
@@ -14,7 +12,7 @@ class Overlay extends Base {
     this.instance = new BaseOverlay();
   }
 
-  initialize = () => {
+  initialize() {
     const {
       pane = MAP_PANE.MARKER,
       zIndex,
@@ -24,12 +22,14 @@ class Overlay extends Base {
       container.style.zIndex = zIndex;
     }
     container.style.position = 'absolute';
-    reactRender(this.render(), container);
+    if (this.render) {
+      reactRender(this.render(), container);
+    }
     this.map.getPanes()[pane].appendChild(container);
     return container;
   }
 
-  draw = () => {
+  draw() {
     const {
       point,
       size = {
@@ -40,10 +40,6 @@ class Overlay extends Base {
     const position = this.map.pointToOverlayPixel(getPoint(point.lng, point.lat));
     this.container.style.left = `${position.x - (size.width / 2)}px`;
     this.container.style.top = `${position.y - (size.height / 2)}px`;
-  }
-
-  destroy = () => {
-    this.map.removeOverlay(this);
   }
 }
 

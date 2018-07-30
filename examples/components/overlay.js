@@ -18,20 +18,28 @@ export default class App extends Component {
     super(props);
     
     this.state = {
+      showMarker: true,
       markerPoint: {
         lng: 116.404,
         lat: 39.915
       }
     };
+
+    this.point = {
+      lng: 116.404,
+      lat: 39.915
+    }
+
+    this.size = {
+      width: 100,
+      height: 100,
+    }
   }
 
   componentDidMount() {
     setTimeout(() => {
       this.setState({
-        markerPoint: {
-          lng: 116.404,
-          lat: 40.915
-        }
+        showMarker: false,
       })
     }, 2000)
   }
@@ -44,21 +52,15 @@ export default class App extends Component {
         scrollWheelZoom
       >
         <CustomOverlay 
-          point={{
-            lng: 116.404,
-            lat: 39.915
-          }}
-          size={{
-            width: 100,
-            height: 100,
-          }}
+          point={this.point}
+          size={this.size}
         />
-        <Marker 
-          point={{
-            lng: 116.404,
-            lat: 39.915
-          }}
-        />
+        {
+          this.state.showMarker && <Marker 
+            point={this.state.markerPoint}
+          />
+        }
+        
       </Map>
     )
   }
