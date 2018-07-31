@@ -1,5 +1,5 @@
 import BaseOverlay from './BaseOverlay';
-import { getPoint, bindEvents } from '../_base/util';
+import { getPoint, bindEvents, isSupportContext } from '../_base/util';
 import ReactComponent from '../ReactComponent';
 
 @ReactComponent
@@ -8,7 +8,7 @@ class PointCollection extends BaseOverlay {
     this.instance = null;
 
     // 判断浏览器支持海量点
-    if (document.createElement('canvas').getContext) {
+    if (isSupportContext()) {
       const {
         points,
         shape,

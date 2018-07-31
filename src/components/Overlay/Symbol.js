@@ -34,7 +34,7 @@ class Symbol extends Marker {
         strokeWeight,
       }
     });
-    console.log(markerProps.icon);
+    
     super(markerProps);
   }
 }

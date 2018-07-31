@@ -30,6 +30,8 @@ export { default as InfoWindow } from './components/Overlay/InfoWindow';
 export { default as Ground } from './components/Overlay/Ground';
 export { default as PointCollection } from './components/Overlay/PointCollection';
 export { default as Symbol } from './components/Overlay/Symbol';
+export { default as Boundary } from './components/Overlay/Boundary';
+export { default as Heat } from './components/Overlay/Heat';
 
 /**
  * 常量

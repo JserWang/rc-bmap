@@ -97,3 +97,12 @@ export function processSetOptions(target, optionKey, opts) {
     }
   });
 }
+
+export function isSupportContext() {
+  return !!(document.createElement('canvas').getContext);
+}
+
+export function isSupportCanvas() {
+  const elem = document.createElement('canvas');
+  return !!(elem.getContext && elem.getContext('2d'));
+}

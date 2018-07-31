@@ -31,9 +31,13 @@ class Polygon extends BaseOverlay {
       enableMassClear: massClear,
     };
 
-    let pList = points.map((item) => {
-      return getPoint(item.lng, item.lat);
-    });
+    let pList = [];
+
+    if (points) {
+      pList = points.map((item) => {
+        return getPoint(item.lng, item.lat);
+      });
+    }
     
     this.instance = new global.BMap.Polygon(pList, opts);
 
