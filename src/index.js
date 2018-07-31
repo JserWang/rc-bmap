@@ -31,7 +31,13 @@ export { default as Ground } from './components/Overlay/Ground';
 export { default as PointCollection } from './components/Overlay/PointCollection';
 export { default as Symbol } from './components/Overlay/Symbol';
 export { default as Boundary } from './components/Overlay/Boundary';
-export { default as Heat } from './components/Overlay/Heat';
+
+/**
+ * 扩展覆盖物
+ */
+export { default as Heatmap } from './components/Overlay/Heatmap';
+export { default as CurveLine } from './components/Overlay/CurveLine';
+export { default as MarkerClusterer } from './components/Overlay/MarkerClusterer';
 
 /**
  * 常量

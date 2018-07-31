@@ -13,7 +13,9 @@ import {
   Ground,
   Symbol,
   Boundary,
-  Heat,
+  Heatmap,
+  CurveLine,
+  MarkerClusterer,
 } from '../../src';
 import CustomOverlay from './CustomOverlay';
 
@@ -26,7 +28,8 @@ export default class App extends Component {
       markerPoint: {
         lng: 116.404,
         lat: 39.915
-      }
+      },
+      markers: [],
     };
 
     this.point = {
@@ -38,6 +41,26 @@ export default class App extends Component {
       width: 100,
       height: 100,
     }
+  }
+
+  componentDidMount() {
+    var MAX = 10;
+    var pt = null;
+    var i = 0;
+    const markers = [];
+    for (; i < MAX; i++) {
+      markers.push({lng: Math.random() * 40 + 85, lat: Math.random() * 30 + 21});
+    }
+    setTimeout(() => {
+      this.setState({
+        markers,
+      });
+      setTimeout(() => {
+        this.setState({
+          markers,
+        });
+      }, 2000);
+    }, 2000);
   }
 
   render() {
@@ -136,10 +159,8 @@ export default class App extends Component {
     return (
       <Map
         ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv"
-        center={{lng: 116.418261, lat: 39.921984}}
-        events={{ click: (args) => {console.log(args); } }}
         scrollWheelZoom
-        zoom={12}
+        zoom={6}
       >
         <CustomOverlay 
           point={this.point}
@@ -224,11 +245,39 @@ export default class App extends Component {
           title="信息框1"
         />
 
-        <Heat
+        <Heatmap
           points={points}
           radius={20}
           max={100}
         />
+
+        <CurveLine 
+          points={[
+            {lng: 116.432045, lat: 39.910683},
+            {lng: 120.129721, lat: 30.314429},
+            {lng: 121.491121, lat: 25.127053},
+          ]}
+          strokeColor="blue"
+          strokeWeight={3}
+          strokeOpacity={0.5}
+          editing
+        />
+
+        <MarkerClusterer 
+          averageCenter
+        >
+        {
+          this.state.markers.map((item, index) => {
+            return (
+              <Marker
+                key={index}
+                point={item}
+              />
+            )
+          })
+        }
+        </MarkerClusterer>
+
         {/* <Ground 
           bounds={{
             sw: {

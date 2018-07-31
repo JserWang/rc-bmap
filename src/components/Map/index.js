@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MAP_SET_OPTIONS, MAP_BOOLEAN_OPTIONS } from '../_base/options';
+import { MAP_BOOLEAN_OPTIONS } from '../_base/options';
 import { replaceInitialToUpper, getPoint, isPoint, bindEvents, processSetOptions } from '../_base/util';
 
 const fillStyle = {
@@ -144,9 +144,11 @@ export default class Map extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const props = this.processProps(nextProps);
-    this.processMapOptions(props);
-    bindEvents(this.map, 'MAP', this.props.events);
+    if (this.map) {
+      const props = this.processProps(nextProps);
+      this.processMapOptions(props);
+      bindEvents(this.map, 'MAP', this.props.events);  
+    }
   }
 
   processProps(nextProps) {

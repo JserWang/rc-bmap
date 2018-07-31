@@ -45,7 +45,7 @@ class BaseOverlay {
     }
   }
 
-  destroy = () => {
+  destroy() {
     this.removeOverlay();
     this.instance = null;
   }
