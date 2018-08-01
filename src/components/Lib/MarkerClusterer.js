@@ -1,4 +1,4 @@
-import BaseOverlay from './BaseOverlay';
+import BaseOverlay from '../Overlay/BaseOverlay';
 import { getSize, getPoint } from '../_base/util';
 import ReactComponent from '../ReactComponent';
 import { default as BMarkerClusterer } from 'bmaplib.markerclusterer'

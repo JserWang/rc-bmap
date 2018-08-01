@@ -122,3 +122,8 @@ export const POINT_COLLECTION = [
   'mouseover',
   'mouseout',
 ];
+
+export const CONTEXT_MENU = [
+  'open',
+  'close',
+];

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MAP_BOOLEAN_OPTIONS } from '../_base/options';
-import { replaceInitialToUpper, getPoint, isPoint, bindEvents, processSetOptions } from '../_base/util';
+import { replaceInitialToUpper, getPoint, isPoint, bindEvents, processSetOptions, createContextMenu } from '../_base/util';
 
 const fillStyle = {
   width: '100%',
@@ -73,13 +73,19 @@ export default class Map extends React.Component {
   }
 
   init = (BMap) => {
-    const { highResolution, autoResize, mapClick, renderCallBack, ...resetProps } = this.props;
+    const { highResolution, autoResize, mapClick, renderCallBack, contextMenu, ...resetProps } = this.props;
     this.mapContainer = this.mapContainer || this.mapContainerRef.current;
     const map = this.map = new BMap.Map(this.mapContainer, {
       enableHighResolution: highResolution,
       enableAutoResize: autoResize,
       enableMapClick: mapClick,
     });
+
+    if (contextMenu) {
+      const menu = createContextMenu(contextMenu.items, contextMenu.events);
+      map.addContextMenu(menu);
+    }
+
     global.bMapInstance = map;
     this.processMapOptions(resetProps);
     bindEvents(map, 'MAP', this.props.events);

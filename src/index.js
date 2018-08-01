@@ -35,9 +35,12 @@ export { default as Boundary } from './components/Overlay/Boundary';
 /**
  * 扩展覆盖物
  */
-export { default as Heatmap } from './components/Overlay/Heatmap';
-export { default as CurveLine } from './components/Overlay/CurveLine';
-export { default as MarkerClusterer } from './components/Overlay/MarkerClusterer';
+export { default as Heatmap } from './components/Lib/Heatmap';
+export { default as CurveLine } from './components/Lib/CurveLine';
+export { default as MarkerClusterer } from './components/Lib/MarkerClusterer';
+export { default as DrawingManager } from './components/Lib/DrawingManager';
+export { default as DistanceTool } from './components/Lib/DistanceTool';
+export { default as TrafficControl } from './components/Lib/TrafficControl';
 
 /**
  * 常量

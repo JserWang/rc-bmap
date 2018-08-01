@@ -16,6 +16,10 @@ import {
   Heatmap,
   CurveLine,
   MarkerClusterer,
+  ContextMenu,
+  DrawingManager,
+  DistanceTool,
+  TrafficControl,
 } from '../../src';
 import CustomOverlay from './CustomOverlay';
 
@@ -161,18 +165,29 @@ export default class App extends Component {
         ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv"
         scrollWheelZoom
         zoom={6}
+        contextMenu={{
+          items: [{
+            text: '放大',
+            callback: function() {global.bMapInstance.zoomIn()},
+          },
+          {
+            text: '缩小',
+            callback: function() {global.bMapInstance.zoomOut()},
+            separator: true,
+          }]
+        }}
       >
         <CustomOverlay 
           point={this.point}
           size={this.size}
         />
-        {/* <Marker 
+        <Marker 
           point={this.state.markerPoint}
           // label={<Label content="bbb" title="bbb" />}
-          animation={Animation.BOUNCE}
-        /> */}
+          
+        />
 
-        <Symbol
+        {/* <Symbol
           path={SymbolShapeType.FORWARD_CLOSED_ARROW}
           scale={5}
           strokeWeight={1}
@@ -181,7 +196,7 @@ export default class App extends Component {
           fillOpacity={0.8}
           point={this.state.markerPoint}
           animation={Animation.BOUNCE}
-        />
+        /> */}
 
         {/* <Label 
           content="aaa"
@@ -277,6 +292,10 @@ export default class App extends Component {
           })
         }
         </MarkerClusterer>
+
+        <DrawingManager />
+        <DistanceTool />
+        <TrafficControl />
 
         {/* <Ground 
           bounds={{

@@ -1,4 +1,4 @@
-import BaseOverlay from './BaseOverlay';
+import BaseOverlay from '../Overlay/BaseOverlay';
 import { isSupportCanvas } from '../_base/util';
 import ReactComponent from '../ReactComponent';
 import { default as BHeatmap } from 'bmaplib.heatmap';

@@ -3,13 +3,16 @@ import BaseOverlay from './BaseOverlay';
 import { getPoint } from '../_base/util';
 import MAP_PANE from '../../constants/MapPane';
 
+const BOverlay = function() {}
 class Overlay extends BaseOverlay {
+
   init() {
-    const BaseOverlay = function() {}
-    BaseOverlay.prototype = new global.BMap.Overlay();
-    BaseOverlay.prototype.initialize = this.initialize.bind(this);
-    BaseOverlay.prototype.draw = this.draw.bind(this);
-    this.instance = new BaseOverlay();
+    if (!BOverlay.prototype.initialize) {
+      BOverlay.prototype = new global.BMap.Overlay();
+      BOverlay.prototype.initialize = this.initialize.bind(this);
+      BOverlay.prototype.draw = this.draw.bind(this);
+    }
+    this.instance = new BOverlay();
   }
 
   initialize() {

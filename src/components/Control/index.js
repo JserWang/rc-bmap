@@ -18,9 +18,12 @@ class Control extends BaseControl {
         height: 0,
       },
     } = this.props;
+
+    if (!BaseCtrl.prototype.initialize) {
+      BaseCtrl.prototype = new global.BMap.Control();
+      BaseCtrl.prototype.initialize = this.initialize.bind(this);
+    }
     
-    BaseCtrl.prototype = new global.BMap.Control();
-    BaseCtrl.prototype.initialize = this.initialize.bind(this);
     this.instance = new BaseCtrl(global[anchor], getSize(offset.width, offset.height));
   }
 

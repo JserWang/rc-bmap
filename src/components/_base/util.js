@@ -89,6 +89,28 @@ export function createSymbol(options = {}) {
   });
 }
 
+export function createContextMenu(items = [], events) {
+  const menu = new global.BMap.ContextMenu();
+  items.forEach((item) => {
+    const itemOpts = {
+      width: item.width,
+      id: item.id,
+      iconUrl: item.iconUrl
+    };
+    const menuItem = new global.BMap.MenuItem(item.text, item.callback, itemOpts);
+    if (item.disabled) {
+      menuItem.disable();
+    }
+    if (item.separator) {
+      menu.addSeparator();
+    }
+    menu.addItem(menuItem);
+  });
+
+  bindEvents(menu, 'CONTEXT_MENU', events);
+  return menu;
+}
+
 export function processSetOptions(target, optionKey, opts) {
   OPTIONS[optionKey].forEach((key) => {
     if (opts[key] || typeof opts[key] === "boolean") {
@@ -105,4 +127,18 @@ export function isSupportContext() {
 export function isSupportCanvas() {
   const elem = document.createElement('canvas');
   return !!(elem.getContext && elem.getContext('2d'));
+}
+
+export function appendCss(options = {}) {
+  const url = options.url;
+  const id = options.id;
+  const node = document.createElement("link");
+
+  node.rel = "stylesheet";
+  node.type = "text/css";
+  node.href = url;
+  if( typeof id !== "undefined" ){
+      node.id = id;
+  }
+  document.getElementsByTagName("head")[0].appendChild(node);
 }
