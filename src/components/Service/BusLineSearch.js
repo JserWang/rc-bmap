@@ -3,19 +3,16 @@ import ReactComponent from '../ReactComponent';
 import { isPoint, getPoint } from '../_base/util';
 
 @ReactComponent
-class TransitRoute extends BaseService {
+class BusLineSearch extends BaseService {
   init() {
     const {
       location = this.map,
-      policy,
-      intercityPolicy,
-      transitTypePolicy,
-      pageCapacity,
-      onSearchComplete,
-      onMarkersSet,
-      onInfoHtmlSet,
+      onGetBusListComplete,
+      onGetBusLineComplete,
+      onBusListHtmlSet,
+      onBusLineHtmlSet,
       onPolylinesSet,
-      onResultsHtmlSet,
+      onMarkersSet,
       renderOptions = {},
       showInMap = false,
     } = this.props;
@@ -25,16 +22,13 @@ class TransitRoute extends BaseService {
       _location = getPoint(_location.lng, _location.lat);
     }
 
-    this.instance = new global.BMap.TransitRoute(_location, {
-      policy: policy && global[policy],
-      intercityPolicy: intercityPolicy && global[intercityPolicy],
-      transitTypePolicy: transitTypePolicy && global[transitTypePolicy],
-      pageCapacity,
-      onSearchComplete,
-      onMarkersSet,
-      onInfoHtmlSet,
+    this.instance = new global.BMap.BusLineSearch(_location, {
+      onGetBusListComplete,
+      onGetBusLineComplete,
+      onBusListHtmlSet,
+      onBusLineHtmlSet,
       onPolylinesSet,
-      onResultsHtmlSet,
+      onMarkersSet,
       renderOptions: {
         map: showInMap ? this.map : null,
         panel: renderOptions.panel,
@@ -45,4 +39,4 @@ class TransitRoute extends BaseService {
   }
 }
 
-export default TransitRoute;
+export default BusLineSearch;

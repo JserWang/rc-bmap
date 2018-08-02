@@ -53,6 +53,10 @@ export { default as Tile } from './components/Layers/Tile';
  */
 export { default as LocalSearch } from './components/Service/LocalSearch';
 export { default as TransitRoute } from './components/Service/TransitRoute';
+export { default as DrivingRoute } from './components/Service/DrivingRoute';
+export { default as WalkingRoute } from './components/Service/WalkingRoute';
+export { default as RidingRoute } from './components/Service/RidingRoute';
+export { default as BusLineSearch } from './components/Service/BusLineSearch';
 
 /**
  * 常量
@@ -76,4 +80,4 @@ export { default as IntercityPolicy } from './constants/IntercityPolicy';
 /**
  * 工具方法
  */
-export { getPoint, getMapBounds, getBounds, getPoiByKeyword } from './components/_base/util'
+export { getPoint, getMapBounds, getBounds, getPoiByKeyword, convertPoint } from './components/_base/util'

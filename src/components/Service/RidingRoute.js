@@ -3,19 +3,14 @@ import ReactComponent from '../ReactComponent';
 import { isPoint, getPoint } from '../_base/util';
 
 @ReactComponent
-class TransitRoute extends BaseService {
+class RidingRoute extends BaseService {
   init() {
     const {
       location = this.map,
-      policy,
-      intercityPolicy,
-      transitTypePolicy,
-      pageCapacity,
       onSearchComplete,
       onMarkersSet,
       onInfoHtmlSet,
       onPolylinesSet,
-      onResultsHtmlSet,
       renderOptions = {},
       showInMap = false,
     } = this.props;
@@ -25,16 +20,11 @@ class TransitRoute extends BaseService {
       _location = getPoint(_location.lng, _location.lat);
     }
 
-    this.instance = new global.BMap.TransitRoute(_location, {
-      policy: policy && global[policy],
-      intercityPolicy: intercityPolicy && global[intercityPolicy],
-      transitTypePolicy: transitTypePolicy && global[transitTypePolicy],
-      pageCapacity,
+    this.instance = new global.BMap.RidingRoute(_location, {
       onSearchComplete,
       onMarkersSet,
       onInfoHtmlSet,
       onPolylinesSet,
-      onResultsHtmlSet,
       renderOptions: {
         map: showInMap ? this.map : null,
         panel: renderOptions.panel,
@@ -45,4 +35,4 @@ class TransitRoute extends BaseService {
   }
 }
 
-export default TransitRoute;
+export default RidingRoute;

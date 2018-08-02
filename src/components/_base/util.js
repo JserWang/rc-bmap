@@ -163,3 +163,15 @@ export function getPoiByKeyword(keyword) {
     local.search(keyword);
   });
 }
+
+export function convertPoint(point, from, to = 5) {
+  return new Promise((resolve) => {
+    const convert = new global.BMap.Convertor();
+    if (!Array.isArray(point)) {
+      point = [point];
+    }
+    convert.translate(point, from, to, (result) => {
+      resolve(result);
+    });
+  });
+}
