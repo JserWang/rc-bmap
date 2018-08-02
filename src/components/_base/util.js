@@ -1,5 +1,6 @@
 import * as EVENT from './events';
 import * as OPTIONS from './options';
+import ContextMenuIcon from '../../constants/ContextMenuIcon';
 
 const reg = /[a-z]/;
 
@@ -15,9 +16,13 @@ export function getSize(width, height) {
   return new global.BMap.Size(width, height);
 }
 
-export function getBound(bounds) {
+export function getBounds(bounds) {
   const { sw, ne } = bounds;
   return new global.BMap.Bounds(getPoint(sw.lng, sw.lat), getPoint(ne.lng, ne.lat));
+}
+
+export function getMapBounds() {
+  return global.bMapInstance.getBounds();
 }
 
 export const isPoint = obj => obj.lng && obj.lat;
@@ -92,10 +97,11 @@ export function createSymbol(options = {}) {
 export function createContextMenu(items = [], events) {
   const menu = new global.BMap.ContextMenu();
   items.forEach((item) => {
+    const iconUrl = (item.iconUrl === ContextMenuIcon.ZOOMIN) || (item.iconUrl === ContextMenuIcon.ZOOMOUT) ? global[item.iconUrl] : iconUrl;
     const itemOpts = {
       width: item.width,
       id: item.id,
-      iconUrl: item.iconUrl
+      iconUrl,
     };
     const menuItem = new global.BMap.MenuItem(item.text, item.callback, itemOpts);
     if (item.disabled) {
@@ -141,4 +147,19 @@ export function appendCss(options = {}) {
       node.id = id;
   }
   document.getElementsByTagName("head")[0].appendChild(node);
+}
+
+export function getPoiByKeyword(keyword) {
+  return new Promise((resolve) => {
+    const local = new global.BMap.LocalSearch(global.bMapInstance, {
+      onSearchComplete(result) {
+        let res = null;
+        if (result) {
+          res = result.getPoi(0);
+        }
+        resolve(res);
+      }
+    });
+    local.search(keyword);
+  });
 }

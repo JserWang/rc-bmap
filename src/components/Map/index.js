@@ -80,20 +80,26 @@ export default class Map extends React.Component {
       enableAutoResize: autoResize,
       enableMapClick: mapClick,
     });
-
-    if (contextMenu) {
-      const menu = createContextMenu(contextMenu.items, contextMenu.events);
-      map.addContextMenu(menu);
-    }
+    
+    this.processContextMenu(contextMenu);
 
     global.bMapInstance = map;
     this.processMapOptions(resetProps);
     bindEvents(map, 'MAP', this.props.events);
-    if (renderCallBack) {
-      renderCallBack();
+    
+    // 地图配置完成后，强制刷新，渲染子组件
+    this.forceUpdate(() => {
+      if (renderCallBack) {
+        renderCallBack(global.bMapInstance);
+      }
+    });
+  }
+
+  processContextMenu = (contextMenu) => {
+    if (contextMenu) {
+      const menu = createContextMenu(contextMenu.items, contextMenu.events);
+      this.map.addContextMenu(menu);
     }
-    // 加载完地图后，强制刷新
-    this.forceUpdate();
   }
 
   processMapOptions = (props) => {

@@ -20,8 +20,12 @@ import {
   DrawingManager,
   DistanceTool,
   TrafficControl,
+  AutoComplete,
+  Tile,
 } from '../../src';
 import CustomOverlay from './CustomOverlay';
+
+const Fragment = React.Fragment;
 
 export default class App extends Component {
   constructor(props) {
@@ -55,16 +59,28 @@ export default class App extends Component {
     for (; i < MAX; i++) {
       markers.push({lng: Math.random() * 40 + 85, lat: Math.random() * 30 + 21});
     }
-    setTimeout(() => {
-      this.setState({
-        markers,
-      });
-      setTimeout(() => {
-        this.setState({
-          markers,
-        });
-      }, 2000);
-    }, 2000);
+    // setTimeout(() => {
+    //   this.setState({
+    //     markers,
+    //   });
+    //   setTimeout(() => {
+    //     this.setState({
+    //       markers,
+    //     });
+    //   }, 2000);
+    // }, 2000);
+  }
+
+  getDistanceTool(tool) {
+    console.log(tool);
+    // tool.open();
+    // tool.close();
+  }
+
+  getTilesUrl = (tileCoord, zoom) => {
+		var x = tileCoord.x;
+		var y = tileCoord.y;
+		return 'http://lbsyun.baidu.com/jsdemo/demo/tiles/' + zoom + '/tile' + x + '_' + y + '.png';  //根据当前坐标，选取合适的瓦片图
   }
 
   render() {
@@ -161,10 +177,12 @@ export default class App extends Component {
       {"lng":116.42076,"lat":39.915251,"count":70},
       {"lng":116.425867,"lat":39.918989,"count":8}];
     return (
+      <Fragment>
       <Map
         ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv"
         scrollWheelZoom
-        zoom={6}
+        zoom={16}
+        center={{lng: 116.332782, lat: 40.007978}}
         contextMenu={{
           items: [{
             text: '放大',
@@ -250,15 +268,15 @@ export default class App extends Component {
           radius={500}
         />
 
-        <Boundary 
+        {/* <Boundary 
           name="北京市海淀区"
-        />
+        /> */}
 
-        <InfoWindow 
+        {/* <InfoWindow 
           point={this.point}
           content="信息框1内容"
           title="信息框1"
-        />
+        /> */}
 
         <Heatmap
           points={points}
@@ -294,7 +312,7 @@ export default class App extends Component {
         </MarkerClusterer>
 
         <DrawingManager />
-        <DistanceTool />
+        <DistanceTool getInstance={this.getDistanceTool} />
         <TrafficControl />
 
         {/* <Ground 
@@ -314,7 +332,15 @@ export default class App extends Component {
           displayOnMaxLevel={14}
         /> */}
 
+        <AutoComplete input="suggest" />
+
+        <Tile 
+          transparentPng
+          getTilesUrl={this.getTilesUrl}
+        />
       </Map>
+      <input id="suggest" />
+      </Fragment>
     )
   }
 }

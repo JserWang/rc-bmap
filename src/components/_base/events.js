@@ -127,3 +127,8 @@ export const CONTEXT_MENU = [
   'open',
   'close',
 ];
+
+export const AUTO_COMPLETE = [
+  'onconfirm',
+  'onhighlight'
+];

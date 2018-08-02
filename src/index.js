@@ -41,6 +41,18 @@ export { default as MarkerClusterer } from './components/Lib/MarkerClusterer';
 export { default as DrawingManager } from './components/Lib/DrawingManager';
 export { default as DistanceTool } from './components/Lib/DistanceTool';
 export { default as TrafficControl } from './components/Lib/TrafficControl';
+export { default as AutoComplete } from './components/AutoComplete';
+
+/**
+ * 地图图层
+ */
+export { default as Tile } from './components/Layers/Tile';
+
+/**
+ * 服务类
+ */
+export { default as LocalSearch } from './components/Service/LocalSearch';
+export { default as TransitRoute } from './components/Service/TransitRoute';
 
 /**
  * 常量
@@ -56,3 +68,12 @@ export { default as Animation } from './constants/Animation';
 export { default as ShapeType } from './constants/ShapeType';
 export { default as SizeType } from './constants/SizeType';
 export { default as SymbolShapeType } from './constants/SymbolShapeType';
+export { default as ContextMenuIcon } from './constants/ContextMenuIcon';
+export { default as TransitPolicy } from './constants/TransitPolicy';
+export { default as TransitTypePolicy } from './constants/TransitTypePolicy';
+export { default as IntercityPolicy } from './constants/IntercityPolicy';
+
+/**
+ * 工具方法
+ */
+export { getPoint, getMapBounds, getBounds, getPoiByKeyword } from './components/_base/util'

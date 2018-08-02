@@ -8,7 +8,7 @@ export default function ReactComponent(Wrapped) {
       this.wrapped = new Wrapped(props);
       // 获得实例
       if (props.getInstance) {
-        props.getInstance(this.wrapped);
+        props.getInstance(this.wrapped.instance);
       }
     }
 
