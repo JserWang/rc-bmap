@@ -5,7 +5,7 @@ import { ReactComponent, Control } from '../../src';
 class CustomControl extends Control {
   render() {
     return (
-      <div>{this.props.label}</div>
+      <div>这是一个自定义控件</div>
     )
   }
 }

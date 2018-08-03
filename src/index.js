@@ -5,6 +5,7 @@ export { default as Map } from './components/Map';
 export { default as Control } from './components/Control';
 export { default as Overlay } from './components/Overlay';
 export { default as ReactComponent } from './components/ReactComponent';
+export { default as AutoComplete } from './components/AutoComplete';
 
 /**
  * 常用控件
@@ -33,7 +34,7 @@ export { default as Symbol } from './components/Overlay/Symbol';
 export { default as Boundary } from './components/Overlay/Boundary';
 
 /**
- * 扩展覆盖物
+ * 扩展类库
  */
 export { default as Heatmap } from './components/Lib/Heatmap';
 export { default as CurveLine } from './components/Lib/CurveLine';
@@ -41,7 +42,6 @@ export { default as MarkerClusterer } from './components/Lib/MarkerClusterer';
 export { default as DrawingManager } from './components/Lib/DrawingManager';
 export { default as DistanceTool } from './components/Lib/DistanceTool';
 export { default as TrafficControl } from './components/Lib/TrafficControl';
-export { default as AutoComplete } from './components/AutoComplete';
 
 /**
  * 地图图层

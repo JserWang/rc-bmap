@@ -48,7 +48,7 @@ export default class Map extends React.Component {
     highResolution: PropTypes.bool,
     autoResize: PropTypes.bool,
     mapClick: PropTypes.bool,
-    renderCallBack: PropTypes.func,
+    mapMounted: PropTypes.func,
     dragging: PropTypes.bool,
     scrollWheelZoom: PropTypes.bool,
     doubleClickZoom: PropTypes.bool,
@@ -73,7 +73,7 @@ export default class Map extends React.Component {
   }
 
   init = (BMap) => {
-    const { highResolution, autoResize, mapClick, renderCallBack, contextMenu, ...resetProps } = this.props;
+    const { highResolution, autoResize, mapClick, mapMounted, contextMenu, ...resetProps } = this.props;
     this.mapContainer = this.mapContainer || this.mapContainerRef.current;
     const map = this.map = new BMap.Map(this.mapContainer, {
       enableHighResolution: highResolution,
@@ -89,8 +89,8 @@ export default class Map extends React.Component {
     
     // 地图配置完成后，强制刷新，渲染子组件
     this.forceUpdate(() => {
-      if (renderCallBack) {
-        renderCallBack(global.bMapInstance);
+      if (mapMounted) {
+        mapMounted(global.bMapInstance);
       }
     });
   }
@@ -152,7 +152,14 @@ export default class Map extends React.Component {
   }
 
   componentDidMount() {
-    this.getMapScript().then(this.init);
+    const { ak } = this.props;
+    if (ak) {
+      this.getMapScript().then(this.init);
+    } else if (global.BMap) {
+      this.init(global.BMap);
+    } else {
+      console.warn('BMap is undefined');
+    }
   }
 
   componentWillReceiveProps(nextProps) {

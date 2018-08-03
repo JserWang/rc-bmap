@@ -9,7 +9,9 @@ class BaseOverlay {
     this.map = global.bMapInstance;
 
     this.init();
-    this.addOverlay();
+    setTimeout(() => {
+      this.addOverlay();
+    }, 0);
   }
 
   addOverlay() {

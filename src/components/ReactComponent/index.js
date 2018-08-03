@@ -7,14 +7,19 @@ export default function ReactComponent(Wrapped) {
       this.map = global.bMapInstance;
       this.wrapped = new Wrapped(props);
       // 获得实例
-      if (props.getInstance) {
-        props.getInstance(this.wrapped.instance);
-      }
+      this.getInstance();
     }
 
     componentDidUpdate() {
       if (this.wrapped.onPropsUpdate) {
         this.wrapped.onPropsUpdate(this.props);
+        this.getInstance();
+      }
+    }
+
+    getInstance = () => {
+      if (this.props.getInstance) {
+        this.props.getInstance(this.wrapped.instance);
       }
     }
 

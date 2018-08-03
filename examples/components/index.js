@@ -1,13 +1,18 @@
-import Map from './map';
-import Overlay from './overlay';
-import Service from './service';
 import React from 'react';
-import {render} from 'react-dom';
+import { render } from 'react-dom';
+import { ControlAnchor, Map } from '../../src';
+import ComplexControl  from './ComplexControl';
 
-const examples = (
-  // <Map />
-  // <Overlay />
-  <Service />
-)
+const offset = {
+  width: 10,
+  height: 10,
+};
 
-render(examples, document.getElementById('app'))
+render(
+  <Map 
+    ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv"
+  >
+    <ComplexControl offset={offset} anchor={ControlAnchor.TOP_RIGHT}  />
+  </Map>,
+  document.getElementById('app')
+);

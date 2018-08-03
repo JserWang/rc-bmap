@@ -31,8 +31,8 @@ export function bindEvents(target, eventKey, events) {
   if (events && EVENT[eventKey]) {
     EVENT[eventKey].forEach((eventName) => {
       if (events[eventName]) {
-        const callBack = (...args) => {
-          events[eventName].call(null, ...args);
+        const callBack = (event) => {
+          events[eventName].call(null, event);
         };
         if (target[`_${eventName}`]) {
           target.removeEventListener(eventName, target[`_${eventName}`]);

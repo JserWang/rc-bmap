@@ -23,7 +23,7 @@ class Control extends BaseControl {
       BaseCtrl.prototype = new global.BMap.Control();
       BaseCtrl.prototype.initialize = this.initialize.bind(this);
     }
-    
+
     this.instance = new BaseCtrl(global[anchor], getSize(offset.width, offset.height));
   }
 
