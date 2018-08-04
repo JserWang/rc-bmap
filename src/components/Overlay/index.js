@@ -33,16 +33,11 @@ class Overlay extends BaseOverlay {
   }
 
   draw() {
-    const {
-      point,
-      size = {
-        width: 0,
-        height: 0,
-      },
-    } = this.props;
+    const { container, props } = this;;
+    const { point } = props;
     const position = this.map.pointToOverlayPixel(getPoint(point.lng, point.lat));
-    this.container.style.left = `${position.x - (size.width / 2)}px`;
-    this.container.style.top = `${position.y - (size.height / 2)}px`;
+    container.style.left = `${position.x - (container.offsetWidth / 2)}px`;
+    container.style.top = `${position.y - (container.offsetHeight / 2)}px`;
   }
 }
 
