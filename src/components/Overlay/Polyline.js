@@ -14,7 +14,6 @@ class Polyline extends BaseOverlay {
       massClear = true,
       editing = false,
       clicking = true,
-      icons,
       events,
     } = this.props;
 
@@ -26,8 +25,6 @@ class Polyline extends BaseOverlay {
       enableEditing: editing,
       enableClicking: clicking,
       enableMassClear: massClear,
-      // TODO: 补全icons实现
-      icons,
     };
 
     let pList = points.map((item) => {

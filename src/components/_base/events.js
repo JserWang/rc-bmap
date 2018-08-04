@@ -132,3 +132,12 @@ export const AUTO_COMPLETE = [
   'onconfirm',
   'onhighlight'
 ];
+
+export const DRAWING_MANAGER = [
+  'circlecomplete',
+  'markercomplete',
+  'overlaycomplete',
+  'polygoncomplete',
+  'polylinecomplete',
+  'rectanglecomplete',
+];

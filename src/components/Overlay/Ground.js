@@ -9,15 +9,15 @@ class Ground extends BaseOverlay {
       bounds,
       opacity,
       imageURL,
-      displayOnMinLevel,
-      displayOnMaxLevel,
+      minZoom,
+      maxZoom,
       events,
     } = this.props;
 
     const opts = {
       opacity,
-      displayOnMinLevel,
-      displayOnMaxLevel,
+      displayOnMinLevel: minZoom,
+      displayOnMaxLevel: maxZoom,
     };
 
     this.instance = new global.BMap.GroundOverlay(getBounds(bounds), opts);

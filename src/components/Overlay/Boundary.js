@@ -7,7 +7,7 @@ class Boundary extends Polygon {
   constructor(props) {
     const {
       name,
-      onBoundaryError,
+      onError,
       autoViewport,
       ...polygonProps
     } = props;

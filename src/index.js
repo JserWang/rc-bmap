@@ -76,6 +76,8 @@ export { default as ContextMenuIcon } from './constants/ContextMenuIcon';
 export { default as TransitPolicy } from './constants/TransitPolicy';
 export { default as TransitTypePolicy } from './constants/TransitTypePolicy';
 export { default as IntercityPolicy } from './constants/IntercityPolicy';
+export { default as DrivingPolicy } from './constants/DrivingPolicy';
+export { default as DrawingMode } from './constants/DrawingMode';
 
 /**
  * 工具方法

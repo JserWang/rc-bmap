@@ -22,7 +22,7 @@
      * 定义常量, 绘制的模式
      * @final {Number} DrawingType
      */
-    var BMAP_DRAWING_MARKER    = "marker",     // 鼠标画点模式
+    var BMAP_DRAWING_MARKER = "marker",     // 鼠标画点模式
     BMAP_DRAWING_POLYLINE  = "polyline",   // 鼠标画线模式
     BMAP_DRAWING_CIRCLE    = "circle",     // 鼠标画圆模式
     BMAP_DRAWING_RECTANGLE = "rectangle",  // 鼠标画矩形模式
