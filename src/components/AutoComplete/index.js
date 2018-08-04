@@ -16,11 +16,6 @@ class AutoComplete {
       searchComplete,
     } = this.props;
 
-    // TODO: 处理当传入的不是input Id时，自动创建个Control
-    if (typeof input !== "string") {
-
-    }
-
     this.instance = new global.BMap.Autocomplete({
       input,
       location: this.map,

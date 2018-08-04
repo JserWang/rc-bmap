@@ -205,7 +205,7 @@ export default class App extends Component {
           
         />
 
-        {/* <Symbol
+        <Symbol
           path={SymbolShapeType.FORWARD_CLOSED_ARROW}
           scale={5}
           strokeWeight={1}
@@ -214,7 +214,7 @@ export default class App extends Component {
           fillOpacity={0.8}
           point={this.state.markerPoint}
           animation={Animation.BOUNCE}
-        /> */}
+        />
 
         {/* <Label 
           content="aaa"
