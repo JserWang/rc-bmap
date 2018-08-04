@@ -38,7 +38,7 @@ class BaseOverlay {
     this.addOverlay();
   }
 
-  setState = (param) => {
+  setState(param) {
     if (param !== null) {
       this.state = Object.assign(this.state, param);
     }

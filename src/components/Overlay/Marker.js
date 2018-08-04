@@ -1,5 +1,5 @@
 import BaseOverlay from './BaseOverlay';
-import { getPoint, getSize, bindEvents, createLabel, createIcon, processSetOptions } from '../_base/util';
+import { getPoint, getSize, bindEvents, createLabel, createIcon, processSetOptions, createContextMenu } from '../_base/util';
 import ReactComponent from '../ReactComponent';
 
 @ReactComponent
@@ -14,7 +14,7 @@ class Marker extends BaseOverlay {
       icon,
       massClear = true,
       dragging = false,
-      clicking = false,
+      clicking = true,
       raiseOnDrag = false,
       draggingCursor,
       rotation,
@@ -56,6 +56,7 @@ class Marker extends BaseOverlay {
 
     bindEvents(this.instance, 'MARKER', events);
 
+    this.processContextMenu();
     processSetOptions(this.instance, 'MARKER_SET_OPTIONS', setOpts);
 
     // animation 需要在addOverlay之后添加，所以这里将setAnimation放置下个队列
@@ -63,6 +64,14 @@ class Marker extends BaseOverlay {
       setTimeout(() => {
         this.instance.setAnimation(global[animation]);
       }, 0)
+    }
+  }
+
+  processContextMenu() {
+    const { contextMenu } = this.props
+    if (contextMenu) {
+      const menu = createContextMenu(contextMenu.items, contextMenu.events);
+      this.instance.addContextMenu(menu);
     }
   }
 }

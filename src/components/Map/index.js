@@ -166,6 +166,7 @@ export default class Map extends React.Component {
     if (this.map) {
       const props = this.processProps(nextProps);
       this.processMapOptions(props);
+      this.processContextMenu(props.contextMenu);
       bindEvents(this.map, 'MAP', this.props.events);  
     }
   }
