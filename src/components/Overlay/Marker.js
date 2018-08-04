@@ -63,7 +63,7 @@ class Marker extends BaseOverlay {
     if (animation) {
       setTimeout(() => {
         this.instance.setAnimation(global[animation]);
-      }, 0)
+      }, 100)
     }
   }
 

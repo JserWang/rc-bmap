@@ -141,3 +141,8 @@ export const DRAWING_MANAGER = [
   'polylinecomplete',
   'rectanglecomplete',
 ];
+
+export const DISTANCE_TOOL = [
+  'onaddpoint',
+  'ondrawend',
+];

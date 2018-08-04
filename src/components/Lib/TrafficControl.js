@@ -6,10 +6,10 @@ import BaseControl from '../Control/BaseControl';
 @ReactComponent
 class TrafficControl extends BaseControl {
   constructor(props) {
-    super(props);
     appendCss({
       url: 'http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.css'
-    })
+    });
+    super(props);
   }
 
   init() {
@@ -21,9 +21,10 @@ class TrafficControl extends BaseControl {
     this.instance = new BTrafficControl({
       showPanel: false
     });
+
     setTimeout(() => {
       this.instance.setAnchor(global[anchor])
-    }, 0);
+    }, 100);
   }
 }
 

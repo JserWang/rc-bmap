@@ -6,10 +6,10 @@ import ControlAnchor from '../../constants/ControlAnchor';
 @ReactComponent
 class DrawingManager extends BaseOverlay {
   constructor(props) {
-    super(props);
     appendCss({
       url: 'http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css'
-    })
+    });
+    super(props);
   }
 
   init() {

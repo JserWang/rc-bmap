@@ -34,7 +34,7 @@ class Heatmap extends BaseOverlay {
           data: points,
           max,
         });
-      }, 0);
+      }, 100);
     }
   }
 }
