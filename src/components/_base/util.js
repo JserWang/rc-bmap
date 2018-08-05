@@ -164,13 +164,14 @@ export function getPoiByKeyword(keyword) {
   });
 }
 
-export function convertPoint(point, from, to = 5) {
+export function convertPoint(points, from, to = 5) {
   return new Promise((resolve) => {
     const convert = new global.BMap.Convertor();
-    if (!Array.isArray(point)) {
-      point = [point];
+    if (!Array.isArray(points)) {
+      point = [points];
     }
-    convert.translate(point, from, to, (result) => {
+    const pList = point.map(item => getPoint(item.lng, item.lat));
+    convert.translate(pList, from, to, (result) => {
       resolve(result);
     });
   });

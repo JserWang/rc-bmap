@@ -940,10 +940,6 @@ bmaplib.heatmap@^1.0.4:
   version "1.0.4"
   resolved "http://registry.npm.taobao.org/bmaplib.heatmap/download/bmaplib.heatmap-1.0.4.tgz#30161262771fe78af35705ff92457725de5d9850"
 
-bmaplib.lushu@^1.0.7:
-  version "1.0.7"
-  resolved "http://registry.npm.taobao.org/bmaplib.lushu/download/bmaplib.lushu-1.0.7.tgz#77c17dcf7148d30c46e8430c7ff86b20e418b8b8"
-
 bmaplib.markerclusterer@^1.0.13:
   version "1.0.13"
   resolved "http://registry.npm.taobao.org/bmaplib.markerclusterer/download/bmaplib.markerclusterer-1.0.13.tgz#442d71a6c40844ee47d01f6db2166b54530b5bd1"
@@ -1235,8 +1231,8 @@ collection-visit@^1.0.0:
     object-visit "^1.0.0"
 
 commander@^2.11.0:
-  version "2.16.0"
-  resolved "http://registry.npm.taobao.org/commander/download/commander-2.16.0.tgz#f16390593996ceb4f3eeb020b31d78528f7f8a50"
+  version "2.17.0"
+  resolved "http://registry.npm.taobao.org/commander/download/commander-2.17.0.tgz#9d07b25e2a6f198b76d8b756a0e8a9604a6a1a60"
 
 commondir@^1.0.1:
   version "1.0.1"
@@ -1898,8 +1894,8 @@ find-up@^2.0.0, find-up@^2.1.0:
     locate-path "^2.0.0"
 
 follow-redirects@^1.0.0:
-  version "1.5.1"
-  resolved "http://registry.npm.taobao.org/follow-redirects/download/follow-redirects-1.5.1.tgz#67a8f14f5a1f67f962c2c46469c79eaec0a90291"
+  version "1.5.2"
+  resolved "http://registry.npm.taobao.org/follow-redirects/download/follow-redirects-1.5.2.tgz#5a9d80e0165957e5ef0c1210678fc5c4acb9fb03"
   dependencies:
     debug "^3.1.0"
 
@@ -3367,8 +3363,8 @@ rc@^1.2.7:
     strip-json-comments "~2.0.1"
 
 react-dom@^16.4.1:
-  version "16.4.1"
-  resolved "http://registry.npm.taobao.org/react-dom/download/react-dom-16.4.1.tgz#7f8b0223b3a5fbe205116c56deb85de32685dad6"
+  version "16.4.2"
+  resolved "http://registry.npm.taobao.org/react-dom/download/react-dom-16.4.2.tgz#4afed569689f2c561d2b8da0b819669c38a0bda4"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -3376,8 +3372,8 @@ react-dom@^16.4.1:
     prop-types "^15.6.0"
 
 react@^16.4.1:
-  version "16.4.1"
-  resolved "http://registry.npm.taobao.org/react/download/react-16.4.1.tgz#de51ba5764b5dbcd1f9079037b862bd26b82fe32"
+  version "16.4.2"
+  resolved "http://registry.npm.taobao.org/react/download/react-16.4.2.tgz#2cd90154e3a9d9dd8da2991149fdca3c260e129f"
   dependencies:
     fbjs "^0.8.16"
     loose-envify "^1.1.0"
@@ -3936,8 +3932,8 @@ tapable@^0.2.7:
   resolved "http://registry.npm.taobao.org/tapable/download/tapable-0.2.8.tgz#99372a5c999bf2df160afc0d74bed4f47948cd22"
 
 tar@^4:
-  version "4.4.4"
-  resolved "http://registry.npm.taobao.org/tar/download/tar-4.4.4.tgz#ec8409fae9f665a4355cc3b4087d0820232bb8cd"
+  version "4.4.6"
+  resolved "http://registry.npm.taobao.org/tar/download/tar-4.4.6.tgz#63110f09c00b4e60ac8bcfe1bf3c8660235fbc9b"
   dependencies:
     chownr "^1.0.1"
     fs-minipass "^1.2.5"
@@ -3952,8 +3948,8 @@ thunky@^1.0.2:
   resolved "http://registry.npm.taobao.org/thunky/download/thunky-1.0.2.tgz#a862e018e3fb1ea2ec3fce5d55605cf57f247371"
 
 time-stamp@^2.0.0:
-  version "2.0.0"
-  resolved "http://registry.npm.taobao.org/time-stamp/download/time-stamp-2.0.0.tgz#95c6a44530e15ba8d6f4a3ecb8c3a3fac46da357"
+  version "2.0.1"
+  resolved "http://registry.npm.taobao.org/time-stamp/download/time-stamp-2.0.1.tgz#708a89359c1fc50bd5e7b1c8aa750d08c9172232"
 
 timers-browserify@^2.0.4:
   version "2.0.10"
@@ -4070,8 +4066,8 @@ urix@^0.1.0:
   resolved "http://registry.npm.taobao.org/urix/download/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
 
 url-parse@^1.1.8, url-parse@~1.4.0:
-  version "1.4.1"
-  resolved "http://registry.npm.taobao.org/url-parse/download/url-parse-1.4.1.tgz#4dec9dad3dc8585f862fed461d2e19bbf623df30"
+  version "1.4.3"
+  resolved "http://registry.npm.taobao.org/url-parse/download/url-parse-1.4.3.tgz#bfaee455c889023219d757e045fa6a684ec36c15"
   dependencies:
     querystringify "^2.0.0"
     requires-port "^1.0.0"

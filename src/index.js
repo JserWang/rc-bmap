@@ -82,4 +82,4 @@ export { default as DrawingMode } from './constants/DrawingMode';
 /**
  * 工具方法
  */
-export { getPoint, getMapBounds, getBounds, getPoiByKeyword, convertPoint } from './components/_base/util'
+export { getMapBounds, getBounds, getPoiByKeyword, convertPoint } from './components/_base/util';

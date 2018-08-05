@@ -57,6 +57,7 @@ export default class Map extends React.Component {
     continuousZoom: PropTypes.bool,
     pinchToZoom: PropTypes.bool,
     events: PropTypes.object,
+    contextMenu: PropTypes.object,
   };
 
   constructor(props) {

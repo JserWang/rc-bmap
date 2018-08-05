@@ -2,21 +2,28 @@
   "name": "rc-bmap",
   "version": "0.1.0",
   "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JserWang/rc-bmap.git"
+  },
+  "keywords": [
+    "react",
+    "baidu-map",
+    "bmap",
+    "rc-bmap",
+    "baidu",
+    "map"
+  ],
+  "homepage": "https://bmap.jser-club.com",
   "dependencies": {
     "bmaplib.curveline": "^1.0.0",
     "bmaplib.heatmap": "^1.0.4",
-    "bmaplib.lushu": "^1.0.7",
     "bmaplib.markerclusterer": "^1.0.13"
   },
   "scripts": {
-    "build:lib": "rm -rf lib && babel src -d lib",
-    "build:dist": "webpack",
-    "build": "npm run build:lib && npm run build:dist",
-    "test": "npm run build:lib && npm run build:dist && npm link & npm run examples:build",
+    "build": "rm -rf lib && babel src -d lib",
     "prepublish": "npm run build",
-    "pub": "npm run prepublish && npm publish",
-    "examples:build": "webpack --config ./examples/webpack.config.js",
-    "examples": "webpack-dev-server --config ./examples/webpack.config.js"
+    "pub": "npm run prepublish && npm publish"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
