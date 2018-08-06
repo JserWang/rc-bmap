@@ -42,6 +42,13 @@ function getApiSiderbarConfig(title) {
       collapsable: false,
       children: [
         '',
+        'TransitRoute',
+        'BusLineSearch',
+        'LocalSearch',
+        'WalkingRoute',
+        'RidingRoute',
+        'DrivingRoute',
+
       ]
     }
   ]

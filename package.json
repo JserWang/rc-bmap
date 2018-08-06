@@ -2,10 +2,7 @@
   "name": "rc-bmap",
   "version": "0.1.0",
   "main": "lib/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JserWang/rc-bmap.git"
-  },
+  "repository": "git+https://github.com/JserWang/rc-bmap.git",
   "keywords": [
     "react",
     "baidu-map",
@@ -37,5 +34,7 @@
     "react-dom": "^16.4.1",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.5.0"
-  }
+  },
+  "author": "Moocliu <namocliu@gmail.com>",
+  "license": "MIT"
 }
