@@ -30,7 +30,6 @@ function getSiderbarConfig(title) {
         'lib',
         'other',
         'constants',
-        
       ]
     }
   ]
@@ -43,6 +42,10 @@ function getApiSiderbarConfig(title) {
       collapsable: false,
       children: [
         '',
+        'autocomplete',
+        'tile',
+        'curveLine',
+        'drawingmanager',
         'marker',
         'symbol',
         'label',
@@ -69,7 +72,7 @@ function getApiSiderbarConfig(title) {
         'cityList',
         'heatmap',
         'trafficControl',
-        'distanceTool'
+        'distanceTool',
       ]
     }
   ]
