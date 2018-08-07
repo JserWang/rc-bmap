@@ -43,6 +43,26 @@ function getApiSiderbarConfig(title) {
       collapsable: false,
       children: [
         '',
+        'autocomplete',
+        'tile',
+        'curveLine',
+        'drawingmanager',
+        'marker',
+        'symbol',
+        'label',
+        'infowindow',
+        'polyline',
+        'circle',
+        'polygon',
+        'boundary',
+        'pointcollection',
+        'ground',
+        'transitRoute',
+        'drivingRoute',
+        'ridingRoute',
+        'walkingRoute',
+        'localSearch',
+        'busLineSearch',
         'navigation',
         'geolocation',
         'overviewMap',
@@ -54,7 +74,7 @@ function getApiSiderbarConfig(title) {
         'heatmap',
         'trafficControl',
         'distanceTool',
-        'markerClusterer'
+        'markerClusterer',
       ]
     }
   ]
