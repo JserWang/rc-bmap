@@ -38,19 +38,9 @@
 ## lineStyle
 * 类型 `string`
 * 默认值 `"solid"`
-* 描述 折线样式
+* 描述 solid或dashed
 
 ## cursor
 * 类型 `string`
 * 默认值 `"http://api.map.baidu.com/images/ruler.cur"`
 * 描述 跟随鼠标样式
-
-## secIcon
-* 类型 `Icon`
-* 默认值 `undefined`
-* 描述 转折点的ICON样式
-
-## closeIcon
-* 类型 `Icon`
-* 默认值 `undefined`
-* 描述 转折点的ICON样式

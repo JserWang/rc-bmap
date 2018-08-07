@@ -2,7 +2,7 @@
 
 ## anchor
 * 类型 `Enum`
-* 默认值 [ANCHOR](/guide/constants.html#controlanchor).TOP_RIGHT
+* 默认值 [ControlAnchor](/guide/constants.html#controlanchor).TOP_RIGHT
 * 描述 控件的停靠位置
 
 ## offset

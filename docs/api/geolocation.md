@@ -2,7 +2,7 @@
 
 ## anchor
 * 类型 `Enum`
-* 默认值 [ANCHOR](/guide/constants.html#controlanchor).BOTTOM_LEFT
+* 默认值 [ControlAnchor](/guide/constants.html#controlanchor).BOTTOM_LEFT
 * 描述 	控件的停靠位置，默认定位到地图的右下角
 
 ## offset
@@ -23,7 +23,20 @@
 ## locationIcon
 * 类型 `Icon`
 * 默认值 `undefined`
-* 描述 可自定义定位中心点的Icon样式
+* 描述 类型 `Icon` 字面量值
+``` js
+const icon = {
+  url: 'http://api0.map.bdimg.com/images/copyright_logo.png',
+  size: { width: 100, height: 100 },
+  opts: {
+    imageSize: { width, height },,
+    imageOffset: { width, height },,
+    infoWindowAnchor: { width, height },
+    printImageUrl: "",
+  }
+};
+
+```
 
 ## events
 * 类型 `Object`

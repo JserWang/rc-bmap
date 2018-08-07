@@ -2,7 +2,7 @@
 
 ## anchor
 * 类型 `Enum`
-* 默认值 [ANCHOR](/guide/constants.html#controlanchor).BOTTOM_LEFT
+* 默认值 [ControlAnchor](/guide/constants.html#controlanchor).BOTTOM_LEFT
 * 描述 	控件的停靠位置，默认定位到地图的右下角
 
 ## offset
