@@ -30,6 +30,7 @@ function getSiderbarConfig(title) {
         'lib',
         'other',
         'constants',
+        
       ]
     }
   ]
@@ -42,6 +43,17 @@ function getApiSiderbarConfig(title) {
       collapsable: false,
       children: [
         '',
+        'navigation',
+        'geolocation',
+        'overviewMap',
+        'scale',
+        'copyright',
+        'mapTypeCtrl',
+        'panorama',
+        'cityList',
+        'heatmap',
+        'trafficControl',
+        'distanceTool'
       ]
     }
   ]

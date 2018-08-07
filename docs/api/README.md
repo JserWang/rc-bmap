@@ -124,7 +124,7 @@
 ## events
 * 类型 Object
 * 默认值 null
-* 描述 为地图[绑定事件]((http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a0b0)
+* 描述 为地图[绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a0b0)
 
 ## contextMenu
 * 类型 Object
