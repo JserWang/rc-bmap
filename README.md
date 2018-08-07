@@ -32,7 +32,7 @@ render(<Map ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv" />,
 
 ```
 
-更多用法，见文档。
+更多用法，见[官网](https://bmap.jser-club.com)。
 
 ## 协议
 
