@@ -1,7 +1,7 @@
 # Polyline
 
 ## points
-* 类型 `object`
+* 类型 `Object`
 * 默认值 undefined
 * 描述 指定位置的坐标
 
@@ -35,11 +35,11 @@
 * 描述 是否启用线编辑
 
 ## clicking
-* 类型 `object`
+* 类型 `Object`
 * 默认值 true
 * 描述 是否响应点击事件
 
 ## event
-* 类型 `object`
+* 类型 `Object`
 * 默认值 undefined
-* 描述 绑定事件
+* 描述 [绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b11)

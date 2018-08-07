@@ -1,7 +1,7 @@
 # Marker
 
 ## offset
-* 类型 `object`
+* 类型 `Object`
 * 默认值 { width: 0,height: 0 }
 * 描述 标注的位置偏移值
 

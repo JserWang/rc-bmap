@@ -11,12 +11,12 @@
 * 描述 信息窗显示文字，支持HTML内容
 
 ## point
-* 类型 `object`	
+* 类型 `Object`	
 * 默认值 undefined
 * 描述 显示位置坐标
 
 ## offset
-* 类型 `object`	
+* 类型 `Object`	
 * 默认值 undefined
 * 描述 信息窗位置偏移值
 
@@ -56,6 +56,6 @@
 * 描述 自定义部分的短信内容
 
 ## events
-* 类型 `object`	
+* 类型 `Object`	
 * 默认值 undefined
-* 描述 绑定事件
+* 描述 [绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b7)

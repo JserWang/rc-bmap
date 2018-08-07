@@ -6,7 +6,7 @@
 * 描述 文本标注的位置偏移值
 
 ## position
-* 类型 `point`	
+* 类型 `Object`	
 * 默认值 undefined
 * 描述 文本标注的地理位置
 
@@ -26,7 +26,7 @@
 * 描述 显示标签，支持html
 
 ## point	
-* 类型 `object`	
+* 类型 `Object`	
 * 默认值 undefined
 * 描述 标签显示坐标
 
@@ -40,17 +40,17 @@
 * 默认值 undefined
 * 描述 鼠标悬浮显示文字
 
-## events	
-* 类型 `object`	
-* 默认值 undefined
-* 描述 绑定事件
-
 ## zIndex	
 * 类型 `number`	
 * 默认值 undefined
 * 描述 同html的z-index
 
 ## style	
-* 类型 `object`	
+* 类型 `Object`	
 * 默认值 undefined
 * 描述 标签样式
+
+## events	
+* 类型 `Object`	
+* 默认值 undefined
+* 描述 [绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b9)

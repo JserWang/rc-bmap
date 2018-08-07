@@ -1,26 +1,31 @@
 # Ground
 
-## points
-* 类型 `object`
+## bounds
+* 类型 `Object`
 * 默认值 undefined
-* 描述 点集合
+* 描述 设置图层显示的矩形区域
 
-## shape
+## imageURL
 * 类型 `string`
 * 默认值 undefined
-* 描述 海量点的预设形状
+* 描述 图层地址
 
-## size
-* 类型 `object`
+## opacity
+* 类型 `number`
 * 默认值 undefined
-* 描述 海量点的预设尺寸
+* 描述 图层透明度
 
-## color
-* 类型 `string`
-* 默认值 '#fa937e'
-* 描述 海量点的颜色
+## maxZoom
+* 类型 `number`
+* 默认值 'undefined'
+* 描述 图层显示的最大级别
+
+## minZoom
+* 类型 `number`
+* 默认值 'undefined'
+* 描述 图层显示的最小级别
 
 ## events
-* 类型 `object`
-* 默认值 '#fa937e'
-* 描述 绑定事件
+* 类型 `Object`
+* 默认值 'undefined'
+* 描述 地图[绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b18)

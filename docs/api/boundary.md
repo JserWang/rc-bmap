@@ -7,7 +7,7 @@
 
 ## onError
 * 类型 `string`
-* 默认值 object
+* 默认值 undefined
 * 描述 初始化失败回调
 
 ## autoViewport
@@ -63,4 +63,4 @@
 ## events
 * 类型 `object`
 * 默认值 undefined
-* 描述 绑定事件
+* 描述 [绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a7b54)
