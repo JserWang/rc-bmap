@@ -53,7 +53,8 @@ function getApiSiderbarConfig(title) {
         'cityList',
         'heatmap',
         'trafficControl',
-        'distanceTool'
+        'distanceTool',
+        'markerClusterer'
       ]
     }
   ]
