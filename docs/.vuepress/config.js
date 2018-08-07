@@ -30,6 +30,7 @@ function getSiderbarConfig(title) {
         'lib',
         'other',
         'constants',
+        
       ]
     }
   ]
@@ -42,6 +43,38 @@ function getApiSiderbarConfig(title) {
       collapsable: false,
       children: [
         '',
+        'autocomplete',
+        'tile',
+        'curveLine',
+        'drawingmanager',
+        'marker',
+        'symbol',
+        'label',
+        'infowindow',
+        'polyline',
+        'circle',
+        'polygon',
+        'boundary',
+        'pointcollection',
+        'ground',
+        'transitRoute',
+        'drivingRoute',
+        'ridingRoute',
+        'walkingRoute',
+        'localSearch',
+        'busLineSearch',
+        'navigation',
+        'geolocation',
+        'overviewMap',
+        'scale',
+        'copyright',
+        'mapTypeCtrl',
+        'panorama',
+        'cityList',
+        'heatmap',
+        'trafficControl',
+        'distanceTool',
+        'markerClusterer',
       ]
     }
   ]
