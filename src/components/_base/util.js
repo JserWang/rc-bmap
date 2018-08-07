@@ -47,7 +47,7 @@ export function bindEvents(target, eventKey, events) {
 export function createIcon(options = {}) {
   const { url, size, opts = {} } = options;
   return new global.BMap.Icon(url, size, {
-    anchor: opts.anchor && getSize(opts.anchor.width, opts.anchor.height),
+    anchor: opts.anchor && global[anchor],
     imageSize: opts.imageSize && getSize(opts.imageSize.width, opts.imageSize.height),
     imageOffset: opts.imageOffset && getSize(opts.imageOffset.width, opts.imageOffset.height),
     infoWindowAnchor: opts.infoWindowAnchor && getSize(opts.infoWindowAnchor.width, opts.infoWindowAnchor.height),
