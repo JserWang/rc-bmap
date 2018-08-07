@@ -22,8 +22,8 @@
 * 描述 设置公交列表查询后的回调函数.参数：rs: BusListResult类型
 
 ## onGetBusLineComplete
-* 类型  `undefined`
-* 默认值 `null`
+* 类型  `Function`
+* 默认值 `undefined`
 * 描述 设置公交线路查询后的回调函数.参数：rs: BusLine类型
 
 ## onBusListHtmlSet
