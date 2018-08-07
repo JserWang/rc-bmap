@@ -30,6 +30,7 @@ function getSiderbarConfig(title) {
         'lib',
         'other',
         'constants',
+        
       ]
     }
   ]
@@ -73,6 +74,7 @@ function getApiSiderbarConfig(title) {
         'heatmap',
         'trafficControl',
         'distanceTool',
+        'markerClusterer',
       ]
     }
   ]
