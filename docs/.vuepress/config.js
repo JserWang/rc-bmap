@@ -30,6 +30,7 @@ function getSiderbarConfig(title) {
         'lib',
         'other',
         'constants',
+        
       ]
     }
   ]
@@ -48,8 +49,17 @@ function getApiSiderbarConfig(title) {
         'walkingRoute',
         'localSearch',
         'busLineSearch',
-      
-
+        'navigation',
+        'geolocation',
+        'overviewMap',
+        'scale',
+        'copyright',
+        'mapTypeCtrl',
+        'panorama',
+        'cityList',
+        'heatmap',
+        'trafficControl',
+        'distanceTool'
       ]
     }
   ]
