@@ -42,6 +42,16 @@ function getApiSiderbarConfig(title) {
       collapsable: false,
       children: [
         '',
+        'marker',
+        'symbol',
+        'label',
+        'infowindow',
+        'polyline',
+        'circle',
+        'polygon',
+        'boundary',
+        'pointcollection',
+        'ground',
       ]
     }
   ]
