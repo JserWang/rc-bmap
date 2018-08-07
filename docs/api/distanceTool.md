@@ -1,4 +1,4 @@
-# distanceTool
+# DistanceTool
 
 ## onaddpoint
 * 类型 `Function`

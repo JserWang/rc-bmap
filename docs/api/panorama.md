@@ -1,4 +1,4 @@
-# panorama
+# Panorama
 
 ## anchor
 * 类型 `Enum`

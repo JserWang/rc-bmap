@@ -1,4 +1,4 @@
-# trafficControl
+# TrafficControl
 
 ## anchor
 * 类型 `Enum`
