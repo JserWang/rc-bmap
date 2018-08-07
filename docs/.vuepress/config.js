@@ -42,6 +42,11 @@ function getApiSiderbarConfig(title) {
       collapsable: false,
       children: [
         '',
+        'autocomplete',
+        'tile',
+        'curveLine',
+        'drawingmanager'
+
       ]
     }
   ]
