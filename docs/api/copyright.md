@@ -11,7 +11,7 @@
 * 描述 控件的偏移值
 
 ## content
-* 类型 String或HtmlElement
+* 类型 string或HtmlElement
 * 默认值 ""
 * 描述 该版权的文本信息，用于显示在地图上，支持HTML内容
 

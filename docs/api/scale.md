@@ -13,4 +13,4 @@
 ## unit
 * 类型 Enum
 * 默认值 [LENGTH_UNIT](/guide/constants.html#lengthunit).METRIC
-* 描述 控件的停靠位置
+* 描述 显示单位

@@ -6,17 +6,17 @@
 * 描述 热力图集合点
 
 ## opacity
-* 类型 Number
+* 类型 number
 * 默认值 ""
 * 描述 透明度
 
 ## max
-* 类型 Number
+* 类型 number
 * 默认值 ""
 * 描述 权重最大值
 
 ## radius
-* 类型 Number
+* 类型 number
 * 默认值 ""
 * 描述 热力圆半径
 

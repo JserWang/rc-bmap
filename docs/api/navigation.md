@@ -16,13 +16,12 @@
 * 描述 平移缩放控件的类型
 
 ## showZoomInfo
-* 类型 Boolean
+* 类型 boolean
 * 默认值 true
 * 描述 是否显示级别提示信息
 
-
 ## enableGeolocation
-* 类型 Boolean
+* 类型 boolean
 * 默认值 false
 * 描述 控件是否集成定位功能
 

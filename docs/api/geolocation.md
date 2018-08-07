@@ -11,12 +11,12 @@
 * 描述 控件的水平偏移值
 
 ## showAddressBar
-* 类型 Boolean
+* 类型 boolean
 * 默认值 true
 * 描述 是否显示定位信息面板。
 
 ## autoLocation
-* 类型 Boolean
+* 类型 boolean
 * 默认值 false
 * 描述 添加控件时是否进行定位。
 
