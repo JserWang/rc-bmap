@@ -7,7 +7,7 @@
 
 ## offset
 * 类型 `Object`
-* 默认值 { width: 10, height: 10 }
+* 默认值 `{ width: 10, height: 10 }`
 * 描述 标注的位置偏移值
 
 ## circleOptions
@@ -41,13 +41,20 @@
 * 描述 所画的点的可选参数
 
 ## drawingModes
-* 类型 `Object`
-* 默认值 `Array[Enum]`
-* 描述 绘制工具支持绘制的图形，从常量 -DrawingMode 取值
+* 类型 Array[[DrawingMode](/guide/constants.html#drawingmode)]
+* 默认值 `undefined`
+* 描述 绘制工具支持绘制的图形
 
 ## events
-* 类型 `object`
+* 类型 `Object`
 * 默认值 `undefined`
 * 描述 `绑定事件`
 
-
+| 事件名 | 描述 |
+| ----- | --- |
+| circlecomplete | 绘制圆完成事件 |
+| markercomplete | 绘制点完成事件 |
+| overlaycomplete | 鼠标绘制完成事件 |
+| polygoncomplete | 绘制多边形完成事件 |
+| polylinecomplete | 绘制线完成事件 |
+| rectanglecomplete | 绘制矩形完成事件 |

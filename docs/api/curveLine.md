@@ -17,7 +17,7 @@
 
 ## strokeOpacity
 * 类型 `number`
-* 默认值 `无`
+* 默认值 `undefined`
 * 描述 折线的透明度，取值范围0 - 1
 
 ## strokeStyle
@@ -44,3 +44,5 @@
 * 属性 `Function`
 * 默认值 `undefined`
 * 描述 响应时间的回调函数
+
+事件同`Polyline`事件

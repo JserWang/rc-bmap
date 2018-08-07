@@ -41,6 +41,12 @@
 * 描述 solid或dashed
 
 ## cursor
-* 类型 `string`
-* 默认值 `"http://api.map.baidu.com/images/ruler.cur"`
-* 描述 跟随鼠标样式
+* 类型 `Object`
+* 默认值 `undefined`
+* 描述 `绑定事件`
+
+## events
+| 事件名 | 描述 |
+| ----- | --- |
+| onaddpoint | 测距过程中，每次点击底图添加节点时触发 |
+| ondrawend | 测距时，每次双击底图结束当前测距折线时触发 |
