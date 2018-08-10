@@ -41,6 +41,8 @@ class Marker extends BaseOverlay {
     };
     
     this.instance = new global.BMap.Marker(oPoint, markerOpts);
+    this.map.addOverlay(this.instance);
+
     const setOpts = {
       label: label && createLabel(label.props),
       shadow: shadow && createIcon(shadow),
@@ -61,9 +63,7 @@ class Marker extends BaseOverlay {
 
     // animation 需要在addOverlay之后添加，所以这里将setAnimation放置下个队列
     if (animation) {
-      setTimeout(() => {
-        this.instance.setAnimation(global[animation]);
-      }, 100)
+      this.instance.setAnimation(global[animation]);
     }
   }
 

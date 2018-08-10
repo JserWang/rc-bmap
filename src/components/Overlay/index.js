@@ -12,7 +12,9 @@ class Overlay extends BaseOverlay {
       BOverlay.prototype.initialize = this.initialize.bind(this);
       BOverlay.prototype.draw = this.draw.bind(this);
     }
+
     this.instance = new BOverlay();
+    this.map.addOverlay(this.instance);
   }
 
   initialize() {

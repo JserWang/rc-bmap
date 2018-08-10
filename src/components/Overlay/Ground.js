@@ -21,6 +21,8 @@ class Ground extends BaseOverlay {
     };
 
     this.instance = new global.BMap.GroundOverlay(getBounds(bounds), opts);
+    this.map.addOverlay(this.instance);
+
     this.instance.setImageURL(imageURL);
     bindEvents(this.instance, 'GROUND', events);
   }

@@ -126,6 +126,19 @@ export function processSetOptions(target, optionKey, opts) {
   });
 }
 
+export function processBooleanOptions(target, optionKey, opts) {
+  OPTIONS[optionKey].forEach((key) => {
+    if (opts[key] || typeof opts[key] === "boolean") {
+      const upKey = replaceInitialToUpper(key);
+      let prefix = 'disable';
+      if (opts[key]) {
+        prefix = 'enable';
+      }
+      target[`${prefix}${upKey}`]();
+    }
+  });
+}
+
 export function isSupportContext() {
   return !!(document.createElement('canvas').getContext);
 }
