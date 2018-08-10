@@ -6,6 +6,7 @@ import ReactComponent from '../ReactComponent';
 class InfoWindow extends BaseOverlay {
   init() {
     const {
+      point,
       content,
       height,
       width,
@@ -32,7 +33,7 @@ class InfoWindow extends BaseOverlay {
     };
 
     this.instance = new global.BMap.InfoWindow(content, opts);
-
+    this.map.openInfoWindow(this.instance, getPoint(point.lng, point.lat));
     bindEvents(this.instance, 'INFO_WINDOW', events);
   }
 }

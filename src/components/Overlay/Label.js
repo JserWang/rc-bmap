@@ -6,6 +6,7 @@ import ReactComponent from '../ReactComponent';
 class Label extends BaseOverlay {
   init() {
     this.instance = createLabel(this.props);
+    this.map.addOverlay(this.instance);
   }
 }
 

@@ -32,3 +32,18 @@ export const LABEL_SET_OPTIONS = [
   'zIndex',
   'style',
 ];
+
+export const POLY_BOOLEAN_OPTIONS = [
+  'editing',
+  'massClear',
+];
+
+export const CIRCLE_BOOLEAN_OPTIONS = [
+  'editing',
+  'massClear',
+];
+
+export const POLYLINE_BOOLEAN_OPTIONS = [
+  'editing',
+  'massClear',
+];
