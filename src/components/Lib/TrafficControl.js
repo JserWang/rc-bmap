@@ -22,9 +22,8 @@ class TrafficControl extends BaseControl {
       showPanel: false
     });
 
-    setTimeout(() => {
-      this.instance.setAnchor(global[anchor])
-    }, 100);
+    this.map.addControl(this.instance);
+    this.instance.setAnchor(global[anchor]);
   }
 }
 

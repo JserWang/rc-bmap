@@ -25,6 +25,7 @@ class Control extends BaseControl {
     }
 
     this.instance = new BaseCtrl(global[anchor], getSize(offset.width, offset.height));
+    this.map.addControl(this.instance);
   }
 
   initialize() {

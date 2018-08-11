@@ -32,6 +32,7 @@ class Geolocation extends BaseControl {
 
     this.instance = new global.BMap.GeolocationControl(opts);
     bindEvents(this.instance, 'GEOLOCATION', events);
+    this.map.addControl(this.instance);
   }
 }
 
