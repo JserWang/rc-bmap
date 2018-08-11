@@ -1,9 +1,9 @@
 # Geolocation
 
 ## anchor
-* 类型 `Enum`
+* 类型 [Enum](/guide/constants.html#controlanchor)
 * 默认值 [ControlAnchor](/guide/constants.html#controlanchor).BOTTOM_LEFT
-* 描述 	控件的停靠位置，默认定位到地图的右下角
+* 描述 控件的停靠位置，默认定位到地图的右下角
 
 ## offset
 * 类型 `Object`
@@ -21,9 +21,9 @@
 * 描述 添加控件时是否进行定位。
 
 ## locationIcon
-* 类型 `Icon`
+* 类型 `Icon`字面量值
 * 默认值 `undefined`
-* 描述 类型 `Icon` 字面量值
+* 描述 自定义定位中心点的Icon样式
 ``` js
 const icon = {
   url: 'http://api0.map.bdimg.com/images/copyright_logo.png',
@@ -41,4 +41,9 @@ const icon = {
 ## events
 * 类型 `Object`
 * 默认值 `undefined`
-* 描述 为地图[绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b5)
+* 描述 回调函数
+
+| 事件名 | 描述 |
+| ----- | --- |
+| locationSuccess | 定位成功后触发此事件 |
+| locationError | 定位失败后触发此事件 |

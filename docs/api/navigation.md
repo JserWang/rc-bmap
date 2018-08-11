@@ -1,7 +1,7 @@
 # Navigation
 
 ## anchor
-* 类型 `Enum`
+* 类型 [Enum](/guide/constants.html#controlanchor)
 * 默认值 [ControlAnchor](/guide/constants.html#controlanchor).TOP_LEFT
 * 描述 控件的停靠位置
 
@@ -11,7 +11,7 @@
 * 描述 控件的水平偏移值
 
 ## type
-* 类型 `Enum`
+* 类型 [Enum](/guide/constants.html#navigationtype)
 * 默认值 [NavigationType](/guide/constants.html#navigationtype).LARGE
 * 描述 平移缩放控件的类型
 

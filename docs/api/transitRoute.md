@@ -2,12 +2,12 @@
 
 ## location
 * 类型 `Map | Point | String`
-* 默认值  `Map`
+* 默认值 `Map`
 * 描述 表示检索区域，类型可为地图实例、坐标点或城市名称的字符串。当参数为地图实例时，检索位置由当前地图中心点确定；当参数为坐标时，检索位置由该点所在位置确定；当参数为城市名称时，检索会在该城市内进行
 
 ## renderOptions
-* 类型  `Object`
-* 默认值 `{}`
+* 类型 `Object`
+* 默认值 `undefined`
 * 描述 RenderOptions结果呈现设置
 ``` js
 {
@@ -16,50 +16,50 @@
   autoViewport: renderOptions.autoViewport, //检索结束后是否自动调整地图视野。此属性对LocalCity无效
 }
 ```
-##   policy
-* 类型  `Enum`
+## policy
+* 类型 [Enum](/guide/constants.html#drivingpolicy)
 * 默认值 [DrivingPolicy](/guide/constants.html#drivingpolicy).NORMAL
 * 描述 市内公交的策略参数
 
 ## intercityPolicy
-类型  `Enum`
+类型 [Enum](/guide/constants.html#intercitypolicy)
 * 默认值 [IntercityPolicy](/guide/constants.html#intercitypolicy).NORMAL
 * 描述 跨城公交的换乘策略参数 
 
 ## transitTypePolicy
-*类型  `Enum
+*类型 [Enum](/guide/constants.html#transittypePolicy)
 * 默认值 [TransitTypePolicy](/guide/constants.html#transittypePolicy).NORMAL
 * 描述 跨城公交的交通方式策略参数
 
 ## pageCapacity
-* 类型  `Function`
+* 类型 `Function`
 * 默认值 `undefined`
 * 描述 返回方案的个数
 
 ## onSearchComplete
-* 类型  `Function`
+* 类型 `Function`
 * 默认值 `undefined`
 * 描述 检索完成后的回调函数。参数：results: TransitRouteResult，公交导航结果
 
 ## onMarkersSet
-* 类型  `Function`
+* 类型 `Function`
 * 默认值 `undefined`
-* 描述 	标注添加完成后的回调函数。参数：pois: Array ，起点和目的地数组。transfers: Array ，公交车站数组
+* 描述 标注添加完成后的回调函数。参数：pois: Array ，起点和目的地数组。transfers: Array ，公交车站数组
 
 ## onInfoHtmlSet
-* 类型  `Function`
+* 类型 `Function`
 * 默认值 `undefined`
-* 描述   气泡内容创建后的回调函数。参数：poi: LocalResultPoi，表示当前气泡对应的点（可以是起点、终点或换乘车站）html: HTMLElement，气泡内的DOM元素
+* 描述 气泡内容创建后的回调函数。参数：poi: LocalResultPoi，表示当前气泡对应的点（可以是起点、终点或换乘车站）html: HTMLElement，气泡内的DOM元素
 
 ##  onPolylinesSet
-* 类型  `Function`
+* 类型 `Function`
 * 默认值 `undefined`
-* 描述  折线添加完成后的回调函数。参数：lines: Array ，公交线路数组。routes: Array ，步行线路数组，通过Route.getPolyline()方法可得到对应的折线覆盖物
+* 描述 折线添加完成后的回调函数。参数：lines: Array ，公交线路数组。routes: Array ，步行线路数组，通过Route.getPolyline()方法可得到对应的折线覆盖物
 
 ##  onResultsHtmlSet
-* 类型  `Function`
-* 默认值` undefined`
-* 描述  结果列表添加完成后的回调函数。参数：container: 结果列表所用的HTML元素
+* 类型 `Function`
+* 默认值 `undefined`
+* 描述 结果列表添加完成后的回调函数。参数：container: 结果列表所用的HTML元素
 
 ## showInMap
 * 类型 `boolean`

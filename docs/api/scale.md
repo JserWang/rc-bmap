@@ -1,7 +1,7 @@
 # Scale
 
 ## anchor
-* 类型 `Enum`
+* 类型 [Enum](/guide/constants.html#controlanchor)
 * 默认值 [ControlAnchor](/guide/constants.html#controlanchor).TOP_LEFT
 * 描述 控件的停靠位置
 
@@ -11,6 +11,6 @@
 * 描述 控件的偏移值
 
 ## unit
-* 类型 `Enum`
+* 类型 [Enum](/guide/constants.html#lengthunit)
 * 默认值 [LengthUnit](/guide/constants.html#lengthunit).METRIC
 * 描述 显示单位
