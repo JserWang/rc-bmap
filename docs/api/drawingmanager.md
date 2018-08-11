@@ -30,6 +30,11 @@
 * 默认值：同 `circleOptions`
 * 描述：所画的线的可选参数
 
+## PolygonOptions
+* 类型：[DrawingOption](/api/#drawingoption)
+* 默认值：同 `circleOptions`
+* 描述：所画的多边形的可选参数
+
 ## rectangleOptions
 * 类型：[DrawingOption](/api/#drawingoption)
 * 默认值：同`circleOptions`
