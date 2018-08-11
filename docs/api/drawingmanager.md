@@ -40,6 +40,11 @@
 * 默认值 同`circleOptions`
 * 描述 所画的点的可选参数
 
+## polygonOptions
+* 类型：[DrawingOption](/api/#drawingoption)
+* 默认值：同`circleOptions`
+* 描述：所画的多边形的可选参数
+
 ## drawingModes
 * 类型 Array[[DrawingMode](/guide/constants.html#drawingmode)]
 * 默认值 `undefined`
