@@ -54,6 +54,11 @@ class DrawingManager extends BaseOverlay {
 
     bindEvents(this.instance, 'DRAWING_MANAGER', events);
   }
+
+  destroy() {
+    this.map.removeControl(this.instance._drawingTool);
+    this.instance = null;
+  }
 }
 
 export default DrawingManager;
