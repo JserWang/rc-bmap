@@ -2,6 +2,7 @@
   "name": "rc-bmap",
   "version": "0.1.1",
   "main": "lib/index.js",
+  "typings": "types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JserWang/rc-bmap.git"
@@ -13,6 +14,11 @@
     "rc-bmap",
     "baidu",
     "map"
+  ],
+  "files": [
+    "src",
+    "lib/*.js",
+    "types/*.d.ts"
   ],
   "homepage": "https://bmap.jser-club.com",
   "dependencies": {
@@ -26,6 +32,7 @@
     "pub": "npm run prepublish && npm publish"
   },
   "devDependencies": {
+    "@types/react": "^16.4.9",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",

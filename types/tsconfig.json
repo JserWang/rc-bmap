@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es5",
+      "dom",
+    ],
+    "strict": true,
+  },
+  "include": [
+    "*.ts"
+  ]
+}
