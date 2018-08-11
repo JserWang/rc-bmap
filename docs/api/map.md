@@ -5,6 +5,16 @@
 * 默认值：`undefined`
 * 描述：加载地图时所需ak
 
+## center
+* 类型：[Point](/api/#point)
+* 默认值：`{ lng: 116.404, lat: 39.915 }`
+* 描述：设初始化地图中心点，默认值为 { lng: 116.404, lat: 39.915 }
+
+## zoom
+* 类型：`number`
+* 默认值：`15`
+* 描述：将视图切换到指定的缩放等级，中心点坐标不变。
+
 ## placeHolder
 * 类型：`string | ReactElement`
 * 默认值：`"地图加载中..."`
@@ -57,20 +67,10 @@
 }
 ```
 
-## center
-* 类型：[Point](/api/#point)
-* 默认值：`{ lng: 116.404, lat: 39.915 }`
-* 描述：设初始化地图中心点，默认值为 { lng: 116.404, lat: 39.915 }
-
 ## mapType
 * 类型：[Enum](/guide/constants.html#maptype)
 * 默认值：[MapType](/guide/constants.html#maptype).NORMAL
 * 描述：设置地图类型
-
-## zoom
-* 类型：`number`
-* 默认值：`15`
-* 描述：将视图切换到指定的缩放等级，中心点坐标不变。
 
 ## highResolution
 * 类型：`boolean`

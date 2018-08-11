@@ -54,3 +54,43 @@
 
 ## Enum
 每个`Enum`类型均为对应常量，您可以通过点击其链接来查看常量中具体包含值
+
+## RenderOption
+
+``` ts
+{
+  [panel: string | HTMLElement], // 结果列表的HTML容器id或容器元素，提供此参数后，结果列表将在此容器中进行展示。此属性对LocalCity无效。驾车路线规划无效
+  [selectFirstResult: boolean], // 是否选择第一个检索结果。此属性仅对LocalSearch有效
+  [autoViewport: boolean], // 检索结束后是否自动调整地图视野。此属性对LocalCity无效
+}
+```
+
+## DrawingOption
+
+``` ts
+{
+  [strokeColor: string], //边线颜色。
+  [fillColor: string], //填充颜色。当参数为空时，圆形将没有填充效果。
+  [strokeWeight: number], //边线的宽度，以像素为单位。
+  [strokeOpacity: number], //边线透明度，取值范围0 - 1。
+  [fillOpacity: number], //填充的透明度，取值范围0 - 1。
+  [strokeStyle: string], //边线的样式，solid或dashed。
+}
+```
+
+## Bounds
+
+``` ts
+{
+  ne: Point
+  sw: Point
+}
+```
+
+## CopyRight
+``` ts
+{
+  [content: string], // 显示内容
+  [bounds: Bounds],  // 所适用的地理区域
+}
+```
