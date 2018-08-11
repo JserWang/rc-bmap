@@ -13,7 +13,7 @@
 ## copyright
 * 类型 `Object`
 * 默认值 
-```
+``` js
 {
     id: copyright.id,
     content: copyright.content,
@@ -25,7 +25,7 @@
 ## zIndex
 * 类型 `number`
 * 默认值 `undefined`
-* 图层的 zIndex 
+* 描述 图层的 zIndex 
 
 ## getTilesUrl
 * 类型 `string`

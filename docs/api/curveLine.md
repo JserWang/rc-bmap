@@ -41,8 +41,8 @@
 * 描述 是否使用编辑功能
 
 ## events
-* 属性 `Function`
+* 属性 `Object`
 * 默认值 `undefined`
-* 描述 响应时间的回调函数
+* 描述 [绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b11)
 
 事件同`Polyline`事件

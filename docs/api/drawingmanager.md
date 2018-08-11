@@ -1,8 +1,8 @@
 # DrawingManager
 
 ## anchor
-* 类型 `string`
-* 默认值 `BMAP_ANCHOR_BOTTOM_RIGHT`
+* 类型 [Enum](/guide/constants.html#controlanchor)
+* 默认值 [ControlAnchor](/guide/constants.html#controlanchor).BOTTOM_RIGHT
 * 描述 表示控件的定位，默认定位到右下角
 
 ## offset
@@ -32,13 +32,18 @@
 
 ## rectangleOptions
 * 类型 `Object`
-* 默认值 同 `circleOptions`
+* 默认值 同`circleOptions`
 * 描述 所画的点的可选参数
 
 ## markerOptions
 * 类型 `Object`
-* 默认值 同 `circleOptions`
+* 默认值 同`circleOptions`
 * 描述 所画的点的可选参数
+
+## polygonOptions
+* 类型：[DrawingOption](/api/#drawingoption)
+* 默认值：同`circleOptions`
+* 描述：所画的多边形的可选参数
 
 ## drawingModes
 * 类型 Array[[DrawingMode](/guide/constants.html#drawingmode)]
@@ -48,7 +53,7 @@
 ## events
 * 类型 `Object`
 * 默认值 `undefined`
-* 描述 `绑定事件`
+* 描述 绑定事件
 
 | 事件名 | 描述 |
 | ----- | --- |
