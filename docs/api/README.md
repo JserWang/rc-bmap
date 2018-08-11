@@ -90,6 +90,8 @@
 ## CopyRight
 ``` ts
 {
+  [anchor: Enum], // 定位
+  [offset: Size], // 偏移值
   [content: string], // 显示内容
   [bounds: Bounds],  // 所适用的地理区域
 }
