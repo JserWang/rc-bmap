@@ -1,5 +1,10 @@
 # Marker
 
+## point
+* 类型：`Point`
+* 默认值：`undefined`
+* 描述：添加标注的位置
+
 ## offset
 * 类型：[Size](/api/#size)
 * 默认值：`{ width: 0, height: 0 }`
