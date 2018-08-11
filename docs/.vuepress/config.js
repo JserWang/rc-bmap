@@ -1,9 +1,12 @@
 module.exports = {
-  title: 'rc-bmap',
+  title: 'React&百度地图',
+  head: [
+    ['link', { rel: 'icon', href: `/favicon.ico` }],
+  ],
   description: '像使用React组件一样使用百度地图',
   themeConfig: {
     nav: [
-      { text: '指南', link: '/guide/' },
+      { text: '指南', link: '/guide/getting-started.html' },
       { text: 'API', link: '/api/' },
       { text: '示例', link: '/demo/' },
       { text: 'GitHub', link: 'https://github.com/JserWang/rc-bmap' },
