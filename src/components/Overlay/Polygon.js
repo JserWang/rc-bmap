@@ -1,5 +1,5 @@
 import BaseOverlay from './BaseOverlay';
-import { getPoint, bindEvents } from '../_base/util';
+import { getPoint, bindEvents, processBooleanOptions } from '../_base/util';
 import ReactComponent from '../ReactComponent';
 
 @ReactComponent
@@ -26,9 +26,7 @@ class Polygon extends BaseOverlay {
       strokeOpacity,
       fillOpacity,
       strokeStyle,
-      enableEditing: editing,
       enableClicking: clicking,
-      enableMassClear: massClear,
     };
 
     let pList = [];
@@ -40,7 +38,13 @@ class Polygon extends BaseOverlay {
     }
     
     this.instance = new global.BMap.Polygon(pList, opts);
-
+    this.map.addOverlay(this.instance);
+    
+    const booleanOpts = {
+      massClear,
+      editing,
+    };
+    processBooleanOptions(this.instance, 'POLY_BOOLEAN_OPTIONS', booleanOpts);
     bindEvents(this.instance, 'POLYGON', events);
   }
 }

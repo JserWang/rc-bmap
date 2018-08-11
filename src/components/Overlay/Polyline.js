@@ -22,9 +22,7 @@ class Polyline extends BaseOverlay {
       strokeWeight,
       strokeOpacity,
       strokeStyle,
-      enableEditing: editing,
       enableClicking: clicking,
-      enableMassClear: massClear,
     };
 
     let pList = points.map((item) => {
@@ -32,7 +30,13 @@ class Polyline extends BaseOverlay {
     });
     
     this.instance = new global.BMap.Polyline(pList, opts);
+    this.map.addOverlay(this.instance);
 
+    const booleanOpts = {
+      massClear,
+      editing,
+    };
+    processBooleanOptions(this.instance, 'POLYLINE_BOOLEAN_OPTIONS', booleanOpts);
     bindEvents(this.instance, 'POLYLINE', events);
   }
 }

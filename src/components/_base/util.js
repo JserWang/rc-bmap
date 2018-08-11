@@ -31,23 +31,36 @@ export function bindEvents(target, eventKey, events) {
   if (events && EVENT[eventKey]) {
     EVENT[eventKey].forEach((eventName) => {
       if (events[eventName]) {
-        const callBack = (...args) => {
+        const callback = (...args) => {
           events[eventName].call(null, ...args);
         };
-        if (target[`_${eventName}`]) {
-          target.removeEventListener(eventName, target[`_${eventName}`]);
+        target.events = target.events || {};
+        if (target.events[`${eventName}`]) {
+          target.removeEventListener(eventName, target.events[`${eventName}`]);
         }
-        target.addEventListener(eventName, callBack);
-        target[`_${eventName}`] = callBack;
+        target.addEventListener(eventName, callback);
+        target.events[`${eventName}`] = callback;
       }
     });
+  }
+}
+
+export function unBindEvents(target) {
+  const events = target.events;
+  if (events) {
+    const eventNames = Object.keys(events);
+    for (let i = 0; i < eventNames.length; i += 1) {
+      const eventName = eventNames[i];
+      const event = events[eventName];
+      target.removeEventListener(eventName, event);
+    }
   }
 }
 
 export function createIcon(options = {}) {
   const { url, size, opts = {} } = options;
   return new global.BMap.Icon(url, size, {
-    anchor: opts.anchor && getSize(opts.anchor.width, opts.anchor.height),
+    anchor: opts.anchor && global[anchor],
     imageSize: opts.imageSize && getSize(opts.imageSize.width, opts.imageSize.height),
     imageOffset: opts.imageOffset && getSize(opts.imageOffset.width, opts.imageOffset.height),
     infoWindowAnchor: opts.infoWindowAnchor && getSize(opts.infoWindowAnchor.width, opts.infoWindowAnchor.height),
@@ -122,6 +135,19 @@ export function processSetOptions(target, optionKey, opts) {
     if (opts[key] || typeof opts[key] === "boolean") {
       const upKey = replaceInitialToUpper(key);
       target[`set${upKey}`](opts[key]);
+    }
+  });
+}
+
+export function processBooleanOptions(target, optionKey, opts) {
+  OPTIONS[optionKey].forEach((key) => {
+    if (opts[key] || typeof opts[key] === "boolean") {
+      const upKey = replaceInitialToUpper(key);
+      let prefix = 'disable';
+      if (opts[key]) {
+        prefix = 'enable';
+      }
+      target[`${prefix}${upKey}`]();
     }
   });
 }

@@ -1,5 +1,5 @@
 import BaseOverlay from './BaseOverlay';
-import { getPoint, bindEvents } from '../_base/util';
+import { getPoint, bindEvents, processBooleanOptions } from '../_base/util';
 import ReactComponent from '../ReactComponent';
 
 @ReactComponent
@@ -33,7 +33,13 @@ class Circle extends BaseOverlay {
     };
 
     this.instance = new global.BMap.Circle(getPoint(point.lng, point.lat), radius, opts);
-
+    this.map.addOverlay(this.instance);
+    
+    const booleanOpts = {
+      editing,
+      massClear,
+    };
+    processBooleanOptions(this.instance, 'CIRCLE_BOOLEAN_OPTIONS', booleanOpts)
     bindEvents(this.instance, 'CIRCLE', events);
   }
 }
