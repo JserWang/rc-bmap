@@ -10,12 +10,7 @@
 * 默认值：`undefined`
 * 描述：文本标注的位置
 
-## enableMassClear
-* 类型：`boolean`
-* 默认值：`true`
-* 描述：是否在调用map.clearOverlays清除此覆盖物
-
-## enableMassClear
+## massClear
 * 类型：`boolean`
 * 默认值：`true`
 * 描述：是否在调用map.clearOverlays清除此覆盖物
@@ -24,11 +19,6 @@
 * 类型：`string`
 * 默认值：`undefined`
 * 描述：显示标签
-
-## massClear
-* 类型：`boolean`
-* 默认值：`false`
-* 描述：地图clearOverlays()时，是否清空
 
 ## title
 * 类型：`string`

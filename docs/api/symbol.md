@@ -1,11 +1,11 @@
 # Symbol
 
-Symbol 继承自 Marker
+`Symbol` 继承自 `Marker`，享有 `Marker` 中的所有属性设置
 
 ## path
 * 类型：[Enum](/guide/constants.html#symbolshapetype)
 * 默认值：[SymbolShapeType](/guide/constants.html#symbolshapetype).FORWARD_CLOSED_ARROW
-* 描述：符号的位置偏移值
+* 描述：设置矢量图标的路径
 
 ## anchor
 * 类型：[Size](/api/#size)
