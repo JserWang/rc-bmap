@@ -14,6 +14,11 @@ class DistanceTool extends BaseOverlay {
     this.instance = new BDistanceTool(this.map, opts);
     bindEvents(this.instance, 'DISTANCE_TOOL', events);
   }
+
+  destroy() {
+    this.instance.close();
+    this.instance = null;
+  }
 }
 
 export default DistanceTool;

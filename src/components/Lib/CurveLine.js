@@ -37,6 +37,7 @@ class CurveLine extends BaseOverlay {
     }
     
     this.instance = new BCurveLine(pList, opts);
+    this.map.addOverlay(this.instance);
 
     if (editing) {
       this.instance.enableEditing();

@@ -23,9 +23,13 @@ class PointCollection extends BaseOverlay {
         size: size && top[size],
       };
 
-      let pList = points.map((item) => {
-        return getPoint(item.lng, item.lat);
-      });
+      let pList = [];
+      if (points && Array.isArray(points)) {
+        pList = points.map((item) => {
+          return getPoint(item.lng, item.lat);
+        });
+      }
+      
       this.instance = new global.BMap.PointCollection(pList, opts);
       this.map.addOverlay(this.instance);
       

@@ -27,14 +27,14 @@ class Heatmap extends BaseOverlay {
     };
     
     this.instance = new BHeatmap(opts);
+    this.map.addOverlay(this.instance);
+
     if (points) {
       // 需要先addOverlay后再执行
-      setTimeout(() => {
-        this.instance.setDataSet({
-          data: points,
-          max,
-        });
-      }, 100);
+      this.instance.setDataSet({
+        data: points,
+        max,
+      });
     }
   }
 }

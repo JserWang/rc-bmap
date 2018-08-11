@@ -25,9 +25,12 @@ class Polyline extends BaseOverlay {
       enableClicking: clicking,
     };
 
-    let pList = points.map((item) => {
-      return getPoint(item.lng, item.lat);
-    });
+    let pList = [];
+    if (points) {
+      pList = points.map((item) => {
+        return getPoint(item.lng, item.lat);
+      });
+    }
     
     this.instance = new global.BMap.Polyline(pList, opts);
     this.map.addOverlay(this.instance);
