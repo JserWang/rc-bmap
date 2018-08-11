@@ -3,13 +3,13 @@
 Symbol 继承自 Marker
 
 ## path
-* 类型 `enum`
+* 类型 [Enum](/guide/constants.html#symbolshapetype)
 * 默认值 [SymbolShapeType](/guide/constants.html#symbolshapetype).FORWARD_CLOSED_ARROW
 * 描述 符号的位置偏移值
 
 ## anchor
 * 类型 `Object`
-* 默认值 { width: 0,height: 0 }
+* 默认值 { width: 0, height: 0 }
 * 描述 符号的位置偏移值
 
 ## fillColor
@@ -20,7 +20,7 @@ Symbol 继承自 Marker
 ## fillOpacity
 * 类型 `number`
 * 默认值 undefined
-* 描述 设置矢量图标填充透明度,范围0~1
+* 描述 设置矢量图标填充透明度，范围0~1
 
 ## scale
 * 类型 `number`
@@ -34,15 +34,15 @@ Symbol 继承自 Marker
 
 ## strokeColor
 * 类型 `string`
-* 默认值 undefined
+* 默认值 `undefined`
 * 描述 设置矢量图标的线填充颜色,支持颜色常量字符串、十六进制、RGB、RGBA等格式
 
 ## strokeOpacity
 * 类型 `number`
-* 默认值 undefined
+* 默认值 `undefined`
 * 描述 设置矢量图标线的透明度,opacity范围0~1
 
 ## strokeWeight	
 * 类型 `number`
-* 默认值 undefined
+* 默认值 `undefined`
 * 描述 旋设置线宽。如果此属性没有指定，则线宽跟scale数值相同
