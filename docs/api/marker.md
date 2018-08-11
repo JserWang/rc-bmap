@@ -10,17 +10,17 @@
 * 默认值：`undefined`
 * 描述：标注所用的图标对象
 
-## enableMassClear
+## massClear
 * 类型：`boolean`
 * 默认值：`true`
 * 描述：是否在调用map.clearOverlays清除此覆盖物
 
-## enableDragging
+## dragging
 * 类型：`boolean`
 * 默认值：`false`
 * 描述：是否启用拖拽
 
-## enableClicking
+## clicking
 * 类型：`boolean`
 * 默认值：`true`
 * 描述：是否响应点击事件

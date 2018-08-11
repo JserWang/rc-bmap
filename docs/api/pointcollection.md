@@ -6,12 +6,12 @@
 * 描述：点集合
 
 ## shape
-* 类型：`string`
+* 类型：[Enum](/guide/constants.html#shapetype)
 * 默认值：`undefined`
 * 描述：海量点的预设形状
 
 ## size
-* 类型：[Size](/api/#size)
+* 类型：[Enum](/guide/constants.html#sizetype)
 * 默认值：`undefined`
 * 描述：海量点的预设尺寸
 

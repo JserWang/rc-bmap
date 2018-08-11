@@ -1,7 +1,7 @@
 # Heatmap
 
 ## points
-* 类型：[Point](/api/#point)[]
+* 类型：[HeatPoint](/api/#heatpoint)[]
 * 默认值：`undefined`
 * 描述：热力图集合点
 

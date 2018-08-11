@@ -94,3 +94,12 @@
   [bounds: Bounds],  // 所适用的地理区域
 }
 ```
+
+## HeatPoint
+``` ts
+{
+  [lng: number], // 经度
+  [lat: number], // 纬度
+  [count: number], // 热度
+}
+```
