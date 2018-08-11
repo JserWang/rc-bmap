@@ -1,7 +1,7 @@
 # MapTypeCtrl
 
 ## anchor
-* 类型 `Enum`
+* 类型 [Enum](/guide/constants.html#controlanchor)
 * 默认值 [ControlAnchor](/guide/constants.html#controlanchor).TOP_RIGHT
 * 描述 控件的停靠位置
 
@@ -11,7 +11,7 @@
 * 描述 控件的偏移值
 
 ## type
-* 类型 `Enum`
+* 类型 [Enum](/guide/constants.html#maptypecontroltype)
 * 默认值 [MapTypeControlType](/guide/constants.html#maptypecontroltype).HORIZONTAL
 * 描述 控件样式
 

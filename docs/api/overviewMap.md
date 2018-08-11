@@ -1,7 +1,7 @@
 # OverviewMap
 
 ## anchor
-* 类型 `Enum`
+* 类型 [Enum](/guide/constants.html#controlanchor)
 * 默认值 [ControlAnchor](/guide/constants.html#controlanchor).BOTTOM_LEFT
 * 描述 	控件的停靠位置，默认定位到地图的右下角
 
@@ -23,4 +23,4 @@
 ## events
 * 类型 `Object`
 * 默认值 `undefined`
-* 描述 为地图[绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b7)
+* 描述 [绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a2b7)
