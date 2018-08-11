@@ -127,11 +127,25 @@
 * 描述 为地图[绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a0b0)
 
 ## contextMenu
-* 类型 `Object`
+* 类型 `ContextMenu`字面量值
 * 默认值 `undefined`
 * 描述 为地图设置右键菜单
 
-传入属性需为`ContextMenu`字面量值，如：
+``` js
+contextMenu: {
+  items: [
+    {
+      text, // 设置菜单项显示的文本
+      width, // 指定此菜单项的宽度，菜单以最长的菜单项宽度为准
+      callback, // 当菜单项被点击时，系统将会以当前菜单弹出的地理坐标点作为参数调用回调函数callback
+      iconUrl, // 指定此菜单项的icon URL（大小为17px*17px)
+      disabled, // 是否禁用
+    }
+  ]
+}
+```
+
+如：
 ``` js
 {
   items: [{
