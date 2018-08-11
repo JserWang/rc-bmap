@@ -69,7 +69,7 @@ export default class Map extends React.Component {
 
   constructor(props) {
     super(props);
-
+    this.defaultCenter = { lng: 116.404, lat: 39.915 }
     // React 16
     if (React.createRef) {
       this.mapContainerRef = React.createRef();
@@ -88,7 +88,10 @@ export default class Map extends React.Component {
       enableAutoResize: autoResize,
       enableMapClick: mapClick,
     });
-    
+    // 当初始化center为string时，保证地图正常渲染，用默认center处理centerAndZoom
+    if (typeof resetProps.center === "string") {
+      map.centerAndZoom(this.defaultCenter, resetProps.zoom);
+    }
     this.processContextMenu(contextMenu);
 
     global.bMapInstance = map;
@@ -105,8 +108,11 @@ export default class Map extends React.Component {
 
   processContextMenu = (contextMenu) => {
     if (contextMenu) {
-      const menu = createContextMenu(contextMenu.items, contextMenu.events);
-      this.map.addContextMenu(menu);
+      this.menu = createContextMenu(contextMenu.items, contextMenu.events);
+      if (this.menu) {
+        this.map.removeContextMenu(this.menu);
+      }
+      this.map.addContextMenu(this.menu);
     }
   }
 
