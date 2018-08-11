@@ -27,6 +27,8 @@ class PointCollection extends BaseOverlay {
         return getPoint(item.lng, item.lat);
       });
       this.instance = new global.BMap.PointCollection(pList, opts);
+      this.map.addOverlay(this.instance);
+      
       bindEvents(this.instance, 'POINT_COLLECTION', events);
     }
   }

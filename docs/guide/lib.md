@@ -12,7 +12,7 @@
 | gridSize | Size | 网格大小 |
 | maxZoom | number | 聚合的最大缩放级别 |
 | minClusterSize | Size | 单个聚合的最小数量 |
-| styles | array | 聚合样式的风格集合 |
+| styles | Array | 聚合样式的风格集合 |
 | averageCenter | boolean | 单个聚合的落脚点是否是聚合内所有标记的平均中心 |
 
 ``` js

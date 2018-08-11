@@ -9,18 +9,6 @@ class BaseOverlay {
     this.map = global.bMapInstance;
 
     this.init();
-    setTimeout(() => {
-      this.addOverlay();
-    }, 0);
-  }
-
-  addOverlay() {
-    if (this.instance instanceof global.BMap.InfoWindow) {
-      const { point } = this.props;
-      this.map.openInfoWindow(this.instance, getPoint(point.lng, point.lat));
-    } else {
-      this.map.addOverlay(this.instance);
-    }
   }
 
   removeOverlay() {
@@ -35,7 +23,6 @@ class BaseOverlay {
     this.props = newProps;
     this.destroy();
     this.init();
-    this.addOverlay();
   }
 
   setState(param) {
