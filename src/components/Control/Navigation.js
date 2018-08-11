@@ -27,6 +27,7 @@ class Navigation extends BaseControl {
     };
 
     this.instance = new global.BMap.NavigationControl(opts);
+    this.map.addControl(this.instance);
   }
 }
 

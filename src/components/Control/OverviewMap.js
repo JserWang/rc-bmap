@@ -29,6 +29,7 @@ class OverviewMap extends BaseControl {
 
     this.instance = new global.BMap.OverviewMapControl(opts);
     bindEvents(this.instance, 'OVERVIEW_MAP', events);
+    this.map.addControl(this.instance);
   }
 }
 

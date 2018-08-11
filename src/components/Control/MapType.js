@@ -30,6 +30,7 @@ class MapType extends BaseControl {
     };
 
     this.instance = new global.BMap.MapTypeControl(opts);
+    this.map.addControl(this.instance);
   }
 }
 

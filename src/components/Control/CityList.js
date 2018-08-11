@@ -24,6 +24,7 @@ class CityList extends BaseControl {
     };
 
     this.instance = new global.BMap.CityListControl(opts);
+    this.map.addControl(this.instance);
   }
 }
 

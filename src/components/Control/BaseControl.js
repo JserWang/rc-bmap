@@ -8,16 +8,12 @@ class BaseControl {
     this.map = global.bMapInstance;
 
     this.init();
-    setTimeout(() => {
-      this.map.addControl(this.instance);
-    }, 0);
   }
 
   onPropsUpdate(newProps) {
     this.props = newProps;
     this.destroy();
     this.init();
-    this.map.addControl(this.instance);
   }
 
   setState(param) {

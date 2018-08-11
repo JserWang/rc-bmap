@@ -20,6 +20,7 @@ class Panorama extends BaseControl{
     };
 
     this.instance = new global.BMap.PanoramaControl(opts);
+    this.map.addControl(this.instance);
   }
 }
 
