@@ -1,4 +1,4 @@
-# Poincollection
+# Pointcollection
 
 ## points
 * 类型 `Object`
