@@ -5,7 +5,7 @@
 以下属性表格中`Size`均为字面量`{ width, height }`，`Point`均为字面量`{ lng, lat }`,`Enum`均为对应常量。
 :::
 
-## MarkerCluster-点聚合
+## MarkerClusterer-点聚合
 
 | 属性 | 类型 | 描述 |
 | ---- | ---- | ---- |
