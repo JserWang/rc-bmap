@@ -1,7 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MAP_BOOLEAN_OPTIONS } from '../_base/options';
-import { replaceInitialToUpper, getPoint, isPoint, bindEvents, processSetOptions, createContextMenu } from '../_base/util';
+import { 
+  getPoint,
+  isPoint,
+  bindEvents,
+  processSetOptions,
+  createContextMenu,
+  processBooleanOptions,
+  unBindEvents 
+} from '../_base/util';
 
 const fillStyle = {
   width: '100%',
@@ -106,15 +113,8 @@ export default class Map extends React.Component {
   processMapOptions = (props) => {
     const { map } = this;
     processSetOptions(map, 'MAP_SET_OPTIONS', props);
-
-    MAP_BOOLEAN_OPTIONS.forEach((key) => {
-      const upKey = replaceInitialToUpper(key);
-      let prefix = 'disable';
-      if (props[key]) {
-        prefix = 'enable';
-      }
-      map[`${prefix}${upKey}`]();
-    });
+    processBooleanOptions(map, 'MAP_BOOLEAN_OPTIONS', props);
+    
     if (props.center) {
       let center = props.center;
       if (isPoint(center)) {
@@ -164,11 +164,13 @@ export default class Map extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.map) {
+    const { map } = this;
+    if (map) {
       const props = this.processProps(nextProps);
       this.processMapOptions(props);
       this.processContextMenu(props.contextMenu);
-      bindEvents(this.map, 'MAP', this.props.events);  
+      unBindEvents(map);
+      props.events && bindEvents(map, 'MAP', props.events);  
     }
   }
 
