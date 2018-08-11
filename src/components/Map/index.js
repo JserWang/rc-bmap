@@ -119,7 +119,11 @@ export default class Map extends React.Component {
       let center = props.center;
       if (isPoint(center)) {
         center = getPoint(center.lng, center.lat);
+      }
+      if (props.zoom) {
         map.centerAndZoom(center, props.zoom);
+      } else {
+        map.setCenter(center);
       }
     }
 
@@ -173,10 +177,9 @@ export default class Map extends React.Component {
   }
 
   processProps(nextProps) {
-    let props = nextProps;
-    if (JSON.stringify(nextProps.center) === JSON.stringify(this.props.center)) {
-      const {center, ...resetProps} = nextProps;
-      props = resetProps;
+    let props = Object.assign({}, nextProps);
+    if (JSON.stringify(props.center) === JSON.stringify(this.props.center)) {
+      delete props.center;
     }
 
     if (props.zoom === this.props.zoom) {
