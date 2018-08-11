@@ -59,7 +59,8 @@ export function unBindEvents(target) {
 
 export function createIcon(options = {}) {
   const { url, size, opts = {} } = options;
-  return new global.BMap.Icon(url, size, {
+  let iconSize = size && getSize(size);
+  return new global.BMap.Icon(url, iconSize, {
     anchor: opts.anchor && global[anchor],
     imageSize: opts.imageSize && getSize(opts.imageSize.width, opts.imageSize.height),
     imageOffset: opts.imageOffset && getSize(opts.imageOffset.width, opts.imageOffset.height),
