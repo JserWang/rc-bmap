@@ -31,16 +31,29 @@ export function bindEvents(target, eventKey, events) {
   if (events && EVENT[eventKey]) {
     EVENT[eventKey].forEach((eventName) => {
       if (events[eventName]) {
-        const callBack = (...args) => {
+        const callback = (...args) => {
           events[eventName].call(null, ...args);
         };
-        if (target[`_${eventName}`]) {
-          target.removeEventListener(eventName, target[`_${eventName}`]);
+        target.events = target.events || {};
+        if (target.events[`${eventName}`]) {
+          target.removeEventListener(eventName, target.events[`${eventName}`]);
         }
-        target.addEventListener(eventName, callBack);
-        target[`_${eventName}`] = callBack;
+        target.addEventListener(eventName, callback);
+        target.events[`${eventName}`] = callback;
       }
     });
+  }
+}
+
+export function unBindEvents(target) {
+  const events = target.events;
+  if (events) {
+    const eventNames = Object.keys(events);
+    for (let i = 0; i < eventNames.length; i += 1) {
+      const eventName = eventNames[i];
+      const event = events[eventName];
+      target.removeEventListener(eventName, event);
+    }
   }
 }
 
