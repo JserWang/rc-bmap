@@ -46,6 +46,7 @@ function getApiSiderbarConfig(title) {
       collapsable: false,
       children: [
         '',
+        'map',
         'navigation',
         'geolocation',
         'overviewMap',
