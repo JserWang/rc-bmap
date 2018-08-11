@@ -1,11 +1,15 @@
 import { Component } from 'react';
-import { Size, Icon, ContextMenu } from './base/common';
+import { Size, Icon, ContextMenu, Point } from './base/common';
 
 export declare class Marker extends Component<any> {
   /**
    * 控件的水平偏移值
    */
   offset: Size;
+  /**
+   * 控件显示经纬度
+   */
+  point: Point;
   /**
    * 标注所用的图标对象
    */
