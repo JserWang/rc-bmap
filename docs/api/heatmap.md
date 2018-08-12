@@ -8,7 +8,7 @@
 ## opacity
 * 类型：`number`
 * 默认值：`undefined`
-* 描述：透明度
+* 描述：透明度，取值范围1-100
 
 ## max
 * 类型：`number`
