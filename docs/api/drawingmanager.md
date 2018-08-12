@@ -38,7 +38,7 @@
 ## rectangleOptions
 * 类型：[DrawingOption](/api/#drawingoption)
 * 默认值：同`circleOptions`
-* 描述：所画的多边形的可选参数
+* 描述：所画的矩形的可选参数
 
 ## markerOptions
 * 类型：[DrawingOption](/api/#drawingoption)
