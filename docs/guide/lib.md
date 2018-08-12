@@ -269,7 +269,7 @@ render(
 | opacity | number | 透明度 |
 | max | number | 权重最大值 |
 | radius | number | 热力圆半径 |
-| gradient | object | 热力图渐变区间，如： {5:'rgb(0, 110, 255)',.8:'rgb(100, 0, 255)'}，其中 key 表示插值的位置，取值范围 0 ~ 1，value 为颜色值。|
+| gradient | object | 热力图渐变区间，如： {.5:'rgb(0, 110, 255)',.8:'rgb(100, 0, 255)'}，其中 key 表示插值的位置，取值范围 0 ~ 1，value 为颜色值。|
 
 ::: warning
 这里的Point相比以往需多传递一个count值， 即`{ lng, lat, count }`。
