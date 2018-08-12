@@ -131,6 +131,51 @@ export function createContextMenu(items = [], events) {
   return menu;
 }
 
+export function createPolygon(props) {
+  const {
+    points,
+    strokeColor,
+    fillColor,
+    strokeWeight,
+    strokeOpacity,
+    fillOpacity,
+    strokeStyle,
+    massClear = true,
+    editing = false,
+    clicking = true,
+    events,
+  } = props;
+
+  const opts = {
+    strokeColor,
+    fillColor,
+    strokeWeight,
+    strokeOpacity,
+    fillOpacity,
+    strokeStyle,
+    enableClicking: clicking,
+  };
+
+  let pList = [];
+
+  if (points) {
+    pList = points.map((item) => {
+      return getPoint(item.lng, item.lat);
+    });
+  }
+  
+  const instance = new global.BMap.Polygon(pList, opts);
+
+  const booleanOpts = {
+    massClear,
+    editing,
+  };
+  processBooleanOptions(instance, 'POLY_BOOLEAN_OPTIONS', booleanOpts);
+  bindEvents(instance, 'POLYGON', events);
+
+  return instance;
+}
+
 export function processSetOptions(target, optionKey, opts) {
   OPTIONS[optionKey].forEach((key) => {
     if (opts[key] || typeof opts[key] === "boolean") {
