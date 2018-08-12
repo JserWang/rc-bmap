@@ -24,7 +24,7 @@ class MarkerClusterer extends BaseOverlay {
     });
 
     const opts = {
-      gridSize: gridSize && getSize(gridSize.width, gridSize.height),
+      gridSize,
       maxZoom,
       minClusterSize: minClusterSize && getSize(minClusterSize.width, minClusterSize.height),
       styles: styles.map(item => {

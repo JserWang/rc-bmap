@@ -5,7 +5,7 @@ export declare class MarkerClusterer extends Component<any> {
   /**
    * 网格大小
    */
-  gridSize: Size;
+  gridSize: number;
   /**
    * 聚合的最大缩放级别
    */
@@ -13,7 +13,7 @@ export declare class MarkerClusterer extends Component<any> {
   /**
    * 单个聚合的最小数量
    */
-  minClusterSize: Size;
+  minClusterSize: number;
   /**
    * 聚合样式的风格集合
    */

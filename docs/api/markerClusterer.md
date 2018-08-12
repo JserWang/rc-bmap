@@ -1,8 +1,8 @@
 # MarkerClusterer
 
 ## gridSize
-* 类型：[Size](/api/#size)
-* 默认值：`undefined`
+* 类型：`number`
+* 默认值：`60`
 * 描述：网格大小
 
 ## maxZoom
@@ -11,8 +11,8 @@
 * 描述：聚合的最大缩放级别
 
 ## minClusterSize
-* 类型：[Size](/api/#size)
-* 默认值：`undefined`
+* 类型：`number`
+* 默认值：`2`
 * 描述：单个聚合的最小数量
 
 ## styles
