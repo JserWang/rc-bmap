@@ -1,30 +1,29 @@
-import Polygon from './Polygon';
-import { getPoint } from '../_base/util';
+import { getPoint, createPolygon } from '../_base/util';
 import ReactComponent from '../ReactComponent';
+import BaseOverlay from './BaseOverlay';
 
 @ReactComponent
-class Boundary extends Polygon {
-  constructor(props) {
+class Boundary extends BaseOverlay {
+  init() {
     const {
       name,
       onError,
       autoViewport,
-      ...polygonProps
-    } = props;
-
-    super(polygonProps);
+      ...polygonOpts,
+    } = this.props;
 
     this.getBoundary(name)
     .then((points) => {
-      polygonProps.points = points;
-      this.wrapped.onPropsUpdate(polygonProps);
+      polygonOpts.points = points;
+      this.instance = createPolygon(polygonOpts)
+      this.map.addOverlay(this.instance);
       if (autoViewport) {
         points = points.map(item => getPoint(item.lng, item.lat));
         this.map.setViewport(points);
       }
     }).catch((msg) => {
-      if (onBoundaryError) {
-        onBoundaryError(msg);
+      if (onError) {
+        onError(msg);
       }
     });
   }
