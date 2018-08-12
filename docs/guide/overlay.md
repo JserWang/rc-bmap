@@ -54,7 +54,7 @@ render(
 
 ```
 
-与基础控件不同的是，这里需要指定`point`用于指定将当前覆盖物添加的坐标。`pane`属性用来表示需要将覆盖物添加至地图中的哪个容器，详细可见常量[MapPane](#)中的值，或见[百度地图文档](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b1)。`zIndex`就像html中的`z-index`一样，用来表示z轴显示位置的。
+与基础控件不同的是，这里需要指定`point`作为当前添加覆盖物的坐标。`pane`属性用来表示需要将覆盖物添加至地图中的哪个容器，详细可见常量[MapPane](#)中的值，或见[百度地图文档](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a3b1)。`zIndex`就像html中的`z-index`一样，用来表示z轴显示位置的。
 
 在自定义覆盖物中，您同样可以使用`state`、`setState`、`render`，在此不再展示自定义覆盖物中的进阶用法，您可以参考[复杂自定义控件实现](./control.html#复杂自定义控件实现)。
 
