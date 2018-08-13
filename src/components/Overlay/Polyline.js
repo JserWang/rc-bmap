@@ -1,5 +1,5 @@
 import BaseOverlay from './BaseOverlay';
-import { getPoint, bindEvents } from '../_base/util';
+import { getPoint, bindEvents, processBooleanOptions } from '../_base/util';
 import ReactComponent from '../ReactComponent';
 
 @ReactComponent
