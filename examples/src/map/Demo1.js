@@ -1,11 +1,12 @@
 import React from 'react';
 import { Button } from 'antd';
+import Container from 'components/Container';
 import {
   Map, MapTypeCtrl,
   ControlAnchor, MapTypeControlType,
   MapType,
 } from 'rc-bmap';
-import Container from 'components/Container';
+
 import Demo1 from './Demo1.md';
 
 class App extends React.Component {
