@@ -6,9 +6,9 @@ import {
 
 import Demo1 from './map/Demo1';
 import Boundary from './overlay/boundary/index';
-import Symbol  from  './overlay/symbol/index'
-import Pointcollection  from  './overlay/pointcollection/index'
-import Ground  from  './overlay/ground/index'
+import Symbol from './overlay/symbol/index';
+import Pointcollection from './overlay/pointcollection/index';
+import Ground from './overlay/ground/index';
 import Circle from './overlay/circle/index';
 import InfoWindow from './overlay/infoWindow/index';
 import Label from './overlay/label/index';
@@ -20,10 +20,10 @@ const route = () => (
   <Switch>
     <Route exact path="/" component={Demo1} />
     <Route path="/demo1" component={Demo1} />
-    <Route path="/boundary/index" component={Boundary} />
-    <Route path="/symbol/index" component={Symbol} />
-    <Route path="/pointcollection/index" component={Pointcollection} />
-    <Route path="/ground/index" component={Ground} />
+    <Route path="/boundary" component={Boundary} />
+    <Route path="/symbol" component={Symbol} />
+    <Route path="/pointcollection" component={Pointcollection} />
+    <Route path="/ground" component={Ground} />
     <Route path="/circle" component={Circle} />
     <Route path="/infoWindow" component={InfoWindow} />
     <Route path="/label" component={Label} />
