@@ -219,7 +219,7 @@ render(
 | scale | number | 设置矢量图标的缩放比例 |
 | rotation | number | 设置矢量图标的旋转角度,参数为角度 |
 | strokeColor | string | 设置矢量图标的线填充颜色,支持颜色常量字符串、十六进制、RGB、RGBA等格式 |
-| strokeOpacity | number |设置矢量图标线的透明度,opacity范围0~1 |
+| strokeOpacity | number |设置矢量图标线的透明度,opacity范围0~1 |
 | strokeWeight | number | 旋设置线宽。如果此属性没有指定，则线宽跟scale数值相同 |
 
 ``` js
