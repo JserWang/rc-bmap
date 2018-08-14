@@ -1,12 +1,10 @@
 import React from 'react';
 import { Button } from 'antd';
 import {
-  Map, MapTypeCtrl,
-  ControlAnchor, MapTypeControlType,
-  MapType,
+  Map, InfoWindow
 } from 'rc-bmap';
 import Container from 'components/Container';
-import InfoWindow from './index.md';
+import Code from './index.md';
 
 class App extends React.Component {
   constructor(props) {
@@ -126,7 +124,7 @@ class App extends React.Component {
       title, content, point, offset, width, height, maxWidth, autoPan, closeOnClick, displayMessage, message, events,
     } = this.state;
     return (
-      <Container code={Demo1}>
+      <Container code={Code}>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"

@@ -1,12 +1,10 @@
 import React from 'react';
 import { Button } from 'antd';
 import {
-  Map, MapTypeCtrl,
-  ControlAnchor, MapTypeControlType,
-  MapType,
+  Map, Polyline
 } from 'rc-bmap';
 import Container from 'components/Container';
-import Polyline from './index.md';
+import Code from './index.md';
 
 class App extends React.Component {
   constructor(props) {
@@ -123,7 +121,7 @@ class App extends React.Component {
       points, strokeColor, strokeWeight, strokeOpacity, strokeStyle, massClear, editing, clicking, events,
     } = this.state;
     return (
-      <Container code={Demo1}>
+      <Container code={Code}>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"

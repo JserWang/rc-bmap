@@ -1,12 +1,10 @@
 import React from 'react';
 import { Button } from 'antd';
 import {
-  Map, MapTypeCtrl,
-  ControlAnchor, MapTypeControlType,
-  MapType,
+  Map, Marker, Animation
 } from 'rc-bmap';
 import Container from 'components/Container';
-import Marker from './index.md';
+import Code from './index.md';
 
 class App extends React.Component {
   constructor(props) {
@@ -170,7 +168,7 @@ class App extends React.Component {
       markerPoint, offset, icon, dragging, title, clicking, raiseOnDrag, draggingCursor, shadow, contextMenu, rotation, massClear,
     } = this.state;
     return (
-      <Container code={Marker}>
+      <Container code={Code}>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
