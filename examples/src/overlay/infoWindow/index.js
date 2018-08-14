@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import {
-  Map, InfoWindow
+  Map, InfoWindow,
 } from 'rc-bmap';
 import Container from 'components/Container';
 import Code from './index.md';
@@ -10,7 +10,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
       title: '弹出框标题',
       content: '弹出框内容',
       point: {
@@ -85,20 +84,23 @@ class App extends React.Component {
   }
 
   handleAutoPan = () => {
+    const { autoPan } = this.state;
     this.setState({
-      autoPan: !this.state.autoPan,
+      autoPan: !autoPan,
     });
   }
 
   handleCloseOnClick = () => {
+    const { closeOnClick } = this.state;
     this.setState({
-      closeOnClick: !this.state.closeOnClick,
+      closeOnClick: !closeOnClick,
     });
   }
 
   handleDisplayMessage = () => {
+    const { displayMessage } = this.state;
     this.setState({
-      displayMessage: !this.state.displayMessage,
+      displayMessage: !displayMessage,
     });
   }
 
@@ -114,14 +116,14 @@ class App extends React.Component {
         click() {
           console.log('new click');
         },
-      }
+      },
     });
   }
 
   render() {
-    const { visible } = this.state;
     const {
-      title, content, point, offset, width, height, maxWidth, autoPan, closeOnClick, displayMessage, message, events,
+      title, content, point, offset, width, height,
+      maxWidth, autoPan, closeOnClick, displayMessage, message, events,
     } = this.state;
     return (
       <Container code={Code}>

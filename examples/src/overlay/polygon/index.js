@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import {
-  Map, Polygon
+  Map, Polygon,
 } from 'rc-bmap';
 import Container from 'components/Container';
 import Code from './index.md';
@@ -10,7 +10,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
       points: [
         {
           lng: 116.387112,
@@ -21,7 +20,7 @@ class App extends React.Component {
         },
         {
           lng: 116.394226,
-          lat: 39.917988
+          lat: 39.917988,
         },
       ],
       strokeColor: 'blue',
@@ -46,22 +45,22 @@ class App extends React.Component {
       points: [
         {
           lng: 116.394226,
-          lat: 39.917988
+          lat: 39.917988,
         }, {
           lng: 116.401772,
-          lat: 39.921364
+          lat: 39.921364,
         },
         {
           lng: 116.394226,
-          lat: 39.917988
+          lat: 39.917988,
         },
         {
           lng: 116.401772,
-          lat: 39.921364
+          lat: 39.921364,
         },
         {
           lng: 116.41248,
-          lat: 39.927893
+          lat: 39.927893,
         },
       ],
     });
@@ -120,15 +119,16 @@ class App extends React.Component {
   }
 
   handleClicking = () => {
+    const { clicking } = this.state;
     this.setState({
-      clicking: !this.state.clicking, // 为true点击之后控制台会输出events里的click语句，false不输出
+      clicking: !clicking, // 为true点击之后控制台会输出events里的click语句，false不输出
     });
   }
 
   handleEvents = () => {
     this.setState({
       events: {
-        click: (event) => {
+        click: () => {
           console.log('mapClick');
         },
       },
@@ -136,9 +136,9 @@ class App extends React.Component {
   }
 
   render() {
-    const { visible } = this.state;
     const {
-      points, strokeColor, fillColor, strokeWeight, strokeOpacity, fillOpacity, strokeStyle, massClear, editing, clicking, events,
+      points, strokeColor, fillColor, strokeWeight, strokeOpacity,
+      fillOpacity, strokeStyle, massClear, editing, clicking, events,
     } = this.state;
     return (
       <Container code={Code}>

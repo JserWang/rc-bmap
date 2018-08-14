@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import {
-  Map, Marker, Animation
+  Map, Marker, Animation,
 } from 'rc-bmap';
 import Container from 'components/Container';
 import Code from './index.md';
@@ -10,11 +10,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
       markerPoint: { lng: 116.404, lat: 39.915 },
       offset: { width: 10, height: 10 },
       icon: {
-        url: "http://lbsyun.baidu.com/jsdemo/img/fox.gif",
+        url: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif',
         size: {
           width: 300,
           height: 157,
@@ -29,7 +28,7 @@ class App extends React.Component {
       raiseOnDrag: false,
       draggingCursor: '',
       shadow: {
-        url: "http://lbsyun.baidu.com/jsdemo/img/fox.gif",
+        url: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif',
         size: {
           width: 600,
           height: 314,
@@ -41,12 +40,12 @@ class App extends React.Component {
       contextMenu: {
         items: [{
           text: '你好', // 设置菜单项显示的文本
-          callback: function(){console.log(666)}, // 菜单项被点击回调函数
+          callback() { console.log(666); }, // 菜单项被点击回调函数
           separator: true, // 是否显示分隔线
           width: 100, // 指定此菜单项的宽度
-          iconUrl: "http://lbsyun.baidu.com/jsdemo/img/fox.gif", // 指定此菜单项的icon URL（大小为17px*17px)
-          disabled: false // 是否禁用
-        }]
+          iconUrl: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif', // 指定此菜单项的icon URL（大小为17px*17px)
+          disabled: false, // 是否禁用
+        }],
       },
       rotation: 0,
       massClear: false,
@@ -58,7 +57,7 @@ class App extends React.Component {
       markerPoint: {
         lng: 116.400,
         lat: 39.915,
-      }
+      },
     });
   }
 
@@ -67,14 +66,14 @@ class App extends React.Component {
       offset: {
         width: 100,
         height: 100,
-      }
+      },
     });
   }
 
   handleIcon = () => {
     this.setState({
       icon: {
-        url: "http://lbsyun.baidu.com/jsdemo/img/fox.gif",
+        url: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif',
         size: {
           width: 600,
           height: 314,
@@ -82,13 +81,13 @@ class App extends React.Component {
         opts: {
           imageOffset: { width: 100, height: 100 },
         },
-      }
+      },
     });
   }
 
   handleDragging = () => {
     this.setState({
-      dragging: true
+      dragging: true,
     });
   }
 
@@ -100,20 +99,20 @@ class App extends React.Component {
 
   handleRaiseOnDrag = () => {
     this.setState({
-      raiseOnDrag: true
+      raiseOnDrag: true,
     });
   }
 
   handleDraggingCursor = () => {
     this.setState({
-      draggingCursor: 'default'
+      draggingCursor: 'default',
     });
   }
 
   handleShadow = () => {
     this.setState({
       shadow: {
-        url: "http://lbsyun.baidu.com/jsdemo/img/fox.gif",
+        url: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif',
         size: {
           width: 600,
           height: 314,
@@ -121,7 +120,7 @@ class App extends React.Component {
         opts: {
           imageOffset: { width: 200, height: 100 },
         },
-      }
+      },
     });
   }
 
@@ -130,13 +129,13 @@ class App extends React.Component {
       contextMenu: {
         items: [{
           text: '大家好', // 设置菜单项显示的文本
-          callback: function(){console.log(888)}, // 菜单项被点击回调函数
+          callback() { console.log(888); }, // 菜单项被点击回调函数
           separator: false, // 是否显示分隔线
           width: 100, // 指定此菜单项的宽度
-          iconUrl: "http://lbsyun.baidu.com/jsdemo/img/fox.gif", // 指定此菜单项的icon URL（大小为17px*17px)
-          disabled: true // 是否禁用
-        }]
-      }
+          iconUrl: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif', // 指定此菜单项的icon URL（大小为17px*17px)
+          disabled: true, // 是否禁用
+        }],
+      },
     });
   }
 
@@ -153,8 +152,9 @@ class App extends React.Component {
   }
 
   handleClicking = () => {
+    const { clicking } = this.state;
     this.setState({
-      clicking: !this.state.clicking, // 为true则右键菜单有反应，false无反应
+      clicking: !clicking, // 为true则右键菜单有反应，false无反应
     });
   }
 
@@ -163,9 +163,9 @@ class App extends React.Component {
   }
 
   render() {
-    const { visible } = this.state;
     const {
-      markerPoint, offset, icon, dragging, title, clicking, raiseOnDrag, draggingCursor, shadow, contextMenu, rotation, massClear,
+      markerPoint, offset, icon, dragging, title, clicking,
+      raiseOnDrag, draggingCursor, shadow, contextMenu, rotation, massClear,
     } = this.state;
     return (
       <Container code={Code}>

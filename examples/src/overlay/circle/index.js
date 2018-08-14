@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import {
-  Map, Circle
+  Map, Circle,
 } from 'rc-bmap';
 import Container from 'components/Container';
 import Code from './index.md';
@@ -10,7 +10,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
       point: { lng: 116.404, lat: 39.915 },
       radius: 500,
       strokeColor: 'blue',
@@ -35,7 +34,7 @@ class App extends React.Component {
       point: {
         lng: 116.400,
         lat: 39.915,
-      }
+      },
     });
   }
 
@@ -98,15 +97,16 @@ class App extends React.Component {
   }
 
   handleClicking = () => {
+    const { clicking } = this.state;
     this.setState({
-      clicking: !this.state.clicking, // 为true点击之后控制台会输出events里的click语句，false不输出
+      clicking: !clicking, // 为true点击之后控制台会输出events里的click语句，false不输出
     });
   }
 
   handleEvents = () => {
     this.setState({
       events: {
-        click: (event) => {
+        click: () => {
           console.log('mapClick');
         },
       },
@@ -114,9 +114,9 @@ class App extends React.Component {
   }
 
   render() {
-    const { visible } = this.state;
     const {
-      point, radius, strokeColor, fillColor, strokeWeight, strokeOpacity, fillOpacity, strokeStyle, massClear, editing, clicking, events,
+      point, radius, strokeColor, fillColor, strokeWeight,
+      strokeOpacity, fillOpacity, strokeStyle, massClear, editing, clicking, events,
     } = this.state;
     return (
       <Container code={Code}>

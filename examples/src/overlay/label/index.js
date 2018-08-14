@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from 'antd';
 import {
-  Map, Label
+  Map, Label,
 } from 'rc-bmap';
 import Container from 'components/Container';
 import Code from './index.md';
@@ -10,7 +10,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
       content: '这是标签哦',
       point: {
         lng: 116.404,
@@ -26,7 +25,7 @@ class App extends React.Component {
       events: {
         click() {
           console.log('label click');
-        }
+        },
       },
       style: {
         backgroundColor: 'red',
@@ -60,8 +59,9 @@ class App extends React.Component {
   }
 
   handleMassClear = () => {
+    const { massClear } = this.state;
     this.setState({
-      massClear: !this.state.massClear, // 改为true之后再点击clearMarker则标签会被清除
+      massClear: !massClear, // 改为true之后再点击clearMarker则标签会被清除
     });
   }
 
@@ -91,7 +91,6 @@ class App extends React.Component {
   }
 
   render() {
-    const { visible } = this.state;
     const {
       content, point, offset, massClear, title, events, zIndex, style,
     } = this.state;
