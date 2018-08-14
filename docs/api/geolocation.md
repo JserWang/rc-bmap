@@ -3,7 +3,7 @@
 ## anchor
 * 类型：[Enum](/guide/constants.html#controlanchor)
 * 默认值：[ControlAnchor](/guide/constants.html#controlanchor).BOTTOM_LEFT
-* 描述：控件的停靠位置，默认定位到地图的右下角
+* 描述：控件的停靠位置，默认定位到地图的左下角
 
 ## offset
 * 类型：[Size](/api/#size)
