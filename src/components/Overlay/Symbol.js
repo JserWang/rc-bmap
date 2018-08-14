@@ -18,7 +18,7 @@ class Symbol extends Marker {
       strokeColor,
       strokeOpacity,
       strokeWeight,
-      ...markerProps,
+      ...markerProps
     } = props;
 
     markerProps.icon = createSymbol({
@@ -32,9 +32,9 @@ class Symbol extends Marker {
         strokeColor,
         strokeOpacity,
         strokeWeight,
-      }
+      },
     });
-    
+
     super(markerProps);
   }
 }

@@ -3,9 +3,8 @@ import BaseOverlay from './BaseOverlay';
 import { getPoint } from '../_base/util';
 import MAP_PANE from '../../constants/MapPane';
 
-const BOverlay = function() {}
+const BOverlay = function Empty() {};
 class Overlay extends BaseOverlay {
-
   init() {
     if (!BOverlay.prototype.initialize) {
       BOverlay.prototype = new global.BMap.Overlay();
@@ -22,7 +21,9 @@ class Overlay extends BaseOverlay {
       pane = MAP_PANE.MARKER,
       zIndex,
     } = this.props;
-    const container = this.container = document.createElement('div');
+    const container = document.createElement('div');
+    this.container = container;
+
     if (zIndex) {
       container.style.zIndex = zIndex;
     }
@@ -35,7 +36,7 @@ class Overlay extends BaseOverlay {
   }
 
   draw() {
-    const { container, props } = this;;
+    const { container, props } = this;
     const { point } = props;
     const position = this.map.pointToOverlayPixel(getPoint(point.lng, point.lat));
     container.style.left = `${position.x - (container.offsetWidth / 2)}px`;

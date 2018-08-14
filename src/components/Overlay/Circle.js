@@ -34,12 +34,12 @@ class Circle extends BaseOverlay {
 
     this.instance = new global.BMap.Circle(getPoint(point.lng, point.lat), radius, opts);
     this.map.addOverlay(this.instance);
-    
+
     const booleanOpts = {
       editing,
       massClear,
     };
-    processBooleanOptions(this.instance, 'CIRCLE_BOOLEAN_OPTIONS', booleanOpts)
+    processBooleanOptions(this.instance, 'CIRCLE_BOOLEAN_OPTIONS', booleanOpts);
     bindEvents(this.instance, 'CIRCLE', events);
   }
 }

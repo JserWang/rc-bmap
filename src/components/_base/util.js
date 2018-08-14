@@ -46,7 +46,7 @@ export function bindEvents(target, eventKey, events) {
 }
 
 export function unBindEvents(target) {
-  const events = target.events;
+  const { events } = target.events;
   if (events) {
     const eventNames = Object.keys(events);
     for (let i = 0; i < eventNames.length; i += 1) {
@@ -59,13 +59,36 @@ export function unBindEvents(target) {
 
 export function createIcon(options = {}) {
   const { url, size, opts = {} } = options;
-  let iconSize = size && getSize(size.width, size.height);
+  const iconSize = size && getSize(size.width, size.height);
   return new global.BMap.Icon(url, iconSize, {
-    anchor: opts.anchor && global[anchor],
+    anchor: opts.anchor && global[opts.anchor],
     imageSize: opts.imageSize && getSize(opts.imageSize.width, opts.imageSize.height),
     imageOffset: opts.imageOffset && getSize(opts.imageOffset.width, opts.imageOffset.height),
-    infoWindowAnchor: opts.infoWindowAnchor && getSize(opts.infoWindowAnchor.width, opts.infoWindowAnchor.height),
+    infoWindowAnchor: opts.infoWindowAnchor
+      && getSize(opts.infoWindowAnchor.width, opts.infoWindowAnchor.height),
     printImageUrl: opts.printImageUrl,
+  });
+}
+
+export function processSetOptions(target, optionKey, opts) {
+  OPTIONS[optionKey].forEach((key) => {
+    if (opts[key] || typeof opts[key] === 'boolean') {
+      const upKey = replaceInitialToUpper(key);
+      target[`set${upKey}`](opts[key]);
+    }
+  });
+}
+
+export function processBooleanOptions(target, optionKey, opts) {
+  OPTIONS[optionKey].forEach((key) => {
+    if (opts[key] || typeof opts[key] === 'boolean') {
+      const upKey = replaceInitialToUpper(key);
+      let prefix = 'disable';
+      if (opts[key]) {
+        prefix = 'enable';
+      }
+      target[`${prefix}${upKey}`]();
+    }
   });
 }
 
@@ -75,7 +98,7 @@ export function createLabel(options = {}) {
     point,
     offset = {
       width: 0,
-      height: 0
+      height: 0,
     },
     massClear = true,
     title,
@@ -83,13 +106,13 @@ export function createLabel(options = {}) {
     zIndex,
     style,
   } = options;
-  
+
   const opts = {
     offset: offset && getSize(offset.width, offset.height),
     enableMassClear: massClear,
     position: point && getPoint(point.lng, point.lat),
   };
-  const label =  new global.BMap.Label(content, opts);
+  const label = new global.BMap.Label(content, opts);
   bindEvents(label, 'LABEL', events);
   const setOpts = {
     title,
@@ -97,7 +120,7 @@ export function createLabel(options = {}) {
     style,
   };
   processSetOptions(label, 'LABEL_SET_OPTIONS', setOpts);
-  return label
+  return label;
 }
 
 export function createSymbol(options = {}) {
@@ -111,7 +134,8 @@ export function createSymbol(options = {}) {
 export function createContextMenu(items = [], events) {
   const menu = new global.BMap.ContextMenu();
   items.forEach((item) => {
-    const iconUrl = (item.iconUrl === ContextMenuIcon.ZOOMIN) || (item.iconUrl === ContextMenuIcon.ZOOMOUT) ? global[item.iconUrl] : iconUrl;
+    const iconUrl = (item.iconUrl === ContextMenuIcon.ZOOMIN)
+      || (item.iconUrl === ContextMenuIcon.ZOOMOUT) ? global[item.iconUrl] : item.iconUrl;
     const itemOpts = {
       width: item.width,
       id: item.id,
@@ -159,11 +183,9 @@ export function createPolygon(props) {
   let pList = [];
 
   if (points) {
-    pList = points.map((item) => {
-      return getPoint(item.lng, item.lat);
-    });
+    pList = points.map(item => getPoint(item.lng, item.lat));
   }
-  
+
   const instance = new global.BMap.Polygon(pList, opts);
 
   const booleanOpts = {
@@ -176,28 +198,6 @@ export function createPolygon(props) {
   return instance;
 }
 
-export function processSetOptions(target, optionKey, opts) {
-  OPTIONS[optionKey].forEach((key) => {
-    if (opts[key] || typeof opts[key] === "boolean") {
-      const upKey = replaceInitialToUpper(key);
-      target[`set${upKey}`](opts[key]);
-    }
-  });
-}
-
-export function processBooleanOptions(target, optionKey, opts) {
-  OPTIONS[optionKey].forEach((key) => {
-    if (opts[key] || typeof opts[key] === "boolean") {
-      const upKey = replaceInitialToUpper(key);
-      let prefix = 'disable';
-      if (opts[key]) {
-        prefix = 'enable';
-      }
-      target[`${prefix}${upKey}`]();
-    }
-  });
-}
-
 export function isSupportContext() {
   return !!(document.createElement('canvas').getContext);
 }
@@ -208,17 +208,16 @@ export function isSupportCanvas() {
 }
 
 export function appendCss(options = {}) {
-  const url = options.url;
-  const id = options.id;
-  const node = document.createElement("link");
+  const { url, id } = options;
+  const node = document.createElement('link');
 
-  node.rel = "stylesheet";
-  node.type = "text/css";
+  node.rel = 'stylesheet';
+  node.type = 'text/css';
   node.href = url;
-  if( typeof id !== "undefined" ){
-      node.id = id;
+  if (typeof id !== 'undefined') {
+    node.id = id;
   }
-  document.getElementsByTagName("head")[0].appendChild(node);
+  document.getElementsByTagName('head')[0].appendChild(node);
 }
 
 export function getPoiByKeyword(keyword) {
@@ -230,7 +229,7 @@ export function getPoiByKeyword(keyword) {
           res = result.getPoi(0);
         }
         resolve(res);
-      }
+      },
     });
     local.search(keyword);
   });
@@ -240,9 +239,9 @@ export function convertPoint(points, from, to = 5) {
   return new Promise((resolve) => {
     const convert = new global.BMap.Convertor();
     if (!Array.isArray(points)) {
-      point = [points];
+      points = [points];
     }
-    const pList = point.map(item => getPoint(item.lng, item.lat));
+    const pList = points.map(item => getPoint(item.lng, item.lat));
     convert.translate(pList, from, to, (result) => {
       resolve(result);
     });

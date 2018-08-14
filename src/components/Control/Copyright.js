@@ -24,7 +24,7 @@ class Copyright extends BaseControl {
     this.instance.addCopyright({
       id: 1,
       content,
-      bounds: global.bMapInstance.getBounds()
+      bounds: global.bMapInstance.getBounds(),
     });
     this.map.addControl(this.instance);
   }

@@ -7,7 +7,7 @@ class DistanceTool extends BaseOverlay {
   init() {
     const {
       events,
-      ...opts,
+      ...opts
     } = this.props;
 
     const BDistanceTool = require('../../libs/DistanceTool.js');

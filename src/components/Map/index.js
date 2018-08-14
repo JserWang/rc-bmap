@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { 
+import {
   getPoint,
   isPoint,
   bindEvents,
   processSetOptions,
   createContextMenu,
   processBooleanOptions,
-  unBindEvents 
+  unBindEvents,
 } from '../_base/util';
 
 const fillStyle = {
   width: '100%',
-  height: '100%'
+  height: '100%',
 };
 
 export default class Map extends React.Component {
-
   static defaultProps = {
     placeHolder: '地图加载中...',
     // 与官方文档保持一致
@@ -69,7 +68,7 @@ export default class Map extends React.Component {
 
   constructor(props) {
     super(props);
-    this.defaultCenter = { lng: 116.404, lat: 39.915 }
+    this.defaultCenter = { lng: 116.404, lat: 39.915 };
     // React 16
     if (React.createRef) {
       this.mapContainerRef = React.createRef();
@@ -80,24 +79,50 @@ export default class Map extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const { ak } = this.props;
+    if (ak) {
+      this.getMapScript().then(this.init);
+    } else if (global.BMap) {
+      this.init(global.BMap);
+    } else {
+      console.warn('BMap is undefined');
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { map } = this;
+    if (map) {
+      const props = this.processProps(nextProps);
+      this.processMapOptions(props);
+      this.processContextMenu(props.contextMenu);
+      unBindEvents(map);
+      if (props.events) bindEvents(map, 'MAP', props.events);
+    }
+  }
+
   init = (BMap) => {
-    const { highResolution, autoResize, mapClick, mapMounted, contextMenu, ...resetProps } = this.props;
+    const {
+      highResolution, autoResize, mapClick, mapMounted, contextMenu, events, ...resetProps
+    } = this.props;
     this.mapContainer = this.mapContainer || this.mapContainerRef.current;
-    const map = this.map = new BMap.Map(this.mapContainer, {
+    const map = new BMap.Map(this.mapContainer, {
       enableHighResolution: highResolution,
       enableAutoResize: autoResize,
       enableMapClick: mapClick,
     });
+
+    this.map = map;
     // 当初始化center为string时，保证地图正常渲染，用默认center处理centerAndZoom
-    if (typeof resetProps.center === "string") {
+    if (typeof resetProps.center === 'string') {
       map.centerAndZoom(this.defaultCenter, resetProps.zoom);
     }
     this.processContextMenu(contextMenu);
 
     global.bMapInstance = map;
     this.processMapOptions(resetProps);
-    bindEvents(map, 'MAP', this.props.events);
-    
+    bindEvents(map, 'MAP', events);
+
     // 地图配置完成后，强制刷新，渲染子组件
     this.forceUpdate(() => {
       if (mapMounted) {
@@ -120,9 +145,9 @@ export default class Map extends React.Component {
     const { map } = this;
     processSetOptions(map, 'MAP_SET_OPTIONS', props);
     processBooleanOptions(map, 'MAP_BOOLEAN_OPTIONS', props);
-    
+
     if (props.center) {
-      let center = props.center;
+      let { center } = props.center;
       if (isPoint(center)) {
         center = getPoint(center.lng, center.lat);
       }
@@ -142,7 +167,9 @@ export default class Map extends React.Component {
     const { ak } = this.props;
     global.BMap = global.BMap || {};
     if (Object.keys(global.BMap).length === 0) {
-      global.BMap._preloader = new Promise((resolve, reject) => {
+      global.BMap._preloader = new Promise((resolve) => {
+        const $script = document.createElement('script');
+        global.document.body.appendChild($script);
         global._initBaiduMap = function initBaiduMap() {
           resolve(global.BMap);
           global.document.body.removeChild($script);
@@ -150,48 +177,26 @@ export default class Map extends React.Component {
           global._initBaiduMap = null;
         };
 
-        const $script = document.createElement('script');
-        global.document.body.appendChild($script);
         $script.src = `https://api.map.baidu.com/api?v=3.0&ak=${ak}&callback=_initBaiduMap`;
       });
 
       return global.BMap._preloader;
-    } else if (!global.BMap._preloader) {
+    } if (!global.BMap._preloader) {
       return Promise.resolve(global.BMap);
     }
     return global.BMap._preloader;
   }
 
-  componentDidMount() {
-    const { ak } = this.props;
-    if (ak) {
-      this.getMapScript().then(this.init);
-    } else if (global.BMap) {
-      this.init(global.BMap);
-    } else {
-      console.warn('BMap is undefined');
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { map } = this;
-    if (map) {
-      const props = this.processProps(nextProps);
-      this.processMapOptions(props);
-      this.processContextMenu(props.contextMenu);
-      unBindEvents(map);
-      props.events && bindEvents(map, 'MAP', props.events);  
-    }
-  }
 
   processProps(nextProps) {
-    let props = Object.assign({}, nextProps);
-    if (JSON.stringify(props.center) === JSON.stringify(this.props.center)) {
+    const { center, zoom } = this.props;
+    const props = Object.assign({}, nextProps);
+    if (JSON.stringify(props.center) === JSON.stringify(center)) {
       delete props.center;
     }
 
-    if (props.zoom === this.props.zoom) {
-      delete props.zoom
+    if (props.zoom === zoom) {
+      delete props.zoom;
     }
     return props;
   }

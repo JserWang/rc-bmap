@@ -1,6 +1,5 @@
 
 import { render as reactRender } from 'react-dom';
-import { getPoint } from '../_base/util';
 
 class BaseOverlay {
   constructor(props) {

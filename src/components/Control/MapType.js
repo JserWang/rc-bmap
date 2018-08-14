@@ -18,15 +18,13 @@ class MapType extends BaseControl {
       mapTypes = [MAP_TYPE.NORMAL, MAP_TYPE.PERSPECTIVE, MAP_TYPE.SATELLITE, MAP_TYPE.HYBRID],
     } = this.props;
 
-    const types = mapTypes.map((item) => {
-      return global[item];
-    });
-    
+    const types = mapTypes.map(item => global[item]);
+
     const opts = {
       anchor: global[anchor],
       offset: getSize(offset.width, offset.height),
       type: global[type],
-      mapTypes: types
+      mapTypes: types,
     };
 
     this.instance = new global.BMap.MapTypeControl(opts);

@@ -1,5 +1,7 @@
 import BaseOverlay from './BaseOverlay';
-import { getPoint, getSize, bindEvents, createLabel, createIcon, processSetOptions, createContextMenu } from '../_base/util';
+import {
+  getPoint, getSize, bindEvents, createLabel, createIcon, processSetOptions, createContextMenu,
+} from '../_base/util';
 import ReactComponent from '../ReactComponent';
 
 @ReactComponent
@@ -9,7 +11,7 @@ class Marker extends BaseOverlay {
       point,
       offset = {
         width: 0,
-        height: 0
+        height: 0,
       },
       icon,
       massClear = true,
@@ -39,7 +41,7 @@ class Marker extends BaseOverlay {
       rotation,
       title,
     };
-    
+
     this.instance = new global.BMap.Marker(oPoint, markerOpts);
     this.map.addOverlay(this.instance);
 
@@ -68,7 +70,7 @@ class Marker extends BaseOverlay {
   }
 
   processContextMenu() {
-    const { contextMenu } = this.props
+    const { contextMenu } = this.props;
     if (contextMenu) {
       const menu = createContextMenu(contextMenu.items, contextMenu.events);
       this.instance.addContextMenu(menu);

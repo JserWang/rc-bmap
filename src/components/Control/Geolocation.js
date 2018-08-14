@@ -18,7 +18,6 @@ class Geolocation extends BaseControl {
       events,
     } = this.props;
 
-    
     const opts = {
       anchor: global[anchor],
       offset: getSize(offset.width, offset.height),

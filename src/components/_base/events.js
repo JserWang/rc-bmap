@@ -130,7 +130,7 @@ export const CONTEXT_MENU = [
 
 export const AUTO_COMPLETE = [
   'onconfirm',
-  'onhighlight'
+  'onhighlight',
 ];
 
 export const DRAWING_MANAGER = [
