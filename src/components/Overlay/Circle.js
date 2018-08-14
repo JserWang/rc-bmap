@@ -27,9 +27,7 @@ class Circle extends BaseOverlay {
       strokeOpacity,
       fillOpacity,
       strokeStyle,
-      enableEditing: editing,
       enableClicking: clicking,
-      enableMassClear: massClear,
     };
 
     this.instance = new global.BMap.Circle(getPoint(point.lng, point.lat), radius, opts);
