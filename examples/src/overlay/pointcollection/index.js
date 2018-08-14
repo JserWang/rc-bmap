@@ -10,7 +10,7 @@ constructor(props){
   this.state={
     color:'#fa937e',
     shape:'CIRCLE',
-    size:'TINY',
+    size:'4',
     points:[{
       lng: 116.3964,
       lat: 40.9093,
