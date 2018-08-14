@@ -2,7 +2,7 @@
 import { default as BMarkerClusterer } from 'bmaplib.markerclusterer';
 /* eslint-enable */
 import BaseOverlay from '../Overlay/BaseOverlay';
-import { getSize, getPoint } from '../_base/util';
+import { getSize, createMarker } from '../_base/util';
 import ReactComponent from '../ReactComponent';
 
 @ReactComponent
@@ -18,10 +18,8 @@ class MarkerClusterer extends BaseOverlay {
     } = this.props;
     const childrenMakers = children && !Array.isArray(children) ? [children] : children;
     const markers = [];
-    const { Marker } = global.BMap.Marker;
     childrenMakers.forEach((m) => {
-      const { point, ...markerOpts } = m.props;
-      markers.push(new Marker(getPoint(point.lng, point.lat), markerOpts));
+      markers.push(createMarker(m.props));
     });
 
     const opts = {

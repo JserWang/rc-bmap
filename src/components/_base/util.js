@@ -247,3 +247,69 @@ export function convertPoint(points, from, to = 5) {
     });
   });
 }
+
+export function processContextMenu(contextMenu, instance) {
+  if (contextMenu) {
+    const menu = createContextMenu(contextMenu.items, contextMenu.events);
+    instance.addContextMenu(menu);
+  }
+}
+
+export function createMarker(props) {
+  const {
+    point,
+    offset = {
+      width: 0,
+      height: 0,
+    },
+    icon,
+    massClear = true,
+    dragging = false,
+    clicking = true,
+    raiseOnDrag = false,
+    draggingCursor,
+    rotation,
+    shadow,
+    title,
+    events,
+    label,
+    zIndex,
+    top = false,
+    contextMenu,
+  } = props;
+
+  const oPoint = point && getPoint(point.lng, point.lat);
+
+  const markerOpts = {
+    offset: offset && getSize(offset.width, offset.height),
+    enableMassClear: massClear,
+    enableDragging: dragging,
+    enableClicking: clicking,
+    raiseOnDrag,
+    draggingCursor,
+    rotation,
+    title,
+  };
+
+  const instance = new global.BMap.Marker(oPoint, markerOpts);
+
+  const setOpts = {
+    label: label && createLabel(label.props),
+    shadow: shadow && createIcon(shadow),
+    zIndex,
+    top,
+  };
+
+  if (icon && icon instanceof global.BMap.Symbol) {
+    setOpts.icon = icon;
+  } else if (icon) {
+    setOpts.icon = createIcon(icon);
+  }
+
+  bindEvents(instance, 'MARKER', events);
+
+  processContextMenu(contextMenu, instance);
+  processSetOptions(instance, 'MARKER_SET_OPTIONS', setOpts);
+
+  return instance;
+}
