@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Map, Boundary } from 'rc-bmap';
 import { Button } from 'antd';
+import { getRandomColor, getRandomBoundary } from 'utils';
 
-class App extends Component {
+class BoundaryExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,73 +41,93 @@ class App extends Component {
     console.log('onChangedError');
   }
 
-  handleName=() => {
+  handleName = () => {
     this.setState({
-      name: '北京市朝阳区',
+      name: getRandomBoundary(),
     });
   }
 
-  handleOnError =() => {
+  handleOnError = () => {
     this.setState({
       onError: this.onChangedError,
     });
   }
 
-  handleAutoViewport =() => {
+  handleAutoViewport = () => {
+    const { autoViewport } = this.state;
     this.setState({
-      autoViewport: true,
+      autoViewport: !autoViewport,
     });
   }
 
-  handleStrokeColor =() => {
+  handleStrokeColor = () => {
     this.setState({
-      strokeColor: 'red',
+      strokeColor: getRandomColor(),
     });
   }
 
-  handleFillColor =() => {
+  handleFillColor = () => {
     this.setState({
-      fillColor: 'blue',
+      fillColor: getRandomColor(),
     });
   }
 
-  handleStrokeWeight =() => {
+  handleStrokeWeight = () => {
+    const { strokeWeight } = this.state;
     this.setState({
-      strokeStyle: 10,
+      strokeWeight: strokeWeight + 1,
     });
   }
 
-  handleStrokeOpacity =() => {
+  handleStrokeOpacity = () => {
+    let { strokeOpacity } = this.state;
+    if (strokeOpacity === 1) {
+      strokeOpacity = 0.1;
+    }
     this.setState({
-      strokeOpacity: 0.1,
+      strokeOpacity: strokeOpacity + 0.1,
     });
   }
 
-  handleStrokeStyle =() => {
+  handleFillOpacity = () => {
+    let { fillOpacity } = this.state;
+    if (fillOpacity === 1) {
+      fillOpacity = 0.1;
+    }
     this.setState({
-      strokeStyle: 'solid',
+      fillOpacity: fillOpacity + 0.1,
     });
   }
 
-  handleMassClear=() => {
+  handleStrokeStyle = () => {
+    const { strokeStyle } = this.state;
     this.setState({
-      massClear: true,
+      strokeStyle: strokeStyle === 'solid' ? 'dashed' : 'solid',
     });
   }
 
-  handleEditing=() => {
+  handleMassClear = () => {
+    const { massClear } = this.state;
     this.setState({
-      editing: true,
+      massClear: !massClear,
     });
   }
 
-  handleClicking=() => {
+  handleEditing = () => {
+    const { editing } = this.state;
     this.setState({
-      clicking: false,
+      editing: !editing,
     });
   }
 
-  handleEvents=() => {
+  handleClicking = () => {
+    const { clicking } = this.state;
+    this.setState({
+      clicking: !clicking,
+    });
+  }
+
+  handleEvents = () => {
     this.setState({
       events: {
         click: this.onChangedClick,
@@ -114,48 +135,64 @@ class App extends Component {
     });
   }
 
+  handleClear = () => {
+    window.bMapInstance.clearOverlays();
+  }
+
   render() {
     const {
       name, onError, autoViewport, strokeColor,
-      fillColor, strokeWeight, strokeOpacity, fillOpacity,
-      strokeStyle, massClear, editing, clicking, events,
+      fillColor, strokeWeight, strokeOpacity, fillOpacity, strokeStyle,
+      massClear, editing, clicking, events,
     } = this.state;
     return (
-      <React.Fragment>
-        <Map
-          ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv"
-        >
-          <Boundary
-            name={name} // 行政区域名字
-            onError={onError} // 初始化失败回调
-            autoViewport={autoViewport} // 添加完成后是否自动移动
-            strokeColor={strokeColor} // 边线颜色
-            fillColor={fillColor} // 填充颜色。当参数为空时，圆形将没有填充效果
-            strokeWeight={strokeWeight} // 边线的宽度，以像素为单位
-            strokeOpacity={strokeOpacity} // 边线透明度，取值范围0 - 1
-            fillOpacity={fillOpacity} // 填充的透明度，取值范围0 - 1
-            strokeStyle={strokeStyle} // 边线的样式，solid或dashed
-            massClear={massClear} // 是否在调用map.clearOverlays清除此覆盖物，默认为true
-            editing={editing} // 是否启用线编辑，默认为false
-            clicking={clicking} // 是否响应点击事件，默认为true
-            events={events}
-          />
-        </Map>
-        <Button className="butt" onClick={this.handleName}> 行政区域名字</Button>
-        <Button className="butt" onClick={this.handleOnError}>初始化失败回调</Button>
-        <Button className="butt" onClick={this.handleAutoViewport}>添加完成后是否自动移动</Button>
-        <Button className="butt" onClick={this.handleStrokeColor}>边线颜色</Button>
-        <Button className="butt" onClick={this.handleFillColor}>填充颜色</Button>
-        <Button className="butt" onClick={this.handleStrokeWeight}>边线的宽度</Button>
-        <Button className="butt" onClick={this.handleStrokeOpacity}>填充的透明度</Button>
-        <Button className="butt" onClick={this.handleStrokeStyle}>边线的样式</Button>
-        <Button className="butt" onClick={this.handleMassClear}>是否在清除此覆盖物</Button>
-        <Button className="butt" onClick={this.handleEditing}>是否启用线编辑</Button>
-        <Button className="butt" onClick={this.handleClicking}>是否响应点击事件</Button>
-        <Button className="butt" onClick={this.handleEvents}>绑定事件</Button>
+      <React.Fragment code={index}>
+        <div style={{ height: '90vh' }}>
+          <Map
+            ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
+          >
+            <Boundary
+              name={name}
+              onError={onError}
+              autoViewport={autoViewport}
+              strokeColor={strokeColor}
+              fillColor={fillColor}
+              strokeWeight={strokeWeight}
+              strokeOpacity={strokeOpacity}
+              fillOpacity={fillOpacity}
+              strokeStyle={strokeStyle}
+              massClear={massClear}
+              editing={editing}
+              clicking={clicking}
+              events={events}
+            />
+          </Map>
+        </div>
+        <Button onClick={this.handleName}>随机改变行政区域名字</Button>
+        <Button onClick={this.handleOnError}>修改初始化失败回调</Button>
+        <Button onClick={this.handleAutoViewport}>
+          {autoViewport ? '禁用自动移动' : '启用自动移动'}
+        </Button>
+        <Button onClick={this.handleStrokeColor}>随机改变边线颜色</Button>
+        <Button onClick={this.handleFillColor}>随机改变填充颜色</Button>
+        <Button onClick={this.handleStrokeWeight}>调整边线宽度</Button>
+        <Button onClick={this.handleStrokeOpacity}>调整边线透明度</Button>
+        <Button onClick={this.handleFillOpacity}>调整填充透明度</Button>
+        <Button onClick={this.handleStrokeStyle}>调整边线样式</Button>
+        <Button onClick={this.handleEditing}>
+          {editing ? '禁用编辑' : '启用编辑'}
+        </Button>
+        <Button onClick={this.handleClicking}>
+          {clicking ? '禁用点击事件' : '响应点击事件'}
+        </Button>
+        <Button onClick={this.handleEvents}>改变绑定事件</Button>
+        <Button onClick={this.handleMassClear}>
+          { massClear ? 'clearOverlay时不移除此对象' : 'clearOverlay时移除此对象' }
+        </Button>
+        <Button onClick={this.handleClear}>clearOverlay</Button>
       </React.Fragment>
     );
   }
 }
 
-export default App;
+export default BoundaryExample;
