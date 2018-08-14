@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
-import { Map, Circle } from 'rc-bmap';
-import './App.css';
+import React from 'react';
+import { Button } from 'antd';
+import {
+  Map, Circle,
+} from 'rc-bmap';
+import { getRandomColor } from 'utils';
 
-class App extends Component {
+class CircleExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,132 +21,165 @@ class App extends Component {
       editing: false,
       clicking: true,
       events: {
-        click: (event) => {
-          console.log('mapClick', event);
-        },
+        click: this.handleClick,
       },
     };
   }
 
+  handleClick = () => {
+    console.log('Circle click');
+  }
+
+  onChangedClick = () => {
+    console.log('onChanged Circle click');
+  }
+
   handlePoint = () => {
+    const { point } = this.state;
     this.setState({
       point: {
-        lng: 116.400,
+        lng: point.lng + 0.01,
         lat: 39.915,
-      }
+      },
     });
   }
 
   handleRadius = () => {
+    const { radius } = this.state;
     this.setState({
-      radius: 700,
+      radius: radius + 100,
     });
   }
 
   handleStrokeColor = () => {
     this.setState({
-      strokeColor: 'green',
+      strokeColor: getRandomColor(),
     });
   }
 
   handleFillColor = () => {
     this.setState({
-      fillColor: 'yellow',
+      fillColor: getRandomColor(),
     });
   }
 
   handleStrokeWeight = () => {
+    const { strokeWeight } = this.state;
     this.setState({
-      strokeWeight: 3,
+      strokeWeight: strokeWeight + 1,
     });
   }
 
   handleStrokeOpacity = () => {
+    let { strokeOpacity } = this.state;
+    if (strokeOpacity === 1) {
+      strokeOpacity = 0.1;
+    }
     this.setState({
-      strokeOpacity: 1,
+      strokeOpacity: strokeOpacity + 0.1,
     });
   }
 
   handleFillOpacity = () => {
+    let { fillOpacity } = this.state;
+    if (fillOpacity === 1) {
+      fillOpacity = 0.1;
+    }
     this.setState({
-      fillOpacity: 0.5,
+      fillOpacity: fillOpacity + 0.1,
     });
   }
 
   handleStrokeStyle = () => {
+    const { strokeStyle } = this.state;
     this.setState({
-      strokeStyle: 'solid',
+      strokeStyle: strokeStyle === 'dashed' ? 'solid' : 'dashed',
     });
   }
 
   handleMassClear = () => {
+    const { massClear } = this.state;
     this.setState({
-      massClear: true, // 改为true之后再点击clearMarker则圆会被清除
+      massClear: !massClear,
     });
   }
 
-  clearMarker = () => {
-    window.bMapInstance.clearOverlays(); // 触发之后若massClear是true则会清除该圆
+  handleClear = () => {
+    window.bMapInstance.clearOverlays();
   }
 
   handleEditing = () => {
+    const { editing } = this.state;
     this.setState({
-      editing: true,
+      editing: !editing,
     });
   }
 
   handleClicking = () => {
+    const { clicking } = this.state;
     this.setState({
-      clicking: !this.state.clicking, // 为true点击之后控制台会输出events里的click语句，false不输出
+      clicking: !clicking,
     });
   }
 
   handleEvents = () => {
     this.setState({
       events: {
-        click: (event) => {
-          console.log('mapClick');
-        },
+        click: this.onChangedClick,
       },
     });
   }
 
   render() {
-    const { point, radius, strokeColor, fillColor, strokeWeight, strokeOpacity, fillOpacity, strokeStyle, massClear, editing, clicking, events } = this.state;
+    const {
+      point, radius, strokeColor, fillColor, strokeWeight,
+      strokeOpacity, fillOpacity, strokeStyle, massClear, editing, clicking, events,
+    } = this.state;
     return (
-      <div style={{height: '100%'}}>
-        <Map ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv">
-          <Circle
-            point={point} // 指定位置的坐标
-            radius={radius}
-            strokeColor={strokeColor} // 圆形边线颜色
-            fillColor={fillColor} // 圆形填充颜色。当参数为空时，圆形将没有填充效果
-            strokeWeight={strokeWeight} // 圆形边线的宽度，以像素为单位
-            strokeOpacity={strokeOpacity} // 圆形边线透明度，取值范围0 - 1
-            fillOpacity={fillOpacity} // 圆形填充的透明度，取值范围0 - 1
-            strokeStyle={strokeStyle} // 圆形边线的样式，solid或dashed
-            massClear={massClear} // 是否在调用map.clearOverlays清除此覆盖物，默认为true
-            editing={editing} // 是否启用线编辑，默认为false
-            clicking={clicking} // 是否响应点击事件，默认为true
-            events={events} // 绑定事件
-          />
-        </Map>
-        <button onClick={this.handlePoint}>改变point</button>
-        <button onClick={this.handleRadius}>改变radius</button>
-        <button onClick={this.handleStrokeColor}>改变strokeColor</button>
-        <button onClick={this.handleFillColor}>改变fillColor</button>
-        <button onClick={this.handleStrokeWeight}>改变strokeWeight</button>
-        <button onClick={this.handleStrokeOpacity}>改变strokeOpacity</button>
-        <button onClick={this.handleFillOpacity}>改变fillOpacity</button>
-        <button onClick={this.handleStrokeStyle}>改变strokeStyle</button>
-        <button onClick={this.handleMassClear}>改变massClear</button>
-        <button onClick={this.handleEditing}>改变editing</button>
-        <button onClick={this.handleClicking}>改变clicking</button>
-        <button onClick={this.handleEvents}>改变events</button>
-        <button onClick={this.clearMarker}>清除marker</button>
-      </div>
+      <React.Fragment>
+        <div style={{ height: '90vh' }}>
+          <Map
+            ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
+            scrollWheelZoom
+          >
+            <Circle
+              point={point}
+              radius={radius}
+              strokeColor={strokeColor}
+              fillColor={fillColor}
+              strokeWeight={strokeWeight}
+              strokeOpacity={strokeOpacity}
+              fillOpacity={fillOpacity}
+              strokeStyle={strokeStyle}
+              massClear={massClear}
+              editing={editing}
+              clicking={clicking}
+              events={events}
+            />
+          </Map>
+        </div>
+        <Button onClick={this.handlePoint}>改变point</Button>
+        <Button onClick={this.handleRadius}>扩大半径</Button>
+        <Button onClick={this.handleStrokeColor}>随机改变边线颜色</Button>
+        <Button onClick={this.handleFillColor}>随机改变填充颜色</Button>
+        <Button onClick={this.handleStrokeWeight}>调整边线宽度</Button>
+        <Button onClick={this.handleStrokeOpacity}>调整边线透明度</Button>
+        <Button onClick={this.handleFillOpacity}>调整填充透明度</Button>
+        <Button onClick={this.handleStrokeStyle}>调整边线样式</Button>
+        <Button onClick={this.handleEditing}>
+          {editing ? '禁用编辑' : '启用编辑'}
+        </Button>
+        <Button onClick={this.handleClicking}>
+          {clicking ? '禁用点击事件' : '响应点击事件'}
+        </Button>
+        <Button onClick={this.handleEvents}>改变绑定事件</Button>
+        <Button onClick={this.handleMassClear}>
+          { massClear ? 'clearOverlay时不移除此对象' : 'clearOverlay时移除此对象' }
+        </Button>
+        <Button onClick={this.handleClear}>清除覆盖物</Button>
+      </React.Fragment>
     );
   }
 }
 
-export default App;
+export default CircleExample;
