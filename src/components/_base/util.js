@@ -46,7 +46,7 @@ export function bindEvents(target, eventKey, events) {
 }
 
 export function unBindEvents(target) {
-  const { events } = target.events;
+  const { events } = target;
   if (events) {
     const eventNames = Object.keys(events);
     for (let i = 0; i < eventNames.length; i += 1) {

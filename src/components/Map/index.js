@@ -147,7 +147,7 @@ export default class Map extends React.Component {
     processBooleanOptions(map, 'MAP_BOOLEAN_OPTIONS', props);
 
     if (props.center) {
-      let { center } = props.center;
+      let { center } = props;
       if (isPoint(center)) {
         center = getPoint(center.lng, center.lat);
       }
