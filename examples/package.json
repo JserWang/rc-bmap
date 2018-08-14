@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "antd": "^3.8.1",
-    "rc-bmap": "0.1.7",
+    "rc-bmap": "0.1.8",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
     "react-router-dom": "^4.3.1",
