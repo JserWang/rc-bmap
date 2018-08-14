@@ -164,8 +164,6 @@ export function createPolygon(props) {
     strokeOpacity,
     fillOpacity,
     strokeStyle,
-    massClear = true,
-    editing = false,
     clicking = true,
     events,
   } = props;
@@ -188,11 +186,6 @@ export function createPolygon(props) {
 
   const instance = new global.BMap.Polygon(pList, opts);
 
-  const booleanOpts = {
-    massClear,
-    editing,
-  };
-  processBooleanOptions(instance, 'POLY_BOOLEAN_OPTIONS', booleanOpts);
   bindEvents(instance, 'POLYGON', events);
 
   return instance;
