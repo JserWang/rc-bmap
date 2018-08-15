@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
+import { Button } from 'antd';
 import { Map, Polyline } from 'rc-bmap';
-import './App.css';
+import { getRandomColor } from 'utils';
 
-class App extends Component {
-  constructor(props){
+class PolylineExample extends Component {
+  constructor(props) {
     super(props);
     this.state = {
       points: [
         {
-          lng: 116.387112,
-          lat: 39.920977,
+          lng: 116.387,
+          lat: 39.920,
         }, {
-          lng: 116.385243,
-          lat: 39.913063,
+          lng: 116.385,
+          lat: 39.913,
         },
       ],
       strokeColor: 'blue',
@@ -23,124 +24,141 @@ class App extends Component {
       editing: false,
       clicking: true,
       events: {
-        click: (event) => {
-          console.log('mapClick', event);
-        },
+        click: this.handleClick,
       },
     };
   }
 
+  handleClick = () => {
+    console.log('Polyline click');
+  }
+
+  onChangedClick = () => {
+    console.log('onChanged Polyline click');
+  }
+
   handlePoints = () => {
+    const { points } = this.state;
     this.setState({
       points: [
         {
-          lng: 116.387112,
-          lat: 39.920977,
+          lng: points[0].lng + 0.01,
+          lat: points[0].lat + 0.01,
         }, {
-          lng: 116.385243,
-          lat: 39.913063,
-        }, {
-          lng: 116.394226,
-          lat: 39.917988
-        }, {
-          lng: 116.401772,
-          lat: 39.921364
-        }, {
-          lng: 116.41248,
-          lat: 39.927893
-        }
+          lng: points[1].lng + 0.01,
+          lat: points[1].lat + 0.01,
+        },
       ],
     });
   }
 
   handleStrokeColor = () => {
     this.setState({
-      strokeColor: 'green',
+      strokeColor: getRandomColor(),
     });
   }
 
   handleStrokeWeight = () => {
+    const { strokeWeight } = this.state;
     this.setState({
-      strokeWeight: 3,
+      strokeWeight: strokeWeight + 1,
     });
   }
 
   handleStrokeOpacity = () => {
+    let { strokeOpacity } = this.state;
+    if (strokeOpacity === 1) {
+      strokeOpacity = 0.1;
+    }
     this.setState({
-      strokeOpacity: 1,
+      strokeOpacity: strokeOpacity + 0.1,
     });
   }
 
   handleStrokeStyle = () => {
+    const { strokeStyle } = this.state;
     this.setState({
-      strokeStyle: 'solid',
+      strokeStyle: strokeStyle === 'dashed' ? 'solid' : 'dashed',
     });
   }
 
   handleMassClear = () => {
+    const { massClear } = this.state;
     this.setState({
-      massClear: true, // 改为true之后再点击clearMarker则线会被清除
+      massClear: !massClear,
     });
   }
 
-  clearMarker = () => {
-    window.bMapInstance.clearOverlays(); // 触发之后若massClear是true则会清除该线
+  handleClear = () => {
+    window.bMapInstance.clearOverlays();
   }
 
   handleEditing = () => {
+    const { editing } = this.state;
     this.setState({
-      editing: true,
+      editing: !editing,
     });
   }
 
   handleClicking = () => {
+    const { clicking } = this.state;
     this.setState({
-      clicking: !this.state.clicking, // 为true点击之后控制台会输出events里的click语句，false不输出
+      clicking: !clicking,
     });
   }
 
   handleEvents = () => {
     this.setState({
       events: {
-        click: (event) => {
-          console.log('mapClick');
-        },
+        click: this.onChangedClick,
       },
     });
   }
 
   render() {
-    const { points, strokeColor, strokeWeight, strokeOpacity, strokeStyle, massClear, editing, clicking, events } = this.state;
+    const {
+      points, strokeColor, strokeWeight, strokeOpacity,
+      strokeStyle, massClear, editing, clicking, events,
+    } = this.state;
     return (
-      <div style={{height: '100%'}}>
-        <Map ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv">
-          <Polyline
-            points={points} // 指定位置的坐标
-            strokeColor={strokeColor} // 折线颜色
-            strokeWeight={strokeWeight} // 折线的宽度，以像素为单位
-            strokeOpacity={strokeOpacity} // 折线的透明度，取值范围0 - 1
-            strokeStyle={strokeStyle} // 折线的样式，solid或dashed
-            massClear={massClear} // 是否在调用map.clearOverlays清除此覆盖物，默认为true
-            editing={editing} // 是否启用线编辑，默认为false
-            clicking={clicking} // 是否响应点击事件，默认为true
-            events={events} // 绑定事件
-          />
-        </Map>
-
-        <button onClick={this.handlePoints}>改变points</button>
-        <button onClick={this.handleStrokeColor}>改变strokeColor</button>
-        <button onClick={this.handleStrokeWeight}>改变strokeWeight</button>
-        <button onClick={this.handleStrokeOpacity}>改变strokeOpacity</button>
-        <button onClick={this.handleStrokeStyle}>改变strokeStyle</button>
-        <button onClick={this.handleMassClear}>改变massClear</button>
-        <button onClick={this.handleEditing}>改变editing</button>
-        <button onClick={this.handleClicking}>改变clicking</button>
-        <button onClick={this.handleEvents}>改变events</button>
-        <button onClick={this.clearMarker}>清除marker</button>
-      </div>
+      <React.Fragment>
+        <div style={{ height: '90vh' }}>
+          <Map
+            ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
+            scrollWheelZoom
+          >
+            <Polyline
+              points={points}
+              strokeColor={strokeColor}
+              strokeWeight={strokeWeight}
+              strokeOpacity={strokeOpacity}
+              strokeStyle={strokeStyle}
+              massClear={massClear}
+              editing={editing}
+              clicking={clicking}
+              events={events}
+            />
+          </Map>
+        </div>
+        <Button onClick={this.handlePoints}>改变points</Button>
+        <Button onClick={this.handleStrokeColor}>随机改变边线颜色</Button>
+        <Button onClick={this.handleStrokeWeight}>调整边线宽度</Button>
+        <Button onClick={this.handleStrokeOpacity}>调整边线透明度</Button>
+        <Button onClick={this.handleStrokeStyle}>调整边线样式</Button>
+        <Button onClick={this.handleEditing}>
+          {editing ? '禁用编辑' : '启用编辑'}
+        </Button>
+        <Button onClick={this.handleClicking}>
+          {clicking ? '禁用点击事件' : '响应点击事件'}
+        </Button>
+        <Button onClick={this.handleEvents}>改变绑定事件</Button>
+        <Button onClick={this.handleMassClear}>
+          { massClear ? 'clearOverlay时不移除此对象' : 'clearOverlay时移除此对象' }
+        </Button>
+        <Button onClick={this.handleClear}>clearOverlay</Button>
+      </React.Fragment>
     );
   }
-
 }
 
-export default App;
+export default PolylineExample;

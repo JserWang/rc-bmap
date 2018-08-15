@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button } from 'antd';
-import {
-  Map, InfoWindow,
-} from 'rc-bmap';
+import { Map, InfoWindow } from 'rc-bmap';
 
-class InfoWindowExample extends React.Component {
+class InfoWindowExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,7 +40,6 @@ class InfoWindowExample extends React.Component {
   handleOpen = () => {
     console.log('InfoWindow open');
   }
-
 
   handleClose = () => {
     console.log('InfoWindow close');
@@ -151,20 +148,20 @@ class InfoWindowExample extends React.Component {
           >
             {
               visible && (
-              <InfoWindow
-                title={title}
-                content={content}
-                point={point}
-                offset={offset}
-                width={width}
-                height={height}
-                maxWidth={maxWidth}
-                autoPan={autoPan}
-                closeOnClick={closeOnClick}
-                displayMessage={displayMessage}
-                message={message}
-                events={events}
-              />
+                <InfoWindow
+                  title={title}
+                  content={content}
+                  point={point}
+                  offset={offset}
+                  width={width}
+                  height={height}
+                  maxWidth={maxWidth}
+                  autoPan={autoPan}
+                  closeOnClick={closeOnClick}
+                  displayMessage={displayMessage}
+                  message={message}
+                  events={events}
+                />
               )
             }
           </Map>

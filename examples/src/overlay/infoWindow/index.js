@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button } from 'antd';
-import {
-  Map, InfoWindow,
-} from 'rc-bmap';
+import { Map, InfoWindow } from 'rc-bmap';
 import Container from 'components/Container';
-import Code from './index.md';
+import index from './index.md';
 
-class InfoWindowExample extends React.Component {
+class InfoWindowExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +42,6 @@ class InfoWindowExample extends React.Component {
   handleOpen = () => {
     console.log('InfoWindow open');
   }
-
 
   handleClose = () => {
     console.log('InfoWindow close');
@@ -145,7 +142,7 @@ class InfoWindowExample extends React.Component {
       maxWidth, autoPan, closeOnClick, displayMessage, message, events,
     } = this.state;
     return (
-      <Container code={Code}>
+      <Container code={index}>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -153,20 +150,20 @@ class InfoWindowExample extends React.Component {
           >
             {
               visible && (
-              <InfoWindow
-                title={title}
-                content={content}
-                point={point}
-                offset={offset}
-                width={width}
-                height={height}
-                maxWidth={maxWidth}
-                autoPan={autoPan}
-                closeOnClick={closeOnClick}
-                displayMessage={displayMessage}
-                message={message}
-                events={events}
-              />
+                <InfoWindow
+                  title={title}
+                  content={content}
+                  point={point}
+                  offset={offset}
+                  width={width}
+                  height={height}
+                  maxWidth={maxWidth}
+                  autoPan={autoPan}
+                  closeOnClick={closeOnClick}
+                  displayMessage={displayMessage}
+                  message={message}
+                  events={events}
+                />
               )
             }
           </Map>
