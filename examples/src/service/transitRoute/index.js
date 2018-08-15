@@ -2,9 +2,11 @@ import React from 'react';
 import {
   Map,
   DrivingPolicy,
+  TransitPolicy,
   getPoiByKeyword,
   TransitRoute,
 } from 'rc-bmap';
+import { Button } from 'antd';
 import Container from 'components/Container';
 import Transit from './index.md';
 
@@ -32,6 +34,12 @@ class App extends React.Component {
     });
   };
 
+  handlePolicy = () => {
+    this.setState({
+      policy: TransitPolicy.NORMAL,
+    });
+  }
+
   render() {
     const { policy } = this.state;
     return (
@@ -49,6 +57,7 @@ class App extends React.Component {
             />
           </Map>
         </div>
+        <Button onClick={this.handlePolicy}>改变市内公交的策略</Button>
       </Container>
     );
   }

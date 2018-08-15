@@ -4,7 +4,9 @@ import {
   DrivingRoute,
   DrivingPolicy,
   getPoiByKeyword,
+  IntercityPolicy,
 } from 'rc-bmap';
+import { Button } from 'antd';
 import Container from 'components/Container';
 import Driving from './index.md';
 
@@ -22,7 +24,7 @@ class App extends React.Component {
   }
 
   getRoute = (instance) => {
-    this.route = instance;
+    this.state.route = instance;
   };
 
   mapMounted = () => {
@@ -33,6 +35,22 @@ class App extends React.Component {
       route.search(res[0], res[1]);
     });
   };
+
+  handleCenter = () => {
+    this.setState({
+      center: {
+        lng: 120.21937549,
+        lat: 30.25924440,
+      },
+    });
+  };
+
+  handlePolicy = () => {
+    this.setState({
+      policy: IntercityPolicy.NORMAL,
+    });
+  }
+
 
   render() {
     const { center, policy } = this.state;
@@ -52,6 +70,8 @@ class App extends React.Component {
             />
           </Map>
         </div>
+        <Button onClick={this.handleCenter}>改变设初始化地图中心点</Button>
+        <Button onClick={this.handlePolicy}>改变驾车策略</Button>
       </Container>
     );
   }
