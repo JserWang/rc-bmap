@@ -11,8 +11,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      transparentPng: false,
       zoom: 16,
-      zIndex: 1,
+      zIndex: -1,
       center: {
         lng: 116.332782,
         lat: 40.007978,
@@ -21,37 +22,29 @@ class App extends React.Component {
   }
 
   getTilesUrl = (tileCoord, zoom) => {
-    const x = tileCoord.x;
-    const y = tileCoord.y;
+    const { x, y } = tileCoord;
+    // const y = tileCoord.y;
     // 根据当前坐标，选取合适的瓦片图
     return `http://lbsyun.baidu.com/jsdemo/demo/tiles/${zoom}/tile${x}_${y}.png`;
   };
 
-  handleZoom = () => {
-    this.setState({
-      zoom: 14,
-    });
-  }
-
-  handleCenter = () => {
-    this.setState({
-      center: {
-        lng: 120.21937542,
-        lat: 30.25924446,
-      },
-    });
-    this.getTilesUrl();
-  }
-
   handleZIndex = () => {
+    const { zIndex } = this.state;
     this.setState({
-      zIndex: -1,
+      zIndex: zIndex + 1,
+    });
+  }
+
+  handlePng = () => {
+    const { transparentPng } = this.state;
+    this.setState({
+      transparentPng: !transparentPng,
     });
   }
 
   render() {
     const {
-      zoom, center, zIndex, copyright,
+      zoom, center, zIndex, copyright, transparentPng,
     } = this.state;
     return (
       <Container code={Ti}>
@@ -66,10 +59,10 @@ class App extends React.Component {
               copyright={copyright}
               getTilesUrl={this.getTilesUrl}
               zIndex={zIndex}
+              transparentPng={transparentPng}
             />
           </Map>
-          <Button onClick={this.handleZoom}>改变zoom</Button>
-          <Button onClick={this.handleCenter}>改变center</Button>
+          <Button onClick={this.handlePng}>{transparentPng ? '使用带有透明信息的PNG' : '不使用带有透明信息的PNG'}</Button>
           <Button onClick={this.handleZIndex}>改变zIndex</Button>
         </div>
       </Container>

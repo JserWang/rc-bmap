@@ -4,6 +4,7 @@ import {
   Map,
   DistanceTool,
 } from 'rc-bmap';
+import { getRandomColor } from 'utils';
 import Container from 'components/Container';
 import Distance from './index.md';
 
@@ -43,19 +44,20 @@ class App extends React.Component {
 
   handleText = () => {
     this.setState({
-      followText: '单击双击',
+      followText: '这是一条新的提示信息',
     });
   }
 
   handleUnit = () => {
+    const { unit } = this.state;
     this.setState({
-      unit: 'us',
+      unit: unit === 'us' ? 'metric' : 'us',
     });
   }
 
   handleLineColor = () => {
     this.setState({
-      lineColor: '#000000',
+      lineColor: getRandomColor(),
     });
   }
 
@@ -66,14 +68,19 @@ class App extends React.Component {
   }
 
   handleOpacity = () => {
+    let { opacity } = this.state;
+    if (opacity > 0.9) {
+      opacity = 1;
+    }
     this.setState({
-      opacity: 0.5,
+      opacity: opacity + 0.1,
     });
   }
 
   handleLineStyle = () => {
+    const { lineStyle } = this.state;
     this.setState({
-      lineStyle: 'dashed',
+      lineStyle: lineStyle === 'dashed' ? 'solid' : 'dashed',
     });
   }
 
@@ -111,12 +118,11 @@ class App extends React.Component {
           <Button onClick={this.closeTool}>关闭</Button>
           <Button onClick={this.handleText}>改变提示内容</Button>
           <Button onClick={this.handleUnit}>改变单位</Button>
-          <Button onClick={this.handleLineColor}>改变线条颜色</Button>
+          <Button onClick={this.handleLineColor}>随机改变线条颜色</Button>
           <Button onClick={this.handleLineStroke}>改变线宽</Button>
           <Button onClick={this.handleOpacity}>改变透明度</Button>
           <Button onClick={this.handleLineStyle}>改变线条样式</Button>
           <Button onClick={this.handleCursor}>改变鼠标样式</Button>
-
         </div>
       </Container>
     );

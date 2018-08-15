@@ -105,13 +105,14 @@ class App extends React.Component {
         { lng: 116.42076, lat: 39.915251 },
         { lng: 116.425867, lat: 39.918989 },
       ],
-      gridSize: 60,
+      gridSize: 50,
       maxZoom: 0,
       minClusterSize: 0,
       // styles: ,
       center: {
         lng: 116.418261, lat: 39.921984,
       },
+      averageCenter: true,
     };
   }
 
@@ -164,20 +165,26 @@ class App extends React.Component {
   }
 
   handleSize = () => {
+    const { gridSize } = this.state;
     this.setState({
-      gridSize: 10,
+      gridSize: gridSize + 5,
     });
   }
 
   handleClusterSize = () => {
+    const { minClusterSize } = this.state;
     this.setState({
-      minClusterSize: 20,
+      minClusterSize: minClusterSize + 5,
     });
   }
 
   handleMaxZoom = () => {
+    let { maxZoom } = this.state;
+    if (maxZoom === 16) {
+      maxZoom = 1;
+    }
     this.setState({
-      maxZoom: 7,
+      maxZoom: maxZoom + 1,
     });
   }
 
@@ -205,9 +212,16 @@ class App extends React.Component {
     });
   }
 
+  handleCenter = () => {
+    const { averageCenter } = this.state;
+    this.setState({
+      averageCenter: !averageCenter,
+    });
+  }
+
   render() {
     const {
-      gridSize, points, maxZoom, minClusterSize, center, styles,
+      gridSize, points, maxZoom, minClusterSize, center, styles, averageCenter,
     } = this.state;
     return (
       <Container code={Clusterer}>
@@ -218,7 +232,7 @@ class App extends React.Component {
             center={center}
           >
             <MarkerClusterer
-              averageCenter
+              averageCenter={averageCenter}
               gridSize={gridSize}
               maxZoom={maxZoom}
               minClusterSize={minClusterSize}
@@ -235,6 +249,7 @@ class App extends React.Component {
             </MarkerClusterer>
           </Map>
           <Button onClick={this.handlePoints}>改变聚合点</Button>
+          <Button onClick={this.handleCenter}>{averageCenter ? '聚合在中心' : '聚合不在中心'}</Button>
           <Button onClick={this.handleSize}>改变网格大小</Button>
           <Button onClick={this.handleMaxZoom}>改变最大缩放级别</Button>
           <Button onClick={this.handleClusterSize}>改变单个聚合的最小数量</Button>
