@@ -7,10 +7,11 @@ import {
   MapType,
   MapTypeControlType,
 } from 'rc-bmap';
+import { getRandomControlAnchor, getRandomMapType, getRandomMapTypeControlType } from 'utils';
 import Container from 'components/Container';
 import MTC from './index.md';
 
-class App extends React.Component {
+class MapTypeCtrlExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,28 +27,29 @@ class App extends React.Component {
 
   handleAnchor = () => {
     this.setState({
-      anchor: ControlAnchor.TOP_LEFT,
+      anchor: ControlAnchor[getRandomControlAnchor()],
     });
   }
 
   handleOffset = () => {
+    const { offset } = this.state;
     this.setState({
       offset: {
-        width: 10,
-        height: 10,
+        width: offset.width + 3,
+        height: offset.height + 3,
       },
     });
   }
 
   handleType = () => {
     this.setState({
-      type: MapTypeControlType.DROPDOWN,
+      type: MapTypeControlType[getRandomMapTypeControlType()],
     });
   }
 
   handleMapTypes = () => {
     this.setState({
-      mapTypes: [MapType.NORMAL, MapType.PERSPECTIVE, MapType.HYBRID],
+      mapTypes: [MapType[getRandomMapType()]],
     });
   }
 
@@ -57,7 +59,6 @@ class App extends React.Component {
     } = this.state;
     return (
       <Container code={MTC}>
-
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -71,13 +72,13 @@ class App extends React.Component {
             />
           </Map>
           <Button onClick={this.handleOffset}>改变offset</Button>
-          <Button onClick={this.handleAnchor}>改变停靠位置</Button>
-          <Button onClick={this.handleType}>改变控件样式</Button>
-          <Button onClick={this.handleMapTypes}>改变地图类型</Button>
+          <Button onClick={this.handleAnchor}>随机改变停靠位置</Button>
+          <Button onClick={this.handleType}>随机改变控件样式</Button>
+          <Button onClick={this.handleMapTypes}>随机改变地图类型</Button>
         </div>
       </Container>
     );
   }
 }
 
-export default App;
+export default MapTypeCtrlExample;

@@ -9,7 +9,7 @@ import { getRandomControlAnchor } from 'utils';
 import Container from 'components/Container';
 import Overview from './index.md';
 
-class App extends React.Component {
+class OverviewMapExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -96,4 +96,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default OverviewMapExample;

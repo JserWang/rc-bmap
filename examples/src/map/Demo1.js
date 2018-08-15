@@ -55,6 +55,7 @@ render() {
         <Map
           ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
           scrollWheelZoom
+          mapType={MapType.NORMAL}
         >
           <MapTypeCtrl
             offset={offset}

@@ -4,10 +4,11 @@ import {
   Map,
   Heatmap,
 } from 'rc-bmap';
+import { getRandomColor } from 'utils';
 import Container from 'components/Container';
 import Heat from './index.md';
 
-class App extends React.Component {
+class HeatmapExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -104,7 +105,7 @@ class App extends React.Component {
         { lng: 116.42076, lat: 39.915251, count: 70 },
         { lng: 116.425867, lat: 39.918989, count: 8 },
       ],
-      opacity: 100,
+      opacity: 90,
       max: 100,
       radius: 20,
       center: {
@@ -126,29 +127,35 @@ class App extends React.Component {
   }
 
   handleRadius = () => {
+    const { radius } = this.state;
     this.setState({
-      radius: 50,
+      radius: radius + 3,
     });
   }
 
   handleOpacity = () => {
+    let { opacity } = this.state;
+    if (opacity === 100) {
+      opacity = 1;
+    }
     this.setState({
-      opacity: 50,
+      opacity: opacity + 1,
     });
   }
 
   handleMax = () => {
+    const { max } = this.state;
     this.setState({
-      max: 50,
+      max: max + 3,
     });
   }
 
   handleGradient = () => {
     this.setState({
       gradient: {
-        0.2: '#EE00EE',
-        0.5: 'rgb(255,255,0)',
-        0.8: 'red',
+        0.2: getRandomColor(),
+        0.5: getRandomColor(),
+        0.8: getRandomColor(),
       },
     });
   }
@@ -177,11 +184,11 @@ class App extends React.Component {
           <Button onClick={this.handleRadius}>改变热力图半径</Button>
           <Button onClick={this.handleOpacity}>改变透明度</Button>
           <Button onClick={this.handleMax}>改变权重最大值</Button>
-          <Button onClick={this.handleGradient}>改变渐变区间</Button>
+          <Button onClick={this.handleGradient}>随机改变渐变区间</Button>
         </div>
       </Container>
     );
   }
 }
 
-export default App;
+export default HeatmapExample;

@@ -5,10 +5,11 @@ import {
   ControlAnchor,
   Geolocation,
 } from 'rc-bmap';
+import { getRandomControlAnchor } from 'utils';
 import Container from 'components/Container';
-import Geo from './Geolocation.md';
+import Geo from './index.md';
 
-class App extends React.Component {
+class GeolocationExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,28 +40,31 @@ class App extends React.Component {
 
   handleAnchor = () => {
     this.setState({
-      anchor: ControlAnchor.TOP_LEFT,
+      anchor: ControlAnchor[getRandomControlAnchor()],
     });
   }
 
   handleOffset = () => {
+    const { offset } = this.state;
     this.setState({
       offset: {
-        width: 10,
-        height: 10,
+        width: offset.width + 3,
+        height: offset.height + 3,
       },
     });
   }
 
   hideAddressBar = () => {
+    const { showAddressBar } = this.state;
     this.setState({
-      showAddressBar: false,
+      showAddressBar: !showAddressBar,
     });
   }
 
   autoLocation = () => {
+    const { autoLocation } = this.state;
     this.setState({
-      autoLocation: true,
+      autoLocation: !autoLocation,
     });
   }
 
@@ -100,9 +104,9 @@ class App extends React.Component {
             />
           </Map>
           <Button onClick={this.handleOffset}>改变offset</Button>
-          <Button onClick={this.handleAnchor}>改变停靠位置</Button>
-          <Button onClick={this.hideAddressBar}>隐藏定位信息面板</Button>
-          <Button onClick={this.autoLocation}>定位</Button>
+          <Button onClick={this.handleAnchor}>随机改变停靠位置</Button>
+          <Button onClick={this.hideAddressBar}>{showAddressBar ? '隐藏定位信息面板' : '显示定位信息面板'}</Button>
+          <Button onClick={this.autoLocation}>{autoLocation ? '添加控件时不进行定位' : '添加控件时进行定位'}</Button>
           <Button onClick={this.handleIcon}>更换icon</Button>
         </div>
       </Container>
@@ -110,4 +114,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default GeolocationExample;
