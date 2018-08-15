@@ -22,3 +22,5 @@ yarn-error.log*
 /docs/publish.sh
 /docs/.vuepress/dist
 .vscode
+
+/examples/node_modules
