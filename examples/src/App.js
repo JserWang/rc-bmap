@@ -26,7 +26,7 @@ const App = () => (
             >
               {
                 item.children.map((child, idx) => (
-                  <Menu.Item key={idx}>
+                  <Menu.Item key={`${index}_${idx}`}>
                     <Link to={child.path}>
                       {child.text}
                     </Link>

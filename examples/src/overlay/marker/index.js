@@ -6,100 +6,100 @@ import {
 import Container from 'components/Container';
 import Code from './index.md';
 
-class App extends React.Component {
+class MarkerExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       markerPoint: { lng: 116.404, lat: 39.915 },
       offset: { width: 10, height: 10 },
-      icon: {
-        url: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif',
-        size: {
-          width: 300,
-          height: 157,
-        },
-        opts: {
-          imageOffset: { width: 10, height: 10 },
-        },
-      },
+      icon: null,
       dragging: false,
       title: 'This is title',
       clicking: true,
       raiseOnDrag: false,
       draggingCursor: '',
-      shadow: {
-        url: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif',
-        size: {
-          width: 600,
-          height: 314,
-        },
-        opts: {
-          imageOffset: { width: 100, height: 100 },
-        },
-      },
+      shadow: null,
       contextMenu: {
         items: [{
-          text: '你好', // 设置菜单项显示的文本
-          callback() { console.log(666); }, // 菜单项被点击回调函数
-          separator: true, // 是否显示分隔线
-          width: 100, // 指定此菜单项的宽度
-          iconUrl: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif', // 指定此菜单项的icon URL（大小为17px*17px)
-          disabled: false, // 是否禁用
+          text: '你好',
+          callback() { console.log(666); },
+          separator: true,
+          width: 100,
+          disabled: false,
         }],
       },
       rotation: 0,
       massClear: false,
     };
+
+    this.icon = {
+      url: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif',
+      size: {
+        width: 300,
+        height: 157,
+      },
+      opts: {
+        imageOffset: { width: 10, height: 10 },
+      },
+    };
+
+    this.shadow = {
+      url: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif',
+      size: {
+        width: 600,
+        height: 314,
+      },
+      opts: {
+        imageOffset: { width: 200, height: 100 },
+      },
+    };
   }
 
   handleMarkerPoint = () => {
+    const { markerPoint } = this.state;
     this.setState({
       markerPoint: {
-        lng: 116.400,
-        lat: 39.915,
+        lng: markerPoint.lng + 0.001,
+        lat: markerPoint.lat + 0.001,
       },
     });
   }
 
   handleOffset = () => {
+    const { offset } = this.state;
     this.setState({
       offset: {
-        width: 100,
-        height: 100,
+        width: offset.width + 10,
+        height: offset.height + 10,
       },
     });
   }
 
   handleIcon = () => {
+    const { icon } = this.state;
     this.setState({
-      icon: {
-        url: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif',
-        size: {
-          width: 600,
-          height: 314,
-        },
-        opts: {
-          imageOffset: { width: 100, height: 100 },
-        },
-      },
+      icon: icon ? null : this.icon,
     });
   }
 
   handleDragging = () => {
+    const { dragging } = this.state;
     this.setState({
-      dragging: true,
+      dragging: !dragging,
     });
   }
 
   handleTitle = () => {
+    const { title } = this.state;
     this.setState({
-      title: '这是你的标注哦',
+      title: title ? '新title' : 'title',
     });
   }
 
   handleRaiseOnDrag = () => {
+    const { raiseOnDrag } = this.state;
     this.setState({
-      raiseOnDrag: true,
+      raiseOnDrag: !raiseOnDrag,
     });
   }
 
@@ -110,17 +110,9 @@ class App extends React.Component {
   }
 
   handleShadow = () => {
+    const { shadow } = this.state;
     this.setState({
-      shadow: {
-        url: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif',
-        size: {
-          width: 600,
-          height: 314,
-        },
-        opts: {
-          imageOffset: { width: 200, height: 100 },
-        },
-      },
+      shadow: shadow ? null : this.shadow,
     });
   }
 
@@ -128,38 +120,39 @@ class App extends React.Component {
     this.setState({
       contextMenu: {
         items: [{
-          text: '大家好', // 设置菜单项显示的文本
-          callback() { console.log(888); }, // 菜单项被点击回调函数
-          separator: false, // 是否显示分隔线
-          width: 100, // 指定此菜单项的宽度
-          iconUrl: 'http://lbsyun.baidu.com/jsdemo/img/fox.gif', // 指定此菜单项的icon URL（大小为17px*17px)
-          disabled: true, // 是否禁用
+          text: '大家好',
+          callback() { console.log(888); },
+          separator: false,
+          width: 100,
+          disabled: true,
         }],
       },
     });
   }
 
   handleRotation = () => {
+    const { rotation } = this.state;
     this.setState({
-      rotation: 90,
+      rotation: rotation + 10,
     });
   }
 
   handleMassClear = () => {
+    const { massClear } = this.state;
     this.setState({
-      massClear: true, // 改为true之后再点击clearMarker则覆盖物会被清除
+      massClear: !massClear,
     });
   }
 
   handleClicking = () => {
     const { clicking } = this.state;
     this.setState({
-      clicking: !clicking, // 为true则右键菜单有反应，false无反应
+      clicking: !clicking,
     });
   }
 
-  clearMarker = () => {
-    window.bMapInstance.clearOverlays(); // 触发之后若massClear是true则会清除该覆盖物
+  handleClear = () => {
+    window.bMapInstance.clearOverlays();
   }
 
   render() {
@@ -190,26 +183,35 @@ class App extends React.Component {
               massClear={massClear}
             />
           </Map>
-
         </div>
-
         <Button onClick={this.handleMarkerPoint}>改变markerPoint</Button>
         <Button onClick={this.handleOffset}>改变offset</Button>
-        <Button onClick={this.handleIcon}>改变icon</Button>
-        <Button onClick={this.handleDragging}>改变dragging</Button>
+        <Button onClick={this.handleIcon}>
+          { icon ? '取消设置icon' : '设置icon' }
+        </Button>
+        <Button onClick={this.handleDragging}>
+          { dragging ? '禁用拖拽' : '启用拖拽' }
+        </Button>
         <Button onClick={this.handleTitle}>改变title</Button>
-        <Button onClick={this.handleRaiseOnDrag}>改变raiseOnDrag</Button>
+        <Button onClick={this.handleRaiseOnDrag}>
+          { raiseOnDrag ? '禁用离开地面效果' : '启用离开地面效果' }
+        </Button>
         <Button onClick={this.handleDraggingCursor}>改变draggingCursor</Button>
-        <Button onClick={this.handleShadow}>改变shadow</Button>
+        <Button onClick={this.handleShadow}>
+          { shadow ? '取消设置shadow' : '设置shadow' }
+        </Button>
         <Button onClick={this.handleContextMenu}>改变contextMenu</Button>
         <Button onClick={this.handleRotation}>改变rotation</Button>
-        <Button onClick={this.handleClicking}>改变clicking</Button>
-        <Button onClick={this.handleMassClear}>改变massClear</Button>
-        <Button onClick={this.clearMarker}>清除marker</Button>
-
+        <Button onClick={this.handleClicking}>
+          {clicking ? '禁用点击事件' : '响应点击事件'}
+        </Button>
+        <Button onClick={this.handleMassClear}>
+          { massClear ? 'clearOverlay时不移除此对象' : 'clearOverlay时移除此对象' }
+        </Button>
+        <Button onClick={this.handleClear}>clearOverlay</Button>
       </Container>
     );
   }
 }
 
-export default App;
+export default MarkerExample;

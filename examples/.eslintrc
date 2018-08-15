@@ -1,4 +1,4 @@
-module.exports = {
+{
   "extends": "airbnb",
   "parser": "babel-eslint",
   "plugins":[
@@ -12,5 +12,7 @@ module.exports = {
     "react/prop-types": 0,
     "react/no-array-index-key": "off",
     "import/no-unresolved": "off",
+    "no-multiple-empty-lines": ["error", {"max": 1} ],
+    "indent": ["error", 2]
   }
-};
+}
