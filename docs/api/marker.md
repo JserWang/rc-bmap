@@ -77,3 +77,19 @@
 - 类型：`Object`
 - 默认值：`undefined`
 - 描述：为[绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference.html#a3b2)
+
+|事件	|参数	|描述|
+|----|-----|-----|
+|click|	event{type, target}|	点击标注图标后会触发此事件|
+|dblclick|	event{type, target, point,pixel}|	双击标注图标后会触发此事件|
+|mousedown	|event{type, target, point,pixel}	|鼠标在标注图上按下触发此事件|
+|mouseup	|event{type, target, point,pixel}|	鼠标在标注图上释放触发此事件|
+|mouseout	|event{type, target, point,pixel}|	鼠标离开标注时触发此事件|
+|mouseover	|event{type, target, point,pixel}|	当鼠标进入标注图标区域时会触发此事件|
+|remove|	event{type, target}	|移除标注时触发|
+|infowindowclose	|event{type, target}|	信息窗在此标注上关闭时触发此事件|
+|infowindowopen|	event{type, target}	|信息窗在此标注上打开时触发此事件|
+|dragstart	|event{type, target}|	开始拖拽标注时触发此事件|
+|dragging|	event{type, target, pixel, point}	|拖拽标注过程中触发此事件|
+|dragend|	event{type, target, pixel, point}	|拖拽结束时触发此事件|
+|rightclick	|event{type, target}	|右键点击标注时触发此事件|
