@@ -68,7 +68,6 @@ export default class Map extends React.Component {
 
   constructor(props) {
     super(props);
-    this.defaultCenter = { lng: 116.404, lat: 39.915 };
     // React 16
     if (React.createRef) {
       this.mapContainerRef = React.createRef();
@@ -105,6 +104,7 @@ export default class Map extends React.Component {
     const {
       highResolution, autoResize, mapClick, mapMounted, contextMenu, events, ...resetProps
     } = this.props;
+    this.defaultCenter = getPoint(116.404, 39.915);
     this.mapContainer = this.mapContainer || this.mapContainerRef.current;
     const map = new BMap.Map(this.mapContainer, {
       enableHighResolution: highResolution,
@@ -113,8 +113,8 @@ export default class Map extends React.Component {
     });
 
     this.map = map;
-    // 当初始化center为string时，保证地图正常渲染，用默认center处理centerAndZoom
-    if (typeof resetProps.center === 'string') {
+    // 当初始化center为null或string时，保证地图正常渲染，用默认center处理centerAndZoom
+    if (!resetProps.center || typeof resetProps.center === 'string') {
       map.centerAndZoom(this.defaultCenter, resetProps.zoom);
     }
     this.processContextMenu(contextMenu);
