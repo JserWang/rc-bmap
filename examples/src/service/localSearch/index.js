@@ -4,6 +4,7 @@ import {
   getMapBounds,
   LocalSearch,
 } from 'rc-bmap';
+import { Button } from 'antd';
 import Container from 'components/Container';
 import Local from './index.md';
 
@@ -45,6 +46,21 @@ class App extends React.Component {
     console.log(result);
   }
 
+  handleCenter = () => {
+    this.setState({
+      center: {
+        lng: 120.21937549,
+        lat: 30.25924440,
+      },
+    });
+  };
+
+  handlePageCapacity = () => {
+    this.setState({
+      pageCapacity: 20,
+    });
+  }
+
   render() {
     const { center, pageCapacity } = this.state;
     return (
@@ -63,10 +79,12 @@ class App extends React.Component {
               onInfoHtmlSet={this.onInfoHtmlSet}// 标注气泡创建后的回调函数
               onResultsHtmlSet={this.onResultsHtmlSet}// 结构列表添加完成后的回调函数
               onSearchComplete={this.onSearchComplete}// 检索完成后回调函数
-              onMarkersSet={this.onMarkersSet}
+              onMarkersSet={this.onMarkersSet} // 标注添加完成后的回调函数
             />
           </Map>
         </div>
+        <Button onClick={this.handleCenter}>改变设初始化地图中心点</Button>
+        <Button onClick={this.handlePageCapacity}>设置每页容量</Button>
       </Container>
     );
   }
