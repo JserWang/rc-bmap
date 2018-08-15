@@ -78,6 +78,13 @@
 - 默认值：`undefined`
 - 描述：[绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a7b54)
 
-| 方法                                  | 返回值 | 描述                                                                                                                                                                                                                                                                                                                       |
-| ------------------------------------- | ------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| get(name: String, callback: function) | null   | 返回行政区域的边界。 name: 查询省、直辖市、地级市、或县的名称。 callback:执行查询后，数据返回到客户端的回调函数，数据以回调函数的参数形式返回。返回结果是一个数组，数据格式如下： arr[0] = "x1, y1; x2, y2; x3, y3; ..." arr[1] = "x1, y1; x2, y2; x3, y3; ..." arr[2] = "x1, y1; x2, y2; ..." … 否则回调函数的参数为 null |
+| 事件       | 参数                              | 描述                               |
+| ---------- | --------------------------------- | ---------------------------------- |
+| click      | event{type, target, point, pixel} | 点击多边形后会触发此事件           |
+| dblclick   | event{type, target, point, pixel} | 双击多边形后会触发此事件           |
+| mousedown  | event{type, target, point, pixel} | 鼠标在多边形上按下触发此事件       |
+| mouseup    | event{type, target, point, pixel} | 鼠标在多边形释放触发此事件         |
+| mouseout   | event{type, target, point, pixel} | 鼠标离开多边形时触发此事件         |
+| mouseover  | event{type, target, point, pixel} | 当鼠标进入多边形区域时会触发此事件 |
+| remove     | event{type, target}               | 移除多边形时触发                   |
+| lineupdate | event{type, target}               | 覆盖物的属性发生变化时触发         |
