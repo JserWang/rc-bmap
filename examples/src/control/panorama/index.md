@@ -5,10 +5,9 @@ import {
   ControlAnchor,
   Panorama,
 } from 'rc-bmap';
-import Container from 'components/Container';
-import Pano from './index.md';
+import { getRandomControlAnchor } from 'utils';
 
-class App extends React.Component {
+class PanoramaExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,15 +21,16 @@ class App extends React.Component {
 
   handleAnchor = () => {
     this.setState({
-      anchor: ControlAnchor.TOP_LEFT,
+      anchor: ControlAnchor[getRandomControlAnchor()],
     });
   }
 
   handleOffset = () => {
+    const { offset } = this.state;
     this.setState({
       offset: {
-        width: 10,
-        height: 10,
+        width: offset.width + 3,
+        height: offset.height + 3,
       },
     });
   }
@@ -38,7 +38,7 @@ class App extends React.Component {
   render() {
     const { offset, anchor } = this.state;
     return (
-      <Container code={Pano}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -50,11 +50,11 @@ class App extends React.Component {
             />
           </Map>
           <Button onClick={this.handleOffset}>改变offset</Button>
-          <Button onClick={this.handleAnchor}>改变停靠位置</Button>
+          <Button onClick={this.handleAnchor}>随机改变停靠位置</Button>
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }
 
-export default App;
+export default PanoramaExample;

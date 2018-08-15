@@ -4,7 +4,7 @@ import {
 } from 'rc-bmap';
 import { Button } from 'antd';
 import Container from 'components/Container';
-import { getRandomColor } from 'utils';
+import { getRandomColor, getRandomShape } from 'utils';
 import index from './index.md';
 
 class PointCollectionExample extends Component {
@@ -76,9 +76,9 @@ class PointCollectionExample extends Component {
   }
 
   handleShape = () => {
-    const { shape } = this.state;
+    const randomShape = getRandomShape();
     this.setState({
-      shape: shape === ShapeType.CIRCLE ? ShapeType.STAR : ShapeType.CIRCLE,
+      shape: ShapeType[randomShape],
     });
   }
 

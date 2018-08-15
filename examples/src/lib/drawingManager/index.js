@@ -6,6 +6,7 @@ import {
   DrawingManager,
   DrawingMode,
 } from 'rc-bmap';
+import { getRandomControlAnchor, getRandomColor } from 'utils';
 import Container from 'components/Container';
 import Drawing from './index.md';
 
@@ -27,27 +28,31 @@ class App extends React.Component {
         circlecomplete(e, overlay) {
           console.log(overlay);
         },
-        circleOptions: {
-          strokeColor: 'red', // 边线颜色。
-          fillColor: 'red', // 填充颜色。当参数为空时，圆形将没有填充效果。
-          strokeWeight: 3, // 边线的宽度，以像素为单位。
-          strokeOpacity: 0.8, // 边线透明度，取值范围0 - 1。
-          fillOpacity: 0.6, // 填充的透明度，取值范围0 - 1。
-          strokeStyle: 'solid', // 边线的样式，solid或dashed。
-        },
+      },
+      circleOptions: {
+        strokeColor: 'red', // 边线颜色。
+        fillColor: 'red', // 填充颜色。当参数为空时，圆形将没有填充效果。
+        strokeWeight: 3, // 边线的宽度，以像素为单位。
+        strokeOpacity: 0.8, // 边线透明度，取值范围0 - 1。
+        fillOpacity: 0.6, // 填充的透明度，取值范围0 - 1。
+        strokeStyle: 'solid', // 边线的样式，solid或dashed。
       },
     };
   }
 
   handleAchor = () => {
     this.setState({
-      anchor: ControlAnchor.BOTTOM_LEFT,
+      anchor: ControlAnchor[getRandomControlAnchor()],
     });
   }
 
   handleOffset = () => {
+    const { offset } = this.state;
     this.setState({
-      offset: { width: 100, height: 100 },
+      offset: {
+        width: offset.width + 10,
+        height: offset.height + 10,
+      },
     });
   }
 
@@ -61,14 +66,15 @@ class App extends React.Component {
   }
 
   handleCircle = () => {
+    const { circleOptions } = this.state;
     this.setState({
       circleOptions: {
-        strokeColor: 'green', // 边线颜色。
-        fillColor: 'yellow', // 填充颜色。当参数为空时，圆形将没有填充效果。
+        strokeColor: getRandomColor(), // 边线颜色。
+        fillColor: getRandomColor(), // 填充颜色。当参数为空时，圆形将没有填充效果。
         strokeWeight: 1, // 边线的宽度，以像素为单位。
         strokeOpacity: 0.9, // 边线透明度，取值范围0 - 1。
         fillOpacity: 0.5, // 填充的透明度，取值范围0 - 1。
-        strokeStyle: 'dashed', // 边线的样式，solid或dashed。
+        strokeStyle: circleOptions.strokeStyle === 'dashed' ? 'solid' : 'dashed', // 边线的样式，solid或dashed。
       },
     });
   }
@@ -92,10 +98,10 @@ class App extends React.Component {
               circleOptions={circleOptions}
             />
           </Map>
-          <Button onClick={this.handleAchor}>改变停靠位置</Button>
-          <Button onClick={this.handleOffset}>改变偏移位置</Button>
+          <Button onClick={this.handleAchor}>随机改变停靠位置</Button>
+          <Button onClick={this.handleOffset}>调整偏移位置</Button>
           <Button onClick={this.handleModes}>改变画图类型</Button>
-          <Button onClick={this.handleCircle}>改变圆形</Button>
+          <Button onClick={this.handleCircle}>改变圆形的参数</Button>
         </div>
       </Container>
     );
