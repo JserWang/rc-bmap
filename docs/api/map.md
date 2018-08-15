@@ -149,6 +149,43 @@
 - 默认值：`undefined`
 - 描述：为地图[绑定事件](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a0b0)
 
+|事件|	参数|	描述|
+|----|----|----|
+|click|	{type, target, point, pixel, overlay}	|左键单击地图时触发此事件。 当双击时，产生的事件序列为： click click dblclick|
+|dblclick|	{type, target, pixel, point}|	鼠标双击地图时会触发此事件|
+|rightclick|	{type, target, point, pixel, overlay}|	右键单击地图时触发此事件。 当双击时，产生的事件序列为： rightclick rightclick rightdblclick|
+|rightdblclick|	{type, target, point, pixel, overlay}	|右键双击地图时触发此事件|
+|maptypechange	|{type, target}	|地图类型发生变化时触发此事件|
+|mousemove|	{type, target, point, pixel, overlay}	|鼠标在地图区域移动过程中触发此事件|
+|mouseover|	{type, target}	|鼠标移入地图区域时触发此事件|
+|mouseout	|{type, target}|	鼠标移出地图区域时触发此事件|
+|movestart|	{type, target}	|地图移动开始时触发此事件|
+|moving	|{type, target}	|地图移动过程中触发此事件|
+|moveend|	{type, target}|	地图移动结束时触发此事件|
+|zoomstart	|{type, target}	|地图更改缩放级别开始时触发触发此事件|
+|zoomend	|{type, target}	|地图更改缩放级别结束时触发触发此事件|
+|addoverlay|	{type, target}	|当使用Map.addOverlay()方法向地图中添加单个覆盖物时会触发此事件|
+|addcontrol|	{type, target}|	当使用Map.addControl()方法向地图中添加单个控件时会触发此事件|
+|removecontrol|	{type, target}|	当使用Map.removeControl()方法移除单个控件时会触发此事件|
+|removeoverlay|	{type, target}	|当使用Map.removeOverlay()方法移除单个覆盖物时会触发此事件|
+|clearoverlays|	{type, target}	|当使用Map.clearOverlays()方法一次性移除全部覆盖物时会触发此事件|
+|dragstart|	{type, target, pixel, point}|	开始拖拽地图时触发|
+|dragging	|{type, target, pixel, point}	|拖拽地图过程中触发|
+|dragend	|{type, target, pixel, point}|	停止拖拽地图时触发|
+|addtilelayer|	{type, target}|	添加一个自定义地图图层时触发此事件|
+|removetilelayer|	{type, target}|	移除一个自定义地图图层时触发此事件|
+|load|	{type, target, pixel, point, zoom}	|调用Map.centerAndZoom()方法时会触发此事件。这表示位置、缩放层级已经确定，但可能还在载入地图图块|
+|resize	|{type, target, size}	|地图可视区域大小发生变化时会触发此事件|
+|hotspotclick|{type, target, spots}	|点击热区时触发此事件|
+|hotspotover|	{type, target, spots}|	鼠标移至热区时触发此事件|
+|hotspotout|	{type, target, spots}	|鼠标移出热区时触发此事件|
+|tilesloaded|	{type, target}|	当地图所有图块完成加载时触发此事件|
+|touchstart|	{type, target, point,pixel}	|触摸开始时触发此事件，仅适用移动设备|
+|touchmove|	{type, target, point,pixel}|	触摸移动时触发此事件，仅适用移动设备|
+|touchend|	{type, target, point,pixel}|	触摸结束时触发此事件，仅适用移动设备|
+|longpress|	{type, target, point,pixel}|	长按事件，仅适用移动设备|
+
+
 ## contextMenu
 
 - 类型：[ContextMenu](/api/#contextmenu)
