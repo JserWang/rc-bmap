@@ -5,6 +5,7 @@ import {
   ControlAnchor,
   CityList,
 } from 'rc-bmap';
+import { getRandomControlAnchor } from 'utils';
 import Container from 'components/Container';
 import City from './index.md';
 
@@ -22,15 +23,16 @@ class App extends React.Component {
 
   handleAnchor = () => {
     this.setState({
-      anchor: ControlAnchor.TOP_LEFT,
+      anchor: ControlAnchor[getRandomControlAnchor()],
     });
   }
 
   handleOffset = () => {
+    const { offset } = this.state;
     this.setState({
       offset: {
-        width: 10,
-        height: 10,
+        width: offset.width + 3,
+        height: offset.height + 3,
       },
     });
   }
@@ -60,7 +62,7 @@ class App extends React.Component {
             />
           </Map>
           <Button onClick={this.handleOffset}>改变offset</Button>
-          <Button onClick={this.handleAnchor}>改变停靠位置</Button>
+          <Button onClick={this.handleAnchor}>随机改变停靠位置</Button>
         </div>
       </Container>
     );

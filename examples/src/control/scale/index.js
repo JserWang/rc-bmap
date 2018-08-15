@@ -7,6 +7,8 @@ import {
   LengthUnit,
 } from 'rc-bmap';
 import Container from 'components/Container';
+import { getRandomControlAnchor } from 'utils';
+
 import Sc from './index.md';
 
 class App extends React.Component {
@@ -14,8 +16,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       offset: {
-        width: 0,
-        height: 0,
+        width: 10,
+        height: 10,
       },
       anchor: ControlAnchor.TOP_RIGHT,
       unit: LengthUnit.METRIC,
@@ -24,25 +26,26 @@ class App extends React.Component {
 
   handleAnchor = () => {
     this.setState({
-      anchor: ControlAnchor.TOP_LEFT,
+      anchor: ControlAnchor[getRandomControlAnchor()],
     });
   }
 
   handleOffset = () => {
+    const { offset } = this.state;
     this.setState({
       offset: {
-        width: 10,
-        height: 10,
+        width: offset.width + 3,
+        height: offset.height + 3,
       },
     });
   }
 
   handleUnit = () => {
+    const { unit } = this.state;
     this.setState({
-      unit: LengthUnit.IMPERIAL,
+      unit: unit === LengthUnit.IMPERIAL ? LengthUnit.METRIC : LengthUnit.IMPERIAL,
     });
   }
-
 
   render() {
     const { offset, anchor, unit } = this.state;
@@ -60,8 +63,8 @@ class App extends React.Component {
             />
           </Map>
           <Button onClick={this.handleOffset}>改变offset</Button>
-          <Button onClick={this.handleAnchor}>改变停靠位置</Button>
-          <Button onClick={this.handleUnit}>改变单位</Button>
+          <Button onClick={this.handleAnchor}>随机改变停靠位置</Button>
+          <Button onClick={this.handleUnit}>{unit === LengthUnit.METRIC ? '使用英制单位' : '使用公制单位'}</Button>
         </div>
       </Container>
     );

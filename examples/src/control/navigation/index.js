@@ -6,6 +6,7 @@ import {
   Navigation,
   NavigationType,
 } from 'rc-bmap';
+import { getRandomControlAnchor, getRandomNavigationType } from 'utils';
 import Container from 'components/Container';
 import Nav from './index.md';
 
@@ -26,34 +27,37 @@ class App extends React.Component {
 
   handleAnchor = () => {
     this.setState({
-      anchor: ControlAnchor.BOTTOM_LEFT,
+      anchor: ControlAnchor[getRandomControlAnchor()],
     });
   }
 
   handleOffset = () => {
+    const { offset } = this.state;
     this.setState({
       offset: {
-        width: 10,
-        height: 10,
+        width: offset.width + 3,
+        height: offset.height + 3,
       },
     });
   }
 
   handleType = () => {
     this.setState({
-      type: NavigationType.PAN,
+      type: NavigationType[getRandomNavigationType()],
     });
   }
 
   hideZoom = () => {
+    const { showZoomInfo } = this.state;
     this.setState({
-      showZoomInfo: false,
+      showZoomInfo: !showZoomInfo,
     });
   }
 
   geolocation = () => {
+    const { geolocation } = this.state;
     this.setState({
-      geolocation: true,
+      geolocation: !geolocation,
     });
   }
 
@@ -77,10 +81,10 @@ class App extends React.Component {
             />
           </Map>
           <Button onClick={this.handleOffset}>改变offset</Button>
-          <Button onClick={this.handleAnchor}>改变停靠位置</Button>
-          <Button onClick={this.handleType}>改变控件类型</Button>
-          <Button onClick={this.hideZoom}>隐藏级别提示信息</Button>
-          <Button onClick={this.geolocation}>集成定位功能</Button>
+          <Button onClick={this.handleAnchor}>随机改变停靠位置</Button>
+          <Button onClick={this.handleType}>随机改变控件类型</Button>
+          <Button onClick={this.hideZoom}>{showZoomInfo ? '隐藏级别提示信息' : '显示级别提示信息'}</Button>
+          <Button onClick={this.geolocation}>{geolocation ? '不集成定位功能' : '集成定位功能'}</Button>
         </div>
       </Container>
     );
