@@ -4,6 +4,7 @@ import {
   getMapBounds,
   LocalSearch,
 } from 'rc-bmap';
+import { Button } from 'antd';
 import Container from 'components/Container';
 import Local from './index.md';
 
@@ -45,6 +46,21 @@ class App extends React.Component {
     console.log(result);
   }
 
+  handleCenter = () => {
+    this.setState({
+      center: {
+        lng: 120.21937549,
+        lat: 30.25924440,
+      },
+    });
+  };
+
+  handlePageCapacity = () => {
+    this.setState({
+      pageCapacity: 20,
+    });
+  }
+
   render() {
     const { center, pageCapacity } = this.state;
     return (
@@ -53,65 +69,7 @@ class App extends React.Component {
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
             scrollWheelZoom
-   import React from 'react';
-import {
-  Map,
-  DrivingPolicy,
-  getPoiByKeyword,
-  TransitRoute,
-} from 'rc-bmap';
-import Container from 'components/Container';
-import Transit from './index.md';
-
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      route: '',
-      policy: DrivingPolicy.NORMAL,
-      // intercityPolicy: IntercityPolicy.NORMAL,
-      // transitTypePolicy: TransitTypePolicy.NORMAL,
-    };
-  }
-
-  getRoute = (instance) => {
-    this.state.route = instance;
-  };
-
-  mapMounted = () => {
-    const { route } = this.state;
-    Promise.all(
-      [getPoiByKeyword('百度大厦'), getPoiByKeyword('北京邮电大学西门')],
-    ).then((res) => {
-      route.search(res[0], res[1]);
-    });
-  };
-
-  render() {
-    const { policy } = this.state;
-    return (
-      <Container code={Transit}>
-        <div style={{ height: '90vh' }}>
-          <Map
-            ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
-            scrollWheelZoom
             mapMounted={this.mapMounted}
-          >
-            <TransitRoute
-              getInstance={this.getRoute}
-              showInMap
-              policy={policy}
-            />
-          </Map>
-        </div>
-      </Container>
-    );
-  }
-}
-
-
-export default App;
-         mapMounted={this.mapMounted}
             center={center}
           >
             <LocalSearch
@@ -121,10 +79,12 @@ export default App;
               onInfoHtmlSet={this.onInfoHtmlSet}// 标注气泡创建后的回调函数
               onResultsHtmlSet={this.onResultsHtmlSet}// 结构列表添加完成后的回调函数
               onSearchComplete={this.onSearchComplete}// 检索完成后回调函数
-              onMarkersSet={this.onMarkersSet}
+              onMarkersSet={this.onMarkersSet} // 标注添加完成后的回调函数
             />
           </Map>
         </div>
+        <Button onClick={this.handleCenter}>改变设初始化地图中心点</Button>
+        <Button onClick={this.handlePageCapacity}>设置每页容量</Button>
       </Container>
     );
   }

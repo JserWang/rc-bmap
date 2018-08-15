@@ -16,10 +16,12 @@ class App extends React.Component {
 
   getRoute = (instance) => {
     this.state.route = instance;
+    console.log(instance);
   };
 
   mapMounted = () => {
-    this.state.route.getBusList(338);
+    const { route } = this.state;
+    route.getBusList(338);
   };
 
   onGetBusListComplete = (result) => {
@@ -74,7 +76,7 @@ class App extends React.Component {
               onBusListHtmlSet={this.onBusListHtmlSet}// 列表渲染后回调函数
               onBusLineHtmlSet={this.onBusLineHtmlSet}// 线路渲染后
               onPolylinesSet={this.onPolylinesSet}// 添加公交线时
-              onMarkersSet={this.onMarkersSet}
+              onMarkersSet={this.onMarkersSet} // 标注添加完成后的回调函数
             />
           </Map>
         </div>
