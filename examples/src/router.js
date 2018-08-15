@@ -49,19 +49,19 @@ const route = () => (
     <Route path="/mapTypeCtrl" component={MapTypeCtrl} />
     <Route path="/panorama" component={Panorama} />
     <Route path="/cityList" component={CityList} />
-    <Route path="/TransitRoute" component={TransitRoute} />
-    <Route path="/DrivingRoute" component={DrivingRoute} />
-    <Route path="/RidingRoute" component={RidingRoute} />
-    <Route path="/WalkingRoute" component={WalkingRoute} />
-    <Route path="/LocalSearch" component={LocalSearch} />
-    <Route path="/BusLineSearch" component={BusLineSearch} />
-    <Route path="/MarkerClusterer" component={MarkerClusterer} />
-    <Route path="/CurveLine" component={CurveLine} />
-    <Route path="/DrawingManager" component={DrawingManager} />
-    <Route path="/Heatmap" component={Heatmap} />
-    <Route path="/TrafficControl" component={TrafficControl} />
-    <Route path="/DistanceTool" component={DistanceTool} />
-    <Route path="/Tile" component={Tile} />
+    <Route path="/transitRoute" component={TransitRoute} />
+    <Route path="/drivingRoute" component={DrivingRoute} />
+    <Route path="/ridingRoute" component={RidingRoute} />
+    <Route path="/walkingRoute" component={WalkingRoute} />
+    <Route path="/localSearch" component={LocalSearch} />
+    <Route path="/busLineSearch" component={BusLineSearch} />
+    <Route path="/markerClusterer" component={MarkerClusterer} />
+    <Route path="/curveLine" component={CurveLine} />
+    <Route path="/drawingManager" component={DrawingManager} />
+    <Route path="/heatmap" component={Heatmap} />
+    <Route path="/trafficControl" component={TrafficControl} />
+    <Route path="/distanceTool" component={DistanceTool} />
+    <Route path="/tile" component={Tile} />
     <Route path="/boundary" component={Boundary} />
     <Route path="/symbol" component={Symbol} />
     <Route path="/pointcollection" component={Pointcollection} />
