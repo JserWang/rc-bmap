@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button } from 'antd';
-import {
-  Map, Label,
-} from 'rc-bmap';
+import { Map, Label } from 'rc-bmap';
 import { getRandomColor } from 'utils';
 
-class LabelExample extends React.Component {
+class LabelExample extends Component {
   constructor(props) {
     super(props);
     this.state = {

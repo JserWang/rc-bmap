@@ -1,82 +1,99 @@
 import React, { Component } from 'react';
-import { Map, Ground } from 'rc-bmap';
 import { Button } from 'antd';
+import { Map, Ground } from 'rc-bmap';
 import Container from 'components/Container';
-import ground from './index.md';
+import index from './index.md';
 
-class App extends Component {
+class GroundExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
       bounds: {
         sw: {
-          lng: 116.29579,
-          lat: 39.837146,
+          lng: 116.295,
+          lat: 39.837,
         },
         ne: {
-          lng: 116.475451,
-          lat: 39.9764,
+          lng: 116.475,
+          lat: 39.976,
         },
       },
-      imageURL: '',
+      imageURL: 'http://lbsyun.baidu.com/jsdemo/img/si-huan.png',
       opacity: 1,
       maxZoom: 14,
       minZoom: 10,
       events: {
-        click() {
-          alert('这是一个事件');
-        },
+        click: this.handleClick,
       },
     };
   }
 
-  handleBounds=() => {
+  handleClick = () => {
+    console.log('Circle click');
+  }
+
+  onChangedClick = () => {
+    console.log('onChanged Circle click');
+  }
+
+  handleBounds = () => {
+    const { bounds } = this.state;
     this.setState({
       bounds: {
         sw: {
-          lng: 116.29579,
-          lat: 39.837146,
+          lng: bounds.sw.lng + 0.01,
+          lat: bounds.sw.lat + 0.01,
         },
         ne: {
-          lng: 116.475451,
-          lat: 39.9764,
+          lng: bounds.ne.lng + 0.01,
+          lat: bounds.ne.lat + 0.01,
         },
       },
     });
   }
 
-  handleOpacity=() => {
+  handleOpacity = () => {
+    let { opacity } = this.state;
+    if (opacity >= 0.9) {
+      opacity = 0.1;
+    }
     this.setState({
-      opacity: 0.1,
+      opacity: opacity + 0.1,
     });
   }
 
-  handleMaxZoom=() => {
+  handleMaxZoom = () => {
+    const { maxZoom } = this.state;
+    console.log(maxZoom);
     this.setState({
-      maxZoom: 19,
+      maxZoom: maxZoom + 1,
     });
   }
 
-  handleMinZoom=() => {
+  handleMinZoom = () => {
+    let { minZoom } = this.state;
+    const { maxZoom } = this.state;
+    if (minZoom + 1 >= maxZoom) {
+      minZoom = 0;
+    }
+    console.log(minZoom);
     this.setState({
-      minZoom: 2,
+      minZoom: minZoom + 1,
     });
   }
 
-  handleEvents=() => {
+  handleEvents = () => {
     this.setState({
       events: {
-        click() {
-          console.log('我点击了');
-        },
+        click: this.onChangedClick,
       },
-
     });
   }
 
-  handleImageURL=() => {
+  handleImageURL = () => {
+    const { imageURL } = this.state;
     this.setState({
-      imageURL: 'http://lbsyun.baidu.com/jsdemo/img/si-huan.png',
+      imageURL: imageURL ? '' : 'http://lbsyun.baidu.com/jsdemo/img/si-huan.png',
     });
   }
 
@@ -85,31 +102,30 @@ class App extends Component {
       bounds, opacity, maxZoom, minZoom, events, imageURL,
     } = this.state;
     return (
-      <Container code={ground}>
+      <Container code={index}>
         <div style={{ height: '90vh' }}>
           <Map
             ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv"
           >
             <Ground
-              bounds={bounds} // 设置图层显示的矩形区域
-              imageURL={imageURL} // 图层地址
-              opacity={opacity} // 图层透明度
-              maxZoom={maxZoom} // 图层显示的最大级别
-              minZoom={minZoom} // 图层显示的最小级别
+              bounds={bounds}
+              imageURL={imageURL}
+              opacity={opacity}
+              maxZoom={maxZoom}
+              minZoom={minZoom}
               events={events}
             />
           </Map>
         </div>
-        <Button className="butt" onClick={this.handleBounds}>设置图层显示的矩形区域</Button>
-        <Button className="butt" onClick={this.handleImageURL}> 图层地址</Button>
-        <Button className="butt" onClick={this.handleOpacity}>图层透明度</Button>
-        <Button className="butt" onClick={this.handleMaxZoom}>图层显示的最大级别</Button>
-        <Button className="butt" onClick={this.handleMinZoom}>图层显示的最小级别</Button>
-        <Button className="butt" onClick={this.handleEvents}>事件绑定</Button>
+        <Button onClick={this.handleBounds}>设置图层显示的矩形区域</Button>
+        <Button onClick={this.handleImageURL}>调整图层地址</Button>
+        <Button onClick={this.handleOpacity}>调整图层透明度</Button>
+        <Button onClick={this.handleMaxZoom}>调整图层显示的最大级别</Button>
+        <Button onClick={this.handleMinZoom}>调整图层显示的最小级别</Button>
+        <Button onClick={this.handleEvents}>改变绑定事件</Button>
       </Container>
-
     );
   }
 }
 
-export default App;
+export default GroundExample;

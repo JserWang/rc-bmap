@@ -1,13 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button } from 'antd';
-import {
-  Map, Label,
-} from 'rc-bmap';
+import { Map, Label } from 'rc-bmap';
 import Container from 'components/Container';
 import { getRandomColor } from 'utils';
-import Code from './index.md';
+import index from './index.md';
 
-class LabelExample extends React.Component {
+class LabelExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -100,7 +98,7 @@ class LabelExample extends React.Component {
       content, point, offset, massClear, title, events, zIndex, style,
     } = this.state;
     return (
-      <Container code={Code}>
+      <Container code={index}>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"

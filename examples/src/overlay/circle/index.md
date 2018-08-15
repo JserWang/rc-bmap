@@ -1,11 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button } from 'antd';
-import {
-  Map, Circle,
-} from 'rc-bmap';
+import { Map, Circle } from 'rc-bmap';
 import { getRandomColor } from 'utils';
 
-class CircleExample extends React.Component {
+class CircleExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -39,7 +37,7 @@ class CircleExample extends React.Component {
     this.setState({
       point: {
         lng: point.lng + 0.01,
-        lat: point.lat + 0.001,
+        lat: point.lat + 0.01,
       },
     });
   }
@@ -72,7 +70,7 @@ class CircleExample extends React.Component {
 
   handleStrokeOpacity = () => {
     let { strokeOpacity } = this.state;
-    if (strokeOpacity === 1) {
+    if (strokeOpacity >= 0.9) {
       strokeOpacity = 0.1;
     }
     this.setState({
@@ -82,7 +80,7 @@ class CircleExample extends React.Component {
 
   handleFillOpacity = () => {
     let { fillOpacity } = this.state;
-    if (fillOpacity === 1) {
+    if (fillOpacity >= 0.9) {
       fillOpacity = 0.1;
     }
     this.setState({
