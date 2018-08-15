@@ -39,7 +39,7 @@ class CircleExample extends React.Component {
     this.setState({
       point: {
         lng: point.lng + 0.01,
-        lat: 39.915,
+        lat: point.lat + 0.001,
       },
     });
   }
@@ -176,7 +176,7 @@ class CircleExample extends React.Component {
         <Button onClick={this.handleMassClear}>
           { massClear ? 'clearOverlay时不移除此对象' : 'clearOverlay时移除此对象' }
         </Button>
-        <Button onClick={this.handleClear}>清除覆盖物</Button>
+        <Button onClick={this.handleClear}>clearOverlay</Button>
       </React.Fragment>
     );
   }
