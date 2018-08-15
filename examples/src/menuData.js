@@ -100,27 +100,27 @@ export default [
     children: [
       {
         text: '公交线路规划',
-        path: '/TransitRoute',
+        path: '/transitRoute',
       },
       {
         text: '驾车路线规划',
-        path: '/DrivingRoute',
+        path: '/drivingRoute',
       },
       {
         text: '骑行路线规划',
-        path: '/RidingRoute',
+        path: '/ridingRoute',
       },
       {
         text: '步行路线规划',
-        path: '/WalkingRoute',
+        path: '/walkingRoute',
       },
       {
         text: '周边检索',
-        path: '/LocalSearch',
+        path: '/localSearch',
       },
       {
         text: '公交路线搜索',
-        path: '/BusLineSearch',
+        path: '/busLineSearch',
       },
     ],
   },
@@ -129,27 +129,27 @@ export default [
     children: [
       {
         text: '点聚合',
-        path: '/MarkerClusterer',
+        path: '/markerClusterer',
       },
       {
         text: '抛物线',
-        path: '/CurveLine',
+        path: '/curveLine',
       },
       {
         text: '绘制工具',
-        path: '/DrawingManager',
+        path: '/drawingManager',
       },
       {
         text: '热力图',
-        path: '/Heatmap',
+        path: '/heatmap',
       },
       {
         text: '路况控件',
-        path: '/TrafficControl',
+        path: '/trafficControl',
       },
       {
         text: '测距工具',
-        path: '/DistanceTool',
+        path: '/distanceTool',
       },
     ],
   },
@@ -158,7 +158,7 @@ export default [
     children: [
       {
         text: '自定义图层',
-        path: '/Tile',
+        path: '/tile',
       },
     ],
   },
