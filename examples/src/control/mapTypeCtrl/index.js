@@ -7,11 +7,15 @@ import {
   MapType,
   MapTypeControlType,
 } from 'rc-bmap';
-import { getRandomControlAnchor, getRandomMapType, getRandomMapTypeControlType } from 'utils';
+import {
+  getRandomControlAnchor,
+  getRandomMapType,
+  getRandomMapTypeControlType,
+} from 'utils';
 import Container from 'components/Container';
 import MTC from './index.md';
 
-class App extends React.Component {
+class MapTypeCtrlExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -81,4 +85,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default MapTypeCtrlExample;

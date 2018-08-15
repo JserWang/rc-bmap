@@ -11,7 +11,7 @@ import { getRandomControlAnchor } from 'utils';
 
 import Sc from './index.md';
 
-class App extends React.Component {
+class ScaleExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,11 +64,13 @@ class App extends React.Component {
           </Map>
           <Button onClick={this.handleOffset}>改变offset</Button>
           <Button onClick={this.handleAnchor}>随机改变停靠位置</Button>
-          <Button onClick={this.handleUnit}>{unit === LengthUnit.METRIC ? '使用英制单位' : '使用公制单位'}</Button>
+          <Button onClick={this.handleUnit}>
+            {unit === LengthUnit.METRIC ? '使用英制单位' : '使用公制单位'}
+          </Button>
         </div>
       </Container>
     );
   }
 }
 
-export default App;
+export default ScaleExample;
