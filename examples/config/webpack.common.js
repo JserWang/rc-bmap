@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const PUBLIC_PATH = process.env.NODE_ENV === 'production' ? './' : '../';
+
 module.exports = {
   entry: {
     main: './index.js',
@@ -10,6 +12,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].[contenthash:12].js',
+    publicPath: PUBLIC_PATH,
   },
   module: {
     rules: [

@@ -7,10 +7,11 @@ module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
+    contentBase: path.resolve(__dirname, '../src/'),
     compress: true,
     port: 9000,
     historyApiFallback: true,
+    publicPath: '//localhost:9000/',
   },
   plugins: [
     new MiniCssExtractPlugin({
