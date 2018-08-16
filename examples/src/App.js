@@ -11,7 +11,7 @@ const {
 const { SubMenu } = Menu;
 
 const App = () => (
-  <Router>
+  <Router basename="/examples">
     <Layout>
       <Sider style={{
         overflow: 'auto', height: '100vh', position: 'fixed', left: 0,
@@ -19,23 +19,23 @@ const App = () => (
       >
         <Menu theme="dark" mode="inline">
           {
-          menuData.map((item, index) => (
-            <SubMenu
-              title={item.text}
-              key={index}
-            >
-              {
-                item.children.map((child, idx) => (
-                  <Menu.Item key={`${index}_${idx}`}>
-                    <Link to={child.path}>
-                      {child.text}
-                    </Link>
-                  </Menu.Item>
-                ))
-              }
-            </SubMenu>
-          ))
-        }
+            menuData.map((item, index) => (
+              <SubMenu
+                title={item.text}
+                key={index}
+              >
+                {
+                  item.children.map((child, idx) => (
+                    <Menu.Item key={`${index}_${idx}`}>
+                      <Link to={child.path}>
+                        {child.text}
+                      </Link>
+                    </Menu.Item>
+                  ))
+                }
+              </SubMenu>
+            ))
+          }
         </Menu>
       </Sider>
       <Layout style={{ marginLeft: 200, overflow: 'hidden', height: '100vh' }}>

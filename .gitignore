@@ -24,3 +24,5 @@ yarn-error.log*
 .vscode
 
 /examples/node_modules
+/examples/dist
+/examples/publish.sh
