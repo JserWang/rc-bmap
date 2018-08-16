@@ -29,15 +29,25 @@ module.exports = merge(common, {
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
-        libs: {
+        libs: {// node_modules内的依赖库
           test: /[\\/]node_modules[\\/]/,
           name: 'chunk-libs',
-          priority: 10,
+          minChunks: 1, // 被不同entry引用次数(import),1次的话没必要提取
+          maxInitialRequests: 5,
+          minSize: 0,
+          priority: 100,
+          chunks: 'initial',
+          // enforce: true?
         },
-        hightlight: {
-          test: /[\\/]node_modules[\\/]highlight.js[\\/]/,
-          name: 'chunk-hightlight',
-          priority: 20,
+        antd: {
+          test: /[\\/]node_modules[\\/]antd[\\/]/,
+          name: 'chunk-antd',
+          priority: 110,
+        },
+        map: {
+          test: /[\\/]node_modules[\\/]rc-bmap[\\/]/,
+          name: 'chunk-map',
+          priority: 115,
         },
       },
     },
