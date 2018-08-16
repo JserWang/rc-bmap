@@ -3,8 +3,6 @@ import {
   Map,
   AutoComplete,
 } from 'rc-bmap';
-import Container from 'components/Container';
-import Ti from './index.md';
 
 class AutoCompleteExample extends React.Component {
   constructor(props) {
@@ -28,7 +26,7 @@ class AutoCompleteExample extends React.Component {
   render() {
     const { events } = this.state;
     return (
-      <Container code={Ti}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -42,7 +40,7 @@ class AutoCompleteExample extends React.Component {
           </Map>
           <input id="suggest" />
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }

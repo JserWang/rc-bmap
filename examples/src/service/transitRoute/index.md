@@ -7,10 +7,8 @@ import {
   TransitRoute,
 } from 'rc-bmap';
 import { Button } from 'antd';
-import Container from 'components/Container';
-import Transit from './index.md';
 
-class App extends React.Component {
+class TransitRouteExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,7 +41,7 @@ class App extends React.Component {
   render() {
     const { policy } = this.state;
     return (
-      <Container code={Transit}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -58,10 +56,10 @@ class App extends React.Component {
           </Map>
         </div>
         <Button onClick={this.handlePolicy}>改变市内公交的策略</Button>
-      </Container>
+      </React.Fragment>
     );
   }
 }
 
 
-export default App;
+export default TransitRouteExample;

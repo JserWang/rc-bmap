@@ -4,7 +4,6 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import Demo1 from './map/Demo1';
 import Navigation from './control/navigation/index';
 import Geolocation from './control/geolocation/index';
 import OverviewMap from './control/overviewMap/index';
@@ -42,7 +41,6 @@ import Map from './map/index';
 const route = () => (
   <Switch>
     <Route exact path="/" component={Map} />
-    <Route path="/demo1" component={Demo1} />
     <Route path="/navigation" component={Navigation} />
     <Route path="/geolocation" component={Geolocation} />
     <Route path="/overViewMap" component={OverviewMap} />

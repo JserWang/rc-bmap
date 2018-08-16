@@ -5,8 +5,6 @@ import {
   Heatmap,
 } from 'rc-bmap';
 import { getRandomColor } from 'utils';
-import Container from 'components/Container';
-import Heat from './index.md';
 
 class HeatmapExample extends React.Component {
   constructor(props) {
@@ -165,7 +163,7 @@ class HeatmapExample extends React.Component {
       points, radius, max, gradient, center, opacity,
     } = this.state;
     return (
-      <Container code={Heat}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -186,7 +184,7 @@ class HeatmapExample extends React.Component {
           <Button onClick={this.handleMax}>改变权重最大值</Button>
           <Button onClick={this.handleGradient}>随机改变渐变区间</Button>
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }

@@ -5,10 +5,8 @@ import {
   LocalSearch,
 } from 'rc-bmap';
 import { Button } from 'antd';
-import Container from 'components/Container';
-import Local from './index.md';
 
-class App extends React.Component {
+class LocalSearchExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -64,7 +62,7 @@ class App extends React.Component {
   render() {
     const { center, pageCapacity } = this.state;
     return (
-      <Container code={Local}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -85,9 +83,9 @@ class App extends React.Component {
         </div>
         <Button onClick={this.handleCenter}>改变设初始化地图中心点</Button>
         <Button onClick={this.handlePageCapacity}>设置每页容量</Button>
-      </Container>
+      </React.Fragment>
     );
   }
 }
 
-export default App;
+export default LocalSearchExample;

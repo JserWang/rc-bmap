@@ -30,7 +30,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Container code={Riding}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -43,7 +43,7 @@ class App extends React.Component {
             />
           </Map>
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }

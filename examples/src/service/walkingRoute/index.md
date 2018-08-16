@@ -4,10 +4,8 @@ import {
   WalkingRoute,
   getPoiByKeyword,
 } from 'rc-bmap';
-import Container from 'components/Container';
-import Walking from './index.md';
 
-class App extends React.Component {
+class WalkingRouteExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -30,7 +28,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Container code={Walking}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv"
@@ -44,8 +42,8 @@ class App extends React.Component {
             />
           </Map>
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }
-export default App;
+export default WalkingRouteExample;

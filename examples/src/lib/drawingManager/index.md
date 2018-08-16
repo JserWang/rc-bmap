@@ -7,8 +7,6 @@ import {
   DrawingMode,
 } from 'rc-bmap';
 import { getRandomControlAnchor, getRandomColor } from 'utils';
-import Container from 'components/Container';
-import Drawing from './index.md';
 
 class DrawingManagerExample extends React.Component {
   constructor(props) {
@@ -84,7 +82,7 @@ class DrawingManagerExample extends React.Component {
       anchor, drawingModes, offset, events, circleOptions,
     } = this.state;
     return (
-      <Container code={Drawing}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -103,7 +101,7 @@ class DrawingManagerExample extends React.Component {
           <Button onClick={this.handleModes}>改变画图类型</Button>
           <Button onClick={this.handleCircle}>改变圆形的参数</Button>
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }

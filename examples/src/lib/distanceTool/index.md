@@ -5,8 +5,6 @@ import {
   DistanceTool,
 } from 'rc-bmap';
 import { getRandomColor } from 'utils';
-import Container from 'components/Container';
-import Distance from './index.md';
 
 class DistanceToolExample extends React.Component {
   constructor(props) {
@@ -95,7 +93,7 @@ class DistanceToolExample extends React.Component {
       followText, unit, lineColor, lineStroke, opacity, lineStyle, cursor, events,
     } = this.state;
     return (
-      <Container code={Distance}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -124,7 +122,7 @@ class DistanceToolExample extends React.Component {
           <Button onClick={this.handleLineStyle}>改变线条样式</Button>
           <Button onClick={this.handleCursor}>改变鼠标样式</Button>
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }

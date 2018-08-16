@@ -3,10 +3,8 @@ import {
   Map,
   BusLineSearch,
 } from 'rc-bmap';
-import Container from 'components/Container';
-import BusLine from './index.md';
 
-class App extends React.Component {
+class BusLineSearchExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -61,7 +59,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <Container code={BusLine}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -80,9 +78,9 @@ class App extends React.Component {
             />
           </Map>
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }
 
-export default App;
+export default BusLineSearchExample;

@@ -5,8 +5,6 @@ import {
   MapType,
 } from 'rc-bmap';
 import { getRandomMapType } from 'utils';
-import Container from 'components/Container';
-import MapCode from './index.md';
 
 class MapExample extends React.Component {
   constructor(props) {
@@ -167,7 +165,7 @@ class MapExample extends React.Component {
       pinchToZoom, events, contextMenu,
     } = this.state;
     return (
-      <Container code={MapCode}>
+      <React.Fragment>
         <div style={{ height: '70vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -210,7 +208,7 @@ class MapExample extends React.Component {
           <Button onClick={this.handLecontinuousZoom}>{continuousZoom ? '禁止连续缩放' : '允许连续缩放'}</Button>
           <Button onClick={this.handPinchToZoom}>{pinchToZoom ? '禁止双指缩放' : '允许双指缩放'}</Button>
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }

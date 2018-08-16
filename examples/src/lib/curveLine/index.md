@@ -4,9 +4,7 @@ import {
   Map,
   CurveLine,
 } from 'rc-bmap';
-import Container from 'components/Container';
 import { getRandomColor } from 'utils';
-import Cur from './index.md';
 
 class CurveLineExample extends React.Component {
   constructor(props) {
@@ -79,9 +77,8 @@ class CurveLineExample extends React.Component {
     const {
       zoom, center, points, strokeColor, strokeWeight, strokeOpacity, events, editing,
     } = this.state;
-    console.log(strokeOpacity);
     return (
-      <Container code={Cur}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -104,7 +101,7 @@ class CurveLineExample extends React.Component {
           <Button onClick={this.handleEditing}>{editing ? '禁用编辑' : '启用编辑'}</Button>
           <Button onClick={this.handleStrokeOpacity}>调整抛物线透明度</Button>
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }

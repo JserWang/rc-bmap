@@ -106,6 +106,8 @@ class GroundExample extends Component {
         <div style={{ height: '90vh' }}>
           <Map
             ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv"
+            scrollWheelZoom
+            zoom={12}
           >
             <Ground
               bounds={bounds}

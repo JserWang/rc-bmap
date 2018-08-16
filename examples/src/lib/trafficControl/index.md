@@ -6,8 +6,6 @@ import {
   TrafficControl,
 } from 'rc-bmap';
 import { getRandomControlAnchor } from 'utils';
-import Container from 'components/Container';
-import Traffic from './index.md';
 
 class TrafficControlExample extends React.Component {
   constructor(props) {
@@ -26,7 +24,7 @@ class TrafficControlExample extends React.Component {
   render() {
     const { anchor } = this.state;
     return (
-      <Container code={Traffic}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -36,7 +34,7 @@ class TrafficControlExample extends React.Component {
           </Map>
           <Button onClick={this.handleAchor}>改变停靠位置</Button>
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }

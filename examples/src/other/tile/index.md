@@ -4,8 +4,6 @@ import {
   Map,
   Tile,
 } from 'rc-bmap';
-import Container from 'components/Container';
-import Ti from './index.md';
 
 class TileExample extends React.Component {
   constructor(props) {
@@ -47,7 +45,7 @@ class TileExample extends React.Component {
       zoom, center, zIndex, copyright, transparentPng,
     } = this.state;
     return (
-      <Container code={Ti}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -65,7 +63,7 @@ class TileExample extends React.Component {
           <Button onClick={this.handlePng}>{transparentPng ? '使用带有透明信息的PNG' : '不使用带有透明信息的PNG'}</Button>
           <Button onClick={this.handleZIndex}>改变zIndex</Button>
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }
