@@ -1,6 +1,6 @@
 {
   "name": "rc-bmap",
-  "version": "0.1.7",
+  "version": "0.1.9",
   "main": "lib/index.js",
   "typings": "types/index.d.ts",
   "repository": {
@@ -29,7 +29,11 @@
   "scripts": {
     "build": "rm -rf lib && babel src -d lib",
     "prepublish": "npm run build",
-    "pub": "npm run prepublish && npm publish"
+    "pub": "npm run prepublish && npm publish",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "docs/**/*.md": ["prettier --parser markdown --write", "git add"]
   },
   "devDependencies": {
     "@types/react": "^16.4.9",
@@ -46,6 +50,10 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
+    "git-hooks": "^1.1.10",
+    "husky": "^1.0.0-rc.13",
+    "lint-staged": "^7.2.2",
+    "prettier": "1.14.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "webpack": "^3.0.0",

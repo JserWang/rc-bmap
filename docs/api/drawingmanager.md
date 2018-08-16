@@ -1,19 +1,23 @@
 # DrawingManager
 
 ## anchor
-* 类型：[Enum](/guide/constants.html#controlanchor)
-* 默认值：[ControlAnchor](/guide/constants.html#controlanchor).BOTTOM_RIGHT
-* 描述 表示控件的定位，默认定位到右下角
+
+- 类型：[Enum](/guide/constants.html#controlanchor)
+- 默认值：[ControlAnchor](/guide/constants.html#controlanchor).BOTTOM_RIGHT
+- 描述 表示控件的定位，默认定位到右下角
 
 ## offset
-* 类型：[Size](/api/#size)
-* 默认值：`{ width: 10, height: 10 }`
-* 描述：标注的位置偏移值
+
+- 类型：[Size](/api/#size)
+- 默认值：`{ width: 10, height: 10 }`
+- 描述：标注的位置偏移值
 
 ## circleOptions
-* 类型：[DrawingOption](/api/#drawingoption)
-* 默认值： 
-``` js
+
+- 类型：[DrawingOption](/api/#drawingoption)
+- 默认值：
+
+```js
 {
   strokeColor: "red", // 边线颜色。
   fillColor: "red", // 填充颜色。当参数为空时，圆形将没有填充效果。
@@ -23,43 +27,50 @@
   strokeStyle: "solid" // 边线的样式，solid或dashed。
 }
 ```
-* 描述：所画圆可选参数
+
+- 描述：所画圆可选参数
 
 ## polylineOptions
-* 类型：[DrawingOption](/api/#drawingoption)
-* 默认值：同 `circleOptions`
-* 描述：所画的线的可选参数
+
+- 类型：[DrawingOption](/api/#drawingoption)
+- 默认值：同 `circleOptions`
+- 描述：所画的线的可选参数
 
 ## PolygonOptions
-* 类型：[DrawingOption](/api/#drawingoption)
-* 默认值：同 `circleOptions`
-* 描述：所画的多边形的可选参数
+
+- 类型：[DrawingOption](/api/#drawingoption)
+- 默认值：同 `circleOptions`
+- 描述：所画的多边形的可选参数
 
 ## rectangleOptions
-* 类型：[DrawingOption](/api/#drawingoption)
-* 默认值：同`circleOptions`
-* 描述：所画的矩形的可选参数
+
+- 类型：[DrawingOption](/api/#drawingoption)
+- 默认值：同`circleOptions`
+- 描述：所画的矩形的可选参数
 
 ## markerOptions
-* 类型：[DrawingOption](/api/#drawingoption)
-* 默认值：同`circleOptions`
-* 描述：所画的点的可选参数
+
+- 类型：[DrawingOption](/api/#drawingoption)
+- 默认值：同`circleOptions`
+- 描述：所画的点的可选参数
 
 ## drawingModes
-* 类型：[Enum](/guide/constants.html#drawingmode)[]
-* 默认值：`undefined`
-* 描述：绘制工具支持绘制的图形
+
+- 类型：[Enum](/guide/constants.html#drawingmode)[]
+- 默认值：`undefined`
+- 描述：绘制工具支持绘制的图形
 
 ## events
-* 类型：`Object`
-* 默认值：`undefined`
-* 描述：绑定事件
 
-| 事件名 | 描述 |
-| ----- | --- |
-| circlecomplete | 绘制圆完成事件 |
-| markercomplete | 绘制点完成事件 |
-| overlaycomplete | 鼠标绘制完成事件 |
-| polygoncomplete | 绘制多边形完成事件 |
-| polylinecomplete | 绘制线完成事件 |
-| rectanglecomplete | 绘制矩形完成事件 |
+- 类型：`Object`
+- 默认值：`undefined`
+- 描述：绑定事件
+
+| 事件名            | 描述               |
+| ----------------- | ------------------ |
+| circlecomplete    | 绘制圆完成事件     |
+| markercomplete    | 绘制点完成事件     |
+| overlaycomplete   | 鼠标绘制完成事件   |
+| polygoncomplete   | 绘制多边形完成事件 |
+| polylinecomplete  | 绘制线完成事件     |
+| rectanglecomplete | 绘制矩形完成事件   |

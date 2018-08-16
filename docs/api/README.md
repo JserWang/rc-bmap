@@ -1,9 +1,10 @@
 # 通用规则
 
-在接下来的API的类型中，您会看到类型为`Icon`、`Size`、`Point`、`ContextMenu`的类型，在此为您统一解释。
+在接下来的 API 的类型中，您会看到类型为`Icon`、`Size`、`Point`、`ContextMenu`的类型，在此为您统一解释。
 
 ## Point
-``` ts
+
+```ts
 {
   [lng: number], // 经度
   [lat: number], // 维度
@@ -11,7 +12,8 @@
 ```
 
 ## Size
-``` ts
+
+```ts
 {
   [height: number], // 高度
   [width: number], // 宽度
@@ -19,7 +21,8 @@
 ```
 
 ## Icon
-``` ts
+
+```ts
 {
   [url: string],  // icon url地址
   [size: Size], // 图标可视区域的大小
@@ -37,7 +40,7 @@
 
 `items`为数组
 
-``` ts
+```ts
 {
   [items: ContextMenuItem[]]: [
     {
@@ -53,11 +56,12 @@
 ```
 
 ## Enum
+
 每个`Enum`类型均为对应常量，您可以通过点击其链接来查看常量中具体包含值
 
 ## RenderOption
 
-``` ts
+```ts
 {
   [panel: string | HTMLElement], // 结果列表的HTML容器id或容器元素，提供此参数后，结果列表将在此容器中进行展示。此属性对LocalCity无效。驾车路线规划无效
   [selectFirstResult: boolean], // 是否选择第一个检索结果。此属性仅对LocalSearch有效
@@ -67,7 +71,7 @@
 
 ## DrawingOption
 
-``` ts
+```ts
 {
   [strokeColor: string], //边线颜色。
   [fillColor: string], //填充颜色。当参数为空时，圆形将没有填充效果。
@@ -80,15 +84,16 @@
 
 ## Bounds
 
-``` ts
+```ts
 {
-  ne: Point
-  sw: Point
+  ne: Point;
+  sw: Point;
 }
 ```
 
 ## CopyRight
-``` ts
+
+```ts
 {
   [anchor: Enum], // 定位
   [offset: Size], // 偏移值
@@ -98,7 +103,8 @@
 ```
 
 ## HeatPoint
-``` ts
+
+```ts
 {
   [lng: number], // 经度
   [lat: number], // 纬度
