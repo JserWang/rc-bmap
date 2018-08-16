@@ -8,27 +8,14 @@ module.exports = {
     nav: [
       { text: '指南', link: '/guide/getting-started.html' },
       { text: 'API', link: '/api/' },
-      { text: '示例', link: '/examples/' },
+      { text: '示例', link: 'https://bmap.jser-club.com/examples' },
       { text: 'GitHub', link: 'https://github.com/JserWang/rc-bmap' },
     ],
     sidebar: {
       '/guide/': getSiderbarConfig('指南'),
       '/api/': getApiSiderbarConfig('API'),
-      '/examples/': getDemoConfig('API'),
     }
   }
-}
-
-function getDemoConfig(title) {
-  return [
-    {
-      title,
-      collapsable: false,
-      children: [
-        '',
-      ]
-    }
-  ]
 }
 
 function getSiderbarConfig(title) {
