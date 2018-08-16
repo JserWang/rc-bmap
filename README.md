@@ -34,6 +34,8 @@ render(<Map ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv" />,
 
 更多用法，见[官网](https://bmap.jser-club.com)。
 
+更多示例，见[示例](https://bmap.jser-club.com/examples/)
+
 ## 协议
 
 [MIT 许可证](https://opensource.org/licenses/MIT)

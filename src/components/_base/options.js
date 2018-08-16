@@ -4,7 +4,6 @@ export const MAP_SET_OPTIONS = [
   'defaultCursor',
   'draggingCursor',
   'mapStyle',
-  'mapType',
   'zoom',
 ];
 
