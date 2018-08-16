@@ -2,7 +2,10 @@ const merge = require('webpack-merge');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const BundleAnalyzer = require('webpack-bundle-analyzer');
 const common = require('./webpack.common');
+
+const { BundleAnalyzerPlugin } = BundleAnalyzer;
 
 module.exports = merge(common, {
   mode: 'production',
@@ -12,6 +15,11 @@ module.exports = merge(common, {
         cache: true,
         parallel: true,
         sourceMap: true,
+        uglifyOptions: {
+          mangle: {
+            safari10: true,
+          },
+        },
       }),
       new OptimizeCSSAssetsPlugin({}), // use OptimizeCSSAssetsPlugin
     ],
@@ -19,12 +27,17 @@ module.exports = merge(common, {
       name: 'manifest',
     },
     splitChunks: {
+      chunks: 'all',
       cacheGroups: {
-        vendor: {
+        libs: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          priority: -20,
-          chunks: 'all',
+          name: 'chunk-libs',
+          priority: 10,
+        },
+        hightlight: {
+          test: /[\\/]node_modules[\\/]highlight.js[\\/]/,
+          name: 'chunk-hightlight',
+          priority: 20,
         },
       },
     },
@@ -34,5 +47,6 @@ module.exports = merge(common, {
       filename: '[name].[contenthash:12].css',
       chunkFilename: '[name].[contenthash:12].css', // use contenthash *
     }),
+    new BundleAnalyzerPlugin(),
   ],
 });
