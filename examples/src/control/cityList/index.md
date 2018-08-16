@@ -7,7 +7,7 @@ import {
 } from 'rc-bmap';
 import { getRandomControlAnchor } from 'utils';
 
-class CityListExample extends React.Component {
+class CitylistExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

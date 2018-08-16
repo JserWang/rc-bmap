@@ -36,10 +36,12 @@ import Label from './overlay/label/index';
 import Marker from './overlay/marker/index';
 import Polygon from './overlay/polygon/index';
 import Polyline from './overlay/polyline/index';
+import AutoComplete from './other/autoComplete/index';
+import Map from './map/index';
 
 const route = () => (
   <Switch>
-    <Route exact path="/" component={Demo1} />
+    <Route exact path="/" component={Map} />
     <Route path="/demo1" component={Demo1} />
     <Route path="/navigation" component={Navigation} />
     <Route path="/geolocation" component={Geolocation} />
@@ -72,6 +74,9 @@ const route = () => (
     <Route path="/marker" component={Marker} />
     <Route path="/polygon" component={Polygon} />
     <Route path="/polyline" component={Polyline} />
+    <Route path="/autoComplete" component={AutoComplete} />
+    <Route path="/map" component={Map} />
+
   </Switch>
 );
 

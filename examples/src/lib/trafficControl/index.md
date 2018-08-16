@@ -5,10 +5,11 @@ import {
   ControlAnchor,
   TrafficControl,
 } from 'rc-bmap';
+import { getRandomControlAnchor } from 'utils';
 import Container from 'components/Container';
 import Traffic from './index.md';
 
-class App extends React.Component {
+class TrafficControlExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +19,7 @@ class App extends React.Component {
 
   handleAchor = () => {
     this.setState({
-      anchor: ControlAnchor.TOP_LEFT,
+      anchor: ControlAnchor[getRandomControlAnchor()],
     });
   }
 
@@ -40,4 +41,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default TrafficControlExample;

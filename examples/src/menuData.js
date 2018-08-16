@@ -10,7 +10,10 @@ export default [
         text: '地图展示2',
         path: '/demo2',
       },
-
+      {
+        text: '地图',
+        path: '/map',
+      },
     ],
   },
   {
@@ -156,6 +159,10 @@ export default [
   {
     text: '其他',
     children: [
+      {
+        text: '自动完成类',
+        path: '/autoComplete',
+      },
       {
         text: '自定义图层',
         path: '/tile',

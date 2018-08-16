@@ -8,7 +8,6 @@ import {
 } from 'rc-bmap';
 import Container from 'components/Container';
 import { getRandomControlAnchor } from 'utils';
-
 import Sc from './index.md';
 
 class ScaleExample extends React.Component {

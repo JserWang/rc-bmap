@@ -8,7 +8,7 @@ import {
 import Container from 'components/Container';
 import Clusterer from './index.md';
 
-class App extends React.Component {
+class MarkerClustererExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -260,4 +260,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default MarkerClustererExample;
