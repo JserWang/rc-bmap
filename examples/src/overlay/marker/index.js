@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button } from 'antd';
-import {
-  Map, Marker, Animation,
-} from 'rc-bmap';
+import { Map, Marker, Animation } from 'rc-bmap';
 import Container from 'components/Container';
-import Code from './index.md';
+import index from './index.md';
 
-class MarkerExample extends React.Component {
+class MarkerExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -161,7 +159,7 @@ class MarkerExample extends React.Component {
       raiseOnDrag, draggingCursor, shadow, contextMenu, rotation, massClear,
     } = this.state;
     return (
-      <Container code={Code}>
+      <Container code={index}>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"

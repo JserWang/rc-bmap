@@ -7,7 +7,11 @@ import {
   MapType,
   MapTypeControlType,
 } from 'rc-bmap';
-import { getRandomControlAnchor, getRandomMapType, getRandomMapTypeControlType } from 'utils';
+import {
+  getRandomControlAnchor,
+  getRandomMapType,
+  getRandomMapTypeControlType,
+} from 'utils';
 import Container from 'components/Container';
 import MTC from './index.md';
 

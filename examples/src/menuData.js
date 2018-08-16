@@ -53,7 +53,7 @@ export default [
       },
       {
         text: '海量标注',
-        path: '/pointcollection',
+        path: '/pointCollection',
       },
       {
         text: '地面叠加层',

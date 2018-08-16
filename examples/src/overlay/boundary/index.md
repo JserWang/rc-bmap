@@ -81,7 +81,7 @@ class BoundaryExample extends Component {
 
   handleStrokeOpacity = () => {
     let { strokeOpacity } = this.state;
-    if (strokeOpacity === 1) {
+    if (strokeOpacity >= 0.9) {
       strokeOpacity = 0.1;
     }
     this.setState({
@@ -91,7 +91,7 @@ class BoundaryExample extends Component {
 
   handleFillOpacity = () => {
     let { fillOpacity } = this.state;
-    if (fillOpacity === 1) {
+    if (fillOpacity >= 0.9) {
       fillOpacity = 0.1;
     }
     this.setState({
@@ -146,7 +146,7 @@ class BoundaryExample extends Component {
       massClear, editing, clicking, events,
     } = this.state;
     return (
-      <React.Fragment code={index}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"

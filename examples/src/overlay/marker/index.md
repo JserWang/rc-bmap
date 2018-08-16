@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Button } from 'antd';
-import {
-  Map, Marker, Animation,
-} from 'rc-bmap';
+import { Map, Marker, Animation } from 'rc-bmap';
 
-class MarkerExample extends React.Component {
+class MarkerExample extends Component {
   constructor(props) {
     super(props);
     this.state = {

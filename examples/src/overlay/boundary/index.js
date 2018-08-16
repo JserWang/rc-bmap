@@ -83,7 +83,7 @@ class BoundaryExample extends Component {
 
   handleStrokeOpacity = () => {
     let { strokeOpacity } = this.state;
-    if (strokeOpacity === 1) {
+    if (strokeOpacity >= 0.9) {
       strokeOpacity = 0.1;
     }
     this.setState({
@@ -93,7 +93,7 @@ class BoundaryExample extends Component {
 
   handleFillOpacity = () => {
     let { fillOpacity } = this.state;
-    if (fillOpacity === 1) {
+    if (fillOpacity >= 0.9) {
       fillOpacity = 0.1;
     }
     this.setState({

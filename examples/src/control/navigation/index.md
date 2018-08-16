@@ -7,8 +7,6 @@ import {
   NavigationType,
 } from 'rc-bmap';
 import { getRandomControlAnchor, getRandomNavigationType } from 'utils';
-import Container from 'components/Container';
-import Nav from './index.md';
 
 class NavigationExample extends React.Component {
   constructor(props) {
@@ -66,7 +64,7 @@ class NavigationExample extends React.Component {
       offset, anchor, type, showZoomInfo, geolocation,
     } = this.state;
     return (
-      <Container code={Nav}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -83,10 +81,14 @@ class NavigationExample extends React.Component {
           <Button onClick={this.handleOffset}>改变offset</Button>
           <Button onClick={this.handleAnchor}>随机改变停靠位置</Button>
           <Button onClick={this.handleType}>随机改变控件类型</Button>
-          <Button onClick={this.hideZoom}>{showZoomInfo ? '隐藏级别提示信息' : '显示级别提示信息'}</Button>
-          <Button onClick={this.geolocation}>{geolocation ? '不集成定位功能' : '集成定位功能'}</Button>
+          <Button onClick={this.hideZoom}>
+            {showZoomInfo ? '隐藏级别提示信息' : '显示级别提示信息'}
+          </Button>
+          <Button onClick={this.geolocation}>
+            {geolocation ? '不集成定位功能' : '集成定位功能'}
+          </Button>
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }

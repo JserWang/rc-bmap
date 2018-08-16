@@ -69,4 +69,4 @@ class CitylistExample extends React.Component {
   }
 }
 
-export default CitylistExample;
+export default CityListExample;

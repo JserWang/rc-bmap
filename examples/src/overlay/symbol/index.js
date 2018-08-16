@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import {
-  Map, ControlAnchor, Symbol, SymbolShapeType,
-} from 'rc-bmap';
+import { Map, Symbol, SymbolShapeType } from 'rc-bmap';
 import { Button } from 'antd';
 import Container from 'components/Container';
-import symbol from './index.md';
+import { getRandomColor, getRandomSymbolShape } from 'utils';
+import index from './index.md';
 
-class App extends Component {
+class SymbolExample extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -15,7 +14,10 @@ class App extends Component {
         lat: 39.915,
       },
       path: SymbolShapeType.FORWARD_CLOSED_ARROW,
-      anchor: ControlAnchor.TOP_RIGHT,
+      anchor: {
+        height: 10,
+        width: 50,
+      },
       fillColor: 'red',
       fillOpacity: 0.8,
       scale: 5,
@@ -26,66 +28,84 @@ class App extends Component {
     };
   }
 
+  handlePoint = () => {
+    const { point } = this.state;
+    this.setState({
+      point: {
+        lng: point.lng + 0.01,
+        lat: point.lat + 0.01,
+      },
+    });
+  }
+
+  handlePath = () => {
+    const symbolShape = getRandomSymbolShape();
+    this.setState({
+      path: SymbolShapeType[symbolShape],
+    });
+  }
+
   handleAnchor = () => {
+    const { anchor } = this.state;
     this.setState({
-      anchor: ControlAnchor.TOP_LEFT,
+      anchor: {
+        width: anchor.width + 5,
+        height: anchor.height + 5,
+      },
     });
   }
 
-  handlePath=() => {
+  handleFillColor = () => {
     this.setState({
-      path: SymbolShapeType.FORWARD_CLOSED_ARROW,
+      fillColor: getRandomColor(),
     });
   }
 
-  handleFillColor=() => {
+  handleFillOpacity = () => {
+    let { fillOpacity } = this.state;
+    if (fillOpacity >= 0.9) {
+      fillOpacity = 0.1;
+    }
     this.setState({
-      fillColor: 'bule',
+      fillOpacity: fillOpacity + 0.1,
     });
   }
 
-  handleFillOpacity=() => {
+  handleScale = () => {
+    const { scale } = this.state;
     this.setState({
-      fillOpacity: 0.2,
+      scale: scale + 1,
     });
   }
 
-  handleScale=() => {
+  handleRotation = () => {
+    const { rotation } = this.state;
     this.setState({
-      scale: 2,
+      rotation: rotation + 10,
     });
   }
 
-  handleRotation=() => {
+  handleStrokeColor = () => {
     this.setState({
-      rotation: 5,
+      strokeColor: getRandomColor(),
     });
   }
 
-  handleStrokeColor=() => {
+  handleStrokeWeight = () => {
+    const { strokeWeight } = this.state;
     this.setState({
-      strokeColor: 'green',
+      strokeWeight: strokeWeight + 1,
     });
   }
 
-  handleStrokeOpacity=() => {
+  handleStrokeOpacity = () => {
+    let { strokeOpacity } = this.state;
+    if (strokeOpacity >= 0.9) {
+      strokeOpacity = 0.1;
+    }
     this.setState({
-      strokeOpacity: 0.3,
+      strokeOpacity: strokeOpacity + 0.1,
     });
-  }
-
-  handleStrokeWeight=() => {
-    this.setState({
-      strokeWeight: 2,
-    });
-  }
-
-  onChangeBefore = () => {
-    console.log('onChangeBefore');
-  }
-
-  onChangeAfter = () => {
-    console.log('onChangeAfter');
   }
 
   render() {
@@ -94,7 +114,7 @@ class App extends Component {
       rotation, strokeColor, strokeOpacity, strokeWeight,
     } = this.state;
     return (
-      <Container code={symbol}>
+      <Container code={index}>
         <div style={{ height: '90vh' }}>
           <Map
             ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv"
@@ -114,18 +134,19 @@ class App extends Component {
             />
           </Map>
         </div>
-        <Button onClick={this.handlePath}>改变图标的路径</Button>
-        <Button onClick={this.handleAnchor}>改变停靠位置</Button>
-        <Button onClick={this.handleFillColor}>设置矢量图标的填充颜色</Button>
-        <Button onClick={this.handleFillOpacity}>设置矢量图标填充透明度</Button>
-        <Button onClick={this.handleScale}>设置矢量图标的缩放比例</Button>
-        <Button onClick={this.handleRotation}>设置矢量图标的旋转角度</Button>
-        <Button onClick={this.handleStrokeColor}>设置矢量图标的线填充颜色 </Button>
-        <Button onClick={this.handleStrokeOpacity}>设置矢量图标线的透明度</Button>
-        <Button onClick={this.handleStrokeWeight}>旋设置线宽</Button>
+        <Button onClick={this.handlePoint}>改变point</Button>
+        <Button onClick={this.handlePath}>随机改变形状</Button>
+        <Button onClick={this.handleAnchor}>随机改变偏移值</Button>
+        <Button onClick={this.handleFillColor}>随机改变填充颜色</Button>
+        <Button onClick={this.handleFillOpacity}>调整填充透明度</Button>
+        <Button onClick={this.handleScale}>调整缩放比例</Button>
+        <Button onClick={this.handleRotation}>调整旋转角度</Button>
+        <Button onClick={this.handleStrokeColor}>随机改变边线颜色 </Button>
+        <Button onClick={this.handleStrokeOpacity}>调整边线透明度</Button>
+        <Button onClick={this.handleStrokeWeight}>调整边线宽度</Button>
       </Container>
     );
   }
 }
 
-export default App;
+export default SymbolExample;

@@ -12,6 +12,31 @@ export function getRandomBoundary() {
   return randomBoundaryArr[getRandomIndex(randomBoundaryArr)];
 }
 
+const randomSymbolShapeArr = [
+  'CIRCLE',
+  'RECTANGLE',
+  'RHOMBUS',
+  'STAR',
+  'BACKWARD_CLOSED_ARROW',
+  'FORWARD_CLOSED_ARROW',
+  'BACKWARD_OPEN_ARROW',
+  'FORWARD_OPEN_ARROW',
+  'POINT',
+  'PLANE',
+  'CAMERA',
+  'WARNING',
+  'SMILE',
+  'CLOCK',
+];
+export function getRandomSymbolShape() {
+  return randomSymbolShapeArr[getRandomIndex(randomSymbolShapeArr)];
+}
+
+const randomShapeArr = ['CIRCLE', 'STAR', 'SQUARE', 'RHOMBUS', 'WATERDROP'];
+export function getRandomShape() {
+  return randomShapeArr[getRandomIndex(randomShapeArr)];
+}
+
 const randomControlAnchor = ['TOP_LEFT', 'TOP_RIGHT', 'BOTTOM_LEFT', 'BOTTOM_RIGHT'];
 export function getRandomControlAnchor() {
   return randomControlAnchor[getRandomIndex(randomControlAnchor)];

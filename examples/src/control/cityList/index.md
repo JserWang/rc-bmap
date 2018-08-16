@@ -6,8 +6,6 @@ import {
   CityList,
 } from 'rc-bmap';
 import { getRandomControlAnchor } from 'utils';
-import Container from 'components/Container';
-import City from './index.md';
 
 class CitylistExample extends React.Component {
   constructor(props) {
@@ -48,7 +46,7 @@ class CitylistExample extends React.Component {
   render() {
     const { offset, anchor } = this.state;
     return (
-      <Container code={City}>
+      <React.Fragment>
         <div style={{ height: '90vh' }}>
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
@@ -64,9 +62,9 @@ class CitylistExample extends React.Component {
           <Button onClick={this.handleOffset}>改变offset</Button>
           <Button onClick={this.handleAnchor}>随机改变停靠位置</Button>
         </div>
-      </Container>
+      </React.Fragment>
     );
   }
 }
 
-export default CitylistExample;
+export default CityListExample;

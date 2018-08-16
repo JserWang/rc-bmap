@@ -6,8 +6,6 @@ import {
   Copyright,
 } from 'rc-bmap';
 import { getRandomControlAnchor } from 'utils';
-import Container from 'components/Container';
-import Copy from './index.md';
 
 class CopyrightExample extends React.Component {
   constructor(props) {

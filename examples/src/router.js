@@ -28,7 +28,7 @@ import DistanceTool from './lib/distanceTool/index';
 import Tile from './other/tile/index';
 import Boundary from './overlay/boundary/index';
 import Symbol from './overlay/symbol/index';
-import Pointcollection from './overlay/pointcollection/index';
+import PointCollection from './overlay/pointCollection/index';
 import Ground from './overlay/ground/index';
 import Circle from './overlay/circle/index';
 import InfoWindow from './overlay/infoWindow/index';
@@ -66,7 +66,7 @@ const route = () => (
     <Route path="/tile" component={Tile} />
     <Route path="/boundary" component={Boundary} />
     <Route path="/symbol" component={Symbol} />
-    <Route path="/pointcollection" component={Pointcollection} />
+    <Route path="/pointCollection" component={PointCollection} />
     <Route path="/ground" component={Ground} />
     <Route path="/circle" component={Circle} />
     <Route path="/infoWindow" component={InfoWindow} />

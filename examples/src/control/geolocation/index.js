@@ -20,13 +20,7 @@ class GeolocationExample extends React.Component {
       anchor: ControlAnchor.TOP_RIGHT,
       showAddressBar: true,
       autoLocation: false,
-      locationIcon: {
-        url: 'http://api0.map.bdimg.com/images/copyright_logo.png',
-        size: {
-          width: 100,
-          height: 100,
-        },
-      },
+      locationIcon: null,
       events: {
         locationSuccess: (event) => {
           console.log('locationSuccess', event);
@@ -71,13 +65,10 @@ class GeolocationExample extends React.Component {
   handleIcon = () => {
     this.setState({
       locationIcon: {
-        url: 'http://is4.mzstatic.com/image/thumb/Purple122/v4/74/cf/18/74cf1856-76c6-2782-df5a-5637454f6974/source/512x512bb.jpg',
+        url: 'http://api0.map.bdimg.com/images/copyright_logo.png',
         size: {
-          width: 300,
-          height: 157,
-        },
-        opts: {
-          imageOffset: { width: 10, height: 10 },
+          width: 100,
+          height: 100,
         },
       },
     });
@@ -95,18 +86,22 @@ class GeolocationExample extends React.Component {
             scrollWheelZoom
           >
             <Geolocation
-              offset={offset} // 停靠偏移值，默认为{ width: 0, height: 0 }
-              anchor={anchor} // 停靠位置，默认为BOTTOM_LEFT
-              showAddressBar={showAddressBar} // 是否显示定位信息面板。默认显示定位信息面板
-              locationIcon={locationIcon} // 可自定义定位中心点的Icon样式
-              autoLocation={autoLocation} // 添加控件时是否进行定位。默认添加控件时不进行定位
-              events={events} // 绑定事件
+              offset={offset}
+              anchor={anchor}
+              showAddressBar={showAddressBar}
+              locationIcon={locationIcon}
+              autoLocation={autoLocation}
+              events={events}
             />
           </Map>
           <Button onClick={this.handleOffset}>改变offset</Button>
           <Button onClick={this.handleAnchor}>随机改变停靠位置</Button>
-          <Button onClick={this.hideAddressBar}>{showAddressBar ? '隐藏定位信息面板' : '显示定位信息面板'}</Button>
-          <Button onClick={this.autoLocation}>{autoLocation ? '添加控件时不进行定位' : '添加控件时进行定位'}</Button>
+          <Button onClick={this.hideAddressBar}>
+            {showAddressBar ? '隐藏定位信息面板' : '显示定位信息面板'}
+          </Button>
+          <Button onClick={this.autoLocation}>
+            {autoLocation ? '添加控件时不进行定位' : '添加控件时进行定位'}
+          </Button>
           <Button onClick={this.handleIcon}>更换icon</Button>
         </div>
       </Container>
