@@ -9,7 +9,7 @@ import { getRandomControlAnchor } from 'utils';
 import Container from 'components/Container';
 import City from './index.md';
 
-class CitylistExample extends React.Component {
+class CityListExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {

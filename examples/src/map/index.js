@@ -116,10 +116,10 @@ class MapExample extends React.Component {
     });
   }
 
-  handleScrollWheelZoomg = () => {
-    const { scrollWheelZoomg } = this.state;
+  handleScrollWheelZoom = () => {
+    const { scrollWheelZoom } = this.state;
     this.setState({
-      scrollWheelZoomg: !scrollWheelZoomg,
+      scrollWheelZoom: !scrollWheelZoom,
     });
   }
 
@@ -144,17 +144,17 @@ class MapExample extends React.Component {
     });
   }
 
-  handLecontinuousZoom = () => {
-    const { lecontinuousZoom } = this.state;
+  handleContinuousZoom = () => {
+    const { continuousZoom } = this.state;
     this.setState({
-      lecontinuousZoom: !lecontinuousZoom,
+      continuousZoom: !continuousZoom,
     });
   }
 
   handPinchToZoom = () => {
-    const { pnchToZoom } = this.state;
+    const { pinchToZoom } = this.state;
     this.setState({
-      pnchToZoom: !pnchToZoom,
+      pinchToZoom: !pinchToZoom,
     });
   }
 
@@ -203,11 +203,11 @@ class MapExample extends React.Component {
           <Button onClick={this.handleAutoResize}>{autoResize ? '不跟随容器大小变化' : '自适应容器大小变化'}</Button>
           <Button onClick={this.handleMapClick}>{mapClick ? '禁止底图点击' : '开启底图点击'}</Button>
           <Button onClick={this.handleDragging}>{dragging ? '禁止拖拽' : '允许拖拽'}</Button>
-          <Button onClick={this.handleScrollWheelZoomg}>{scrollWheelZoom ? '禁止滚轮放大缩小' : '允许滚轮放大缩小'}</Button>
+          <Button onClick={this.handleScrollWheelZoom}>{scrollWheelZoom ? '禁止滚轮放大缩小' : '允许滚轮放大缩小'}</Button>
           <Button onClick={this.handleDoubleClickZoom}>{doubleClickZoom ? '禁止双击放大' : '允许双击放大'}</Button>
           <Button onClick={this.handleKeyboard}>{keyboard ? '禁止键盘操作' : '启用键盘操作'}</Button>
           <Button onClick={this.handleInertialDragging}>{inertialDragging ? '禁止惯性拖拽' : '允许惯性拖拽'}</Button>
-          <Button onClick={this.handLecontinuousZoom}>{continuousZoom ? '禁止连续缩放' : '允许连续缩放'}</Button>
+          <Button onClick={this.handleContinuousZoom}>{continuousZoom ? '禁止连续缩放' : '允许连续缩放'}</Button>
           <Button onClick={this.handPinchToZoom}>{pinchToZoom ? '禁止双指缩放' : '允许双指缩放'}</Button>
         </div>
       </Container>
