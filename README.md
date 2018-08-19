@@ -39,3 +39,20 @@ render(<Map ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv" />,
 ## 协议
 
 [MIT 许可证](https://opensource.org/licenses/MIT)
+
+
+## 如何本地启动demo
+
+* 进入`examples`目录，执行 
+
+```bash
+yarn install # 安装相关依赖
+npm run dev # 启动本地服务
+```
+
+## 如何启动本地文档
+* 进入`docs`目录，执行
+
+```bash
+vuepress dev # 文档由vuepress驱动
+```
