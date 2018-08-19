@@ -1,15 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { MAP_BOOLEAN_OPTIONS } from '../_base/options';
-import { replaceInitialToUpper, getPoint, isPoint, bindEvents, processSetOptions, createContextMenu } from '../_base/util';
+import {
+  getPoint,
+  isPoint,
+  bindEvents,
+  processSetOptions,
+  createContextMenu,
+  processBooleanOptions,
+  unBindEvents,
+} from '../_base/util';
 
 const fillStyle = {
   width: '100%',
-  height: '100%'
+  height: '100%',
 };
 
 export default class Map extends React.Component {
-
   static defaultProps = {
     placeHolder: '地图加载中...',
     // 与官方文档保持一致
@@ -62,7 +68,6 @@ export default class Map extends React.Component {
 
   constructor(props) {
     super(props);
-
     // React 16
     if (React.createRef) {
       this.mapContainerRef = React.createRef();
@@ -71,85 +76,6 @@ export default class Map extends React.Component {
         this.mapContainer = ref;
       };
     }
-  }
-
-  init = (BMap) => {
-    const { highResolution, autoResize, mapClick, mapMounted, contextMenu, ...resetProps } = this.props;
-    this.mapContainer = this.mapContainer || this.mapContainerRef.current;
-    const map = this.map = new BMap.Map(this.mapContainer, {
-      enableHighResolution: highResolution,
-      enableAutoResize: autoResize,
-      enableMapClick: mapClick,
-    });
-    
-    this.processContextMenu(contextMenu);
-
-    global.bMapInstance = map;
-    this.processMapOptions(resetProps);
-    bindEvents(map, 'MAP', this.props.events);
-    
-    // 地图配置完成后，强制刷新，渲染子组件
-    this.forceUpdate(() => {
-      if (mapMounted) {
-        mapMounted(global.bMapInstance);
-      }
-    });
-  }
-
-  processContextMenu = (contextMenu) => {
-    if (contextMenu) {
-      const menu = createContextMenu(contextMenu.items, contextMenu.events);
-      this.map.addContextMenu(menu);
-    }
-  }
-
-  processMapOptions = (props) => {
-    const { map } = this;
-    processSetOptions(map, 'MAP_SET_OPTIONS', props);
-
-    MAP_BOOLEAN_OPTIONS.forEach((key) => {
-      const upKey = replaceInitialToUpper(key);
-      let prefix = 'disable';
-      if (props[key]) {
-        prefix = 'enable';
-      }
-      map[`${prefix}${upKey}`]();
-    });
-    if (props.center) {
-      let center = props.center;
-      if (isPoint(center)) {
-        center = getPoint(center.lng, center.lat);
-        map.centerAndZoom(center, props.zoom);
-      }
-    }
-
-    if (props.mapType) {
-      map.setMapType(global[props.mapType]);
-    }
-  }
-
-  getMapScript = () => {
-    const { ak } = this.props;
-    global.BMap = global.BMap || {};
-    if (Object.keys(global.BMap).length === 0) {
-      global.BMap._preloader = new Promise((resolve, reject) => {
-        global._initBaiduMap = function initBaiduMap() {
-          resolve(global.BMap);
-          global.document.body.removeChild($script);
-          global.BMap._preloader = null;
-          global._initBaiduMap = null;
-        };
-
-        const $script = document.createElement('script');
-        global.document.body.appendChild($script);
-        $script.src = `https://api.map.baidu.com/api?v=3.0&ak=${ak}&callback=_initBaiduMap`;
-      });
-
-      return global.BMap._preloader;
-    } else if (!global.BMap._preloader) {
-      return Promise.resolve(global.BMap);
-    }
-    return global.BMap._preloader;
   }
 
   componentDidMount() {
@@ -164,23 +90,113 @@ export default class Map extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.map) {
+    const { map } = this;
+    if (map) {
       const props = this.processProps(nextProps);
       this.processMapOptions(props);
       this.processContextMenu(props.contextMenu);
-      bindEvents(this.map, 'MAP', this.props.events);  
+      unBindEvents(map);
+      if (props.events) bindEvents(map, 'MAP', props.events);
     }
   }
 
-  processProps(nextProps) {
-    let props = nextProps;
-    if (JSON.stringify(nextProps.center) === JSON.stringify(this.props.center)) {
-      const {center, ...resetProps} = nextProps;
-      props = resetProps;
+  init = (BMap) => {
+    const {
+      highResolution, autoResize, mapClick, mapMounted, contextMenu, events, ...resetProps
+    } = this.props;
+    this.defaultCenter = getPoint(116.404, 39.915);
+    this.mapContainer = this.mapContainer || this.mapContainerRef.current;
+    const map = new BMap.Map(this.mapContainer, {
+      enableHighResolution: highResolution,
+      enableAutoResize: autoResize,
+      enableMapClick: mapClick,
+    });
+
+    this.map = map;
+    // 当初始化center为null或string时，保证地图正常渲染，用默认center处理centerAndZoom
+    if (!resetProps.center || typeof resetProps.center === 'string') {
+      map.centerAndZoom(this.defaultCenter, resetProps.zoom);
+    }
+    this.processContextMenu(contextMenu);
+
+    global.bMapInstance = map;
+    this.processMapOptions(resetProps);
+    bindEvents(map, 'MAP', events);
+
+    // 地图配置完成后，强制刷新，渲染子组件
+    this.forceUpdate(() => {
+      if (mapMounted) {
+        mapMounted(global.bMapInstance);
+      }
+    });
+  }
+
+  processContextMenu = (contextMenu) => {
+    if (contextMenu) {
+      this.menu = createContextMenu(contextMenu.items, contextMenu.events);
+      if (this.menu) {
+        this.map.removeContextMenu(this.menu);
+      }
+      this.map.addContextMenu(this.menu);
+    }
+  }
+
+  processMapOptions = (props) => {
+    const { map } = this;
+    processSetOptions(map, 'MAP_SET_OPTIONS', props);
+    processBooleanOptions(map, 'MAP_BOOLEAN_OPTIONS', props);
+
+    if (props.center) {
+      let { center } = props;
+      if (isPoint(center)) {
+        center = getPoint(center.lng, center.lat);
+      }
+      if (props.zoom) {
+        map.centerAndZoom(center, props.zoom);
+      } else {
+        map.setCenter(center);
+      }
     }
 
-    if (props.zoom === this.props.zoom) {
-      delete props.zoom
+    if (props.mapType) {
+      map.setMapType(global[props.mapType]);
+    }
+  }
+
+  getMapScript = () => {
+    const { ak } = this.props;
+    global.BMap = global.BMap || {};
+    if (Object.keys(global.BMap).length === 0) {
+      global.BMap._preloader = new Promise((resolve) => {
+        const $script = document.createElement('script');
+        global.document.body.appendChild($script);
+        global._initBaiduMap = function initBaiduMap() {
+          resolve(global.BMap);
+          global.document.body.removeChild($script);
+          global.BMap._preloader = null;
+          global._initBaiduMap = null;
+        };
+
+        $script.src = `https://api.map.baidu.com/api?v=3.0&ak=${ak}&callback=_initBaiduMap`;
+      });
+
+      return global.BMap._preloader;
+    } if (!global.BMap._preloader) {
+      return Promise.resolve(global.BMap);
+    }
+    return global.BMap._preloader;
+  }
+
+
+  processProps(nextProps) {
+    const { center, zoom } = this.props;
+    const props = Object.assign({}, nextProps);
+    if (JSON.stringify(props.center) === JSON.stringify(center)) {
+      delete props.center;
+    }
+
+    if (props.zoom === zoom) {
+      delete props.zoom;
     }
     return props;
   }

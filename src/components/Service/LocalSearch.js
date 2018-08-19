@@ -24,7 +24,6 @@ class LocalSearch extends BaseService {
     this.instance = new global.BMap.LocalSearch(_location, {
       onMarkersSet,
       onInfoHtmlSet,
-      onInfoHtmlSet,
       onResultsHtmlSet,
       pageCapacity,
       onSearchComplete,

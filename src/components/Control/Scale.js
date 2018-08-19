@@ -6,7 +6,6 @@ import BaseControl from './BaseControl';
 
 @ReactComponent
 class Scale extends BaseControl {
-
   init() {
     const {
       anchor = CONTROL_ANCHOR.TOP_LEFT,

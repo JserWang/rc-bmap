@@ -1,11 +1,12 @@
+/* eslint-disable */
+import { default as BHeatmap } from 'bmaplib.heatmap';
+/* eslint-enable */
 import BaseOverlay from '../Overlay/BaseOverlay';
 import { isSupportCanvas } from '../_base/util';
 import ReactComponent from '../ReactComponent';
-import { default as BHeatmap } from 'bmaplib.heatmap';
 
 @ReactComponent
 class Heatmap extends BaseOverlay {
-
   init() {
     if (!isSupportCanvas()) {
       this.instance = null;
@@ -25,16 +26,16 @@ class Heatmap extends BaseOverlay {
       radius,
       gradient,
     };
-    
+
     this.instance = new BHeatmap(opts);
+    this.map.addOverlay(this.instance);
+
     if (points) {
       // 需要先addOverlay后再执行
-      setTimeout(() => {
-        this.instance.setDataSet({
-          data: points,
-          max,
-        });
-      }, 100);
+      this.instance.setDataSet({
+        data: points,
+        max,
+      });
     }
   }
 }

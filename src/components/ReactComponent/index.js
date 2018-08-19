@@ -17,14 +17,15 @@ export default function ReactComponent(Wrapped) {
       }
     }
 
-    getInstance = () => {
-      if (this.props.getInstance) {
-        this.props.getInstance(this.wrapped.instance);
-      }
-    }
-
     componentWillUnmount() {
       this.wrapped.destroy();
+    }
+
+    getInstance = () => {
+      const { getInstance } = this.props;
+      if (getInstance) {
+        getInstance(this.wrapped.instance);
+      }
     }
 
     render() {

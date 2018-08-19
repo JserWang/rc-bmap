@@ -1,11 +1,12 @@
+/* eslint-disable */
+import { default as BMarkerClusterer } from 'bmaplib.markerclusterer';
+/* eslint-enable */
 import BaseOverlay from '../Overlay/BaseOverlay';
-import { getSize, getPoint } from '../_base/util';
+import { getSize, createMarker } from '../_base/util';
 import ReactComponent from '../ReactComponent';
-import { default as BMarkerClusterer } from 'bmaplib.markerclusterer'
 
 @ReactComponent
 class MarkerClusterer extends BaseOverlay {
-
   init() {
     const {
       children,
@@ -17,24 +18,22 @@ class MarkerClusterer extends BaseOverlay {
     } = this.props;
     const childrenMakers = children && !Array.isArray(children) ? [children] : children;
     const markers = [];
-    const Marker = global.BMap.Marker;
-    childrenMakers.map((m) => {
-      const { point, ...markerOpts } = m.props;
-      markers.push(new Marker(getPoint(point.lng, point.lat), markerOpts));
+    childrenMakers.forEach((m) => {
+      markers.push(createMarker(m.props));
     });
 
     const opts = {
-      gridSize: gridSize && getSize(gridSize.width, gridSize.height),
+      gridSize,
       maxZoom,
-      minClusterSize: minClusterSize && getSize(minClusterSize.width, minClusterSize.height),
-      styles: styles.map(item => {
+      minClusterSize,
+      styles: styles.map((item) => {
         item.size = getSize(item.size.width, item.size.height);
         return item;
       }),
       isAverageCenter: averageCenter,
       markers,
     };
-    
+
     this.instance = new BMarkerClusterer(this.map, opts);
   }
 

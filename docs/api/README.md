@@ -1,147 +1,113 @@
-# Map
+# 通用规则
 
-## ak
-* 类型 string
-* 默认值 ""
-* 描述 加载地图时所需ak
+在接下来的 API 的类型中，您会看到类型为`Icon`、`Size`、`Point`、`ContextMenu`的类型，在此为您统一解释。
 
-## placeHolder
-* 类型 string 或 ReactElement
-* 默认值 "地图加载中..."
-* 描述 地图未加载完成时，展示内容
+## Point
 
-## mapMounted
-* 类型 Function
-* 默认值 null
-* 描述 地图渲染完成后回调函数
-
-## minZoom
-* 类型 number
-* 默认值 3
-* 描述 地图允许的最小级别，取值不得小于地图类型所允许的最小级别
-
-## maxZoom
-* 类型 number
-* 默认值 19
-* 地图允许的最大级别。取值不得大于地图类型所允许的最大级别
-
-## defaultCursor
-* 类型 string
-* 默认值 ""
-* 描述 设置地图默认的鼠标指针样式。参数cursor应符合CSS的cursor属性规范
-
-## draggingCursor
-* 类型 string
-* 默认值 ""
-* 描述 设置拖拽地图时的鼠标指针样式。参数cursor应符合CSS的cursor属性规范
-
-## mapStyle
-* 类型 Object
-* 默认值 {}
-* 描述 设置地图样式，样式包括地图底图颜色和地图要素是否展示两部分
-
-若您使用[百度地图个性化模板时](http://lbsyun.baidu.com/custom/list.htm)，可传递如下值：
-
-``` js
+```ts
 {
-  style: 'midnight'
+  [lng: number], // 经度
+  [lat: number], // 维度
 }
 ```
 
-若您使用[百度地图图形编辑工具](http://lbsyun.baidu.com/img-editor.html)，可传递如下值：
+## Size
 
-``` js
+```ts
 {
-  styleJson: mapStyle,
+  [height: number], // 高度
+  [width: number], // 宽度
 }
 ```
 
-## center
-* 类型 Object
-* 默认值 { lng: 116.404, lat: 39.915 }
-* 描述 设初始化地图中心点，默认值为 { lng: 116.404, lat: 39.915 }
+## Icon
 
-## mapType
-* 类型 Enum
-* 默认值 [MapType](/guide/constants.html#maptype).NORMAL
-* 描述 设置地图类型
-
-## zoom
-* 类型 number
-* 默认值 15
-* 描述 将视图切换到指定的缩放等级，中心点坐标不变。
-
-## highResolution
-* 类型 boolean
-* 默认值 true
-* 描述 是否启用使用高分辨率地图
-
-## autoResize
-* 类型 boolean
-* 默认值 true
-* 描述 是否自动适应地图容器变化
-
-## mapClick
-* 类型 boolean
-* 默认值 true
-* 描述 是否开启底图可点功能
-
-## dragging
-* 类型 boolean
-* 默认值 true
-> 是否启用地图拖拽
-
-## scrollWheelZoom
-* 类型 boolean
-* 默认值 false
-* 描述 是否启用滚轮放大缩小
-
-## doubleClickZoom
-* 类型 boolean
-* 默认值 true
-* 描述 是否启用双击放大
-
-## keyboard
-* 类型 boolean
-* 默认值 true
-* 描述 是否启用键盘操作
-
-## inertialDragging
-* 类型 boolean
-* 默认值 false
-* 描述 是否启用地图惯性拖拽
-
-## continuousZoom
-* 类型 boolean
-* 默认值 true
-* 描述 是否启用连续缩放效果
-
-## pinchToZoom
-* 类型 boolean
-* 默认值 true
-* 描述 是否启用双指操作缩放
-
-## events
-* 类型 Object
-* 默认值 null
-* 描述 为地图[绑定事件]((http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a0b0)
-
-## contextMenu
-* 类型 Object
-* 默认值 null
-* 描述 为地图设置右键菜单
-
-传入属性需为`ContextMenu`字面量值，如：
-``` js
+```ts
 {
-  items: [{
-    text: '放大',
-    callback: function() {global.bMapInstance.zoomIn()},
-  },
-  {
-    text: '缩小',
-    callback: function() {global.bMapInstance.zoomOut()},
-    separator: true,
-  }]
+  [url: string],  // icon url地址
+  [size: Size], // 图标可视区域的大小
+  [opts: IconOptions]: {
+    [anchor: ControlAnchor], // 图标的定位点相对于图标左上角的偏移值
+    [imageSize: Size], // 图片的大小，同CSS中background-size。
+    [imageOffset: Size], // 图片相对于可视区域的偏移值，同CSS中background-position
+    [infoWindowAnchor: Size], // 信息窗口开启位置相对于图标左上角的偏移值
+    [printImageUrl: string], // 设置icon打印图片的url，该打印图片只针对IE6有效
+  }
+}
+```
+
+## ContextMenu
+
+`items`为数组
+
+```ts
+{
+  [items: ContextMenuItem[]]: [
+    {
+      [text: string], // 设置菜单项显示的文本
+      [callback: Function], // 菜单项被点击回调函数
+      [separator: boolean], // 是否显示分隔线
+      [width: number], // 指定此菜单项的宽度
+      [iconUrl: string], // 指定此菜单项的icon URL（大小为17px*17px)
+      [disabled: boolean] // 是否禁用
+    }
+  ]
+}
+```
+
+## Enum
+
+每个`Enum`类型均为对应常量，您可以通过点击其链接来查看常量中具体包含值
+
+## RenderOption
+
+```ts
+{
+  [panel: string | HTMLElement], // 结果列表的HTML容器id或容器元素，提供此参数后，结果列表将在此容器中进行展示。此属性对LocalCity无效。驾车路线规划无效
+  [selectFirstResult: boolean], // 是否选择第一个检索结果。此属性仅对LocalSearch有效
+  [autoViewport: boolean], // 检索结束后是否自动调整地图视野。此属性对LocalCity无效
+}
+```
+
+## DrawingOption
+
+```ts
+{
+  [strokeColor: string], //边线颜色。
+  [fillColor: string], //填充颜色。当参数为空时，圆形将没有填充效果。
+  [strokeWeight: number], //边线的宽度，以像素为单位。
+  [strokeOpacity: number], //边线透明度，取值范围0 - 1。
+  [fillOpacity: number], //填充的透明度，取值范围0 - 1。
+  [strokeStyle: string], //边线的样式，solid或dashed。
+}
+```
+
+## Bounds
+
+```ts
+{
+  ne: Point;
+  sw: Point;
+}
+```
+
+## CopyRight
+
+```ts
+{
+  [anchor: Enum], // 定位
+  [offset: Size], // 偏移值
+  [content: string], // 显示内容
+  [bounds: Bounds],  // 所适用的地理区域
+}
+```
+
+## HeatPoint
+
+```ts
+{
+  [lng: number], // 经度
+  [lat: number], // 纬度
+  [count: number], // 热度
 }
 ```

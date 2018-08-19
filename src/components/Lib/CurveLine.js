@@ -1,11 +1,12 @@
+/* eslint-disable */
+import { default as BCurveLine } from 'bmaplib.curveline';
+/* eslint-enable */
 import BaseOverlay from '../Overlay/BaseOverlay';
 import { getPoint, bindEvents } from '../_base/util';
 import ReactComponent from '../ReactComponent';
-import { default as BCurveLine } from 'bmaplib.curveline';
 
 @ReactComponent
 class CurveLine extends BaseOverlay {
-
   init() {
     const {
       points,
@@ -31,12 +32,11 @@ class CurveLine extends BaseOverlay {
     let pList = [];
 
     if (points) {
-      pList = points.map((item) => {
-        return getPoint(item.lng, item.lat);
-      });
+      pList = points.map(item => getPoint(item.lng, item.lat));
     }
-    
+
     this.instance = new BCurveLine(pList, opts);
+    this.map.addOverlay(this.instance);
 
     if (editing) {
       this.instance.enableEditing();

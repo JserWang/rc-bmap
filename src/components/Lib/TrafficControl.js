@@ -7,7 +7,7 @@ import BaseControl from '../Control/BaseControl';
 class TrafficControl extends BaseControl {
   constructor(props) {
     appendCss({
-      url: 'http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.css'
+      url: 'http://api.map.baidu.com/library/TrafficControl/1.4/src/TrafficControl_min.css',
     });
     super(props);
   }
@@ -19,12 +19,11 @@ class TrafficControl extends BaseControl {
 
     const BTrafficControl = require('../../libs/TrafficControl.js');
     this.instance = new BTrafficControl({
-      showPanel: false
+      showPanel: false,
     });
 
-    setTimeout(() => {
-      this.instance.setAnchor(global[anchor])
-    }, 100);
+    this.map.addControl(this.instance);
+    this.instance.setAnchor(global[anchor]);
   }
 }
 

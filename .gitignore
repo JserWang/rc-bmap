@@ -19,3 +19,10 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/docs/publish.sh
+/docs/.vuepress/dist
+.vscode
+
+/examples/node_modules
+/examples/dist
+/examples/publish.sh

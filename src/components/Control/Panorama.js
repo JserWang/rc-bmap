@@ -4,7 +4,7 @@ import ANCHOR from '../../constants/ControlAnchor';
 import ReactComponent from '../ReactComponent';
 
 @ReactComponent
-class Panorama extends BaseControl{
+class Panorama extends BaseControl {
   init() {
     const {
       anchor = ANCHOR.TOP_RIGHT,
@@ -20,6 +20,7 @@ class Panorama extends BaseControl{
     };
 
     this.instance = new global.BMap.PanoramaControl(opts);
+    this.map.addControl(this.instance);
   }
 }
 

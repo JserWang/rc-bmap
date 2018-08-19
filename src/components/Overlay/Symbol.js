@@ -1,10 +1,10 @@
-import { createSymbol, getSize } from '../_base/util';
+import BaseOverlay from './BaseOverlay';
+import { createSymbol, getSize, createMarker } from '../_base/util';
 import ReactComponent from '../ReactComponent';
-import Marker from './Marker';
 
 @ReactComponent
-class Symbol extends Marker {
-  constructor(props) {
+class Symbol extends BaseOverlay {
+  init() {
     const {
       path,
       anchor = {
@@ -18,8 +18,8 @@ class Symbol extends Marker {
       strokeColor,
       strokeOpacity,
       strokeWeight,
-      ...markerProps,
-    } = props;
+      ...markerProps
+    } = this.props;
 
     markerProps.icon = createSymbol({
       path,
@@ -32,10 +32,15 @@ class Symbol extends Marker {
         strokeColor,
         strokeOpacity,
         strokeWeight,
-      }
+      },
     });
-    
-    super(markerProps);
+
+    this.instance = createMarker(markerProps);
+    this.map.addOverlay(this.instance);
+
+    if (markerProps.animation) {
+      this.instance.setAnimation(global[markerProps.animation]);
+    }
   }
 }
 

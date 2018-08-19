@@ -3,13 +3,12 @@ import { getSize } from '../_base/util';
 import BaseControl from './BaseControl';
 import CONTROL_ANCHOR from '../../constants/ControlAnchor';
 
-const BaseCtrl = function(defaultAnchor, defaultOffset) {
+const BaseCtrl = function (defaultAnchor, defaultOffset) {
   this.defaultAnchor = defaultAnchor;
   this.defaultOffset = defaultOffset;
 };
 
 class Control extends BaseControl {
-
   init() {
     const {
       anchor = CONTROL_ANCHOR.TOP_LEFT,
@@ -25,11 +24,14 @@ class Control extends BaseControl {
     }
 
     this.instance = new BaseCtrl(global[anchor], getSize(offset.width, offset.height));
+    this.map.addControl(this.instance);
   }
 
   initialize() {
     // // 创建一个DOM元素
-    const container = this.container = document.createElement('div');
+    const container = document.createElement('div');
+    this.container = container;
+
     if (this.render) {
       reactRender(this.render(), container);
     }

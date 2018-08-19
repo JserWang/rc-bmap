@@ -18,15 +18,19 @@ class PointCollection extends BaseOverlay {
       } = this.props;
 
       const opts = {
-        shape: shape && top[shape],
+        shape: shape && global[shape],
         color,
-        size: size && top[size],
+        size: size && global[size],
       };
 
-      let pList = points.map((item) => {
-        return getPoint(item.lng, item.lat);
-      });
+      let pList = [];
+      if (points && Array.isArray(points)) {
+        pList = points.map(item => getPoint(item.lng, item.lat));
+      }
+
       this.instance = new global.BMap.PointCollection(pList, opts);
+      this.map.addOverlay(this.instance);
+
       bindEvents(this.instance, 'POINT_COLLECTION', events);
     }
   }
