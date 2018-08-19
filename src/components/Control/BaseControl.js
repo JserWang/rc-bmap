@@ -1,5 +1,6 @@
 
 import { render as reactRender } from 'react-dom';
+import { unBindEvents } from '../_base/util';
 
 class BaseControl {
   constructor(props) {
@@ -12,6 +13,7 @@ class BaseControl {
 
   onPropsUpdate(newProps) {
     this.props = newProps;
+    unBindEvents(this.instance);
     this.destroy();
     this.init();
   }

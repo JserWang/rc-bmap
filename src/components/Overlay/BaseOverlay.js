@@ -1,5 +1,6 @@
 
 import { render as reactRender } from 'react-dom';
+import { unBindEvents } from '../_base/util';
 
 class BaseOverlay {
   constructor(props) {
@@ -20,6 +21,7 @@ class BaseOverlay {
 
   onPropsUpdate(newProps) {
     this.props = newProps;
+    unBindEvents(this.instance);
     this.destroy();
     this.init();
   }
