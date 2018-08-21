@@ -1,5 +1,5 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -27,7 +27,7 @@ module.exports = {
     filename: '[name].min.js',
     library: 'rc-bmap',
     libraryTarget: 'umd',
-    path: path.resolve(__dirname, 'examples/dist')
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [{
@@ -36,8 +36,8 @@ module.exports = {
       loader: 'babel-loader',
       options: {
         presets: ['es2015', 'react', 'stage-0'],
-        plugins: ["transform-decorators-legacy"]
-      }
+        plugins: ['transform-decorators-legacy'],
+      },
     }],
   },
   plugins: [
@@ -50,5 +50,5 @@ module.exports = {
         warnings: false,
       },
     }),
-  ]
+  ],
 };
