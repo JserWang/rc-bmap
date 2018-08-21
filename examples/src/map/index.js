@@ -179,7 +179,7 @@ class MapExample extends React.Component {
             defaultCursor={defaultCursor}
             draggingCursor={draggingCursor}
             mapStyle={mapStyle}
-            // mapType={mapType}
+            mapType={mapType}
             highResolution={highResolution}
             autoResize={autoResize}
             mapClick={mapClick}
