@@ -78,7 +78,7 @@ class MapExample extends React.Component {
   handleMapStyle = () => {
     const { mapStyle } = this.state;
     this.setState({
-      mapStyle: mapStyle.style === 'nomal' ? { style: 'normal' } : { style: 'normal' },
+      mapStyle: mapStyle.style === 'normal' ? { style: 'midnight' } : { style: 'normal' },
     });
   }
 
@@ -198,7 +198,7 @@ class MapExample extends React.Component {
           <Button onClick={this.handleMinZoom}>改变最小显示级别</Button>
           <Button onClick={this.handleMaxZoom}>改变最大显示级别</Button>
           <Button onClick={this.handleMapStyle}>改变地图样式</Button>
-          <Button onClick={this.handleMaptype}>随机改变地图类型</Button>
+          <Button onClick={this.handleMapType}>随机改变地图类型</Button>
           <Button onClick={this.handleHighResolution}>{highResolution ? '不使用高分辨率地图' : '使用高分辨率地图'}</Button>
           <Button onClick={this.handleAutoResize}>{autoResize ? '不跟随容器大小变化' : '自适应容器大小变化'}</Button>
           <Button onClick={this.handleMapClick}>{mapClick ? '禁止底图点击' : '开启底图点击'}</Button>
