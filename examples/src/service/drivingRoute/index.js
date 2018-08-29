@@ -51,7 +51,6 @@ class App extends React.Component {
     });
   }
 
-
   render() {
     const { center, policy } = this.state;
     return (

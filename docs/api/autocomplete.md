@@ -22,3 +22,15 @@
 - 类型：`Function`
 - 默认值：`undefined`
 - 描述：在 input 框中输入字符后，发起列表检索，完成后的回调函数
+
+## value
+
+- 类型：`string`
+- 默认值: `undefined`
+- 描述：设置绑定文本框中的值
+
+## location
+
+- 类型： `string | Point`
+- 默认值：`当前地图示例`
+- 描述：设置返回结果的所属范围。

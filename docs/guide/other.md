@@ -5,18 +5,6 @@
 > [百度文档](http://lbsyun.baidu.com/cms/jsapi/reference/jsapi_reference_3_0.html#a7b50)，
 > 当前版本 input 仅支持传入文本框 id。
 
-| 属性           | 类型     | 描述                |
-| -------------- | -------- | ------------------- |
-| input          | string   |  文本框 id          |
-| searchComplete | function |  搜索完成时回调函数 |
-| events         | object   | 绑定事件            |
-
-事件：
-| 事件 | 描述 |
-| ---- | ---- |
-| onconfirm | 回车选中某条记录后触发 |
-| onhighlight | 键盘或者鼠标移动，某条记录高亮之后 |
-
 ```js
 import React from "react";
 import { render } from "react-dom";
@@ -59,6 +47,10 @@ render(
   document.getElementById("app")
 );
 ```
+
+### 更多
+
+更多属性，可见[API](/api/autocomplete.html)中的描述。
 
 ## Tile-自定义图层
 

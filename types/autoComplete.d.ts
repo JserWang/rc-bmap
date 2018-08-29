@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { Point } from './base/common';
 import { ControlAnchor } from "./base/constants";
 import { AutoCompleteEvents } from './base/events';
 
@@ -19,4 +20,14 @@ export declare class AutoComplete extends Component<any> {
    * 获取当前实例
    */
   getInstance: Function;
+
+  /**
+   * 设定返回结果的所属范围
+   */
+  location: string | Point;
+
+  /**
+   * 绑定的input控件的值
+   */
+  value: string;
 }

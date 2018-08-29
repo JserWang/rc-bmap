@@ -5162,9 +5162,9 @@ rc-animate@^3.0.0-rc.1, rc-animate@^3.0.0-rc.4:
     rc-util "^4.5.0"
     react-lifecycles-compat "^3.0.4"
 
-rc-bmap@0.1.9:
-  version "0.1.9"
-  resolved "http://registry.npm.taobao.org/rc-bmap/download/rc-bmap-0.1.9.tgz#5b56a736ece0031797c6354d67765574dedbcf86"
+rc-bmap@0.2.2:
+  version "0.2.2"
+  resolved "https://registry.corp.bianlifeng.com/rc-bmap/download/rc-bmap-0.2.2.tgz#5941938b7d1fca09864ccddde2ebea78e1bcbae9"
   dependencies:
     bmaplib.curveline "^1.0.0"
     bmaplib.heatmap "^1.0.4"
