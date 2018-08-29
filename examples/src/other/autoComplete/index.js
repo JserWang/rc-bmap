@@ -4,12 +4,15 @@ import {
   AutoComplete,
 } from 'rc-bmap';
 import Container from 'components/Container';
+import { Button } from 'antd';
 import Ti from './index.md';
 
 class AutoCompleteExample extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      location: '北京市',
+      value: '',
       events: {
         onconfirm() {
           console.log('onconfirm');
@@ -25,8 +28,20 @@ class AutoCompleteExample extends React.Component {
     console.log('searchComplete');
   }
 
+  handleChangeValue = () => {
+    this.setState({
+      value: '变更默认显示值',
+    });
+  }
+
+  handleChangeLocation = () => {
+    this.setState({
+      location: '杭州市',
+    });
+  }
+
   render() {
-    const { events } = this.state;
+    const { events, location, value } = this.state;
     return (
       <Container code={Ti}>
         <div style={{ height: '90vh' }}>
@@ -38,9 +53,13 @@ class AutoCompleteExample extends React.Component {
               input="suggest"
               searchComplete={this.searchComplete}
               events={events}
+              location={location}
+              value={value}
             />
           </Map>
           <input id="suggest" />
+          <Button onClick={this.handleChangeValue}>更改默认显示值</Button>
+          <Button onClick={this.handleChangeLocation}>更改location</Button>
         </div>
       </Container>
     );

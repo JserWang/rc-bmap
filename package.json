@@ -1,6 +1,6 @@
 {
   "name": "rc-bmap",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "lib/index.js",
   "typings": "types/index.d.ts",
   "repository": {
