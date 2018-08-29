@@ -38,7 +38,9 @@ class AutoComplete {
   }
 
   destroy = () => {
-    this.instance.dispose();
+    if (this.instance.dispose) {
+      this.instance.dispose();
+    }
   }
 }
 
