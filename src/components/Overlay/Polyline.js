@@ -15,6 +15,7 @@ class Polyline extends BaseOverlay {
       editing = false,
       clicking = true,
       events,
+      icons = [],
     } = this.props;
 
     const opts = {
@@ -23,6 +24,7 @@ class Polyline extends BaseOverlay {
       strokeOpacity,
       strokeStyle,
       enableClicking: clicking,
+      icons,
     };
 
     let pList = [];

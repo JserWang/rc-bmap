@@ -48,6 +48,12 @@
 - 默认值：`true`
 - 描述：是否响应点击事件
 
+## icons
+
+- 类型：`array`
+- 默认值：`[]`
+- 描述：绘制折线(轨迹)可加入纹理(箭头/方向), 在mapMounted生命周期中获取BMap对象，参照官方文档[http://lbsyun.baidu.com/jsdemo.htm#c1_25](http://lbsyun.baidu.com/jsdemo.htm#c1_25)创建IconSequence实例
+
 ## event
 
 - 类型：`Object`
