@@ -43,4 +43,8 @@ export declare class Polyline extends Component<any> {
    * 获取当前实例
    */
   getInstance: Function;
+  /**
+   * 方向纹理
+   */
+  icons: Array<any>;
 }

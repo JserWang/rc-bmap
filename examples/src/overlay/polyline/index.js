@@ -19,8 +19,8 @@ class PolylineExample extends Component {
         },
       ],
       strokeColor: 'blue',
-      strokeWeight: 5,
-      strokeOpacity: 0.5,
+      strokeWeight: 8,
+      strokeOpacity: 0.8,
       strokeStyle: 'dashed',
       massClear: false,
       editing: false,
@@ -28,7 +28,24 @@ class PolylineExample extends Component {
       events: {
         click: this.handleClick,
       },
+      icons: [],
+      isShowArrow: false,
     };
+  }
+
+  drawLineDirection = () => {
+    const sy = new window.BMap.Symbol(window.BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW, {
+      scale: 0.6,
+      strokeWeight: 1,
+      strokeColor: '#fff',
+    });
+    const icons = new window.BMap.IconSequence(sy, '10', '30');
+    return icons;
+  }
+
+  mapMounted = () => {
+    const icons = this.drawLineDirection();
+    this.setState({ icons });
   }
 
   handleClick = () => {
@@ -117,10 +134,17 @@ class PolylineExample extends Component {
     });
   }
 
+  handleShowArrow = () => {
+    const { isShowArrow } = this.state;
+    this.handleClear();
+    this.setState({ isShowArrow: !isShowArrow });
+  }
+
   render() {
     const {
       points, strokeColor, strokeWeight, strokeOpacity,
       strokeStyle, massClear, editing, clicking, events,
+      icons, isShowArrow,
     } = this.state;
     return (
       <Container code={index}>
@@ -128,6 +152,8 @@ class PolylineExample extends Component {
           <Map
             ak="dbLUj1nQTvDvKXkov5fhnH5HIE88RUEO"
             scrollWheelZoom
+            mapMounted={this.mapMounted}
+            zoom={14}
           >
             <Polyline
               points={points}
@@ -139,6 +165,7 @@ class PolylineExample extends Component {
               editing={editing}
               clicking={clicking}
               events={events}
+              icons={isShowArrow ? [icons] : []}
             />
           </Map>
         </div>
@@ -158,6 +185,9 @@ class PolylineExample extends Component {
           { massClear ? 'clearOverlay时不移除此对象' : 'clearOverlay时移除此对象' }
         </Button>
         <Button onClick={this.handleClear}>clearOverlay</Button>
+        <Button onClick={this.handleShowArrow}>
+          { isShowArrow ? '隐藏箭头' : '显示箭头' }
+        </Button>
       </Container>
     );
   }
