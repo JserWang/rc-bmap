@@ -17,7 +17,7 @@ class TrafficControl extends BaseControl {
       anchor = ControlAnchor.BOTTOM_RIGHT,
     } = this.props;
 
-    const BTrafficControl = require('../../libs/TrafficControl.js');
+    const BTrafficControl = require('bmaplib.trafficcontrol');
     this.instance = new BTrafficControl({
       showPanel: false,
     });

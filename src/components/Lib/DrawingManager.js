@@ -37,7 +37,7 @@ class DrawingManager extends BaseOverlay {
       events,
     } = this.props;
 
-    const BDrawingManager = require('../../libs/DrawingManager.js');
+    const BDrawingManager = require('bmaplib.new-drawingmanager');
     this.instance = new BDrawingManager(this.map, {
       enableDrawingTool: true,
       drawingToolOptions: {

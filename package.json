@@ -21,11 +21,15 @@
     "types",
     "dist"
   ],
+  "license": "MIT",
   "homepage": "https://bmap.jser-club.com",
   "dependencies": {
     "bmaplib.curveline": "^1.0.0",
     "bmaplib.heatmap": "^1.0.4",
-    "bmaplib.markerclusterer": "^1.0.13"
+    "bmaplib.markerclusterer": "^1.0.13",
+    "bmaplib.new-distancetool": "^1.0.0",
+    "bmaplib.new-drawingmanager": "^1.0.0",
+    "bmaplib.trafficcontrol": "^1.0.0"
   },
   "scripts": {
     "build": "rm -rf lib && babel src -d lib",
@@ -35,7 +39,10 @@
     "precommit": "lint-staged"
   },
   "lint-staged": {
-    "docs/**/*.md": ["prettier --parser markdown --write", "git add"]
+    "docs/**/*.md": [
+      "prettier --parser markdown --write",
+      "git add"
+    ]
   },
   "devDependencies": {
     "@types/react": "^16.4.9",
