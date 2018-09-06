@@ -31,6 +31,7 @@ export default class Map extends React.Component {
     mapClick: true,
     center: { lng: 116.404, lat: 39.915 },
     zoom: 15,
+    name: 'bMapInstance',
   };
 
   static propTypes = {
@@ -64,6 +65,7 @@ export default class Map extends React.Component {
     pinchToZoom: PropTypes.bool,
     events: PropTypes.object,
     contextMenu: PropTypes.object,
+    name: PropTypes.string,
   };
 
   constructor(props) {
@@ -85,7 +87,7 @@ export default class Map extends React.Component {
     } else if (global.BMap) {
       this.init(global.BMap);
     } else {
-      console.warn('BMap is undefined');
+      console.error('rc-bmap: Please confirm that you provided ak correctly.');
     }
   }
 
@@ -102,7 +104,7 @@ export default class Map extends React.Component {
 
   init = (BMap) => {
     const {
-      highResolution, autoResize, mapClick, mapMounted, contextMenu, events, ...resetProps
+      highResolution, autoResize, mapClick, mapMounted, contextMenu, events, name, ...resetProps
     } = this.props;
     this.defaultCenter = getPoint(116.404, 39.915);
     this.mapContainer = this.mapContainer || this.mapContainerRef.current;
@@ -113,20 +115,26 @@ export default class Map extends React.Component {
     });
 
     this.map = map;
+    if (name && !global[`${name}`]) {
+      global[`${name}`] = map;
+    } else if (name && global[`${name}`]) {
+      console.error(`rc-bmap: the same map name: ${name}, the duplicate map will be ignored for assignment.`);
+    }
+
     // 当初始化center为null或string时，保证地图正常渲染，用默认center处理centerAndZoom
     if (!resetProps.center || typeof resetProps.center === 'string') {
       map.centerAndZoom(this.defaultCenter, resetProps.zoom);
     }
     this.processContextMenu(contextMenu);
 
-    global.bMapInstance = map;
+    this.map = map;
     this.processMapOptions(resetProps);
     bindEvents(map, 'MAP', events);
 
     // 地图配置完成后，强制刷新，渲染子组件
     this.forceUpdate(() => {
       if (mapMounted) {
-        mapMounted(global.bMapInstance);
+        mapMounted(this.map);
       }
     });
   }
@@ -186,7 +194,6 @@ export default class Map extends React.Component {
     }
     return global.BMap._preloader;
   }
-
 
   processProps(nextProps) {
     const { center, zoom } = this.props;
