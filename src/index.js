@@ -1,4 +1,12 @@
 /**
+ * 基础类
+ */
+export { default as Point } from './components/Base/Point';
+export { default as Center } from './components/Base/Center';
+export { default as ContextMenu } from './components/Base/ContextMenu';
+export { default as Events } from './components/Base/Events';
+
+/**
  * 基础组件
  */
 export { default as Map } from './components/Map';
@@ -36,12 +44,12 @@ export { default as Boundary } from './components/Overlay/Boundary';
 /**
  * 扩展类库
  */
-export { default as Heatmap } from './components/Lib/Heatmap';
-export { default as CurveLine } from './components/Lib/CurveLine';
-export { default as MarkerClusterer } from './components/Lib/MarkerClusterer';
-export { default as DrawingManager } from './components/Lib/DrawingManager';
-export { default as DistanceTool } from './components/Lib/DistanceTool';
-export { default as TrafficControl } from './components/Lib/TrafficControl';
+// export { default as Heatmap } from './components/Lib/Heatmap';
+// export { default as CurveLine } from './components/Lib/CurveLine';
+// export { default as MarkerClusterer } from './components/Lib/MarkerClusterer';
+// export { default as DrawingManager } from './components/Lib/DrawingManager';
+// export { default as DistanceTool } from './components/Lib/DistanceTool';
+// export { default as TrafficControl } from './components/Lib/TrafficControl';
 
 /**
  * 地图图层

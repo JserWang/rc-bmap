@@ -1,21 +1,16 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {
-  getPoint,
-  isPoint,
-  bindEvents,
-  processSetOptions,
-  createContextMenu,
-  processBooleanOptions,
-  unBindEvents,
-} from '../_base/util';
+// TODO: chagne it to rc-bmap-core
+import initMap from '../../core';
 
 const fillStyle = {
   width: '100%',
   height: '100%',
 };
 
-export default class Map extends React.Component {
+const firstLowerCase = str => str.replace(/^\S/, s => s.toLowerCase());
+
+export default class Map extends PureComponent {
   static defaultProps = {
     placeHolder: '地图加载中...',
     // 与官方文档保持一致
@@ -68,6 +63,12 @@ export default class Map extends React.Component {
     name: PropTypes.string,
   };
 
+  static childContextTypes = {
+    centralizedUpdates: PropTypes.func,
+  }
+
+  config = {}
+
   constructor(props) {
     super(props);
     // React 16
@@ -80,58 +81,43 @@ export default class Map extends React.Component {
     }
   }
 
+  getChildContext() {
+    return {
+      centralizedUpdates: this.centralizedUpdates,
+    };
+  }
+
   componentDidMount() {
-    const { ak } = this.props;
-    if (ak) {
-      this.getMapScript().then(this.init);
-    } else if (global.BMap) {
-      this.init(global.BMap);
-    } else {
-      console.error('rc-bmap: Please confirm that you provided ak correctly.');
-    }
+    const { children, ...resetProps } = this.props;
+    this.config = resetProps;
+    this.createMapInstance(resetProps);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { map } = this;
-    if (map) {
-      const props = this.processProps(nextProps);
-      this.processMapOptions(props);
-      this.processContextMenu(props.contextMenu);
-      unBindEvents(map);
-      if (props.events) bindEvents(map, 'MAP', props.events);
-    }
+  componentDidUpdate() {
+    const { children, ...resetProps } = this.props;
+    this.config = { ...this.config, ...resetProps };
+    this.repaintMapInstance();
   }
 
-  init = (BMap) => {
-    const {
-      highResolution, autoResize, mapClick, mapMounted, contextMenu, events, name, ...resetProps
-    } = this.props;
-    this.defaultCenter = getPoint(116.404, 39.915);
-    this.mapContainer = this.mapContainer || this.mapContainerRef.current;
-    const map = new BMap.Map(this.mapContainer, {
-      enableHighResolution: highResolution,
-      enableAutoResize: autoResize,
-      enableMapClick: mapClick,
-    });
+  centralizedUpdates = (unit) => {
+    const { displayName, instance, props } = unit;
+    this.combineContentConfig(
+      displayName,
+      instance || props,
+    );
+  }
 
-    this.map = map;
-    if (name && !global[`${name}`]) {
-      global[`${name}`] = map;
-    } else if (name && global[`${name}`]) {
-      console.error(`rc-bmap: the same map name: ${name}, the duplicate map will be ignored for assignment.`);
-    }
+  combineContentConfig = (displayName, instance) => {
+    const { config } = this;
+    const propsName = firstLowerCase(displayName);
+    config[propsName] = instance;
+  }
 
-    // 当初始化center为null或string时，保证地图正常渲染，用默认center处理centerAndZoom
-    if (!resetProps.center || typeof resetProps.center === 'string') {
-      map.centerAndZoom(this.defaultCenter, resetProps.zoom);
-    }
-    this.processContextMenu(contextMenu);
+  createMapInstance = async (config) => {
+    const { mapMounted } = this.props;
+    const container = this.mapContainer || this.mapContainerRef.current;
+    this.map = await initMap(container, config);
 
-    this.map = map;
-    this.processMapOptions(resetProps);
-    bindEvents(map, 'MAP', events);
-
-    // 地图配置完成后，强制刷新，渲染子组件
     this.forceUpdate(() => {
       if (mapMounted) {
         mapMounted(this.map);
@@ -139,73 +125,11 @@ export default class Map extends React.Component {
     });
   }
 
-  processContextMenu = (contextMenu) => {
-    if (contextMenu) {
-      this.menu = createContextMenu(contextMenu.items, contextMenu.events);
-      if (this.menu) {
-        this.map.removeContextMenu(this.menu);
-      }
-      this.map.addContextMenu(this.menu);
+  repaintMapInstance = () => {
+    const { config, map } = this;
+    if (map) {
+      map.repaint(config);
     }
-  }
-
-  processMapOptions = (props) => {
-    const { map } = this;
-    processSetOptions(map, 'MAP_SET_OPTIONS', props);
-    processBooleanOptions(map, 'MAP_BOOLEAN_OPTIONS', props);
-
-    if (props.center) {
-      let { center } = props;
-      if (isPoint(center)) {
-        center = getPoint(center.lng, center.lat);
-      }
-      if (props.zoom) {
-        map.centerAndZoom(center, props.zoom);
-      } else {
-        map.setCenter(center);
-      }
-    }
-
-    if (props.mapType) {
-      map.setMapType(global[props.mapType]);
-    }
-  }
-
-  getMapScript = () => {
-    const { ak } = this.props;
-    global.BMap = global.BMap || {};
-    if (Object.keys(global.BMap).length === 0) {
-      global.BMap._preloader = new Promise((resolve) => {
-        const $script = document.createElement('script');
-        global.document.body.appendChild($script);
-        global._initBaiduMap = function initBaiduMap() {
-          resolve(global.BMap);
-          global.document.body.removeChild($script);
-          global.BMap._preloader = null;
-          global._initBaiduMap = null;
-        };
-
-        $script.src = `https://api.map.baidu.com/api?v=3.0&ak=${ak}&callback=_initBaiduMap`;
-      });
-
-      return global.BMap._preloader;
-    } if (!global.BMap._preloader) {
-      return Promise.resolve(global.BMap);
-    }
-    return global.BMap._preloader;
-  }
-
-  processProps(nextProps) {
-    const { center, zoom } = this.props;
-    const props = Object.assign({}, nextProps);
-    if (JSON.stringify(props.center) === JSON.stringify(center)) {
-      delete props.center;
-    }
-
-    if (props.zoom === zoom) {
-      delete props.zoom;
-    }
-    return props;
   }
 
   renderChildren = () => {
@@ -213,12 +137,7 @@ export default class Map extends React.Component {
     if (!this.map || !children) {
       return null;
     }
-    return React.Children.map(children, (child) => {
-      if (child) {
-        return React.cloneElement(child);
-      }
-      return null;
-    });
+    return children;
   }
 
   render() {
@@ -228,7 +147,7 @@ export default class Map extends React.Component {
         <div ref={this.mapContainerRef} style={fillStyle}>
           {placeHolder}
         </div>
-        {this.renderChildren()}
+        { this.renderChildren() }
       </div>
     );
   }
