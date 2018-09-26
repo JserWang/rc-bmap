@@ -99,14 +99,15 @@ export default class Map extends PureComponent {
     const { mounted, name } = this.props;
     const container = this.mapContainer || this.mapContainerRef.current;
     this.map = await initMap(container, config);
+    const mapInstance = this.map.instance;
 
     if (name) {
-      global[`${name}`] = this.map;
+      global[`${name}`] = mapInstance;
     }
 
     this.forceUpdate(() => {
       if (mounted) {
-        mounted(this.map.instance);
+        mounted(mapInstance);
       }
     });
   }

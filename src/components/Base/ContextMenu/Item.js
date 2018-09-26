@@ -1,5 +1,6 @@
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import ContextMenuIcon from '../../../constants/ContextMenuIcon';
 import { Util, BMapUtil } from '../../../core/utils';
 
 export default class ContextMenuItem extends PureComponent {
@@ -31,13 +32,24 @@ export default class ContextMenuItem extends PureComponent {
 
   processConfig = () => {
     const { disabled, separator } = this.props;
-    this.instance = BMapUtil.BMenuItem(this.props);
+    const icon = this.processIconUrl();
+    this.instance = BMapUtil.BMenuItem({ ...this.props, iconUrl: icon });
     this.instance.separator = separator;
     if (!Util.isNil(disabled) && disabled) {
       this.instance.disable();
     } else {
       this.instance.enable();
     }
+  }
+
+  processIconUrl = () => {
+    const { iconUrl } = this.props;
+    let icon = null;
+    if (iconUrl
+      && (iconUrl === ContextMenuIcon.ZOOMIN || iconUrl === ContextMenuIcon.ZOOMOUT)) {
+      icon = global[iconUrl];
+    }
+    return icon;
   }
 
   render() {
