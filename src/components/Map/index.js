@@ -29,7 +29,7 @@ export default class Map extends PureComponent {
     highResolution: PropTypes.bool,
     autoResize: PropTypes.bool,
     mapClick: PropTypes.bool,
-    mapMounted: PropTypes.func,
+    mounted: PropTypes.func,
     dragging: PropTypes.bool,
     scrollWheelZoom: PropTypes.bool,
     doubleClickZoom: PropTypes.bool,
@@ -96,7 +96,7 @@ export default class Map extends PureComponent {
   }
 
   createMapInstance = async (config) => {
-    const { mapMounted, name } = this.props;
+    const { mounted, name } = this.props;
     const container = this.mapContainer || this.mapContainerRef.current;
     this.map = await initMap(container, config);
 
@@ -105,8 +105,8 @@ export default class Map extends PureComponent {
     }
 
     this.forceUpdate(() => {
-      if (mapMounted) {
-        mapMounted(this.map.instance);
+      if (mounted) {
+        mounted(this.map.instance);
       }
     });
   }
