@@ -106,7 +106,7 @@ export default class Map extends PureComponent {
 
     this.forceUpdate(() => {
       if (mapMounted) {
-        mapMounted(this.map);
+        mapMounted(this.map.instance);
       }
     });
   }

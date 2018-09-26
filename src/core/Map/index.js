@@ -2,14 +2,14 @@ import { Util, BMapUtil } from '../utils';
 import OPTIONS from '../options/map';
 
 class Map {
-  mapInstance=null
+  instance=null
 
   config
 
   constructor(container, config) {
     this.config = Util.deepClone(config);
     const mapOptions = this.getMapOptions(config);
-    this.mapInstance = new global.BMap.Map(container, mapOptions);
+    this.instance = new global.BMap.Map(container, mapOptions);
     this.setCenterAndZoom(config.center, config.zoom);
   }
 
@@ -24,35 +24,35 @@ class Map {
 
   setCenterAndZoom = (center, zoom) => {
     center = this.getUsableCenter(center);
-    this.mapInstance.centerAndZoom(center, zoom);
+    this.instance.centerAndZoom(center, zoom);
   }
 
   setContextMenu = (contextMenu) => {
     if (this.contextMenu) {
-      this.mapInstance.removeContextMenu(this.contextMenu);
+      this.instance.removeContextMenu(this.contextMenu);
     }
     this.contextMenu = contextMenu;
     if (contextMenu) {
-      this.mapInstance.addContextMenu(contextMenu);
+      this.instance.addContextMenu(contextMenu);
     }
   }
 
   setMapType = (mapType) => {
     if (mapType) {
-      this.mapInstance.setMapType(global[mapType]);
+      this.instance.setMapType(global[mapType]);
     }
   }
 
   processEvents = (events) => {
-    BMapUtil.unBindEvents(this.mapInstance);
-    BMapUtil.bindEvents(this.mapInstance, events);
+    BMapUtil.unBindEvents(this.instance);
+    BMapUtil.bindEvents(this.instance, events);
   }
 
   processOptions = () => {
     const { config = {} } = this;
 
-    BMapUtil.processSetOptions(this.mapInstance, OPTIONS.SET, config);
-    BMapUtil.processBooleanOptions(this.mapInstance, OPTIONS.BOOLEAN, config);
+    BMapUtil.processSetOptions(this.instance, OPTIONS.SET, config);
+    BMapUtil.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);
   }
 
   getUsableCenter = (center) => {
