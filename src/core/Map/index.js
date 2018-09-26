@@ -1,12 +1,10 @@
-import { Util, BMapUtil } from './utils';
-import OPTIONS from './options/map';
+import { Util, BMapUtil } from '../utils';
+import OPTIONS from '../options/map';
 
 class Map {
   mapInstance=null
 
   config
-
-  originConfig
 
   constructor(container, config) {
     this.config = Util.deepClone(config);
@@ -52,7 +50,7 @@ class Map {
 
   processOptions = () => {
     const { config = {} } = this;
-    config.center = this.getUsableCenter(config.center);
+
     BMapUtil.processSetOptions(this.mapInstance, OPTIONS.SET, config);
     BMapUtil.processBooleanOptions(this.mapInstance, OPTIONS.BOOLEAN, config);
   }
@@ -72,7 +70,21 @@ class Map {
     return center;
   }
 
+  processCenter = (config) => {
+    const { center: oriCenter } = this.config;
+    // BMap's bug: When the values of setCenter and centerAndZoom
+    // are both city names and are the same, the map is abnormal.
+    if (Util.isString(config.center) && Util.isString(oriCenter) && config.center === oriCenter) {
+      delete config.center;
+    }
+
+    if (config.center) {
+      config.center = this.getUsableCenter(config.center);
+    }
+  }
+
   repaint = (config) => {
+    this.processCenter(config);
     this.config = config;
     this.render();
   }
@@ -81,6 +93,7 @@ class Map {
     const { config = {} } = this;
     this.setContextMenu(config.contextMenu);
     this.processEvents(config.events);
+    this.processCenter(config);
     this.processOptions();
   }
 }

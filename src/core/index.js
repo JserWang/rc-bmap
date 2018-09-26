@@ -1,10 +1,10 @@
-import Map from './map';
+import Map from './Map';
 
-const addBMapScript = (ak) => {
+const addBMapScript = (ak, version = 3) => {
   if (!global.BMap && !global.mapLoader) {
     global.mapLoader = new Promise((resolve) => {
       const script = document.createElement('script');
-      script.src = `https://api.map.baidu.com/api?v=3.0&ak=${ak}&callback=initBMapCallBack`;
+      script.src = `https://api.map.baidu.com/api?v=${version}.0&ak=${ak}&callback=initBMapCallBack`;
       document.head.appendChild(script);
       global.initBMapCallBack = () => {
         resolve(global.BMap);
@@ -18,7 +18,7 @@ const addBMapScript = (ak) => {
 };
 
 const initMap = async (container, config) => {
-  await addBMapScript(config.ak);
+  await addBMapScript(config.ak, config.version);
   return new Map(container, config);
 };
 

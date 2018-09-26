@@ -46,7 +46,9 @@ const Util = {
   isNil(obj) {
     return obj === undefined || obj === null;
   },
-
+  isObject(obj) {
+    return toString.call(obj) === '[object Object]';
+  },
 };
 
 

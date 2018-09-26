@@ -11,31 +11,10 @@ const fillStyle = {
 const firstLowerCase = str => str.replace(/^\S/, s => s.toLowerCase());
 
 export default class Map extends PureComponent {
-  static defaultProps = {
-    placeHolder: '地图加载中...',
-    // 与官方文档保持一致
-    dragging: true,
-    scrollWheelZoom: false,
-    doubleClickZoom: true,
-    keyboard: false,
-    inertialDragging: false,
-    continuousZoom: true,
-    pinchToZoom: true,
-    autoResize: true,
-    highResolution: true,
-    mapClick: true,
-    center: { lng: 116.404, lat: 39.915 },
-    zoom: 15,
-    name: 'bMapInstance',
-  };
-
   static propTypes = {
-    placeHolder: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]),
-    children: PropTypes.any,
     ak: PropTypes.string,
+    name: PropTypes.string,
+    version: PropTypes.number,
     minZoom: PropTypes.number,
     maxZoom: PropTypes.number,
     defaultCursor: PropTypes.string,
@@ -58,13 +37,15 @@ export default class Map extends PureComponent {
     inertialDragging: PropTypes.bool,
     continuousZoom: PropTypes.bool,
     pinchToZoom: PropTypes.bool,
-    events: PropTypes.object,
-    contextMenu: PropTypes.object,
-    name: PropTypes.string,
   };
 
   static childContextTypes = {
     centralizedUpdates: PropTypes.func,
+    renderPlaceHolder: PropTypes.func,
+  }
+
+  state = {
+    placeHolder: {},
   }
 
   config = {}
@@ -84,6 +65,7 @@ export default class Map extends PureComponent {
   getChildContext() {
     return {
       centralizedUpdates: this.centralizedUpdates,
+      renderPlaceHolder: this.renderPlaceHolder,
     };
   }
 
@@ -114,9 +96,13 @@ export default class Map extends PureComponent {
   }
 
   createMapInstance = async (config) => {
-    const { mapMounted } = this.props;
+    const { mapMounted, name } = this.props;
     const container = this.mapContainer || this.mapContainerRef.current;
     this.map = await initMap(container, config);
+
+    if (name) {
+      global[`${name}`] = this.map;
+    }
 
     this.forceUpdate(() => {
       if (mapMounted) {
@@ -132,6 +118,12 @@ export default class Map extends PureComponent {
     }
   }
 
+  renderPlaceHolder = (placeHolder) => {
+    this.setState({
+      placeHolder,
+    });
+  }
+
   renderChildren = () => {
     const { children } = this.props;
     if (!this.map || !children) {
@@ -141,11 +133,11 @@ export default class Map extends PureComponent {
   }
 
   render() {
-    const { placeHolder } = this.props;
+    const { placeHolder } = this.state;
     return (
       <div style={fillStyle}>
         <div ref={this.mapContainerRef} style={fillStyle}>
-          {placeHolder}
+          { placeHolder.render ? placeHolder.render() : null}
         </div>
         { this.renderChildren() }
       </div>
