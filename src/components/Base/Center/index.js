@@ -1,8 +1,10 @@
-import SubComponent from './SubComponent';
-import { BMapUtil } from '../../core/utils';
+import SubComponent from '../SubComponent';
+import { BMapUtil } from '../../../core/utils';
 
 export default class Center extends SubComponent {
   displayName= 'Center'
+
+  instance= this.getInstance()
 
   getInstance = () => {
     const { lng, lat, name } = this.props;

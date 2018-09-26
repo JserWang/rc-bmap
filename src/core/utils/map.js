@@ -14,6 +14,12 @@ const BMapUtil = {
   BSize(width, height) {
     return new global.BMap.Size(width, height);
   },
+  isSize(size) {
+    return size.width && size.height;
+  },
+  isBSize(size) {
+    return BMapUtil.isSize(size) && size.equals;
+  },
   BMenuItem(config) {
     const menuItemOptions = {
       id: config.id,
@@ -24,6 +30,9 @@ const BMapUtil = {
   },
   BContextMenu() {
     return new global.BMap.ContextMenu();
+  },
+  BControl() {
+    return new global.BMap.Control();
   },
   bindEvents(target, events) {
     if (events) {

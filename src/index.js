@@ -2,6 +2,7 @@
  * 基础类
  */
 export { default as Point } from './components/Base/Point';
+export { default as Offset } from './components/Base/Offset';
 export { default as Center } from './components/Base/Center';
 export { default as ContextMenu } from './components/Base/ContextMenu';
 export { default as Events } from './components/Base/Events';
@@ -11,7 +12,7 @@ export { default as PlaceHolder } from './components/Base/PlaceHolder';
  * 基础组件
  */
 export { default as Map } from './components/Map';
-export { default as Control } from './components/Control';
+export { default as CustomControl } from './components/Control/Custom';
 export { default as Overlay } from './components/Overlay';
 export { default as ReactComponent } from './components/ReactComponent';
 export { default as AutoComplete } from './components/AutoComplete';

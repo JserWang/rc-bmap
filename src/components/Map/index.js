@@ -40,6 +40,7 @@ export default class Map extends PureComponent {
   };
 
   static childContextTypes = {
+    getMapInstance: PropTypes.func,
     centralizedUpdates: PropTypes.func,
     renderPlaceHolder: PropTypes.func,
   }
@@ -50,20 +51,9 @@ export default class Map extends PureComponent {
 
   config = {}
 
-  constructor(props) {
-    super(props);
-    // React 16
-    if (React.createRef) {
-      this.mapContainerRef = React.createRef();
-    } else {
-      this.mapContainerRef = (ref) => {
-        this.mapContainer = ref;
-      };
-    }
-  }
-
   getChildContext() {
     return {
+      getMapInstance: this.getMapInstance,
       centralizedUpdates: this.centralizedUpdates,
       renderPlaceHolder: this.renderPlaceHolder,
     };
@@ -97,7 +87,7 @@ export default class Map extends PureComponent {
 
   createMapInstance = async (config) => {
     const { mounted, name } = this.props;
-    const container = this.mapContainer || this.mapContainerRef.current;
+    const container = this.mapContainer;
     this.map = await initMap(container, config);
     const mapInstance = this.map.instance;
 
@@ -111,6 +101,12 @@ export default class Map extends PureComponent {
       }
     });
   }
+
+  getMapContainer = (ref) => {
+    this.mapContainer = ref;
+  }
+
+  getMapInstance = () => this.map.instance
 
   repaintMapInstance = () => {
     const { config, map } = this;
@@ -137,7 +133,7 @@ export default class Map extends PureComponent {
     const { placeHolder } = this.state;
     return (
       <div style={fillStyle}>
-        <div ref={this.mapContainerRef} style={fillStyle}>
+        <div ref={this.getMapContainer} style={fillStyle}>
           { placeHolder.render ? placeHolder.render() : null}
         </div>
         { this.renderChildren() }
