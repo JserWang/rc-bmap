@@ -1,30 +1,62 @@
-import BaseControl from './BaseControl';
-import { getSize } from '../_base/util';
-import ANCHOR from '../../constants/ControlAnchor';
-import ReactComponent from '../ReactComponent';
+import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { CityList as BCityList } from '../../core';
 
-@ReactComponent
-class CityList extends BaseControl {
-  init() {
-    const {
-      anchor = ANCHOR.TOP_LEFT,
-      offset = {
-        width: 0,
-        height: 0,
-      },
-      onChangeBefore,
-      onChangeAfter,
-    } = this.props;
+class CityList extends PureComponent {
+  static contextTypes = {
+    getMapInstance: PropTypes.func,
+  }
 
-    const opts = {
-      anchor: global[anchor],
-      offset: getSize(offset.width, offset.height),
-      onChangeBefore,
-      onChangeAfter,
+  static childContextTypes = {
+    centralizedUpdates: PropTypes.func,
+  }
+
+  instance = null
+
+  config = {}
+
+  getChildContext() {
+    return {
+      centralizedUpdates: this.centralizedUpdates,
     };
+  }
 
-    this.instance = new global.BMap.CityListControl(opts);
-    this.map.addControl(this.instance);
+  componentDidMount() {
+    this.init();
+  }
+
+  componentDidUpdate() {
+    this.destroy();
+    this.init();
+  }
+
+  centralizedUpdates = (unit) => {
+    if (unit.displayName === 'Offset') {
+      this.config.offset = unit.props;
+    } else if (unit.displayName === 'Events') {
+      const events = Object.keys(unit.props);
+      events.forEach((key) => {
+        this.config[key] = unit.props[key];
+      });
+    }
+  }
+
+  init = () => {
+    const { context, props } = this;
+    const { children, ...resetProps } = props;
+    const cityList = new BCityList({ ...this.config, ...resetProps });
+    this.instance = cityList.instance;
+    context.getMapInstance().addControl(this.instance);
+  }
+
+  destroy = () => {
+    const { context, instance } = this;
+    context.getMapInstance().removeControl(instance);
+  }
+
+  render() {
+    const { children } = this.props;
+    return children;
   }
 }
 

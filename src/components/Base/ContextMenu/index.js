@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Item from './Item';
-import { BMapUtil } from '../../../core/utils';
+import { BMapUtil } from '../../../core';
 
 export default class ContextMenu extends PureComponent {
   static Item = Item

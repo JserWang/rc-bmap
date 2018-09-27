@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import getCustomControl from '../../core/Control';
+import { getCustomControl } from '../../core';
 
 const CustomHOC = WrappedComponent => class extends PureComponent {
   static contextTypes = {

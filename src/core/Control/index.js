@@ -13,7 +13,7 @@ class Control {
   processCommonOptions = (config) => {
     const { anchor, offset } = config;
     if (anchor) {
-      config.anchor = global[anchor];
+      config.anchor = global[anchor] || anchor;
     }
 
     if (offset) {
