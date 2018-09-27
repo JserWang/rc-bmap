@@ -3,7 +3,6 @@
  */
 export { default as Point } from './components/Base/Point';
 export { default as Offset } from './components/Base/Offset';
-export { default as Center } from './components/Base/Center';
 export { default as ContextMenu } from './components/Base/ContextMenu';
 export { default as Events } from './components/Base/Events';
 export { default as PlaceHolder } from './components/Base/PlaceHolder';

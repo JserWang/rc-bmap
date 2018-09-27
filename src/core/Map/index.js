@@ -3,11 +3,12 @@ import { Util, BMapUtil } from '../utils';
 import OPTIONS from '../options/map';
 
 class Map {
-  instance=null
+  config = {}
 
-  config={}
+  instance = null
 
   constructor(container, config) {
+    this.config = config;
     const mapOptions = this.getMapOptions(config);
     this.instance = new global.BMap.Map(container, mapOptions);
     this.setCenterAndZoom(config.center, config.zoom);

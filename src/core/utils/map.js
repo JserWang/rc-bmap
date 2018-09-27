@@ -34,6 +34,9 @@ const BMapUtil = {
   BControl() {
     return new global.BMap.Control();
   },
+  BCityList(config) {
+    return new global.BMap.CityListControl(config);
+  },
   bindEvents(target, events) {
     if (events) {
       const eventKeys = Object.keys(events);

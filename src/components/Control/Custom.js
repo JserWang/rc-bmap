@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Control from '../../core/Control';
-import { Util, BMapUtil } from '../../core/utils';
+import getCustomControl from '../../core/Control';
 
 const CustomHOC = WrappedComponent => class extends PureComponent {
   static contextTypes = {
@@ -14,6 +13,8 @@ const CustomHOC = WrappedComponent => class extends PureComponent {
 
   config = {}
 
+  instance = null
+
   getChildContext() {
     return {
       centralizedUpdates: this.centralizedUpdates,
@@ -22,42 +23,20 @@ const CustomHOC = WrappedComponent => class extends PureComponent {
 
   componentDidMount() {
     const { context } = this;
-
-    Control.prototype = new BMapUtil.BControl();
-    Control.prototype.initialize = this.initialize;
-    const ctrl = new Control();
-    this.instance = ctrl;
     const { children, ...resetProps } = this.props;
     this.config = { ...this.config, ...resetProps };
-    this.processOptions(this.config);
-    context.getMapInstance().addControl(ctrl);
+    this.instance = getCustomControl(this.config, this.initialize);
+    context.getMapInstance().addControl(this.instance);
   }
 
   componentDidUpdate() {
     const { children, ...resetProps } = this.props;
-    const diffConfig = Util.getDiffConfig(this.config, resetProps);
-    this.processOptions(diffConfig);
-    this.config = { ...this.config, ...resetProps };
+    this.instance.repaint(resetProps);
   }
 
-  processOptions = (config) => {
-    const { anchor, offset, visible } = config;
-    if (anchor) {
-      this.instance.setAnchor(global[anchor]);
-    }
-
-    if (offset) {
-      const usableOffset = this.getUsableOffset(offset || this.offset);
-      this.instance.setOffset(usableOffset);
-    }
-
-    if (!Util.isNil(visible)) {
-      if (!visible) {
-        this.instance.hide();
-      } else {
-        this.instance.show();
-      }
-    }
+  componentWillUnmount() {
+    const { context } = this;
+    context.getMapInstance().removeControl(this.instance);
   }
 
   getContainer = (ref) => {
@@ -72,20 +51,8 @@ const CustomHOC = WrappedComponent => class extends PureComponent {
 
   centralizedUpdates = (unit) => {
     if (unit.displayName === 'Offset') {
-      this.config.offset = unit.instance;
+      this.config.offset = unit.props;
     }
-  }
-
-  getUsableOffset = (offset) => {
-    if (!Util.isNil(offset)) {
-      if (!BMapUtil.isSize(offset)) {
-        throw Error('The `offset` property should be literal value `{ width, height }`');
-      } else if (!BMapUtil.isBSize(offset)) {
-        offset = BMapUtil.BSize(offset.width, offset.height);
-      }
-    }
-
-    return offset;
   }
 
   render() {
