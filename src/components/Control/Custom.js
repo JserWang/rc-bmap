@@ -12,7 +12,7 @@ const CustomHOC = WrappedComponent => class extends PureComponent {
     centralizedUpdates: PropTypes.func,
   }
 
-  offset = { width: 0, height: 0 }
+  config = {}
 
   getChildContext() {
     return {
@@ -22,37 +22,41 @@ const CustomHOC = WrappedComponent => class extends PureComponent {
 
   componentDidMount() {
     const { context } = this;
-    const {
-      anchor,
-      offset,
-      visible,
-    } = this.props;
 
     Control.prototype = new BMapUtil.BControl();
     Control.prototype.initialize = this.initialize;
-    const usableOffset = this.getUsableOffset(offset || this.offset);
-    const ctrl = new Control(global[anchor], usableOffset);
+    const ctrl = new Control();
     this.instance = ctrl;
+    const { children, ...resetProps } = this.props;
+    this.config = { ...this.config, ...resetProps };
+    this.processOptions(this.config);
     context.getMapInstance().addControl(ctrl);
-
-    if (!Util.isNil(visible) && !visible) {
-      ctrl.hide();
-    }
   }
 
   componentDidUpdate() {
-    const {
-      anchor,
-      offset,
-      visible,
-    } = this.props;
-    this.instance.setAnchor(global[anchor]);
-    const usableOffset = this.getUsableOffset(offset || this.offset);
-    this.instance.setOffset(usableOffset);
-    if (!Util.isNil(visible) && !visible) {
-      this.instance.hide();
-    } else {
-      this.instance.show();
+    const { children, ...resetProps } = this.props;
+    const diffConfig = Util.getDiffConfig(this.config, resetProps);
+    this.processOptions(diffConfig);
+    this.config = { ...this.config, ...resetProps };
+  }
+
+  processOptions = (config) => {
+    const { anchor, offset, visible } = config;
+    if (anchor) {
+      this.instance.setAnchor(global[anchor]);
+    }
+
+    if (offset) {
+      const usableOffset = this.getUsableOffset(offset || this.offset);
+      this.instance.setOffset(usableOffset);
+    }
+
+    if (!Util.isNil(visible)) {
+      if (!visible) {
+        this.instance.hide();
+      } else {
+        this.instance.show();
+      }
     }
   }
 
@@ -68,7 +72,7 @@ const CustomHOC = WrappedComponent => class extends PureComponent {
 
   centralizedUpdates = (unit) => {
     if (unit.displayName === 'Offset') {
-      this.offset = unit.instance;
+      this.config.offset = unit.instance;
     }
   }
 

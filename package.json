@@ -29,7 +29,8 @@
     "bmaplib.markerclusterer": "^1.0.13",
     "bmaplib.new-distancetool": "^1.0.0",
     "bmaplib.new-drawingmanager": "^1.0.0",
-    "bmaplib.trafficcontrol": "^1.0.0"
+    "bmaplib.trafficcontrol": "^1.0.0",
+    "lodash.isequal": "^4.5.0"
   },
   "scripts": {
     "build": "rm -rf lib && babel src -d lib",

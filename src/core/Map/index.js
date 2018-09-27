@@ -1,13 +1,13 @@
+
 import { Util, BMapUtil } from '../utils';
 import OPTIONS from '../options/map';
 
 class Map {
   instance=null
 
-  config
+  config={}
 
   constructor(container, config) {
-    this.config = Util.deepClone(config);
     const mapOptions = this.getMapOptions(config);
     this.instance = new global.BMap.Map(container, mapOptions);
     this.setCenterAndZoom(config.center, config.zoom);
@@ -48,9 +48,7 @@ class Map {
     BMapUtil.bindEvents(this.instance, events);
   }
 
-  processOptions = () => {
-    const { config = {} } = this;
-
+  processOptions = (config) => {
     BMapUtil.processSetOptions(this.instance, OPTIONS.SET, config);
     BMapUtil.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);
   }
@@ -85,16 +83,16 @@ class Map {
 
   repaint = (config) => {
     this.processCenter(config);
-    this.config = config;
-    this.render();
+    const diffConfig = Util.getDiffConfig(this.config, config);
+    this.render(diffConfig);
+    this.config = { ...this.config, ...diffConfig };
   }
 
-  render = () => {
-    const { config = {} } = this;
+  render = (config) => {
     this.setContextMenu(config.contextMenu);
     this.processEvents(config.events);
     this.processCenter(config);
-    this.processOptions();
+    this.processOptions(config);
   }
 }
 
