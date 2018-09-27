@@ -8,10 +8,10 @@ class Map {
   instance = null
 
   constructor(container, config) {
-    this.config = config;
     const mapOptions = this.getMapOptions(config);
     this.instance = new global.BMap.Map(container, mapOptions);
     this.setCenterAndZoom(config.center, config.zoom);
+    this.config.center = config.center;
   }
 
   getMapOptions = config => ({
@@ -70,16 +70,7 @@ class Map {
   }
 
   processCenter = (config) => {
-    const { center: oriCenter } = this.config;
-    // BMap's bug: When the values of setCenter and centerAndZoom
-    // are both city names and are the same, the map is abnormal.
-    if (Util.isString(config.center) && Util.isString(oriCenter) && config.center === oriCenter) {
-      delete config.center;
-    }
-
-    if (config.center) {
-      config.center = this.getUsableCenter(config.center);
-    }
+    config.center = this.getUsableCenter(config.center);
   }
 
   repaint = (config) => {
@@ -92,7 +83,9 @@ class Map {
   render = (config) => {
     this.setContextMenu(config.contextMenu);
     this.processEvents(config.events);
-    this.processCenter(config);
+    if (config.center) {
+      this.processCenter(config);
+    }
     this.processOptions(config);
   }
 }
