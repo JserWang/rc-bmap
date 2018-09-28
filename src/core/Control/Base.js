@@ -1,8 +1,9 @@
 import { Util, BMapUtil } from '../utils';
 
 class BaseControl {
-  constructor(map) {
+  constructor(config, map) {
     this.map = map;
+    this.processCommonOptions(config);
   }
 
   processCommonOptions = (config) => {

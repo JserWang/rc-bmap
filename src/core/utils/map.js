@@ -31,17 +31,41 @@ const BMapUtil = {
   BContextMenu() {
     return new global.BMap.ContextMenu();
   },
+  BIcon(config) {
+    const iconOptions = {
+      anchor: config.anchor,
+      imageOffset: config.imageOffset,
+      infoWindowAnchor: config.infoWindowAnchor,
+      printImageUrl: config.printImageUrl,
+    };
+    return new global.BMap.Icon(config.url, config.size, iconOptions);
+  },
   BControl() {
     return new global.BMap.Control();
   },
-  BCityList(config) {
+  BCityListControl(config) {
     return new global.BMap.CityListControl(config);
   },
   BCopyrightControl(config) {
     return new global.BMap.CopyrightControl(config);
   },
-  BNavigation(config) {
+  BNavigationControl(config) {
     return new global.BMap.NavigationControl(config);
+  },
+  BMapTypeControl(config) {
+    return new global.BMap.MapTypeControl(config);
+  },
+  BScaleControl(config) {
+    return new global.BMap.ScaleControl(config);
+  },
+  BPanoramaControl(config) {
+    return new global.BMap.PanoramaControl(config);
+  },
+  BOverviewMapControl(config) {
+    return new global.BMap.OverviewMapControl(config);
+  },
+  BGeolocationControl(config) {
+    return new global.BMap.GeolocationControl(config);
   },
   bindEvents(target, events) {
     if (events) {

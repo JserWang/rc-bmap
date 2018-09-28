@@ -44,6 +44,8 @@ class BaseControl extends PureComponent {
       this.config.offset = unit.props;
     } else if (unit.displayName === 'Events') {
       this.config.events = unit.props;
+    } else if (unit.displayName === 'Icon') {
+      this.config.icon = unit.instance;
     }
   }
 

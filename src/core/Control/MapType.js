@@ -1,7 +1,7 @@
 import { BMapUtil } from '../utils';
 import BaseControl from './Base';
 
-class Navigation extends BaseControl {
+class MapType extends BaseControl {
   constructor(config, map) {
     super(config, map);
     this.init(config);
@@ -10,18 +10,19 @@ class Navigation extends BaseControl {
   instance = null
 
   init = (config) => {
-    const options = this.getNavigationControlOptions(config);
-    this.instance = BMapUtil.BNavigationControl(options);
+    const options = this.getMapTypeOptions(config);
+    this.instance = BMapUtil.BMapTypeControl(options);
     this.map.addControl(this.instance);
   }
 
-  getNavigationControlOptions = config => ({
+  getMapTypeOptions = config => ({
     anchor: config.anchor,
     offset: config.offset,
     type: global[config.type] || config.type,
-    showZoomInfo: config.showZoomInfo,
-    enableGeolocation: config.geolocation,
+    mapTypes: this.getTypes(config.mapTypes),
   })
+
+  getTypes = types => types && types.map(item => global[item] || item)
 }
 
-export default Navigation;
+export default MapType;

@@ -4,6 +4,11 @@ import getCustomControl from './Control';
 import CityList from './Control/CityList';
 import Copyright from './Control/Copyright';
 import Navigation from './Control/Navigation';
+import MapType from './Control/MapType';
+import Scale from './Control/Scale';
+import Panorama from './Control/Panorama';
+import OverviewMap from './Control/OverviewMap';
+import Geolocation from './Control/Geolocation';
 
 export {
   BMapUtil,
@@ -12,6 +17,11 @@ export {
   CityList,
   Copyright,
   Navigation,
+  MapType,
+  Scale,
+  Panorama,
+  OverviewMap,
+  Geolocation,
 };
 
 const addBMapScript = (ak, version = 3) => {

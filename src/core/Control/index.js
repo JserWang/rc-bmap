@@ -1,7 +1,9 @@
 import { BMapUtil, Util } from '../utils';
+import BaseControl from './Base';
 
-class Control {
-  constructor(config) {
+class Control extends BaseControl {
+  constructor(config, map) {
+    super(config, map);
     this.config = config;
     this.processCommonOptions(config);
     this.defaultAnchor = config.anchor;
@@ -58,11 +60,11 @@ class Control {
 }
 
 // 异步加载时，BMap对象不存在，所以提供获得类方法，确保调用时BMap对象存在。
-const getCustomControl = (config, initialize) => {
+const getCustomControl = (config, initialize, mapInstance) => {
   Control.prototype = new BMapUtil.BControl();
   Control.prototype.initialize = initialize;
 
-  return new Control(config);
+  return new Control(config, mapInstance);
 };
 
 export default getCustomControl;

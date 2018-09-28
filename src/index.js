@@ -7,6 +7,7 @@ export { default as ContextMenu } from './components/Base/ContextMenu';
 export { default as Events } from './components/Base/Events';
 export { default as PlaceHolder } from './components/Base/PlaceHolder';
 export { default as Copyright } from './components/Base/Copyright';
+export { default as Icon } from './components/Base/Icon';
 
 /**
  * 基础组件
