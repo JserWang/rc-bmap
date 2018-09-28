@@ -12,7 +12,7 @@ class BaseControl {
     } = config;
 
     if (anchor) {
-      config.anchor = global[config.anchor];
+      config.anchor = !Util.isNil(global[anchor]) ? global[anchor] : anchor;
     }
 
     if (offset) {

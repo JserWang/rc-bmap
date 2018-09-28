@@ -42,11 +42,7 @@ class Copyright extends BaseControl {
     this.copyrights.splice(id, 1, config);
   }
 
-  init = () => {
-    const { copyrights } = this;
-    const copyright = new BCopyright(this.config, copyrights, this.mapInstance);
-    this.instance = copyright.instance;
-  }
+  getRealControl = () => new BCopyright(this.config, this.copyrights, this.mapInstance)
 }
 
 export default Copyright;

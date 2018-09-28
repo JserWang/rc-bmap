@@ -11,6 +11,8 @@ class BaseControl extends PureComponent {
     centralizedUpdates: PropTypes.func,
   }
 
+  control = null
+
   mapInstance = null
 
   config = {}
@@ -26,17 +28,19 @@ class BaseControl extends PureComponent {
     const { children, ...resetProps } = props;
     this.config = { ...this.config, ...resetProps };
     this.mapInstance = context.getMapInstance();
-    this.init();
+    const control = this.getRealControl();
+    this.control = control;
+    this.instance = control.instance;
   }
 
   componentDidUpdate() {
     const { children, ...resetProps } = this.props;
     this.config = { ...this.config, ...resetProps };
-    this.instance.repaint(this.config);
+    this.control.repaint(this.config);
   }
 
   componentWillUnmount() {
-    this.instance.destroy();
+    this.control.destroy();
   }
 
   centralizedUpdates = (unit) => {

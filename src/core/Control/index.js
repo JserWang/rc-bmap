@@ -1,13 +1,15 @@
 import { BMapUtil, Util } from '../utils';
-import BaseControl from './Base';
 
-class Control extends BaseControl {
+class Control {
   constructor(config, map) {
-    super(config, map);
-    this.config = config;
+    this.config = { ...config };
+    this.map = map;
     this.processCommonOptions(config);
     this.defaultAnchor = config.anchor;
+    this.defaultOffset = config.offset;
     this.processOptions(config);
+
+    this.map.addControl();
   }
 
   config = {}
@@ -15,7 +17,7 @@ class Control extends BaseControl {
   processCommonOptions = (config) => {
     const { anchor, offset } = config;
     if (anchor) {
-      config.anchor = global[anchor] || anchor;
+      config.anchor = !Util.isNil(global[anchor]) ? global[anchor] : anchor;
     }
 
     if (offset) {
@@ -57,14 +59,21 @@ class Control extends BaseControl {
     this.processOptions(diffConfig);
     this.config = { ...this.config, ...diffConfig };
   }
+
+  destroy = () => {
+    this.map.removeControl(this);
+  }
 }
 
 // 异步加载时，BMap对象不存在，所以提供获得类方法，确保调用时BMap对象存在。
 const getCustomControl = (config, initialize, mapInstance) => {
-  Control.prototype = new BMapUtil.BControl();
+  Control.prototype = BMapUtil.BControl();
   Control.prototype.initialize = initialize;
 
-  return new Control(config, mapInstance);
+  const control = new Control(config, mapInstance);
+  mapInstance.addControl(control);
+
+  return control;
 };
 
 export default getCustomControl;

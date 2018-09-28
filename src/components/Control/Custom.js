@@ -1,42 +1,27 @@
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { getCustomControl } from '../../core';
+import BaseControl from './BaseControl';
 
-const CustomHOC = WrappedComponent => class extends PureComponent {
-  static contextTypes = {
-    getMapInstance: PropTypes.func,
-  }
-
-  static childContextTypes = {
-    centralizedUpdates: PropTypes.func,
-  }
-
+const CustomHOC = WrappedComponent => class extends BaseControl {
   config = {}
 
-  instance = null
-
-  getChildContext() {
-    return {
-      centralizedUpdates: this.centralizedUpdates,
-    };
-  }
+  control = null
 
   componentDidMount() {
     const { context } = this;
     const { children, ...resetProps } = this.props;
     this.config = { ...this.config, ...resetProps };
-    this.instance = getCustomControl(this.config, this.initialize);
-    context.getMapInstance().addControl(this.instance);
+    this.mapInstance = context.getMapInstance();
+    this.control = getCustomControl(this.config, this.initialize, this.mapInstance);
   }
 
   componentDidUpdate() {
     const { children, ...resetProps } = this.props;
-    this.instance.repaint(resetProps);
+    this.control.repaint(resetProps);
   }
 
   componentWillUnmount() {
-    const { context } = this;
-    context.getMapInstance().removeControl(this.instance);
+    this.control.destroy();
   }
 
   getContainer = (ref) => {
@@ -44,15 +29,9 @@ const CustomHOC = WrappedComponent => class extends PureComponent {
   }
 
   initialize = () => {
-    const { context, mapContainer } = this;
-    context.getMapInstance().getContainer().appendChild(mapContainer);
+    const { mapContainer, mapInstance } = this;
+    mapInstance.getContainer().appendChild(mapContainer);
     return mapContainer;
-  }
-
-  centralizedUpdates = (unit) => {
-    if (unit.displayName === 'Offset') {
-      this.config.offset = unit.props;
-    }
   }
 
   render() {
