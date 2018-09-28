@@ -8,8 +8,6 @@ class Control {
     this.defaultAnchor = config.anchor;
     this.defaultOffset = config.offset;
     this.processOptions(config);
-
-    this.map.addControl();
   }
 
   config = {}

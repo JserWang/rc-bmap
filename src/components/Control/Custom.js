@@ -25,13 +25,13 @@ const CustomHOC = WrappedComponent => class extends BaseControl {
   }
 
   getContainer = (ref) => {
-    this.mapContainer = ref;
+    this.container = ref;
   }
 
   initialize = () => {
-    const { mapContainer, mapInstance } = this;
-    mapInstance.getContainer().appendChild(mapContainer);
-    return mapContainer;
+    const { container, mapInstance } = this;
+    mapInstance.getContainer().appendChild(container);
+    return container;
   }
 
   render() {

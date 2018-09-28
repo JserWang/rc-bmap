@@ -67,6 +67,9 @@ const BMapUtil = {
   BGeolocationControl(config) {
     return new global.BMap.GeolocationControl(config);
   },
+  BOverlay() {
+    return new global.BMap.Overlay();
+  },
   bindEvents(target, events) {
     if (events) {
       const eventKeys = Object.keys(events);

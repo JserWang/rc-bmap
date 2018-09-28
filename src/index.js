@@ -14,7 +14,7 @@ export { default as Icon } from './components/Base/Icon';
  */
 export { default as Map } from './components/Map';
 export { default as CustomControl } from './components/Control/Custom';
-export { default as Overlay } from './components/Overlay';
+export { default as CustomOverlay } from './components/Overlay/Custom';
 export { default as ReactComponent } from './components/ReactComponent';
 export { default as AutoComplete } from './components/AutoComplete';
 
