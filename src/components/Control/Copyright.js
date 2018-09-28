@@ -1,13 +1,9 @@
-import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Copyright as BCopyright } from '../../core';
+import BaseControl from './BaseControl';
 
-class Copyright extends PureComponent {
+class Copyright extends BaseControl {
   static displayName = 'CopyrightControl'
-
-  static contextTypes = {
-    getMapInstance: PropTypes.func,
-  }
 
   static childContextTypes = {
     getId: PropTypes.func,
@@ -29,15 +25,6 @@ class Copyright extends PureComponent {
     };
   }
 
-  componentDidMount() {
-    this.init();
-  }
-
-  componentDidUpdate() {
-    this.destroy();
-    this.init();
-  }
-
   centralizedUpdates = (unit) => {
     if (unit.displayName === 'Offset') {
       this.config.offset = unit.props;
@@ -56,23 +43,9 @@ class Copyright extends PureComponent {
   }
 
   init = () => {
-    const {
-      context, props, copyrights, config,
-    } = this;
-    const { children, ...resetProps } = props;
-    const copyright = new BCopyright({ ...config, ...resetProps }, copyrights);
+    const { copyrights } = this;
+    const copyright = new BCopyright(this.config, copyrights, this.mapInstance);
     this.instance = copyright.instance;
-    context.getMapInstance().addControl(this.instance);
-  }
-
-  destroy = () => {
-    const { context, instance } = this;
-    context.getMapInstance().removeControl(instance);
-  }
-
-  render() {
-    const { children } = this.props;
-    return children;
   }
 }
 

@@ -40,6 +40,9 @@ const BMapUtil = {
   BCopyrightControl(config) {
     return new global.BMap.CopyrightControl(config);
   },
+  BNavigation(config) {
+    return new global.BMap.NavigationControl(config);
+  },
   bindEvents(target, events) {
     if (events) {
       const eventKeys = Object.keys(events);

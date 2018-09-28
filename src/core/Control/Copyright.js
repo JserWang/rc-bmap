@@ -2,8 +2,8 @@ import { BMapUtil } from '../utils';
 import BaseControl from './Base';
 
 class Copyright extends BaseControl {
-  constructor(config, copyrights) {
-    super();
+  constructor(config, copyrights, map) {
+    super(map);
     this.init(config, copyrights);
   }
 
@@ -15,7 +15,8 @@ class Copyright extends BaseControl {
     copyrights.forEach((item) => {
       this.instance.addCopyright(item);
     });
-    this.config = config;
+
+    this.map.addControl(this.instance);
   }
 }
 

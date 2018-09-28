@@ -3,6 +3,7 @@ import { BMapUtil, Util } from './utils';
 import getCustomControl from './Control';
 import CityList from './Control/CityList';
 import Copyright from './Control/Copyright';
+import Navigation from './Control/Navigation';
 
 export {
   BMapUtil,
@@ -10,6 +11,7 @@ export {
   getCustomControl,
   CityList,
   Copyright,
+  Navigation,
 };
 
 const addBMapScript = (ak, version = 3) => {

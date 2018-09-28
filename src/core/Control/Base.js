@@ -1,7 +1,9 @@
 import { Util, BMapUtil } from '../utils';
 
 class BaseControl {
-  config = {}
+  constructor(map) {
+    this.map = map;
+  }
 
   processCommonOptions = (config) => {
     const {
@@ -27,6 +29,15 @@ class BaseControl {
     }
 
     return offset;
+  }
+
+  repaint = (config) => {
+    this.destroy();
+    this.init(config);
+  }
+
+  destroy = () => {
+    this.map.removeControl(this.instance);
   }
 }
 

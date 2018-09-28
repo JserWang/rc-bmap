@@ -2,8 +2,8 @@ import { BMapUtil } from '../utils';
 import BaseControl from './Base';
 
 class CityList extends BaseControl {
-  constructor(config) {
-    super();
+  constructor(config, map) {
+    super(map);
     this.init(config);
   }
 
@@ -12,7 +12,7 @@ class CityList extends BaseControl {
   init = (config) => {
     this.processCommonOptions(config);
     this.instance = BMapUtil.BCityList(config);
-    this.config = config;
+    this.map.addControl(this.instance);
   }
 }
 
