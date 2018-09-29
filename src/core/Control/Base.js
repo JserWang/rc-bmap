@@ -1,9 +1,14 @@
 import { Util, BMapUtil } from '../utils';
 
 class BaseControl {
-  constructor(config, map) {
+  instance = null;
+
+  constructor(...params) {
+    const [config, map] = [...params];
     this.map = map;
     this.processCommonOptions(config);
+    this.init(...params);
+    this.processVisible(config.visible);
   }
 
   processCommonOptions = (config) => {
@@ -17,6 +22,16 @@ class BaseControl {
 
     if (offset) {
       config.offset = this.getUsableOffset(offset);
+    }
+  }
+
+  processVisible = (visible) => {
+    if (!Util.isNil(visible)) {
+      if (!visible) {
+        this.instance.hide();
+      } else {
+        this.instance.show();
+      }
     }
   }
 
