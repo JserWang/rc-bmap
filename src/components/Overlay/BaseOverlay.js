@@ -50,6 +50,10 @@ class BaseOverlay extends PureComponent {
       this.config.events = unit.props;
     } else if (unit.displayName === 'Icon') {
       this.config.icon = unit.instance;
+    } else if (unit.displayName === 'Shadow') {
+      this.config.shadow = unit.instance;
+    } else if (unit.displayName === 'ContextMenu') {
+      this.config.contextMenu = unit.instance;
     }
   }
 

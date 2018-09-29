@@ -10,6 +10,7 @@ import Panorama from './Control/Panorama';
 import OverviewMap from './Control/OverviewMap';
 import Geolocation from './Control/Geolocation';
 import getCustomOverlay from './Overlay';
+import Marker from './Overlay/Marker';
 
 export {
   BMapUtil,
@@ -24,6 +25,7 @@ export {
   OverviewMap,
   Geolocation,
   getCustomOverlay,
+  Marker,
 };
 
 const addBMapScript = (ak, version = 3) => {

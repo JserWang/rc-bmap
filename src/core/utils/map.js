@@ -70,6 +70,9 @@ const BMapUtil = {
   BOverlay() {
     return new global.BMap.Overlay();
   },
+  BMarker(point, options) {
+    return new global.BMap.Marker(point, options);
+  },
   bindEvents(target, events) {
     if (events) {
       const eventKeys = Object.keys(events);
