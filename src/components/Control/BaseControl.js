@@ -1,6 +1,7 @@
 
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Util } from '../../core';
 
 class BaseControl extends PureComponent {
   static contextTypes = {
@@ -44,13 +45,10 @@ class BaseControl extends PureComponent {
   }
 
   centralizedUpdates = (unit) => {
-    if (unit.displayName === 'Offset') {
-      this.config.offset = unit.props;
-    } else if (unit.displayName === 'Events') {
-      this.config.events = unit.props;
-    } else if (unit.displayName === 'Icon') {
-      this.config.icon = unit.instance;
-    }
+    const { config } = this;
+    const { displayName, instance, props } = unit;
+    const propsName = Util.firstLowerCase(displayName);
+    config[propsName] = instance || props;
   }
 
   render() {

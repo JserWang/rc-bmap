@@ -2,7 +2,7 @@ import { BMapUtil, Util } from '../utils';
 import OPTIONS from '../options/marker';
 
 class Marker {
-  static outOfRangeOpts = ['clicking', 'raiseOnDrag', 'draggingCursor', 'shadow']
+  outOfRangeOpts = ['clicking', 'raiseOnDrag', 'draggingCursor', 'shadow']
 
   constructor(config, map) {
     this.config = { ...config };
@@ -72,14 +72,13 @@ class Marker {
   }
 
   repaint = (config) => {
-    const diffConfig = Util.getDiffConfig(this.config, config);
-    if (this.hasOutOfRangeOpts(diffConfig)) {
+    const diffConfig = Util.getDiffConfig(this.config, config) || {};
+    if (this.hasOutOfRangeOpts(Object.keys(diffConfig))) {
       this.destroy();
       this.init({ ...this.config, ...diffConfig });
     } else {
       this.processOptions(diffConfig);
     }
-    console.log(diffConfig);
     this.config = { ...this.config, ...diffConfig };
   }
 

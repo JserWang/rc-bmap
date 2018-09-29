@@ -1,4 +1,3 @@
-// const firstLowerCase = str => str.replace(/^\S/, s => s.toLowerCase());
 const firstUpperCase = str => str.replace(/^\S/, s => s.toUpperCase());
 
 const BMapUtil = {

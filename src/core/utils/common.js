@@ -21,6 +21,9 @@ const Util = {
     }
     return result;
   },
+  firstLowerCase(str) {
+    return str.replace(/^\S/, s => s.toLowerCase());
+  },
 };
 
 export default Util;

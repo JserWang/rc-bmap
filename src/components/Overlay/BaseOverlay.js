@@ -1,6 +1,7 @@
 
 import { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import { Util } from '../../core';
 
 class BaseOverlay extends PureComponent {
   static contextTypes = {
@@ -44,17 +45,10 @@ class BaseOverlay extends PureComponent {
   }
 
   centralizedUpdates = (unit) => {
-    if (unit.displayName === 'Offset') {
-      this.config.offset = unit.props;
-    } else if (unit.displayName === 'Events') {
-      this.config.events = unit.props;
-    } else if (unit.displayName === 'Icon') {
-      this.config.icon = unit.instance;
-    } else if (unit.displayName === 'Shadow') {
-      this.config.shadow = unit.instance;
-    } else if (unit.displayName === 'ContextMenu') {
-      this.config.contextMenu = unit.instance;
-    }
+    const { config } = this;
+    const { displayName, instance, props } = unit;
+    const propsName = Util.firstLowerCase(displayName);
+    config[propsName] = instance || props;
   }
 
   render() {

@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 // TODO: chagne it to rc-bmap-core
-import initMap from '../../core';
+import initMap, { Util } from '../../core';
 
 const fillStyle = {
   width: '100%',
   height: '100%',
 };
 
-const firstLowerCase = str => str.replace(/^\S/, s => s.toLowerCase());
 
 export default class Map extends PureComponent {
   static propTypes = {
@@ -81,7 +80,7 @@ export default class Map extends PureComponent {
 
   combineContentConfig = (displayName, instance) => {
     const { config } = this;
-    const propsName = firstLowerCase(displayName);
+    const propsName = Util.firstLowerCase(displayName);
     config[propsName] = instance;
   }
 
