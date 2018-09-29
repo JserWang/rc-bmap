@@ -1,45 +1,38 @@
 import { Util, BMapUtil } from '../utils';
 
-class BaseControl {
+class BaseOverlay {
+  config = {}
+
   constructor(config, map) {
     this.map = map;
-    this.processCommonOptions(config);
+    this.config = { ...config };
+    this.init(config);
+    this.processEvents(config.events);
   }
 
-  processCommonOptions = (config) => {
-    const {
-      anchor, offset,
-    } = config;
+  hasOutOfRangeOpts = (opts = []) => opts.some(item => this.outOfRangeOpts.indexOf(item) > -1)
 
-    if (anchor) {
-      config.anchor = !Util.isNil(global[anchor]) ? global[anchor] : anchor;
+  processEvents = (events) => {
+    BMapUtil.unBindEvents(this.instance);
+    if (events) {
+      BMapUtil.bindEvents(this.instance, events);
     }
-
-    if (offset) {
-      config.offset = this.getUsableOffset(offset);
-    }
-  }
-
-  getUsableOffset = (offset) => {
-    if (!Util.isNil(offset)) {
-      if (!BMapUtil.isSize(offset)) {
-        throw Error('The `offset` property should be literal value `{ width, height }`');
-      } else if (!BMapUtil.isBSize(offset)) {
-        offset = BMapUtil.BSize(offset.width, offset.height);
-      }
-    }
-
-    return offset;
   }
 
   repaint = (config) => {
-    this.destroy();
-    this.init(config);
+    const diffConfig = Util.getDiffConfig(this.config, config) || {};
+    if (this.hasOutOfRangeOpts(Object.keys(diffConfig))) {
+      this.destroy();
+      this.init({ ...this.config, ...diffConfig });
+    } else {
+      this.processOptions(diffConfig);
+    }
+    this.config = { ...this.config, ...diffConfig };
   }
 
   destroy = () => {
-    this.map.removeControl(this.instance);
+    this.map.removeOverlay(this.instance);
   }
 }
 
-export default BaseControl;
+export default BaseOverlay;

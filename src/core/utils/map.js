@@ -72,6 +72,9 @@ const BMapUtil = {
   BMarker(point, options) {
     return new global.BMap.Marker(point, options);
   },
+  BCircle(center, radius, options) {
+    return new global.BMap.Circle(center, radius, options);
+  },
   bindEvents(target, events) {
     if (events) {
       const eventKeys = Object.keys(events);

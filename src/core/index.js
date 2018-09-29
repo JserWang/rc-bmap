@@ -11,6 +11,7 @@ import OverviewMap from './Control/OverviewMap';
 import Geolocation from './Control/Geolocation';
 import getCustomOverlay from './Overlay';
 import Marker from './Overlay/Marker';
+import Circle from './Overlay/Circle';
 
 export {
   BMapUtil,
@@ -26,6 +27,7 @@ export {
   Geolocation,
   getCustomOverlay,
   Marker,
+  Circle,
 };
 
 const addBMapScript = (ak, version = 3) => {
