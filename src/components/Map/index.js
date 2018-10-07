@@ -2,14 +2,16 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 // TODO: chagne it to rc-bmap-core
 import initMap, { Util } from '../../core';
+import PlaceHolder from './PlaceHolder';
 
 const fillStyle = {
   width: '100%',
   height: '100%',
 };
 
-
 export default class Map extends PureComponent {
+  static PlaceHolder = PlaceHolder;
+
   static propTypes = {
     ak: PropTypes.string,
     name: PropTypes.string,
@@ -41,11 +43,6 @@ export default class Map extends PureComponent {
   static childContextTypes = {
     getMapInstance: PropTypes.func,
     centralizedUpdates: PropTypes.func,
-    renderPlaceHolder: PropTypes.func,
-  }
-
-  state = {
-    placeHolder: {},
   }
 
   config = {}
@@ -54,7 +51,6 @@ export default class Map extends PureComponent {
     return {
       getMapInstance: this.getMapInstance,
       centralizedUpdates: this.centralizedUpdates,
-      renderPlaceHolder: this.renderPlaceHolder,
     };
   }
 
@@ -114,27 +110,26 @@ export default class Map extends PureComponent {
     }
   }
 
-  renderPlaceHolder = (placeHolder) => {
-    this.setState({
-      placeHolder,
-    });
-  }
-
   renderChildren = () => {
     const { children } = this.props;
-    if (!this.map || !children) {
-      return null;
+    if (!this.map) {
+      if (children) {
+        // process placeholder
+        let placeHolder = null;
+        React.Children.forEach(children, (child) => {
+          if (child.type.displayName === 'PlaceHolder') {
+            placeHolder = child;
+          }
+        });
+        return placeHolder;
+      }
     }
     return children;
   }
 
   render() {
-    const { placeHolder } = this.state;
     return (
-      <div style={fillStyle}>
-        <div ref={this.getMapContainer} style={fillStyle}>
-          { placeHolder.render ? placeHolder.render() : null}
-        </div>
+      <div ref={this.getMapContainer} style={fillStyle}>
         { this.renderChildren() }
       </div>
     );
