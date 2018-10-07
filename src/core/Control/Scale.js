@@ -1,5 +1,5 @@
 import { BMapUtil } from '../utils';
-import BaseControl from './Base';
+import BaseControl from './index';
 
 const processUnit = (unit, instance) => {
   if (unit) {

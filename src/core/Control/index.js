@@ -1,77 +1,24 @@
-import { BMapUtil, Util } from '../utils';
+import { ControlUtil } from '../utils';
 
-class Control {
-  constructor(config, map) {
-    this.config = { ...config };
+class BaseControl {
+  instance = null;
+
+  constructor(...params) {
+    const [config, map] = [...params];
     this.map = map;
-    this.processCommonOptions(config);
-    this.defaultAnchor = config.anchor;
-    this.defaultOffset = config.offset;
-    this.processOptions(config);
-  }
-
-  config = {}
-
-  processCommonOptions = (config) => {
-    const { anchor, offset } = config;
-    if (anchor) {
-      config.anchor = !Util.isNil(global[anchor]) ? global[anchor] : anchor;
-    }
-
-    if (offset) {
-      config.offset = this.getUsableOffset(offset);
-    }
-  }
-
-  processOptions = ({ anchor, offset, visible }) => {
-    if (anchor) {
-      this.setAnchor(anchor);
-    }
-    if (offset) {
-      this.setOffset(offset);
-    }
-    if (!Util.isNil(visible)) {
-      if (!visible) {
-        this.hide();
-      } else {
-        this.show();
-      }
-    }
-  }
-
-  getUsableOffset = (offset) => {
-    if (!Util.isNil(offset)) {
-      if (!BMapUtil.isSize(offset)) {
-        throw Error('The `offset` property should be literal value `{ width, height }`');
-      } else if (!BMapUtil.isBSize(offset)) {
-        offset = BMapUtil.BSize(offset.width, offset.height);
-      }
-    }
-
-    return offset;
+    ControlUtil.processCommonOptions(config);
+    this.init(...params);
+    ControlUtil.processVisible(this.instance, config.visible);
   }
 
   repaint = (config) => {
-    this.processCommonOptions(config);
-    const diffConfig = Util.getDiffConfig(this.config, config);
-    this.processOptions(diffConfig);
-    this.config = { ...this.config, ...diffConfig };
+    this.destroy();
+    this.init(config);
   }
 
   destroy = () => {
-    this.map.removeControl(this);
+    this.map.removeControl(this.instance);
   }
 }
 
-// 异步加载时，BMap对象不存在，所以提供获得类方法，确保调用时BMap对象存在。
-const getCustomControl = (config, initialize, mapInstance) => {
-  Control.prototype = BMapUtil.BControl();
-  Control.prototype.initialize = initialize;
-
-  const control = new Control(config, mapInstance);
-  mapInstance.addControl(control);
-
-  return control;
-};
-
-export default getCustomControl;
+export default BaseControl;

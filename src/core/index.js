@@ -1,6 +1,6 @@
 import Map from './Map';
 import { BMapUtil, Util } from './utils';
-import getCustomControl from './Control';
+import getCustomControl from './Control/Custom';
 import CityList from './Control/CityList';
 import Copyright from './Control/Copyright';
 import Navigation from './Control/Navigation';
