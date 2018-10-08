@@ -20,7 +20,7 @@ next分支正在进行重构，master为当前最新release分支。
 
 ## 本地开发
 
-与`demo`结合的最佳实践。
+与`demo`结合的最佳实践：
 
 1. 将`demo`工程`clone`至本地。
   ``` bash
