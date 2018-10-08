@@ -22,7 +22,7 @@ next分支正在进行重构，master为当前最新release分支。
 
 与`demo`结合的最佳实践。
 
-1. 将`demo`工程`clone`至本地。
+1. 将`demo`工程`clone`至本地。
   ``` bash
   git clone https://github.com/jser-club/rc-bmap-demo.git
   ```
@@ -35,7 +35,7 @@ next分支正在进行重构，master为当前最新release分支。
   ``` bash
   yarn link
   ```
-4. 进入`rc-bmap-dmeo`工程目录执行
+4. 进入`rc-bmap-dmeo`工程目录执行
   ``` bash
   yarn link rc-bmap
   ```
