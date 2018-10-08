@@ -1,6 +1,6 @@
 import { BMapUtil, Util } from '../utils';
 import OPTIONS from '../options/marker';
-import BaseOverlay from './Base';
+import BaseOverlay from './index';
 
 const getMarkerOptions = config => ({
   offset: config.offset,
@@ -46,8 +46,10 @@ class Marker extends BaseOverlay {
     if (animation) {
       config.animation = global[animation] || animation;
     }
-    const point = getUsablePoint(config.point);
-    config.position = point;
+
+    if (config.point) {
+      config.position = getUsablePoint(config.point);
+    }
 
     BMapUtil.processSetOptions(this.instance, OPTIONS.SET, config);
     BMapUtil.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);

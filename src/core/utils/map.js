@@ -72,8 +72,44 @@ const BMapUtil = {
   BMarker(point, options) {
     return new global.BMap.Marker(point, options);
   },
+  BLabel(content, options) {
+    return new global.BMap.Label(content, options);
+  },
   BCircle(center, radius, options) {
     return new global.BMap.Circle(center, radius, options);
+  },
+  BInfoWindow(content, options) {
+    return new global.BMap.InfoWindow(content, options);
+  },
+  BPolygon(points, options) {
+    return new global.BMap.Polygon(points, options);
+  },
+  getBoundary(name) {
+    return new Promise((resolve, reject) => {
+      const boundary = new global.BMap.Boundary();
+
+      boundary.get(name, (res) => {
+        const count = res.boundaries.length;
+        if (count === 0) {
+          reject();
+        }
+        const area = [];
+        let allPoints = [];
+        for (let i = 0; i < count; i += 1) {
+          const arr = res.boundaries[i].split(';').map((item) => {
+            const pointArr = item.split(',');
+            return BMapUtil.BPoint(pointArr[0], pointArr[1].trim());
+          });
+          allPoints = allPoints.concat(arr);
+          area.push(arr);
+        }
+
+        resolve({
+          area,
+          points: allPoints,
+        });
+      });
+    });
   },
   bindEvents(target, events) {
     if (events) {

@@ -1,60 +1,42 @@
-import { BMapUtil, Util } from '../utils';
+import { Util, BMapUtil } from '../utils';
 
-class Overlay {
-  constructor(config, map) {
-    this.config = { ...config };
-    this.map = map;
-    this.processOptions(config);
-  }
-
+class BaseOverlay {
   config = {}
 
-  processOptions = ({ visible }) => {
-    if (!Util.isNil(visible)) {
-      if (!visible) {
-        this.hide();
-      } else {
-        this.show();
-      }
-    }
+  constructor(config, map) {
+    this.map = map;
+    this.config = { ...config };
+    this.init(config);
+    this.processEvents(config.events);
   }
 
-  getUsablePoint = (point) => {
-    if (Util.isNil(point)) {
-      throw Error('Missing property `point`');
-    }
-    if (!Util.isString(point)) {
-      if (!BMapUtil.isPoint(point)) {
-        throw Error('The `point` property should be `string` or literal value `{ lng, lat }`');
-      } else if (!BMapUtil.isBPoint(point)) {
-        point = BMapUtil.BPoint(point.lng, point.lat);
-      }
-    }
+  hasOutOfRangeOpts = (opts = []) => opts.some(item => this.outOfRangeOpts.indexOf(item) > -1)
 
-    return point;
+  processEvents = (events) => {
+    BMapUtil.unBindEvents(this.instance);
+    if (events) {
+      BMapUtil.bindEvents(this.instance, events);
+    }
   }
 
   repaint = (config) => {
-    const diffConfig = Util.getDiffConfig(this.config, config);
-    this.processOptions(diffConfig);
+    const diffConfig = Util.getDiffConfig(this.config, config) || {};
+    if (this.hasOutOfRangeOpts(Object.keys(diffConfig))) {
+      this.destroy();
+      this.init({ ...this.config, ...diffConfig });
+    } else {
+      this.processOptions(diffConfig);
+
+      if (config.events) {
+        this.processEvents(config.events);
+      }
+    }
     this.config = { ...this.config, ...diffConfig };
   }
 
   destroy = () => {
-    this.map.removeOverlay(this);
+    this.map.removeOverlay(this.instance);
   }
 }
 
-// 异步加载时，BMap对象不存在，所以提供获得类方法，确保调用时BMap对象存在。
-const getCustomOverlay = (config, initialize, draw, mapInstance) => {
-  Overlay.prototype = BMapUtil.BOverlay();
-  Overlay.prototype.initialize = initialize;
-  Overlay.prototype.draw = draw;
-
-  const overlay = new Overlay(config, mapInstance);
-  mapInstance.addOverlay(overlay);
-
-  return overlay;
-};
-
-export default getCustomOverlay;
+export default BaseOverlay;

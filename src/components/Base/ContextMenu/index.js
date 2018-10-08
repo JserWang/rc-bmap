@@ -6,7 +6,7 @@ import { BMapUtil } from '../../../core';
 export default class ContextMenu extends PureComponent {
   static Item = Item
 
-  displayName= 'ContextMenu'
+  displayName = 'ContextMenu'
 
   static contextTypes = {
     centralizedUpdates: PropTypes.func,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { BMapUtil } from '../../../core';
 
 export default class Icon extends PureComponent {
-  displayName= 'Icon'
+  displayName = 'Icon'
 
   instance = null
 

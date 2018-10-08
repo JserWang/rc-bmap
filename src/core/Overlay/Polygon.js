@@ -1,8 +1,8 @@
 import { BMapUtil, Util } from '../utils';
-import OPTIONS from '../options/circle';
+import OPTIONS from '../options/polygon';
 import BaseOverlay from './index';
 
-const getCircleOptions = config => ({
+const getPolygonOptions = config => ({
   strokeColor: config.strokeColor,
   fillColor: config.fillColor,
   strokeWeight: config.strokeWeight,
@@ -15,9 +15,6 @@ const getCircleOptions = config => ({
 });
 
 const getUsablePoint = (point) => {
-  if (Util.isNil(point)) {
-    throw Error('Missing property `point`');
-  }
   if (!Util.isString(point)) {
     if (!BMapUtil.isPoint(point)) {
       throw Error('The `point` property should be `string` or literal value `{ lng, lat }`');
@@ -29,20 +26,23 @@ const getUsablePoint = (point) => {
   return point;
 };
 
-class Circle extends BaseOverlay {
+const processPoints = (points = []) => points.map(item => getUsablePoint(item));
+
+class Polygon extends BaseOverlay {
   outOfRangeOpts = ['clicking']
 
   init(config = {}) {
-    const options = getCircleOptions(config);
-    const point = getUsablePoint(config.point);
-    this.instance = BMapUtil.BCircle(point, config.radius, options);
+    const options = getPolygonOptions(config);
+    const points = processPoints(config.path);
+    this.instance = BMapUtil.BPolygon(points, options);
     this.map.addOverlay(this.instance);
     this.processOptions(config);
   }
 
   processOptions(config) {
-    if (config.point) {
-      config.center = getUsablePoint(config.point);
+    const { points } = config;
+    if (points && Array.isArray(points)) {
+      config.path = processPoints(config.path);
     }
 
     BMapUtil.processSetOptions(this.instance, OPTIONS.SET, config);
@@ -50,4 +50,4 @@ class Circle extends BaseOverlay {
   }
 }
 
-export default Circle;
+export default Polygon;

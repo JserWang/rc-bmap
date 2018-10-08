@@ -1,17 +1,11 @@
 import { BMapUtil, Util } from '../utils';
-import OPTIONS from '../options/circle';
+import OPTIONS from '../options/label';
 import BaseOverlay from './index';
 
-const getCircleOptions = config => ({
-  strokeColor: config.strokeColor,
-  fillColor: config.fillColor,
-  strokeWeight: config.strokeWeight,
-  strokeOpacity: config.strokeOpacity,
-  fillOpacity: config.fillOpacity,
-  strokeStyle: config.strokeStyle,
+const getLabelOptions = config => ({
+  offset: config.offset,
+  position: config.point,
   enableMassClear: config.massClear,
-  enableEditing: config.editing,
-  enableClicking: config.clicking,
 });
 
 const getUsablePoint = (point) => {
@@ -29,25 +23,24 @@ const getUsablePoint = (point) => {
   return point;
 };
 
-class Circle extends BaseOverlay {
-  outOfRangeOpts = ['clicking']
+class Label extends BaseOverlay {
+  outOfRangeOpts = []
 
   init(config = {}) {
-    const options = getCircleOptions(config);
-    const point = getUsablePoint(config.point);
-    this.instance = BMapUtil.BCircle(point, config.radius, options);
+    config.point = getUsablePoint(config.point);
+    const options = getLabelOptions(config);
+    this.instance = BMapUtil.BLabel(config.content, options);
     this.map.addOverlay(this.instance);
     this.processOptions(config);
   }
 
   processOptions(config) {
     if (config.point) {
-      config.center = getUsablePoint(config.point);
+      config.position = getUsablePoint(config.point);
     }
-
     BMapUtil.processSetOptions(this.instance, OPTIONS.SET, config);
     BMapUtil.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);
   }
 }
 
-export default Circle;
+export default Label;

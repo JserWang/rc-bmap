@@ -9,9 +9,12 @@ import Scale from './Control/Scale';
 import Panorama from './Control/Panorama';
 import OverviewMap from './Control/OverviewMap';
 import Geolocation from './Control/Geolocation';
-import getCustomOverlay from './Overlay';
+import getCustomOverlay from './Overlay/Custom';
 import Marker from './Overlay/Marker';
+import InfoWindow from './Overlay/InfoWindow';
 import Circle from './Overlay/Circle';
+import Polygon from './Overlay/Polygon';
+import Label from './Overlay/Label';
 
 export {
   BMapUtil,
@@ -28,6 +31,9 @@ export {
   getCustomOverlay,
   Marker,
   Circle,
+  Polygon,
+  Label,
+  InfoWindow,
 };
 
 const addBMapScript = (ak, version = 3) => {

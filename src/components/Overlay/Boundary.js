@@ -1,59 +1,71 @@
-import { getPoint, createPolygon, processBooleanOptions } from '../_base/util';
-import ReactComponent from '../ReactComponent';
-import BaseOverlay from './BaseOverlay';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import Polygon from './Polygon';
+import { BMapUtil } from '../../core';
 
-@ReactComponent
-class Boundary extends BaseOverlay {
-  init() {
-    const {
-      name,
-      onError,
-      autoViewport,
-      massClear = true,
-      editing = false,
-      ...polygonOpts
-    } = this.props;
+const { Path, Point } = Polygon;
 
-    this.getBoundary()
-      .then((points) => {
-        polygonOpts.points = points;
-        this.instance = createPolygon(polygonOpts);
-        this.map.addOverlay(this.instance);
-        processBooleanOptions(this.instance, 'POLY_BOOLEAN_OPTIONS', {
-          massClear,
-          editing,
-        });
-        if (autoViewport) {
-          points = points.map(item => getPoint(item.lng, item.lat));
-          this.map.setViewport(points);
-        }
-      }).catch((msg) => {
-        if (onError) {
-          onError(msg);
-        }
-      });
+class Boundary extends PureComponent {
+  static contextTypes = {
+    getMapInstance: PropTypes.func,
   }
 
-  getBoundary() {
-    const { name } = this.props;
-    return new Promise((resolve, reject) => {
-      const boundary = new global.BMap.Boundary();
+  state = {
+    area: [],
+  }
 
-      boundary.get(name, (res) => {
-        const count = res.boundaries.length;
-        if (count === 0) {
-          reject();
-        }
-        const points = res.boundaries[0].split(';').map((item) => {
-          const pointArr = item.split(',');
-          return {
-            lng: pointArr[0],
-            lat: pointArr[1],
-          };
-        });
-        resolve(points);
+  componentDidMount() {
+    const { name } = this.props;
+    this.getPoints(name);
+  }
+
+  componentDidUpdate() {
+    const { name } = this.props;
+    if (name !== this.name) {
+      this.getPoints(name);
+    }
+  }
+
+  getPoints = (name) => {
+    BMapUtil.getBoundary(name).then(({ points, area }) => {
+      this.name = name;
+      this.processAutoViewport(points);
+      this.setState({
+        area,
       });
     });
+  }
+
+  processAutoViewport(points = []) {
+    const { context, props } = this;
+    const { autoViewport } = props;
+    if (autoViewport) {
+      context.getMapInstance().setViewport(points);
+    }
+  }
+
+  render() {
+    const { area } = this.state;
+    const { children } = this.props;
+    return (
+      area.length > 0 ? (
+        area.map(points => (
+          <Polygon
+            {...this.props}
+          >
+            <Path>
+              {
+                points.map(item => (
+                  <Point lng={item.lng} lat={item.lat} />
+                ))
+              }
+            </Path>
+            { children }
+          </Polygon>
+        ))
+
+      ) : null
+    );
   }
 }
 

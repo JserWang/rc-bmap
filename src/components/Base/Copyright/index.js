@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 export default class Copyright extends PureComponent {
-  displayName= 'Copyright'
+  displayName = 'Copyright'
 
   id = -1
 
