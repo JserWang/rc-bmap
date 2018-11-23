@@ -14,6 +14,7 @@ import Marker from './Overlay/Marker';
 import InfoWindow from './Overlay/InfoWindow';
 import Circle from './Overlay/Circle';
 import Polygon from './Overlay/Polygon';
+import Polyline from './Overlay/Polyline';
 import Label from './Overlay/Label';
 
 export {
@@ -34,6 +35,7 @@ export {
   Polygon,
   Label,
   InfoWindow,
+  Polyline,
 };
 
 const addBMapScript = (ak, version = 3) => {

@@ -1,13 +1,11 @@
 import { BMapUtil, Util } from '../utils';
-import OPTIONS from '../options/polygon';
+import OPTIONS from '../options/polyline';
 import BaseOverlay from './index';
 
-const getPolygonOptions = config => ({
+const getPolylineOptions = config => ({
   strokeColor: config.strokeColor,
-  fillColor: config.fillColor,
   strokeWeight: config.strokeWeight,
   strokeOpacity: config.strokeOpacity,
-  fillOpacity: config.fillOpacity,
   strokeStyle: config.strokeStyle,
   enableMassClear: config.massClear,
   enableEditing: config.editing,
@@ -15,6 +13,9 @@ const getPolygonOptions = config => ({
 });
 
 const getUsablePoint = (point) => {
+  if (Util.isNil(point)) {
+    throw Error('Missing property `point`');
+  }
   if (!Util.isString(point)) {
     if (!BMapUtil.isPoint(point)) {
       throw Error('The `point` property should be `string` or literal value `{ lng, lat }`');
@@ -28,13 +29,13 @@ const getUsablePoint = (point) => {
 
 const processPoints = (points = []) => points.map(item => getUsablePoint(item));
 
-class Polygon extends BaseOverlay {
+class Polyline extends BaseOverlay {
   outOfRangeOpts = ['clicking']
 
   init(config = {}) {
-    const options = getPolygonOptions(config);
+    const options = getPolylineOptions(config);
     const points = processPoints(config.path);
-    this.instance = BMapUtil.BPolygon(points, options);
+    this.instance = BMapUtil.BPolyline(points, options);
     this.map.addOverlay(this.instance);
     this.processOptions(config);
   }
@@ -50,4 +51,4 @@ class Polygon extends BaseOverlay {
   }
 }
 
-export default Polygon;
+export default Polyline;

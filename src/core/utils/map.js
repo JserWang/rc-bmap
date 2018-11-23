@@ -78,6 +78,9 @@ const BMapUtil = {
   BCircle(center, radius, options) {
     return new global.BMap.Circle(center, radius, options);
   },
+  BPolyline(points, options) {
+    return new global.BMap.Polyline(points, options);
+  },
   BInfoWindow(content, options) {
     return new global.BMap.InfoWindow(content, options);
   },
