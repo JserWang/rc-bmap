@@ -34,6 +34,7 @@
   },
   "scripts": {
     "build": "rm -rf lib && babel src -d lib",
+    "build_win": "rimraf lib && babel src -d lib",
     "build:dist": "webpack",
     "prepublish": "npm run build:dist && npm run build",
     "pub": "npm run prepublish && npm publish",

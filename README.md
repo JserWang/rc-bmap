@@ -43,4 +43,8 @@ next分支正在进行重构，master为当前最新release分支。
   ``` bash
   yarn run build
   ```
+  如果在windows系统下
+  ```bash
+  yarn run build_win
+  ```
 6. 在`demo`重新点击按钮运行，即可看到最新修改后的效果

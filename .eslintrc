@@ -9,6 +9,7 @@
     "no-param-reassign": "off",
     "react/prop-types": "off",
     "no-underscore-dangle": "warn",
+    "linebreak-style": "off",
     "global-require": "warn",
     "react/jsx-filename-extension": "off",
     "react/require-default-props": "off",
