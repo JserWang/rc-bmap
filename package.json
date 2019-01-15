@@ -18,8 +18,7 @@
   "files": [
     "src",
     "lib",
-    "types",
-    "dist"
+    "types"
   ],
   "license": "MIT",
   "homepage": "https://bmap.jser-club.com",
@@ -29,16 +28,8 @@
   "scripts": {
     "build": "rm -rf lib && babel src -d lib",
     "build_win": "rimraf lib && babel src -d lib",
-    "build:dist": "webpack",
-    "prepublish": "npm run build:dist && npm run build",
-    "pub": "npm run prepublish && npm publish",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "docs/**/*.md": [
-      "prettier --parser markdown --write",
-      "git add"
-    ]
+    "prepublish": "npm run build",
+    "pub": "npm run prepublish && npm publish"
   },
   "devDependencies": {
     "@types/react": "^16.4.9",
@@ -55,13 +46,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
-    "git-hooks": "^1.1.10",
-    "husky": "^1.0.0-rc.13",
-    "lint-staged": "^7.2.2",
-    "prettier": "1.14.2",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "webpack": "^3.0.0",
-    "webpack-dev-server": "^2.5.0"
+    "react-dom": "^16.4.1"
   }
 }

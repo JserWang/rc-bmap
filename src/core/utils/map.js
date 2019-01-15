@@ -105,10 +105,32 @@ const BMapUtil = {
   BLocalSearch(location, opts) {
     return new global.BMap.LocalSearch(location, opts);
   },
-
-  search({ keyword, location }) {
+  BGeolocation() {
+    return new global.BMap.Geolocation();
+  },
+  BConvertor() {
+    return new global.BMap.Convertor();
+  },
+  BTransitRoute(location, opts) {
+    return new global.BMap.TransitRoute(location, opts);
+  },
+  BWalkingRoute(location, opts) {
+    return new global.BMap.WalkingRoute(location, opts);
+  },
+  BRidingRoute(location, opts) {
+    return new global.BMap.RidingRoute(location, opts);
+  },
+  BDrivingRoute(location, opts) {
+    return new global.BMap.DrivingRoute(location, opts);
+  },
+  /**
+   * 根据关键字查询位置信息
+   * @param {*} keyword 关键字
+   * @param {*} location 定位信息[map实例/string/point]
+   */
+  search(keyword, location) {
     return new Promise((resolve) => {
-      const local = new global.BMap.LocalSearch(location, {
+      const local = BMapUtil.LocalSearch(location, {
         onSearchComplete(result) {
           const list = [];
           for (let i = 0, len = result.getCurrentNumPois(); i < len - 1; i += 1) {
@@ -118,6 +140,77 @@ const BMapUtil = {
         },
       });
       local.search(keyword);
+    });
+  },
+
+  /**
+   * 获取当前位置信息
+   */
+  getCurrentPosition() {
+    return new Promise((resolve, reject) => {
+      const geo = BMapUtil.BGeolocation();
+      geo.getCurrentPosition((result) => {
+        const status = geo.getStatus();
+        if (status === global.BMAP_STATUS_SUCCESS) {
+          resolve(result);
+        } else {
+          reject(status);
+        }
+      });
+    });
+  },
+
+  /**
+   * 转换坐标
+   * @param {*} points 转换坐标点
+   * @param {*} from 来源坐标类型
+   * @param {*} to 目标坐标类型
+   */
+  convertPoint(points, from, to = 5) {
+    return new Promise((resolve) => {
+      const convert = BMapUtil.BConvertor();
+      if (!Array.isArray(points)) {
+        points = [points];
+      }
+      const pList = points.map(item => BMapUtil.BPoint({ ...item }));
+      convert.translate(pList, from, to, (result) => {
+        resolve(result);
+      });
+    });
+  },
+
+  /**
+   * 对指定的地址进行解析，返回坐标点
+   * @param {*} address
+   * @param {*} city
+   */
+  getPoint(address, city) {
+    return new Promise((resolve, reject) => {
+      const geo = new global.BMap.Geocoder();
+      geo.getPoint(address, (point) => {
+        if (point) {
+          resolve(point);
+        } else {
+          reject();
+        }
+      }, city);
+    });
+  },
+
+  /**
+   * 对指定坐标点解析，返回地址信息
+   * @param {*} point
+   */
+  getLocation(point) {
+    return new Promise((resolve, reject) => {
+      const geo = new global.BMap.Geocoder();
+      geo.getPoint(point, (result) => {
+        if (result) {
+          resolve(result);
+        } else {
+          reject();
+        }
+      });
     });
   },
 };
