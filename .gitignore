@@ -16,3 +16,5 @@ yarn-error.log*
 lib
 dist
 package-lock.json
+/.idea
+/lib/
