@@ -1,10 +1,11 @@
-import { BMapUtil } from '../utils';
-import BaseControl from './index';
+import Util from '../utils';
+import BMapUtil from '../utils/map';
+import BaseControl from './BaseControl';
 
 const getOverviewMapControlOptions = config => ({
   anchor: config.anchor,
   offset: config.offset,
-  size: config.size && BMapUtil.BSize(config.size.width, config.size.height),
+  size: config.size && BMapUtil.BSize({ ...config.size }),
   isOpen: config.isOpen,
 });
 
@@ -13,7 +14,7 @@ class OverviewMap extends BaseControl {
     const options = getOverviewMapControlOptions(config);
     this.instance = BMapUtil.BOverviewMapControl(options);
     this.map.addControl(this.instance);
-    BMapUtil.bindEvents(this.instance, config.events);
+    Util.bindEvents(this.instance, config.events);
   }
 }
 

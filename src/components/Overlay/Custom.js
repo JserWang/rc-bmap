@@ -1,7 +1,8 @@
 import React from 'react';
-import { getCustomOverlay, BMapUtil, Util } from '../../core';
+import { initCustomOverlay, Util, Constants } from '../../core';
 import BaseOverlay from './BaseOverlay';
-import MAP_PANE from '../../constants/MapPane';
+
+const { MAP_PANES } = Constants;
 
 const CustomHOC = WrappedComponent => class extends BaseOverlay {
   config = {}
@@ -13,7 +14,7 @@ const CustomHOC = WrappedComponent => class extends BaseOverlay {
     const { children, ...resetProps } = this.props;
     this.config = { ...this.config, ...resetProps };
     this.mapInstance = context.getMapInstance();
-    this.overlay = getCustomOverlay(this.config, this.initialize, this.draw, this.mapInstance);
+    this.overlay = initCustomOverlay(this.config, this.initialize, this.draw, this.mapInstance);
   }
 
   componentDidUpdate() {
@@ -31,32 +32,17 @@ const CustomHOC = WrappedComponent => class extends BaseOverlay {
 
   initialize = () => {
     const { container, mapInstance } = this;
-    mapInstance.getPanes()[MAP_PANE.MARKER].appendChild(container);
+    mapInstance.getPanes()[MAP_PANES.MARKER].appendChild(container);
     return container;
   }
 
   draw = () => {
-    const { container, props, mapInstance } = this;
-    const { point } = props;
-    const BPoint = this.getUsablePoint(point);
-    const position = mapInstance.pointToOverlayPixel(BPoint);
+    const { container, mapInstance } = this;
+    const { point } = this.config;
+    const bdPoint = Util.convert2BPoint({ ...point });
+    const position = mapInstance.pointToOverlayPixel(bdPoint);
     container.style.left = `${position.x - (container.offsetWidth / 2)}px`;
     container.style.top = `${position.y - (container.offsetHeight / 2)}px`;
-  }
-
-  getUsablePoint = (point) => {
-    if (Util.isNil(point)) {
-      throw Error('Missing property `point`');
-    }
-    if (!Util.isString(point)) {
-      if (!BMapUtil.isPoint(point)) {
-        throw Error('The `point` property should be `string` or literal value `{ lng, lat }`');
-      } else if (!BMapUtil.isBPoint(point)) {
-        point = BMapUtil.BPoint(point.lng, point.lat);
-      }
-    }
-
-    return point;
   }
 
   render() {

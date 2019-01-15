@@ -6,6 +6,7 @@ export default {
     'defaultCursor',
     'draggingCursor',
     'mapStyle',
+    'mapStyleV2',
     'zoom',
   ],
   BOOLEAN: [

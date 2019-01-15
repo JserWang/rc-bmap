@@ -1,34 +1,57 @@
+/*
+ * 百度地图核心类
+ *
+ */
 
-import { Util, BMapUtil } from '../utils';
+import Util from '../utils';
+import BMapUtil from '../utils/map';
+
 import OPTIONS from '../options/map';
+
+/**
+ * 地图初始化配置项所需属性
+ */
+const getMapOptions = config => ({
+  minZoom: config.minZoom,
+  maxZoom: config.maxZoom,
+  mapType: config.mapType && global[config.mapType],
+  enableHighResolution: config.highResolution,
+  enableAutoResize: config.autoResize,
+  enableMapClick: config.mapClick,
+});
+
+/**
+ * 处理地图显示中心点
+ */
+const processCenter = (center) => {
+  if (!Util.isNil(center) && !Util.isString(center)) {
+    center = Util.convert2BPoint(center, 'center');
+  }
+
+  return center;
+};
 
 class Map {
   config = {}
 
   instance = null
 
+  requiredProperty = ['zoom', 'center']
+
   constructor(container, config) {
-    const mapOptions = this.getMapOptions(config);
-    this.instance = new global.BMap.Map(container, mapOptions);
-    this.setCenterAndZoom(config.center, config.zoom);
-    this.config.center = config.center;
+    const mapOptions = getMapOptions(config);
+    this.instance = BMapUtil.BMap(container, mapOptions);
+    this.config.center = processCenter(config.center);
+    if (!config.zoom) {
+      throw Error('Missing the required property `zoom`');
+    }
+    this.instance.centerAndZoom(this.config.center, config.zoom);
   }
 
-  getMapOptions = config => ({
-    minZoom: config.minZoom,
-    maxZoom: config.maxZoom,
-    mapType: global[config.mapType],
-    enableHighResolution: config.highResolution,
-    enableAutoResize: config.autoResize,
-    enableMapClick: config.mapClick,
-  })
-
-  setCenterAndZoom = (center, zoom) => {
-    center = this.getUsableCenter(center);
-    this.instance.centerAndZoom(center, zoom);
-  }
-
-  setContextMenu = (contextMenu) => {
+  /**
+   * 设置右键菜单
+   */
+  processContextMenu = (contextMenu) => {
     if (this.contextMenu) {
       this.instance.removeContextMenu(this.contextMenu);
     }
@@ -38,55 +61,51 @@ class Map {
     }
   }
 
+  /**
+   * 设置地图类型
+   */
   setMapType = (mapType) => {
-    if (mapType) {
+    if (mapType && global[mapType]) {
       this.instance.setMapType(global[mapType]);
     }
   }
 
+  /**
+   * 处理地图相关事件
+   * 绑定之前先统一解绑
+   */
   processEvents = (events) => {
-    BMapUtil.unBindEvents(this.instance);
-    BMapUtil.bindEvents(this.instance, events);
+    Util.unbindEvents(this.instance);
+    Util.bindEvents(this.instance, events);
   }
 
+  /**
+   * 处理可以通过 setXXX 以及 enable、disableXXX 的方法
+   */
   processOptions = (config) => {
-    BMapUtil.processSetOptions(this.instance, OPTIONS.SET, config);
-    BMapUtil.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);
+    Util.processSetOptions(this.instance, OPTIONS.SET, config);
+    Util.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);
   }
 
-  getUsableCenter = (center) => {
-    if (Util.isNil(center)) {
-      throw Error('Missing property `center`');
-    }
-    if (!Util.isString(center)) {
-      if (!BMapUtil.isPoint(center)) {
-        throw Error('The `center` property should be `string` or literal value `{ lng, lat }`');
-      } else if (!BMapUtil.isBPoint(center)) {
-        center = BMapUtil.BPoint(center.lng, center.lat);
-      }
-    }
-
-    return center;
-  }
-
-  processCenter = (config) => {
-    config.center = this.getUsableCenter(config.center);
-  }
-
+  /**
+   * 重绘
+   */
   repaint = (config) => {
-    this.processCenter(config);
-    const diffConfig = Util.getDiffConfig(this.config, config);
-    this.render(diffConfig);
-    this.config = { ...this.config, ...diffConfig };
-  }
-
-  render = (config) => {
-    this.setContextMenu(config.contextMenu);
-    this.processEvents(config.events);
+    // 先进行一步转换，因为this.config.center为转换后的值，防止diff出现 bad case
     if (config.center) {
-      this.processCenter(config);
+      config.center = processCenter(config.center);
     }
-    this.processOptions(config);
+    const diffConfig = Util.compareConfig(this.config, config);
+
+    this.processContextMenu(diffConfig.contextMenu);
+    this.processEvents(diffConfig.events);
+
+    this.setMapType(diffConfig.mapType);
+    this.processOptions(diffConfig);
+    this.config = {
+      ...this.config,
+      ...diffConfig,
+    };
   }
 }
 

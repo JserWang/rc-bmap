@@ -1,47 +1,54 @@
-import BaseOverlay from './BaseOverlay';
-import { createSymbol, getSize, createMarker } from '../_base/util';
-import ReactComponent from '../ReactComponent';
+import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { Symbol as BSymbol, Util } from '../../core';
 
-@ReactComponent
-class Symbol extends BaseOverlay {
-  init() {
-    const {
-      path,
-      anchor = {
-        width: 0,
-        height: 0,
-      },
-      fillColor,
-      fillOpacity,
-      scale,
-      rotation,
-      strokeColor,
-      strokeOpacity,
-      strokeWeight,
-      ...markerProps
-    } = this.props;
+export default class Symbol extends PureComponent {
+  config = {}
 
-    markerProps.icon = createSymbol({
-      path,
-      opts: {
-        anchor: getSize(anchor.width, anchor.height),
-        fillColor,
-        fillOpacity,
-        scale,
-        rotation,
-        strokeColor,
-        strokeOpacity,
-        strokeWeight,
-      },
+  static contextTypes = {
+    centralizedUpdates: PropTypes.func,
+  }
+
+  static childContextTypes = {
+    centralizedUpdates: PropTypes.func,
+  }
+
+  getChildContext() {
+    return {
+      centralizedUpdates: this.centralizedUpdates,
+    };
+  }
+
+  componentDidMount() {
+    const { context } = this;
+    context.centralizedUpdates({
+      name: 'symbol',
+      data: this.getIcon(),
     });
+  }
 
-    this.instance = createMarker(markerProps);
-    this.map.addOverlay(this.instance);
+  componentDidUpdate() {
+    const { context } = this;
+    context.centralizedUpdates({
+      name: 'symbol',
+      data: this.getIcon(),
+    });
+  }
 
-    if (markerProps.animation) {
-      this.instance.setAnimation(global[markerProps.animation]);
-    }
+  centralizedUpdates = ({ name, data }) => {
+    const configName = Util.firstLowerCase(name);
+    this.config[configName] = data;
+  }
+
+  getIcon = () => {
+    const { children, ...resetProps } = this.props;
+    this.config = { ...this.config, ...resetProps };
+
+    return new BSymbol({ ...this.config });
+  }
+
+  render() {
+    const { children } = this.props;
+    return children || null;
   }
 }
-
-export default Symbol;

@@ -1,13 +1,14 @@
-import { BMapUtil } from '../utils';
-import BaseControl from './index';
+import BMapUtil from '../utils/map';
+import BaseControl from './BaseControl';
 
 class Copyright extends BaseControl {
-  init(config = {}, map, copyrights) {
+  init(config = {}) {
+    const { copyrights = [] } = config;
     this.instance = BMapUtil.BCopyrightControl(config);
     copyrights.forEach((item) => {
       this.instance.addCopyright(item);
     });
-    map.addControl(this.instance);
+    this.map.addControl(this.instance);
   }
 }
 

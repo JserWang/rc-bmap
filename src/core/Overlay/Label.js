@@ -1,33 +1,24 @@
-import { BMapUtil, Util } from '../utils';
+import Util from '../utils';
+import BMapUtil from '../utils/map';
 import OPTIONS from '../options/label';
-import BaseOverlay from './index';
+import BaseOverlay from './BaseOverlay';
 
 const getLabelOptions = config => ({
   offset: config.offset,
-  position: config.point,
+  position: config.position,
   enableMassClear: config.massClear,
 });
-
-const getUsablePoint = (point) => {
-  if (Util.isNil(point)) {
-    throw Error('Missing property `point`');
-  }
-  if (!Util.isString(point)) {
-    if (!BMapUtil.isPoint(point)) {
-      throw Error('The `point` property should be `string` or literal value `{ lng, lat }`');
-    } else if (!BMapUtil.isBPoint(point)) {
-      point = BMapUtil.BPoint(point.lng, point.lat);
-    }
-  }
-
-  return point;
-};
 
 class Label extends BaseOverlay {
   outOfRangeOpts = []
 
   init(config = {}) {
-    config.point = getUsablePoint(config.point);
+    if (config.position) {
+      config.position = Util.convert2BPoint(config.position);
+    }
+    if (config.offset) {
+      config.offset = Util.convert2BSize(config.offset);
+    }
     const options = getLabelOptions(config);
     this.instance = BMapUtil.BLabel(config.content, options);
     this.map.addOverlay(this.instance);
@@ -35,11 +26,11 @@ class Label extends BaseOverlay {
   }
 
   processOptions(config) {
-    if (config.point) {
-      config.position = getUsablePoint(config.point);
+    if (config.position) {
+      config.position = Util.convert2BPoint(config.position);
     }
-    BMapUtil.processSetOptions(this.instance, OPTIONS.SET, config);
-    BMapUtil.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);
+    Util.processSetOptions(this.instance, OPTIONS.SET, config);
+    Util.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);
   }
 }
 

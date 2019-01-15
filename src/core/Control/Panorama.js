@@ -1,5 +1,5 @@
-import { BMapUtil } from '../utils';
-import BaseControl from './index';
+import BMapUtil from '../utils/map';
+import BaseControl from './BaseControl';
 
 class Panorama extends BaseControl {
   init(config = {}) {

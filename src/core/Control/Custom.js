@@ -1,13 +1,13 @@
-import { BMapUtil, Util, ControlUtil } from '../utils';
+import Util from '../utils';
+import BMapUtil from '../utils/map';
 
 class CustomControl {
   constructor(config, map) {
-    this.config = { ...config };
     this.map = map;
-    ControlUtil.processCommonOptions(config);
+    config = { ...config, ...Util.convertControlOptions(config) };
+    this.config = { ...config };
     this.defaultAnchor = config.anchor;
     this.defaultOffset = config.offset;
-    ControlUtil.processVisible(this, config.visible);
   }
 
   config = {}
@@ -29,8 +29,8 @@ class CustomControl {
   }
 
   repaint = (config) => {
-    ControlUtil.processCommonOptions(config);
-    const diffConfig = Util.getDiffConfig(this.config, config);
+    config = { ...config, ...Util.convertControlOptions(config) };
+    const diffConfig = Util.compareConfig(this.config, config);
     this.processOptions(diffConfig);
     this.config = { ...this.config, ...diffConfig };
   }
@@ -41,14 +41,14 @@ class CustomControl {
 }
 
 // 异步加载时，BMap对象不存在，所以提供获得类方法，确保调用时BMap对象存在。
-const getCustomControl = (config, initialize, mapInstance) => {
+const initCustomControl = (config, initialize, mapInstance) => {
   CustomControl.prototype = BMapUtil.BControl();
   CustomControl.prototype.initialize = initialize;
 
   const control = new CustomControl(config, mapInstance);
   mapInstance.addControl(control);
-
+  Util.processControlVisible(control, config.visible);
   return control;
 };
 
-export default getCustomControl;
+export default initCustomControl;

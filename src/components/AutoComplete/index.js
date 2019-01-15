@@ -1,46 +1,47 @@
-import ReactComponent from '../ReactComponent';
-import { bindEvents } from '../_base/util';
+import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { Util, AutoComplete as BAutoComplete } from '../../core';
 
-@ReactComponent
-class AutoComplete {
-  constructor(props) {
-    this.props = props;
-    this.map = global.bMapInstance;
-    this.init();
+class AutoComplete extends PureComponent {
+  instance = null;
+
+  config = {}
+
+  static childContextTypes = {
+    centralizedUpdates: PropTypes.func,
   }
 
-  init() {
-    const {
-      input,
-      events,
-      value,
-      location,
-      searchComplete,
-    } = this.props;
-
-    this.instance = new global.BMap.Autocomplete({
-      input,
-      location: location || this.map,
-      onSearchComplete: searchComplete,
-    });
-
-    if (value) {
-      this.instance.setInputValue(value);
-    }
-
-    bindEvents(this.instance, 'AUTO_COMPLETE', events);
+  getChildContext() {
+    return {
+      centralizedUpdates: this.centralizedUpdates,
+    };
   }
 
-  onPropsUpdate(newProps) {
-    this.props = newProps;
-    this.destroy();
-    this.init();
+  componentDidMount() {
+    const { children, ...resetProps } = this.props;
+    this.config = { ...this.config, ...resetProps };
+    this.control = new BAutoComplete(this.config);
+    this.instance = this.control.instance;
   }
 
-  destroy = () => {
-    if (this.instance.dispose) {
-      this.instance.dispose();
-    }
+  componentDidUpdate() {
+    const { children, ...resetProps } = this.props;
+    this.config = { ...this.config, ...resetProps };
+    this.control.repaint(this.config);
+  }
+
+  componentWillUnmount() {
+    this.control.destroy();
+  }
+
+  centralizedUpdates = ({ name, data }) => {
+    const configName = Util.firstLowerCase(name);
+    this.config[configName] = data;
+  }
+
+  render() {
+    const { children } = this.props;
+    return children || null;
   }
 }
 

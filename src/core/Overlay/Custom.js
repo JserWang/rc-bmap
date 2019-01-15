@@ -1,4 +1,5 @@
-import { BMapUtil, Util } from '../utils';
+import Util from '../utils';
+import BMapUtil from '../utils/map';
 
 class CustomOverlay {
   constructor(config, map) {
@@ -19,23 +20,8 @@ class CustomOverlay {
     }
   }
 
-  getUsablePoint = (point) => {
-    if (Util.isNil(point)) {
-      throw Error('Missing property `point`');
-    }
-    if (!Util.isString(point)) {
-      if (!BMapUtil.isPoint(point)) {
-        throw Error('The `point` property should be `string` or literal value `{ lng, lat }`');
-      } else if (!BMapUtil.isBPoint(point)) {
-        point = BMapUtil.BPoint(point.lng, point.lat);
-      }
-    }
-
-    return point;
-  }
-
   repaint = (config) => {
-    const diffConfig = Util.getDiffConfig(this.config, config);
+    const diffConfig = Util.compareConfig(this.config, config);
     this.processOptions(diffConfig);
     this.config = { ...this.config, ...diffConfig };
   }
@@ -46,7 +32,7 @@ class CustomOverlay {
 }
 
 // 异步加载时，BMap对象不存在，所以提供获得类方法，确保调用时BMap对象存在。
-const getCustomOverlay = (config, initialize, draw, mapInstance) => {
+const initCustomOverlay = (config, initialize, draw, mapInstance) => {
   CustomOverlay.prototype = BMapUtil.BOverlay();
   CustomOverlay.prototype.initialize = initialize;
   CustomOverlay.prototype.draw = draw;
@@ -57,4 +43,4 @@ const getCustomOverlay = (config, initialize, draw, mapInstance) => {
   return overlay;
 };
 
-export default getCustomOverlay;
+export default initCustomOverlay;

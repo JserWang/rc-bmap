@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Polygon from './Polygon';
-import { BMapUtil } from '../../core';
+import Base from '../Base';
+import { Util } from '../../core';
 
-const { Path, Point } = Polygon;
+const { Point, Path } = Base;
 
 class Boundary extends PureComponent {
   static contextTypes = {
@@ -27,7 +28,7 @@ class Boundary extends PureComponent {
   }
 
   getPoints = (name) => {
-    BMapUtil.getBoundary(name).then(({ points, area }) => {
+    Util.getBoundary(name).then(({ points, area }) => {
       this.name = name;
       this.processAutoViewport(points);
       this.setState({

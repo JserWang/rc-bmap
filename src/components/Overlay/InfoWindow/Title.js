@@ -1,7 +1,7 @@
-import ChildComponent from './ChildComponent';
+import HTMLComponent from '../HTMLComponent';
 
-class Title extends ChildComponent {
-  displayName = 'Title';
+class Title extends HTMLComponent {
+  name = 'title';
 }
 
 export default Title;

@@ -1,7 +1,7 @@
-import ChildComponent from './ChildComponent';
+import HTMLComponent from '../HTMLComponent';
 
-class MaxContent extends ChildComponent {
-  displayName = 'MaxContent';
+class MaxContent extends HTMLComponent {
+  name = 'maxContent';
 }
 
 export default MaxContent;

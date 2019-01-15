@@ -1,158 +1,123 @@
-const firstUpperCase = str => str.replace(/^\S/, s => s.toUpperCase());
-
 const BMapUtil = {
-  BPoint(lng, lat) {
+  BMap(container, opts) {
+    return new global.BMap.Map(container, opts);
+  },
+  BPoint({ lng, lat }) {
     return new global.BMap.Point(lng, lat);
   },
-  isPoint(point) {
-    return point.lng && point.lat;
+  BSize({ width, height }) {
+    return new global.BMap.Size(Number(width), Number(height));
   },
-  isBPoint(point) {
-    return BMapUtil.isPoint(point) && point.equals;
+  BPixel({ x, y }) {
+    return new global.BMap.Pixel(x, y);
   },
-  BSize(width, height) {
-    return new global.BMap.Size(width, height);
+  BBounds({ sw, ne }) {
+    const swPoint = BMapUtil.BPoint(sw);
+    const nePoint = BMapUtil.BPoint(ne);
+
+    return new global.BMap.Bounds(swPoint, nePoint);
   },
-  isSize(size) {
-    return size.width && size.height;
+  BMenuItem(text, callback, opts) {
+    return new global.BMap.MenuItem(text, callback, opts);
   },
-  isBSize(size) {
-    return BMapUtil.isSize(size) && size.equals;
+  BContextMenu(subMenus = []) {
+    const contextMenu = new global.BMap.ContextMenu();
+    subMenus.forEach((item) => {
+      contextMenu.addItem(item);
+      if (item.separator) {
+        contextMenu.addSeparator();
+      }
+    });
+    return contextMenu;
   },
-  BMenuItem(config) {
-    const menuItemOptions = {
-      id: config.id,
-      width: config.width,
-      iconUrl: config.iconUrl,
-    };
-    return new global.BMap.MenuItem(config.text, config.onClick, menuItemOptions);
+  BIcon(url, size, opts) {
+    return new global.BMap.Icon(url, size, opts);
   },
-  BContextMenu() {
-    return new global.BMap.ContextMenu();
-  },
-  BIcon(config) {
-    const iconOptions = {
-      anchor: config.anchor,
-      imageOffset: config.imageOffset,
-      infoWindowAnchor: config.infoWindowAnchor,
-      printImageUrl: config.printImageUrl,
-    };
-    return new global.BMap.Icon(config.url, config.size, iconOptions);
+  BIconSequence(symbol, offset, repeat, fixedRotation) {
+    return new global.BMap.IconSequence(symbol, offset, repeat, fixedRotation);
   },
   BControl() {
     return new global.BMap.Control();
   },
-  BCityListControl(config) {
-    return new global.BMap.CityListControl(config);
+  BCityListControl(opts) {
+    return new global.BMap.CityListControl(opts);
   },
-  BCopyrightControl(config) {
-    return new global.BMap.CopyrightControl(config);
+  BCopyrightControl(opts) {
+    return new global.BMap.CopyrightControl(opts);
   },
-  BNavigationControl(config) {
-    return new global.BMap.NavigationControl(config);
+  BNavigationControl(opts) {
+    return new global.BMap.NavigationControl(opts);
   },
-  BMapTypeControl(config) {
-    return new global.BMap.MapTypeControl(config);
+  BMapTypeControl(opts) {
+    return new global.BMap.MapTypeControl(opts);
   },
-  BScaleControl(config) {
-    return new global.BMap.ScaleControl(config);
+  BScaleControl(opts) {
+    return new global.BMap.ScaleControl(opts);
   },
-  BPanoramaControl(config) {
-    return new global.BMap.PanoramaControl(config);
+  BPanoramaControl(opts) {
+    return new global.BMap.PanoramaControl(opts);
   },
-  BOverviewMapControl(config) {
-    return new global.BMap.OverviewMapControl(config);
+  BOverviewMapControl(opts) {
+    return new global.BMap.OverviewMapControl(opts);
   },
-  BGeolocationControl(config) {
-    return new global.BMap.GeolocationControl(config);
+  BGeolocationControl(opts) {
+    return new global.BMap.GeolocationControl(opts);
   },
   BOverlay() {
     return new global.BMap.Overlay();
   },
-  BMarker(point, options) {
-    return new global.BMap.Marker(point, options);
+  BMarker(point, opts) {
+    return new global.BMap.Marker(point, opts);
   },
-  BLabel(content, options) {
-    return new global.BMap.Label(content, options);
+  BLabel(content, opts) {
+    return new global.BMap.Label(content, opts);
   },
-  BCircle(center, radius, options) {
-    return new global.BMap.Circle(center, radius, options);
+  BCircle(center, radius, opts) {
+    return new global.BMap.Circle(center, radius, opts);
   },
-  BPolyline(points, options) {
-    return new global.BMap.Polyline(points, options);
+  BPolyline(points, opts) {
+    return new global.BMap.Polyline(points, opts);
   },
-  BInfoWindow(content, options) {
-    return new global.BMap.InfoWindow(content, options);
+  BInfoWindow(content, opts) {
+    return new global.BMap.InfoWindow(content, opts);
   },
-  BPolygon(points, options) {
-    return new global.BMap.Polygon(points, options);
+  BPolygon(points, opts) {
+    return new global.BMap.Polygon(points, opts);
   },
-  getBoundary(name) {
-    return new Promise((resolve, reject) => {
-      const boundary = new global.BMap.Boundary();
+  BGroundOverlay(bounds, opts) {
+    return new global.BMap.GroundOverlay(bounds, opts);
+  },
+  BPointCollection(points, opts) {
+    return new global.BMap.PointCollection(points, opts);
+  },
+  BAutocomplete(opts) {
+    return new global.BMap.Autocomplete(opts);
+  },
+  BSymbol(path, opts) {
+    return new global.BMap.Symbol(path, opts);
+  },
+  BTileLayer(opts) {
+    return new global.BMap.TileLayer(opts);
+  },
+  BTrafficLayer(opts) {
+    return new global.BMap.TrafficLayer(opts);
+  },
+  BLocalSearch(location, opts) {
+    return new global.BMap.LocalSearch(location, opts);
+  },
 
-      boundary.get(name, (res) => {
-        const count = res.boundaries.length;
-        if (count === 0) {
-          reject();
-        }
-        const area = [];
-        let allPoints = [];
-        for (let i = 0; i < count; i += 1) {
-          const arr = res.boundaries[i].split(';').map((item) => {
-            const pointArr = item.split(',');
-            return BMapUtil.BPoint(pointArr[0], pointArr[1].trim());
-          });
-          allPoints = allPoints.concat(arr);
-          area.push(arr);
-        }
-
-        resolve({
-          area,
-          points: allPoints,
-        });
+  search({ keyword, location }) {
+    return new Promise((resolve) => {
+      const local = new global.BMap.LocalSearch(location, {
+        onSearchComplete(result) {
+          const list = [];
+          for (let i = 0, len = result.getCurrentNumPois(); i < len - 1; i += 1) {
+            list.push(result.getPoi(i));
+          }
+          resolve(result);
+        },
       });
-    });
-  },
-  bindEvents(target, events) {
-    if (events) {
-      const eventKeys = Object.keys(events);
-      eventKeys.forEach((eventName) => {
-        const callback = (...args) => {
-          events[eventName].call(null, ...args);
-        };
-        target.events = target.events || {};
-        target.addEventListener(eventName, callback);
-        target.events[`${eventName}`] = callback;
-      });
-    }
-  },
-  unBindEvents(target) {
-    const { events } = target;
-    if (events) {
-      const eventNames = Object.keys(events);
-      for (let i = 0, len = eventNames.length; i < len; i += 1) {
-        const eventName = eventNames[i];
-        const event = events[eventName];
-        target.removeEventListener(eventName, event);
-      }
-    }
-  },
-  processSetOptions(target, optionList, opts) {
-    optionList.forEach((key) => {
-      if (opts[key] || typeof opts[key] === 'boolean') {
-        const upKey = firstUpperCase(key);
-        target[`set${upKey}`](opts[key]);
-      }
-    });
-  },
-  processBooleanOptions(target, optionList, opts) {
-    optionList.forEach((key) => {
-      if (opts[key] || typeof opts[key] === 'boolean') {
-        const upKey = firstUpperCase(key);
-        const prefix = opts[key] ? 'enable' : 'disable';
-        target[`${prefix}${upKey}`]();
-      }
+      local.search(keyword);
     });
   },
 };

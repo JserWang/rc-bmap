@@ -1,12 +1,7 @@
 /**
  * 基础类
  */
-export { default as Point } from './components/Base/Point';
-export { default as Offset } from './components/Base/Offset';
-export { default as ContextMenu } from './components/Base/ContextMenu';
-export { default as Events } from './components/Base/Events';
-export { default as Copyright } from './components/Base/Copyright';
-export { default as Icon } from './components/Base/Icon';
+export { default as Base } from './components/Base';
 
 /**
  * 基础组件
@@ -14,7 +9,6 @@ export { default as Icon } from './components/Base/Icon';
 export { default as Map } from './components/Map';
 export { default as CustomControl } from './components/Control/Custom';
 export { default as CustomOverlay } from './components/Overlay/Custom';
-export { default as ReactComponent } from './components/ReactComponent';
 export { default as AutoComplete } from './components/AutoComplete';
 
 /**
@@ -23,8 +17,8 @@ export { default as AutoComplete } from './components/AutoComplete';
 export { default as Navigation } from './components/Control/Navigation';
 export { default as OverviewMap } from './components/Control/OverviewMap';
 export { default as Scale } from './components/Control/Scale';
-export { default as MapTypeCtrl } from './components/Control/MapType';
-export { default as CopyrightControl } from './components/Control/Copyright';
+export { default as MapType } from './components/Control/MapType';
+export { default as CopyrightControl } from './components/Control/CopyrightControl';
 export { default as Geolocation } from './components/Control/Geolocation';
 export { default as Panorama } from './components/Control/Panorama';
 export { default as CityList } from './components/Control/CityList';
@@ -40,7 +34,6 @@ export { default as Circle } from './components/Overlay/Circle';
 export { default as InfoWindow } from './components/Overlay/InfoWindow';
 export { default as Ground } from './components/Overlay/Ground';
 export { default as PointCollection } from './components/Overlay/PointCollection';
-export { default as Symbol } from './components/Overlay/Symbol';
 export { default as Boundary } from './components/Overlay/Boundary';
 
 /**
@@ -56,42 +49,18 @@ export { default as Boundary } from './components/Overlay/Boundary';
 /**
  * 地图图层
  */
-export { default as Tile } from './components/Layers/Tile';
+export { default as TileLayer } from './components/Layer/TileLayer';
+export { default as TrafficLayer } from './components/Layer/TrafficLayer';
 
-/**
- * 服务类
- */
-export { default as LocalSearch } from './components/Service/LocalSearch';
-export { default as TransitRoute } from './components/Service/TransitRoute';
-export { default as DrivingRoute } from './components/Service/DrivingRoute';
-export { default as WalkingRoute } from './components/Service/WalkingRoute';
-export { default as RidingRoute } from './components/Service/RidingRoute';
-export { default as BusLineSearch } from './components/Service/BusLineSearch';
+// /**
+//  * 服务类
+//  */
+// export { default as LocalSearch } from './components/Service/LocalSearch';
+// export { default as TransitRoute } from './components/Service/TransitRoute';
+// export { default as DrivingRoute } from './components/Service/DrivingRoute';
+// export { default as WalkingRoute } from './components/Service/WalkingRoute';
+// export { default as RidingRoute } from './components/Service/RidingRoute';
+// export { default as BusLineSearch } from './components/Service/BusLineSearch';
 
-/**
- * 常量
- */
-export { default as MapType } from './constants/MapType';
-export { default as ControlAnchor } from './constants/ControlAnchor';
-export { default as NavigationType } from './constants/NavigationType';
-export { default as LengthUnit } from './constants/LengthUnit';
-export { default as MapPane } from './constants/MapPane';
-export { default as MapTypeControlType } from './constants/MapTypeControlType';
-export { default as StatusCode } from './constants/StatusCode';
-export { default as Animation } from './constants/Animation';
-export { default as ShapeType } from './constants/ShapeType';
-export { default as SizeType } from './constants/SizeType';
-export { default as SymbolShapeType } from './constants/SymbolShapeType';
-export { default as ContextMenuIcon } from './constants/ContextMenuIcon';
-export { default as TransitPolicy } from './constants/TransitPolicy';
-export { default as TransitTypePolicy } from './constants/TransitTypePolicy';
-export { default as IntercityPolicy } from './constants/IntercityPolicy';
-export { default as DrivingPolicy } from './constants/DrivingPolicy';
-export { default as DrawingMode } from './constants/DrawingMode';
-
-/**
- * 工具方法
- */
-export {
-  getMapBounds, getBounds, getPoiByKeyword, convertPoint,
-} from './components/_base/util';
+export { default as Constants } from './core/constants';
+export { default as BMapUtil } from './core/utils/map';

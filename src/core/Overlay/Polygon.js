@@ -1,6 +1,7 @@
-import { BMapUtil, Util } from '../utils';
+import Util from '../utils';
+import BMapUtil from '../utils/map';
 import OPTIONS from '../options/polygon';
-import BaseOverlay from './index';
+import BaseOverlay from './BaseOverlay';
 
 const getPolygonOptions = config => ({
   strokeColor: config.strokeColor,
@@ -14,19 +15,7 @@ const getPolygonOptions = config => ({
   enableClicking: config.clicking,
 });
 
-const getUsablePoint = (point) => {
-  if (!Util.isString(point)) {
-    if (!BMapUtil.isPoint(point)) {
-      throw Error('The `point` property should be `string` or literal value `{ lng, lat }`');
-    } else if (!BMapUtil.isBPoint(point)) {
-      point = BMapUtil.BPoint(point.lng, point.lat);
-    }
-  }
-
-  return point;
-};
-
-const processPoints = (points = []) => points.map(item => getUsablePoint(item));
+const processPoints = (points = []) => points.map(item => Util.convert2BPoint(item));
 
 class Polygon extends BaseOverlay {
   outOfRangeOpts = ['clicking']
@@ -40,13 +29,12 @@ class Polygon extends BaseOverlay {
   }
 
   processOptions(config) {
-    const { path } = config;
-    if (path && Array.isArray(path)) {
+    if (config.path && Array.isArray(config.path)) {
       config.path = processPoints(config.path);
     }
 
-    BMapUtil.processSetOptions(this.instance, OPTIONS.SET, config);
-    BMapUtil.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);
+    Util.processSetOptions(this.instance, OPTIONS.SET, config);
+    Util.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);
   }
 }
 

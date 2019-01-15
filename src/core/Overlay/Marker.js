@@ -1,6 +1,7 @@
-import { BMapUtil, Util } from '../utils';
+import Util from '../utils';
+import BMapUtil from '../utils/map';
 import OPTIONS from '../options/marker';
-import BaseOverlay from './index';
+import BaseOverlay from './BaseOverlay';
 
 const getMarkerOptions = config => ({
   offset: config.offset,
@@ -14,27 +15,12 @@ const getMarkerOptions = config => ({
   title: config.title,
 });
 
-const getUsablePoint = (point) => {
-  if (Util.isNil(point)) {
-    throw Error('Missing property `point`');
-  }
-  if (!Util.isString(point)) {
-    if (!BMapUtil.isPoint(point)) {
-      throw Error('The `point` property should be `string` or literal value `{ lng, lat }`');
-    } else if (!BMapUtil.isBPoint(point)) {
-      point = BMapUtil.BPoint(point.lng, point.lat);
-    }
-  }
-
-  return point;
-};
-
 class Marker extends BaseOverlay {
   outOfRangeOpts = ['clicking', 'raiseOnDrag', 'draggingCursor', 'shadow']
 
   init(config = {}) {
     const options = getMarkerOptions(config);
-    const point = getUsablePoint(config.point);
+    const point = Util.convert2BPoint(config.point);
     this.instance = BMapUtil.BMarker(point, options);
     this.map.addOverlay(this.instance);
     this.processOptions(config);
@@ -48,11 +34,15 @@ class Marker extends BaseOverlay {
     }
 
     if (config.point) {
-      config.position = getUsablePoint(config.point);
+      config.position = Util.convert2BPoint(config.point);
     }
 
-    BMapUtil.processSetOptions(this.instance, OPTIONS.SET, config);
-    BMapUtil.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);
+    Util.processSetOptions(this.instance, OPTIONS.SET, config);
+    Util.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);
+
+    if (config.contextMenu) {
+      this.setContextMenu(config.contextMenu);
+    }
   }
 
   setContextMenu(contextMenu) {

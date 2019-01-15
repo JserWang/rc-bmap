@@ -1,6 +1,8 @@
-import { BMapUtil, Util } from '../utils';
+import Util from '../utils';
+import BMapUtil from '../utils/map';
+
 import OPTIONS from '../options/infoWindow';
-import BaseOverlay from './index';
+import BaseOverlay from './BaseOverlay';
 
 const getInfoWindowOptions = config => ({
   width: config.width,
@@ -14,39 +16,23 @@ const getInfoWindowOptions = config => ({
   message: config.message,
 });
 
-const getUsablePoint = (point) => {
-  if (Util.isNil(point)) {
-    throw Error('Missing property `point`');
-  }
-  if (!Util.isString(point)) {
-    if (!BMapUtil.isPoint(point)) {
-      throw Error('The `point` property should be `string` or literal value `{ lng, lat }`');
-    } else if (!BMapUtil.isBPoint(point)) {
-      point = BMapUtil.BPoint(point.lng, point.lat);
-    }
-  }
-
-  return point;
-};
-
 class InfoWindow extends BaseOverlay {
   outOfRangeOpts = ['maxWidth', 'offset', 'displayMessage', 'message', 'point']
 
   init(config = {}) {
     const options = getInfoWindowOptions(config);
-    const point = getUsablePoint(config.point);
+    const point = Util.convert2BPoint(config.point);
     this.instance = BMapUtil.BInfoWindow(config.content, options);
     this.processVisible(config.visible, point);
   }
 
   processOptions(config) {
-    if (!config.point) {
-      config.point = this.config.point;
-    }
-    const point = getUsablePoint(config.point);
-    BMapUtil.processSetOptions(this.instance, OPTIONS.SET, config);
-    BMapUtil.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);
-    this.processVisible(config.visible, point);
+    const point = config.point || this.config.point;
+    config.point = Util.convert2BPoint(point);
+
+    Util.processSetOptions(this.instance, OPTIONS.SET, config);
+    Util.processBooleanOptions(this.instance, OPTIONS.BOOLEAN, config);
+    this.processVisible(config.visible, config.point);
   }
 
   processVisible(visible = true, point) {

@@ -44,11 +44,9 @@ class BaseControl extends PureComponent {
     this.control.destroy();
   }
 
-  centralizedUpdates = (unit) => {
-    const { config } = this;
-    const { displayName, instance, props } = unit;
-    const propsName = Util.firstLowerCase(displayName);
-    config[propsName] = instance || props;
+  centralizedUpdates = ({ name, data }) => {
+    const configName = Util.firstLowerCase(name);
+    this.config[configName] = data;
   }
 
   render() {

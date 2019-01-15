@@ -1,5 +1,6 @@
-import { BMapUtil } from '../utils';
-import BaseControl from './index';
+import Util from '../utils';
+import BMapUtil from '../utils/map';
+import BaseControl from './BaseControl';
 
 class Geolocation extends BaseControl {
   init(config = {}) {
@@ -7,7 +8,8 @@ class Geolocation extends BaseControl {
     delete config.icon;
     this.instance = BMapUtil.BGeolocationControl(config);
     this.map.addControl(this.instance);
-    BMapUtil.bindEvents(this.instance, config.events);
+
+    Util.bindEvents(this.instance, config.events);
   }
 }
 

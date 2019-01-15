@@ -1,5 +1,5 @@
 import React from 'react';
-import { getCustomControl } from '../../core';
+import { initCustomControl } from '../../core';
 import BaseControl from './BaseControl';
 
 const CustomHOC = WrappedComponent => class extends BaseControl {
@@ -12,7 +12,7 @@ const CustomHOC = WrappedComponent => class extends BaseControl {
     const { children, ...resetProps } = this.props;
     this.config = { ...this.config, ...resetProps };
     this.mapInstance = context.getMapInstance();
-    this.control = getCustomControl(this.config, this.initialize, this.mapInstance);
+    this.control = initCustomControl(this.config, this.initialize, this.mapInstance);
   }
 
   componentDidUpdate() {

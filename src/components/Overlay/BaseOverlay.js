@@ -36,18 +36,16 @@ class BaseOverlay extends PureComponent {
   componentDidUpdate() {
     const { children, ...resetProps } = this.props;
     this.config = { ...this.config, ...resetProps };
-    this.overlay.repaint(this.config);
+    this.overlay.repaint({ ...this.config });
   }
 
   componentWillUnmount() {
     this.overlay.destroy();
   }
 
-  centralizedUpdates = (unit) => {
-    const { config } = this;
-    const { displayName, instance, props } = unit;
-    const propsName = Util.firstLowerCase(displayName);
-    config[propsName] = instance || props;
+  centralizedUpdates = ({ name, data }) => {
+    const configName = Util.firstLowerCase(name);
+    this.config[configName] = data;
   }
 
   render() {
