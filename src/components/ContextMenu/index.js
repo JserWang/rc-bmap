@@ -72,14 +72,17 @@ export default class ContextMenu extends PureComponent {
 
   render() {
     const { children } = this.props;
-    return React.Children.map(children, (child, index) => {
-      if (child) {
-        // 这里将 index 传递给MenuItem，保证子元素的显示顺序
-        return React.cloneElement(child, {
-          index,
-        });
-      }
-      return null;
-    });
+    if (children) {
+      return React.Children.map(children, (child, index) => {
+        if (child) {
+          // 这里将 index 传递给MenuItem，保证子元素的显示顺序
+          return React.cloneElement(child, {
+            index,
+          });
+        }
+        return null;
+      });
+    }
+    return null;
   }
 }
