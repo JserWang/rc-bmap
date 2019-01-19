@@ -64,16 +64,20 @@ export default class Path extends PureComponent {
     this.items.splice(index, 1);
   }
 
+  renderChildren = () => React.Children.map(this.props.children, (child, index) => {
+    if (child) {
+      return React.cloneElement(child, {
+        index,
+      });
+    }
+    return null;
+  })
+
   render() {
-    const { children } = this.props;
-    return React.Children.map(children, (child, index) => {
-      if (child) {
-        // 这里将 index 传递给子元素，保证子元素的显示顺序
-        return React.cloneElement(child, {
-          index,
-        });
-      }
-      return null;
-    });
+    return (
+      <div>
+        {this.renderChildren()}
+      </div>
+    );
   }
 }

@@ -44,16 +44,21 @@ class CopyrightControl extends BaseControl {
 
   getRealControl = () => new BCopyright(this.config, this.mapInstance)
 
+  renderChildren = () => React.Children.map(this.props.children, (child, index) => {
+    if (child) {
+      return React.cloneElement(child, {
+        index,
+      });
+    }
+    return null;
+  })
+
   render() {
-    const { children } = this.props;
-    return React.Children.map(children, (child, index) => {
-      if (child) {
-        return React.cloneElement(child, {
-          index,
-        });
-      }
-      return null;
-    });
+    return (
+      <div>
+        {this.renderChildren()}
+      </div>
+    );
   }
 }
 

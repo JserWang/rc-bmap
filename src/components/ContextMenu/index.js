@@ -70,19 +70,21 @@ export default class ContextMenu extends PureComponent {
     this.instance = BMapUtil.BContextMenu(this.menuItems);
   }
 
-  render() {
-    const { children } = this.props;
-    if (children) {
-      return React.Children.map(children, (child, index) => {
-        if (child) {
-          // 这里将 index 传递给MenuItem，保证子元素的显示顺序
-          return React.cloneElement(child, {
-            index,
-          });
-        }
-        return null;
+  renderChildren = () => React.Children.map(this.props.children, (child, index) => {
+    if (child) {
+      // 这里将 index 传递给MenuItem，保证子元素的显示顺序
+      return React.cloneElement(child, {
+        index,
       });
     }
     return null;
+  })
+
+  render() {
+    return (
+      <div>
+        {this.renderChildren()}
+      </div>
+    );
   }
 }
