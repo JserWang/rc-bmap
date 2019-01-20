@@ -11,7 +11,6 @@ const getPolygonOptions = config => ({
   fillOpacity: config.fillOpacity,
   strokeStyle: config.strokeStyle,
   enableMassClear: config.massClear,
-  enableEditing: config.editing,
   enableClicking: config.clicking,
 });
 

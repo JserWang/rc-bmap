@@ -6,7 +6,6 @@ const getNavigationControlOptions = config => ({
   offset: config.offset,
   type: global[config.type] || config.type,
   showZoomInfo: config.showZoomInfo,
-  enableGeolocation: config.geolocation,
 });
 
 class Navigation extends BaseControl {

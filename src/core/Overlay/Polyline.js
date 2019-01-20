@@ -9,7 +9,6 @@ const getPolylineOptions = config => ({
   strokeOpacity: config.strokeOpacity,
   strokeStyle: config.strokeStyle,
   enableMassClear: config.massClear,
-  enableEditing: config.editing,
   enableClicking: config.clicking,
   icons: config.icons,
 });

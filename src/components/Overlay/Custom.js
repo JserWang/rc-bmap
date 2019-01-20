@@ -17,15 +17,6 @@ const CustomHOC = WrappedComponent => class extends BaseOverlay {
     this.overlay = initCustomOverlay(this.config, this.initialize, this.draw, this.mapInstance);
   }
 
-  componentDidUpdate() {
-    const { children, ...resetProps } = this.props;
-    this.overlay.repaint(resetProps);
-  }
-
-  componentWillUnmount() {
-    this.overlay.destroy();
-  }
-
   getContainer = (ref) => {
     this.container = ref;
   }

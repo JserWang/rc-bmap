@@ -37,30 +37,10 @@ export { default as PointCollection } from './components/Overlay/PointCollection
 export { default as Boundary } from './components/Overlay/Boundary';
 
 /**
- * 扩展类库
- */
-// export { default as Heatmap } from './components/Lib/Heatmap';
-// export { default as CurveLine } from './components/Lib/CurveLine';
-// export { default as MarkerClusterer } from './components/Lib/MarkerClusterer';
-// export { default as DrawingManager } from './components/Lib/DrawingManager';
-// export { default as DistanceTool } from './components/Lib/DistanceTool';
-// export { default as TrafficControl } from './components/Lib/TrafficControl';
-
-/**
  * 地图图层
  */
 export { default as TileLayer } from './components/Layer/TileLayer';
 export { default as TrafficLayer } from './components/Layer/TrafficLayer';
-
-// /**
-//  * 服务类
-//  */
-// export { default as LocalSearch } from './components/Service/LocalSearch';
-// export { default as TransitRoute } from './components/Service/TransitRoute';
-// export { default as DrivingRoute } from './components/Service/DrivingRoute';
-// export { default as WalkingRoute } from './components/Service/WalkingRoute';
-// export { default as RidingRoute } from './components/Service/RidingRoute';
-// export { default as BusLineSearch } from './components/Service/BusLineSearch';
 
 export { default as Constants } from './core/constants';
 export { default as BMapUtil } from './core/utils/map';

@@ -38,7 +38,6 @@ class Label extends BaseOverlay {
     });
   }
 
-
   getRealOverlay = () => new BLabel(this.config, this.mapInstance)
 }
 

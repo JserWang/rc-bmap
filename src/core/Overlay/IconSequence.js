@@ -1,4 +1,4 @@
-import BMapUtil from '../utils';
+import BMapUtil from '../utils/map';
 
 class IconSequence {
   constructor(config = {}) {

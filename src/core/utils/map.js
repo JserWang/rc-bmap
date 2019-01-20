@@ -130,7 +130,7 @@ const BMapUtil = {
    */
   search(keyword, location) {
     return new Promise((resolve) => {
-      const local = BMapUtil.LocalSearch(location, {
+      const local = BMapUtil.BLocalSearch(location, {
         onSearchComplete(result) {
           const list = [];
           for (let i = 0, len = result.getCurrentNumPois(); i < len - 1; i += 1) {
@@ -161,25 +161,6 @@ const BMapUtil = {
   },
 
   /**
-   * 转换坐标
-   * @param {*} points 转换坐标点
-   * @param {*} from 来源坐标类型
-   * @param {*} to 目标坐标类型
-   */
-  convertPoint(points, from, to = 5) {
-    return new Promise((resolve) => {
-      const convert = BMapUtil.BConvertor();
-      if (!Array.isArray(points)) {
-        points = [points];
-      }
-      const pList = points.map(item => BMapUtil.BPoint({ ...item }));
-      convert.translate(pList, from, to, (result) => {
-        resolve(result);
-      });
-    });
-  },
-
-  /**
    * 对指定的地址进行解析，返回坐标点
    * @param {*} address
    * @param {*} city
@@ -204,7 +185,7 @@ const BMapUtil = {
   getLocation(point) {
     return new Promise((resolve, reject) => {
       const geo = new global.BMap.Geocoder();
-      geo.getPoint(point, (result) => {
+      geo.getLocation(point, (result) => {
         if (result) {
           resolve(result);
         } else {

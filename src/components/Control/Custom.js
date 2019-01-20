@@ -15,15 +15,6 @@ const CustomHOC = WrappedComponent => class extends BaseControl {
     this.control = initCustomControl(this.config, this.initialize, this.mapInstance);
   }
 
-  componentDidUpdate() {
-    const { children, ...resetProps } = this.props;
-    this.control.repaint(resetProps);
-  }
-
-  componentWillUnmount() {
-    this.control.destroy();
-  }
-
   getContainer = (ref) => {
     this.container = ref;
   }

@@ -47,24 +47,28 @@ class Boundary extends PureComponent {
 
   render() {
     const { area } = this.state;
-    const { children } = this.props;
+    const { children, ...resetProps } = this.props;
     return (
       area.length > 0 ? (
-        area.map(points => (
-          <Polygon
-            {...this.props}
-          >
-            <Path>
-              {
-                points.map(item => (
-                  <Point lng={item.lng} lat={item.lat} />
-                ))
-              }
-            </Path>
-            { children }
-          </Polygon>
-        ))
-
+        <div>
+          {
+            area.map((points, index) => (
+              <Polygon
+                key={index}
+                {...resetProps}
+              >
+                <Path>
+                  {
+                    points.map((item, idx) => (
+                      <Point key={idx} lng={item.lng} lat={item.lat} />
+                    ))
+                  }
+                </Path>
+                { children }
+              </Polygon>
+            ))
+          }
+        </div>
       ) : null
     );
   }
