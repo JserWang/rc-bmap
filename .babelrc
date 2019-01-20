@@ -5,6 +5,8 @@
     "stage-0"
   ],
   "plugins": [
-    "transform-decorators-legacy"
+    "transform-runtime",
+    "transform-decorators-legacy",
+    "babel-plugin-transform-regenerator"
   ]
 }

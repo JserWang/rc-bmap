@@ -23,6 +23,8 @@
   "license": "MIT",
   "homepage": "https://bmap.jser-club.com",
   "dependencies": {
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "lodash.isequal": "^4.5.0",
     "prop-types": "^15.6.2"
   },
