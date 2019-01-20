@@ -1,4 +1,4 @@
-import { PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Util } from '../../core';
 
@@ -47,7 +47,10 @@ class Common extends PureComponent {
 
   render() {
     const { children } = this.props;
-    return children || null;
+    if (children) {
+      return <div>{children}</div>;
+    }
+    return null;
   }
 }
 
