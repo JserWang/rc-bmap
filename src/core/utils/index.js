@@ -151,8 +151,14 @@ const convert2BBounds = (bounds, propsName = 'bounds') => {
  */
 const bindEvents = (target, events = {}) => {
   Object.keys(events).forEach((eventName) => {
+    const eventType = typeof events[eventName];
+    if (eventType !== 'function') {
+      console.warn(`Events's props value should be a function, but got '${eventType}'`);
+    }
     const callback = (...args) => {
-      events[eventName].call(null, ...args);
+      if (eventType === 'function') {
+        events[eventName].call(null, ...args);
+      }
     };
     target.events = target.events || {};
     target.addEventListener(eventName, callback);
