@@ -27,12 +27,9 @@ class BaseOverlay {
       this.init({ ...this.config, ...diffConfig });
     } else {
       this.processOptions(diffConfig);
-
-      if (config.events) {
-        this.processEvents(config.events);
-      }
     }
     this.config = { ...this.config, ...diffConfig };
+    this.processEvents(this.config.events);
   }
 
   destroy = () => {

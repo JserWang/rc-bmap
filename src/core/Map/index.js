@@ -98,14 +98,13 @@ class Map {
     const diffConfig = Util.compareConfig(this.config, config);
 
     this.processContextMenu(diffConfig.contextMenu);
-    this.processEvents(diffConfig.events);
-
     this.setMapType(diffConfig.mapType);
     this.processOptions(diffConfig);
     this.config = {
       ...this.config,
       ...diffConfig,
     };
+    this.processEvents(this.config.events);
   }
 }
 

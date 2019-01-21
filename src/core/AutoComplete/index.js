@@ -42,12 +42,9 @@ class AutoComplete {
       this.init({ ...this.config, ...diffConfig });
     } else {
       this.processOptions(diffConfig);
-
-      if (config.events) {
-        this.processEvents(config.events);
-      }
     }
     this.config = { ...this.config, ...diffConfig };
+    this.processEvents(this.config.events);
   }
 
   destroy = () => {
@@ -56,9 +53,7 @@ class AutoComplete {
 
   processEvents = (events) => {
     Util.unbindEvents(this.instance);
-    if (events) {
-      Util.bindEvents(this.instance, events);
-    }
+    Util.bindEvents(this.instance, events);
   }
 
   processOptions(config) {
