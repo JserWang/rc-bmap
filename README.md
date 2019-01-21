@@ -10,11 +10,24 @@
 
 ## 文档
 
-1.0.0文档地址
-[https://jser.wang/bmap/](https://jser.wang/bmap/)
+1.0.0文档地址:
 
-0.2.4文档地址
+[http://jser.wang/bmap/](http://jser.wang/bmap/)
+
+0.2.4文档地址:
+
 [https://bmap.jser-club.com](https://bmap.jser-club.com)
+
+## 安装
+
+```
+npm install rc-bmap
+```
+
+当前通过npm 或 yarn 直接安装为最新版，若想指定安装0.2.4版本时可通过：
+```
+npm install rc-bmap@0.2.4
+```
 
 ## 协议
 
