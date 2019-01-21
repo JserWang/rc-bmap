@@ -1,8 +1,7 @@
 {
   "name": "rc-bmap",
-  "version": "0.2.4",
+  "version": "1.0.0",
   "main": "lib/index.js",
-  "typings": "types/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/JserWang/rc-bmap.git"
@@ -18,24 +17,21 @@
   "files": [
     "src",
     "lib",
-    "types",
-    "dist"
+    "types"
   ],
+  "license": "MIT",
   "homepage": "https://bmap.jser-club.com",
   "dependencies": {
-    "bmaplib.curveline": "^1.0.0",
-    "bmaplib.heatmap": "^1.0.4",
-    "bmaplib.markerclusterer": "^1.0.13"
+    "babel-plugin-transform-regenerator": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "lodash.isequal": "^4.5.0",
+    "prop-types": "^15.6.2"
   },
   "scripts": {
     "build": "rm -rf lib && babel src -d lib",
-    "build:dist": "webpack",
-    "prepublish": "npm run build:dist && npm run build",
-    "pub": "npm run prepublish && npm publish",
-    "precommit": "lint-staged"
-  },
-  "lint-staged": {
-    "docs/**/*.md": ["prettier --parser markdown --write", "git add"]
+    "build_win": "rimraf lib && babel src -d lib",
+    "prepublish": "npm run build",
+    "pub": "npm run prepublish && npm publish"
   },
   "devDependencies": {
     "@types/react": "^16.4.9",
@@ -52,13 +48,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.0",
-    "git-hooks": "^1.1.10",
-    "husky": "^1.0.0-rc.13",
-    "lint-staged": "^7.2.2",
-    "prettier": "1.14.2",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "webpack": "^3.0.0",
-    "webpack-dev-server": "^2.5.0"
+    "react-dom": "^16.4.1"
   }
 }

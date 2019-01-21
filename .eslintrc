@@ -6,12 +6,15 @@
   },
   "rules": {
     "import/no-extraneous-dependencies": "off",
-    "no-param-reassign": "warn",
+    "no-param-reassign": "off",
     "react/prop-types": "off",
     "no-underscore-dangle": "warn",
+    "linebreak-style": "off",
     "global-require": "warn",
     "react/jsx-filename-extension": "off",
     "react/require-default-props": "off",
-    "react/forbid-prop-types": "off"
+    "react/forbid-prop-types": "off",
+    "react/destructuring-assignment": "off",
+    "react/no-array-index-key": "off"
   }
 }

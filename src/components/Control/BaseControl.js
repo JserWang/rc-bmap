@@ -1,35 +1,57 @@
 
-import { render as reactRender } from 'react-dom';
-import { unBindEvents } from '../_base/util';
+import { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { Util } from '../../core';
 
-class BaseControl {
-  constructor(props) {
-    this.props = props;
-    this.state = {};
-    this.map = global.bMapInstance;
-
-    this.init();
+class BaseControl extends PureComponent {
+  static contextTypes = {
+    getMapInstance: PropTypes.func,
   }
 
-  onPropsUpdate(newProps) {
-    this.props = newProps;
-    unBindEvents(this.instance);
-    this.destroy();
-    this.init();
+  static childContextTypes = {
+    centralizedUpdates: PropTypes.func,
   }
 
-  setState(param) {
-    if (param !== null) {
-      this.state = Object.assign(this.state, param);
-    }
-    if (this.render) {
-      reactRender(this.render(), this.container);
-    }
+  control = null
+
+  mapInstance = null
+
+  config = {}
+
+  getChildContext() {
+    return {
+      centralizedUpdates: this.centralizedUpdates,
+    };
   }
 
-  destroy() {
-    this.map.removeControl(this.instance);
-    this.instance = null;
+  componentDidMount() {
+    const { context, props } = this;
+    const { children, ...resetProps } = props;
+    this.config = { ...this.config, ...resetProps };
+    this.mapInstance = context.getMapInstance();
+    const control = this.getRealControl();
+    this.control = control;
+    this.instance = control.instance;
+  }
+
+  componentDidUpdate() {
+    const { children, ...resetProps } = this.props;
+    this.config = { ...this.config, ...resetProps };
+    this.control.repaint(this.config);
+  }
+
+  componentWillUnmount() {
+    this.control.destroy();
+  }
+
+  centralizedUpdates = ({ name, data }) => {
+    const configName = Util.firstLowerCase(name);
+    this.config[configName] = data;
+  }
+
+  render() {
+    const { children } = this.props;
+    return children || null;
   }
 }
 

@@ -1,45 +1,8 @@
 import BaseOverlay from './BaseOverlay';
-import { getPoint, bindEvents, processBooleanOptions } from '../_base/util';
-import ReactComponent from '../ReactComponent';
+import { Circle as BCircle } from '../../core';
 
-@ReactComponent
 class Circle extends BaseOverlay {
-  init() {
-    const {
-      point,
-      radius,
-      strokeColor,
-      fillColor,
-      strokeWeight,
-      strokeOpacity,
-      fillOpacity,
-      strokeStyle,
-      massClear = true,
-      editing = false,
-      clicking = true,
-      events,
-    } = this.props;
-
-    const opts = {
-      strokeColor,
-      fillColor,
-      strokeWeight,
-      strokeOpacity,
-      fillOpacity,
-      strokeStyle,
-      enableClicking: clicking,
-    };
-
-    this.instance = new global.BMap.Circle(getPoint(point.lng, point.lat), radius, opts);
-    this.map.addOverlay(this.instance);
-
-    const booleanOpts = {
-      editing,
-      massClear,
-    };
-    processBooleanOptions(this.instance, 'CIRCLE_BOOLEAN_OPTIONS', booleanOpts);
-    bindEvents(this.instance, 'CIRCLE', events);
-  }
+  getRealOverlay = () => new BCircle(this.config, this.mapInstance)
 }
 
 export default Circle;

@@ -1107,9 +1107,21 @@ bmaplib.markerclusterer@^1.0.13:
   dependencies:
     bmaplib.texticonoverlay "^1.0.2"
 
+bmaplib.new-distancetool@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/bmaplib.new-distancetool/download/bmaplib.new-distancetool-1.0.0.tgz#ad146d843d1dad0a210d762f115c23fc71a3a5d0"
+
+bmaplib.new-drawingmanager@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/bmaplib.new-drawingmanager/download/bmaplib.new-drawingmanager-1.0.0.tgz#fb9022ec0df24269c2a86f08525376e6a162e0ef"
+
 bmaplib.texticonoverlay@^1.0.2:
   version "1.0.2"
   resolved "http://registry.npm.taobao.org/bmaplib.texticonoverlay/download/bmaplib.texticonoverlay-1.0.2.tgz#d78546ea0f036d9fe964983796315b6c112a05bf"
+
+bmaplib.trafficcontrol@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/bmaplib.trafficcontrol/download/bmaplib.trafficcontrol-1.0.0.tgz#bf4eaa93600e74eef1d5cabc935c92295fe4ef74"
 
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
@@ -1458,13 +1470,9 @@ color-name@1.1.1:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/color-name/download/color-name-1.1.1.tgz#4b1415304cf50028ea81643643bd82ea05803689"
 
-commander@^2.11.0:
+commander@^2.11.0, commander@^2.14.1, commander@^2.9.0:
   version "2.17.1"
   resolved "http://registry.npm.taobao.org/commander/download/commander-2.17.1.tgz#bd77ab7de6de94205ceacc72f1716d29f20a77bf"
-
-commander@^2.14.1, commander@^2.9.0:
-  version "2.17.1"
-  resolved "https://registry.npmjs.org/commander/-/commander-2.17.1.tgz#bd77ab7de6de94205ceacc72f1716d29f20a77bf"
 
 commondir@^1.0.1:
   version "1.0.1"
@@ -3367,6 +3375,10 @@ locate-path@^3.0.0:
 lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "http://registry.npm.taobao.org/lodash.debounce/download/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+
+lodash.isequal@^4.5.0:
+  version "4.5.0"
+  resolved "http://registry.npm.taobao.org/lodash.isequal/download/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
 
 lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0:
   version "4.17.10"

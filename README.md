@@ -10,48 +10,43 @@
 
 ## 文档
 
+1.0.0文档地址
+[https://jser.wang/bmap/](https://jser.wang/bmap/)
+
+0.2.4文档地址
 [https://bmap.jser-club.com](https://bmap.jser-club.com)
-
-## 开始
-
-### 安装
-
-```bash
-yarn add rc-bmap # 或者：npm install --save rc-bmap
-```
-
-### 使用
-``` js
-import React from 'react';
-import { render } from 'react-dom';
-import { Map } from 'rc-bmap';
-
-render(<Map ak="WAeVpuoSBH4NswS30GNbCRrlsmdGB5Gv" />, 
-  document.getElementById('app')
-);
-
-```
-
-更多用法，见[官网](https://bmap.jser-club.com)。
-
-更多示例，见[示例](https://bmap.jser-club.com/examples/)
 
 ## 协议
 
 [MIT 许可证](https://opensource.org/licenses/MIT)
 
-## 如何本地启动demo
+## 本地开发
 
-* 进入`examples`目录，执行 
+与`demo`结合的最佳实践：
 
-```bash
-yarn install # 安装相关依赖
-npm run dev # 启动本地服务
-```
-
-## 如何启动本地文档
-* 进入`docs`目录，执行
-
-```bash
-vuepress dev # 文档由vuepress驱动
-```
+1. 将`demo`工程`clone`至本地。
+  ``` bash
+  git clone https://github.com/jser-club/rc-bmap-demo.git
+  ```
+2. 安装`demo`工程所需依赖。
+  ``` bash
+  cd 你刚clone的工程目录
+  yarn install
+  ```
+3. 进入`rc-bmap`工程的目录，执行
+  ``` bash
+  yarn link
+  ```
+4. 进入`rc-bmap-dmeo`工程目录执行
+  ``` bash
+  yarn link rc-bmap
+  ```
+5. 修改完`rc-bmap`的源码后，在`rc-bmap`工程执行
+  ``` bash
+  yarn run build
+  ```
+  如果在windows系统下
+  ```bash
+  yarn run build_win
+  ```
+6. 在`demo`重新点击按钮运行，即可看到最新修改后的效果

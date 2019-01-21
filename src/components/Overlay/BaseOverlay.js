@@ -1,43 +1,59 @@
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import { Util } from '../../core';
 
-import { render as reactRender } from 'react-dom';
-import { unBindEvents } from '../_base/util';
-
-class BaseOverlay {
-  constructor(props) {
-    this.props = props;
-    this.state = {};
-    this.map = global.bMapInstance;
-
-    this.init();
+class BaseOverlay extends PureComponent {
+  static contextTypes = {
+    getMapInstance: PropTypes.func,
   }
 
-  removeOverlay() {
-    if (this.instance instanceof global.BMap.InfoWindow) {
-      this.map.closeInfoWindow();
-    } else {
-      this.map.removeOverlay(this.instance);
+  static childContextTypes = {
+    centralizedUpdates: PropTypes.func,
+  }
+
+  overlay = null
+
+  mapInstance = null
+
+  config = {}
+
+  getChildContext() {
+    return {
+      centralizedUpdates: this.centralizedUpdates,
+    };
+  }
+
+  componentDidMount() {
+    const { context, props } = this;
+    const { children, ...resetProps } = props;
+    this.config = { ...this.config, ...resetProps };
+    this.mapInstance = context.getMapInstance();
+    const overlay = this.getRealOverlay();
+    this.overlay = overlay;
+    this.instance = overlay.instance;
+  }
+
+  componentDidUpdate() {
+    const { children, ...resetProps } = this.props;
+    this.config = { ...this.config, ...resetProps };
+    this.overlay.repaint({ ...this.config });
+  }
+
+  componentWillUnmount() {
+    this.overlay.destroy();
+  }
+
+  centralizedUpdates = ({ name, data }) => {
+    const configName = Util.firstLowerCase(name);
+    this.config[configName] = data;
+  }
+
+  render() {
+    const { children } = this.props;
+    if (children) {
+      return <div>{children}</div>;
     }
-  }
-
-  onPropsUpdate(newProps) {
-    this.props = newProps;
-    unBindEvents(this.instance);
-    this.destroy();
-    this.init();
-  }
-
-  setState(param) {
-    if (param !== null) {
-      this.state = Object.assign(this.state, param);
-    }
-    if (this.render) {
-      reactRender(this.render(), this.container);
-    }
-  }
-
-  destroy() {
-    this.removeOverlay();
-    this.instance = null;
+    return null;
   }
 }
 

@@ -1,30 +1,16 @@
+import React from 'react';
+import { CityList as BCityList } from '../../core';
 import BaseControl from './BaseControl';
-import { getSize } from '../_base/util';
-import ANCHOR from '../../constants/ControlAnchor';
-import ReactComponent from '../ReactComponent';
 
-@ReactComponent
 class CityList extends BaseControl {
-  init() {
-    const {
-      anchor = ANCHOR.TOP_LEFT,
-      offset = {
-        width: 0,
-        height: 0,
-      },
-      onChangeBefore,
-      onChangeAfter,
-    } = this.props;
+  getRealControl = () => new BCityList(this.config, this.mapInstance)
 
-    const opts = {
-      anchor: global[anchor],
-      offset: getSize(offset.width, offset.height),
-      onChangeBefore,
-      onChangeAfter,
-    };
-
-    this.instance = new global.BMap.CityListControl(opts);
-    this.map.addControl(this.instance);
+  render() {
+    const { children } = this.props;
+    if (children) {
+      return <div>{children}</div>;
+    }
+    return null;
   }
 }
 

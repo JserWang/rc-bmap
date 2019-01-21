@@ -1,31 +1,8 @@
+import { GroundOverlay as BGroundOverlay } from '../../core';
 import BaseOverlay from './BaseOverlay';
-import { bindEvents, getBounds } from '../_base/util';
-import ReactComponent from '../ReactComponent';
 
-@ReactComponent
 class Ground extends BaseOverlay {
-  init() {
-    const {
-      bounds,
-      opacity,
-      imageURL,
-      minZoom,
-      maxZoom,
-      events,
-    } = this.props;
-
-    const opts = {
-      opacity,
-      displayOnMinLevel: minZoom,
-      displayOnMaxLevel: maxZoom,
-    };
-
-    this.instance = new global.BMap.GroundOverlay(getBounds(bounds), opts);
-    this.map.addOverlay(this.instance);
-
-    this.instance.setImageURL(imageURL);
-    bindEvents(this.instance, 'GROUND', events);
-  }
+  getRealOverlay = () => new BGroundOverlay(this.config, this.mapInstance)
 }
 
 export default Ground;

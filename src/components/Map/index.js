@@ -1,228 +1,151 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import {
-  getPoint,
-  isPoint,
-  bindEvents,
-  processSetOptions,
-  createContextMenu,
-  processBooleanOptions,
-  unBindEvents,
-} from '../_base/util';
+import initMap, { Util } from '../../core';
+import ContextMenu from '../ContextMenu';
+import PlaceHolder from './PlaceHolder';
 
 const fillStyle = {
   width: '100%',
   height: '100%',
 };
 
-export default class Map extends React.Component {
-  static defaultProps = {
-    placeHolder: '地图加载中...',
-    // 与官方文档保持一致
-    dragging: true,
-    scrollWheelZoom: false,
-    doubleClickZoom: true,
-    keyboard: false,
-    inertialDragging: false,
-    continuousZoom: true,
-    pinchToZoom: true,
-    autoResize: true,
-    highResolution: true,
-    mapClick: true,
-    center: { lng: 116.404, lat: 39.915 },
-    zoom: 15,
-  };
+export default class Map extends PureComponent {
+  static PlaceHolder = PlaceHolder;
 
-  static propTypes = {
-    placeHolder: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]),
-    children: PropTypes.any,
-    ak: PropTypes.string,
-    minZoom: PropTypes.number,
-    maxZoom: PropTypes.number,
-    defaultCursor: PropTypes.string,
-    draggingCursor: PropTypes.string,
-    mapStyle: PropTypes.object,
-    center: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.object,
-    ]),
-    mapType: PropTypes.string,
-    zoom: PropTypes.number,
-    highResolution: PropTypes.bool,
-    autoResize: PropTypes.bool,
-    mapClick: PropTypes.bool,
-    mapMounted: PropTypes.func,
-    dragging: PropTypes.bool,
-    scrollWheelZoom: PropTypes.bool,
-    doubleClickZoom: PropTypes.bool,
-    keyboard: PropTypes.bool,
-    inertialDragging: PropTypes.bool,
-    continuousZoom: PropTypes.bool,
-    pinchToZoom: PropTypes.bool,
-    events: PropTypes.object,
-    contextMenu: PropTypes.object,
-  };
+  static ContextMenu = ContextMenu;
 
-  constructor(props) {
-    super(props);
-    // React 16
-    if (React.createRef) {
-      this.mapContainerRef = React.createRef();
-    } else {
-      this.mapContainerRef = (ref) => {
-        this.mapContainer = ref;
-      };
-    }
+  static childContextTypes = {
+    getMapInstance: PropTypes.func,
+    centralizedUpdates: PropTypes.func,
+  }
+
+  config = {}
+
+  // 仅用作config的组件
+  configComponent = ['Point', 'PlaceHolder']
+
+  getChildContext() {
+    return {
+      getMapInstance: this.getMapInstance,
+      centralizedUpdates: this.centralizedUpdates,
+    };
   }
 
   componentDidMount() {
-    const { ak } = this.props;
-    if (ak) {
-      this.getMapScript().then(this.init);
-    } else if (global.BMap) {
-      this.init(global.BMap);
-    } else {
-      console.warn('BMap is undefined');
+    const { children, ...resetProps } = this.props;
+    this.config = { ...this.config, ...resetProps };
+    this.createMapInstance(this.config);
+  }
+
+  componentDidUpdate() {
+    const { children, ...resetProps } = this.props;
+    this.config = { ...this.config, ...resetProps };
+    if (this.map) {
+      this.map.repaint(this.config);
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { map } = this;
-    if (map) {
-      const props = this.processProps(nextProps);
-      this.processMapOptions(props);
-      this.processContextMenu(props.contextMenu);
-      unBindEvents(map);
-      if (props.events) bindEvents(map, 'MAP', props.events);
-    }
+  /**
+   * 内部子组件属性更新触发方法
+   */
+  centralizedUpdates = ({ name, data }) => {
+    const configName = Util.firstLowerCase(name);
+    this.config[configName] = data;
   }
 
-  init = (BMap) => {
-    const {
-      highResolution, autoResize, mapClick, mapMounted, contextMenu, events, ...resetProps
-    } = this.props;
-    this.defaultCenter = getPoint(116.404, 39.915);
-    this.mapContainer = this.mapContainer || this.mapContainerRef.current;
-    const map = new BMap.Map(this.mapContainer, {
-      enableHighResolution: highResolution,
-      enableAutoResize: autoResize,
-      enableMapClick: mapClick,
-    });
-
-    this.map = map;
-    // 当初始化center为null或string时，保证地图正常渲染，用默认center处理centerAndZoom
-    if (!resetProps.center || typeof resetProps.center === 'string') {
-      map.centerAndZoom(this.defaultCenter, resetProps.zoom);
+  /**
+   * 初始化地图实例
+   */
+  createMapInstance = async (config) => {
+    const { mounted, name } = this.props;
+    this.map = await initMap(this.mapContainer, config);
+    const mapInstance = this.map.instance;
+    if (name) {
+      global[`${name}`] = mapInstance;
     }
-    this.processContextMenu(contextMenu);
-
-    global.bMapInstance = map;
-    this.processMapOptions(resetProps);
-    bindEvents(map, 'MAP', events);
-
-    // 地图配置完成后，强制刷新，渲染子组件
     this.forceUpdate(() => {
-      if (mapMounted) {
-        mapMounted(global.bMapInstance);
+      if (mounted) {
+        mounted(mapInstance);
       }
     });
   }
 
-  processContextMenu = (contextMenu) => {
-    if (contextMenu) {
-      this.menu = createContextMenu(contextMenu.items, contextMenu.events);
-      if (this.menu) {
-        this.map.removeContextMenu(this.menu);
-      }
-      this.map.addContextMenu(this.menu);
-    }
+  /**
+   * 获得地图容器ref
+   */
+  getMapContainer = (ref) => {
+    this.mapContainer = ref;
   }
 
-  processMapOptions = (props) => {
-    const { map } = this;
-    processSetOptions(map, 'MAP_SET_OPTIONS', props);
-    processBooleanOptions(map, 'MAP_BOOLEAN_OPTIONS', props);
-
-    if (props.center) {
-      let { center } = props;
-      if (isPoint(center)) {
-        center = getPoint(center.lng, center.lat);
-      }
-      if (props.zoom) {
-        map.centerAndZoom(center, props.zoom);
-      } else {
-        map.setCenter(center);
-      }
-    }
-
-    if (props.mapType) {
-      map.setMapType(global[props.mapType]);
-    }
-  }
-
-  getMapScript = () => {
-    const { ak } = this.props;
-    global.BMap = global.BMap || {};
-    if (Object.keys(global.BMap).length === 0) {
-      global.BMap._preloader = new Promise((resolve) => {
-        const $script = document.createElement('script');
-        global.document.body.appendChild($script);
-        global._initBaiduMap = function initBaiduMap() {
-          resolve(global.BMap);
-          global.document.body.removeChild($script);
-          global.BMap._preloader = null;
-          global._initBaiduMap = null;
-        };
-
-        $script.src = `https://api.map.baidu.com/api?v=3.0&ak=${ak}&callback=_initBaiduMap`;
-      });
-
-      return global.BMap._preloader;
-    } if (!global.BMap._preloader) {
-      return Promise.resolve(global.BMap);
-    }
-    return global.BMap._preloader;
-  }
-
-
-  processProps(nextProps) {
-    const { center, zoom } = this.props;
-    const props = Object.assign({}, nextProps);
-    if (JSON.stringify(props.center) === JSON.stringify(center)) {
-      delete props.center;
-    }
-
-    if (props.zoom === zoom) {
-      delete props.zoom;
-    }
-    return props;
-  }
+  /**
+   * 获得地图实例
+   */
+  getMapInstance = () => this.map && this.map.instance
 
   renderChildren = () => {
     const { children } = this.props;
-    if (!this.map || !children) {
-      return null;
-    }
     return React.Children.map(children, (child) => {
-      if (child) {
-        return React.cloneElement(child);
+      if (this.map || (child && this.configComponent.indexOf(child.type.displayName) > -1)) {
+        return child;
       }
       return null;
     });
   }
 
   render() {
-    const { placeHolder } = this.props;
     return (
-      <div style={fillStyle}>
-        <div ref={this.mapContainerRef} style={fillStyle}>
-          {placeHolder}
-        </div>
-        {this.renderChildren()}
+      <div ref={this.getMapContainer} style={fillStyle}>
+        { this.renderChildren() }
       </div>
     );
   }
 }
+
+
+Map.propTypes = {
+  // 
+  ak: PropTypes.string,
+  // 地图实例别名
+  // 设置后可通过window[name]进行获取
+  name: PropTypes.string,
+  // 当前缩放等级
+  zoom: PropTypes.number,
+  // 当前百度地图版本, 2 or 3
+  version: PropTypes.number,
+  // 最小缩放等级
+  minZoom: PropTypes.number,
+  // 最大缩放等级
+  maxZoom: PropTypes.number,
+  // 设置地图默认的鼠标指针样式
+  defaultCursor: PropTypes.string,
+  // 设置拖拽地图时的鼠标指针样式
+  draggingCursor: PropTypes.string,
+  // 设置地图样式，样式包括地图底图颜色和地图要素是否展示两部分
+  mapStyle: PropTypes.object,
+  // 设置地图个性化样式V2版本，仅支持现代浏览器（支持Canvas）
+  mapStyleV2: PropTypes.object,
+  // 设置地图类型
+  mapType: PropTypes.string,
+  // 地图初始化完成回调函数
+  mounted: PropTypes.func,
+  // 是否启用使用高分辨率地图
+  highResolution: PropTypes.bool,
+  // 自动适应地图容器变化
+  autoResize: PropTypes.bool,
+  // 地图可点
+  mapClick: PropTypes.bool,
+  // 拖拽
+  dragging: PropTypes.bool,
+  // 滚轮缩放
+  scrollWheelZoom: PropTypes.bool,
+  // 双击放大
+  doubleClickZoom: PropTypes.bool,
+  // 键盘操作
+  keyboard: PropTypes.bool,
+  // 惯性拖拽
+  inertialDragging: PropTypes.bool,
+  // 连续缩放
+  continuousZoom: PropTypes.bool,
+  // 双指操作
+  pinchToZoom: PropTypes.bool,
+};
