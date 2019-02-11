@@ -1,10 +1,6 @@
-import React, { PureComponent } from 'react';
+import { PureComponent } from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-
-const containerStyle = {
-  position: 'absolute',
-  top: -10000,
-};
 
 class HTMLComponent extends PureComponent {
   static contextTypes = {
@@ -13,20 +9,26 @@ class HTMLComponent extends PureComponent {
 
   static displayName = 'HTMLComponent';
 
+  constructor(props) {
+    super(props);
+    this.div = document.createElement('div');
+  }
+
   componentDidMount() {
     const { context } = this;
-    this.instance = this.content.innerHTML;
+    ReactDOM.render(this.props.children, this.div);
     context.centralizedUpdates({
       name: this.name,
-      data: this.content.innerHTML,
+      data: this.div,
     });
   }
 
   componentDidUpdate() {
     const { context } = this;
+    ReactDOM.render(this.props.children, this.div);
     context.centralizedUpdates({
       name: this.name,
-      data: this.content.innerHTML,
+      data: this.div,
     });
   }
 
@@ -38,17 +40,8 @@ class HTMLComponent extends PureComponent {
     });
   }
 
-  getContent = (ref) => {
-    this.content = ref;
-  }
-
   render() {
-    const { children } = this.props;
-    return (
-      <div ref={this.getContent} style={containerStyle}>
-        { children || null }
-      </div>
-    );
+    return null;
   }
 }
 
