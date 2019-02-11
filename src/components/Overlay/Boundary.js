@@ -12,6 +12,7 @@ class Boundary extends PureComponent {
   }
 
   state = {
+    name: '',
     area: [],
   }
 
@@ -22,16 +23,16 @@ class Boundary extends PureComponent {
 
   componentDidUpdate() {
     const { name } = this.props;
-    if (name !== this.name) {
+    if (name !== this.state.name) {
       this.getPoints(name);
     }
   }
 
   getPoints = (name) => {
     Util.getBoundary(name).then(({ points, area }) => {
-      this.name = name;
       this.processAutoViewport(points);
       this.setState({
+        name,
         area,
       });
     });
@@ -46,7 +47,7 @@ class Boundary extends PureComponent {
   }
 
   render() {
-    const { area } = this.state;
+    const { area, name } = this.state;
     const { children, ...resetProps } = this.props;
     return (
       area.length > 0 ? (
@@ -54,7 +55,7 @@ class Boundary extends PureComponent {
           {
             area.map((points, index) => (
               <Polygon
-                key={index}
+                key={`${name}_${index}`}
                 {...resetProps}
               >
                 <Path>
