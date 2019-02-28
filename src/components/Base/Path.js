@@ -62,7 +62,8 @@ export default class Path extends PureComponent {
   }
 
   removePoint = (index) => {
-    // fix sync call removePoint cause index confusion
+    // Fix sync call removePoint cause index confusion
+    // https://github.com/jser-club/rc-bmap/issues/92
     this.items.splice(index, 1, undefined);
   }
 
