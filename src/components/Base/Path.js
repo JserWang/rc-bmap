@@ -34,9 +34,10 @@ export default class Path extends PureComponent {
 
   componentDidUpdate() {
     const { context } = this;
+    // filter undefined item
     context.centralizedUpdates({
       name: 'path',
-      data: [...this.items],
+      data: [...this.items.filter(i => i)],
     });
   }
 
@@ -61,7 +62,8 @@ export default class Path extends PureComponent {
   }
 
   removePoint = (index) => {
-    this.items.splice(index, 1);
+    // fix sync call removePoint cause index confusion
+    this.items.splice(index, 1, undefined);
   }
 
   renderChildren = () => React.Children.map(this.props.children, (child, index) => {
