@@ -37,6 +37,8 @@ class BaseOverlay extends PureComponent {
     const { children, ...resetProps } = this.props;
     this.config = { ...this.config, ...resetProps };
     this.overlay.repaint({ ...this.config });
+    // repaint will update this.config
+    this.config = { ...this.overlay.config };
   }
 
   componentWillUnmount() {
