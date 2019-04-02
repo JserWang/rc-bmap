@@ -1,6 +1,6 @@
-import HTMLComponent from '../HTMLComponent';
+import HTMLStringComponent from '../HTMLStringComponent';
 
-class Content extends HTMLComponent {
+class Content extends HTMLStringComponent {
   name = 'content'
 }
 
