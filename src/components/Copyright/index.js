@@ -1,6 +1,11 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
+const containerStyle = {
+  position: 'absolute',
+  top: -10000,
+};
+
 export default class Copyright extends PureComponent {
   static contextTypes = {
     getMapInstance: PropTypes.func,
@@ -44,7 +49,7 @@ export default class Copyright extends PureComponent {
   render() {
     const { children } = this.props;
     return (
-      <div ref={this.getContainer}>
+      <div ref={this.getContainer} style={containerStyle}>
         {children}
       </div>
     );
