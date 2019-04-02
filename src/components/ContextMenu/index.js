@@ -63,11 +63,11 @@ export default class ContextMenu extends PureComponent {
   }
 
   removeMenuItem = (index) => {
-    this.menuItems.splice(index, 1);
+    this.menuItems.splice(index, 1, undefined);
   }
 
   repaint = () => {
-    this.instance = BMapUtil.BContextMenu(this.menuItems);
+    this.instance = BMapUtil.BContextMenu([...this.menuItems.filter(i => i)]);
   }
 
   renderChildren = () => React.Children.map(this.props.children, (child, index) => {

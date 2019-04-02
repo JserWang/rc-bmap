@@ -39,10 +39,13 @@ class CopyrightControl extends BaseControl {
   }
 
   removeCopyright = (index) => {
-    this.config.copyrights.splice(index, 1);
+    this.config.copyrights.splice(index, 1, undefined);
   }
 
-  getRealControl = () => new BCopyright(this.config, this.mapInstance)
+  getRealControl = () => {
+    this.config.copyrights = this.config.copyrights.filter(item => item);
+    return new BCopyright(this.config, this.mapInstance)
+  }
 
   renderChildren = () => React.Children.map(this.props.children, (child, index) => {
     if (child) {
