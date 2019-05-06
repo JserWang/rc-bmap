@@ -260,8 +260,36 @@ const processControlVisible = (target, visible) => {
   return null;
 };
 
+const libScriptsMap = {};
+/**
+ * 同步请求第三方script
+ * @param {*} src script链接
+ *
+ * 此处保证每个script在整个文档流中有且只有一个，不重复添加
+ */
+const syncScript = (src) => {
+  let scriptLoader = libScriptsMap[src];
+  if (!scriptLoader) {
+    // eslint-disable-next-line no-multi-assign
+    libScriptsMap[src] = scriptLoader = new Promise((resolved) => {
+      const script = document.createElement('script');
+      script.src = src;
+      // eslint-disable-next-line no-multi-assign
+      script.onload = script.onreadystatechange = function loaded() {
+        // for IE
+        if (!this.readyState || this.readyState === 'loaded' || this.readyState === 'complete') {
+          resolved();
+        }
+      };
+      document.head.appendChild(script);
+    });
+  }
+
+  return scriptLoader;
+};
 
 export default {
+  syncScript,
   isPoint,
   isBPoint,
   isSize,
