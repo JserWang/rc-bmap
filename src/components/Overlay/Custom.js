@@ -4,6 +4,11 @@ import BaseOverlay from './BaseOverlay';
 
 const { MAP_PANES } = Constants;
 
+// fix: #106 the custom overlay's container position should be absolute
+const containerStyle = {
+  position: 'absolute',
+};
+
 const CustomHOC = WrappedComponent => class extends BaseOverlay {
   config = {}
 
@@ -31,9 +36,13 @@ const CustomHOC = WrappedComponent => class extends BaseOverlay {
     const { container, mapInstance } = this;
     const { point } = this.config;
     const bdPoint = Util.convert2BPoint({ ...point });
+    // 当地图scroll时，container的高度为0 宽度为0，导致计算出现错误，所以存储上次有效宽高
+    this.lastWidth = container.offsetWidth > 0 ? container.offsetWidth : this.lastWidth;
+    this.lastHeight = container.offsetHeight > 0 ? container.offsetHeight : this.lastHeight;
+
     const position = mapInstance.pointToOverlayPixel(bdPoint);
-    container.style.left = `${position.x - (container.offsetWidth / 2)}px`;
-    container.style.top = `${position.y - (container.offsetHeight / 2)}px`;
+    container.style.left = `${position.x - (this.lastWidth / 2)}px`;
+    container.style.top = `${position.y - (this.lastHeight / 2)}px`;
   }
 
   render() {
@@ -41,7 +50,7 @@ const CustomHOC = WrappedComponent => class extends BaseOverlay {
     const { children } = this.props;
     return (
       <div>
-        <div ref={this.getContainer}>
+        <div ref={this.getContainer} style={containerStyle}>
           <WrappedComponent
             map={context.getMapInstance()}
             {...this.props}
