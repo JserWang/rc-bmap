@@ -26,6 +26,7 @@ import AutoComplete from './AutoComplete';
 import Constants from './constants';
 import TileLayer from './Layer/TileLayer';
 import TrafficLayer from './Layer/TrafficLayer';
+import DistanceTool from './Library/DistanceTool';
 
 export {
   BMapUtil,
@@ -55,6 +56,7 @@ export {
   Symbol,
   TileLayer,
   TrafficLayer,
+  DistanceTool,
 };
 
 const addBMapScript = (ak, version = 3) => {

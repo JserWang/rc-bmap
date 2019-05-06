@@ -42,5 +42,10 @@ export { default as Boundary } from './components/Overlay/Boundary';
 export { default as TileLayer } from './components/Layer/TileLayer';
 export { default as TrafficLayer } from './components/Layer/TrafficLayer';
 
+/**
+ *
+ */
+export { default as DistanceTool } from './components/Library/DistanceTool/';
+
 export { default as Constants } from './core/constants';
 export { default as BMapUtil } from './core/utils/map';
