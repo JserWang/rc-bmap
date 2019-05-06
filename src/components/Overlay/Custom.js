@@ -40,12 +40,14 @@ const CustomHOC = WrappedComponent => class extends BaseOverlay {
     const { context } = this;
     const { children } = this.props;
     return (
-      <div ref={this.getContainer}>
-        <WrappedComponent
-          map={context.getMapInstance()}
-          {...this.props}
-        />
-        { children }
+      <div>
+        <div ref={this.getContainer}>
+          <WrappedComponent
+            map={context.getMapInstance()}
+            {...this.props}
+          />
+          { children }
+        </div>
       </div>
     );
   }
