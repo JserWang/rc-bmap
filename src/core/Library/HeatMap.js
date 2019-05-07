@@ -15,29 +15,24 @@ class HeatMap {
     const options = getHeatMapOptions(config);
     this.instance = new global.BMapLib.HeatmapOverlay(options);
     this.map.addOverlay(this.instance);
-    if (config.data) {
-      this.instance.setDataSet({
-        max: config.max,
-        data: config.data,
-      });
-    }
+    this.setData(config);
   }
 
   repaint = (config) => {
     if (this.instance) {
       const options = getHeatMapOptions(config);
       this.instance.setOptions(options);
-      if (config.data) {
-        this.instance.setDataSet({
-          max: config.max,
-          data: config.data,
-        });
-      }
+      this.setData(config);
     }
   }
 
-  setData = () => {
-
+  setData = (config) => {
+    if (config.data) {
+      this.instance.setDataSet({
+        max: config.max,
+        data: config.data,
+      });
+    }
   }
 
   destroy = () => {
