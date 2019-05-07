@@ -27,6 +27,7 @@ import Constants from './constants';
 import TileLayer from './Layer/TileLayer';
 import TrafficLayer from './Layer/TrafficLayer';
 import DistanceTool from './Library/DistanceTool';
+import HeatMap from './Library/HeatMap';
 
 export {
   BMapUtil,
@@ -57,6 +58,7 @@ export {
   TileLayer,
   TrafficLayer,
   DistanceTool,
+  HeatMap,
 };
 
 const addBMapScript = (ak, version = 3) => {

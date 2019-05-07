@@ -14,25 +14,25 @@ export default class Point extends Common {
   componentDidMount() {
     const { context } = this;
     const {
-      index, lng, lat, name = 'point',
+      index, name = 'point', ...resetProps
     } = this.props;
     // 若存在addPoint，则证明在Path下，不进行统一数据变更逻辑
     if (context.addPoint) {
-      context.addPoint(index, { lng, lat });
+      context.addPoint(index, { ...resetProps });
     } else {
-      this.centralizedUpdates(name, lng, lat);
+      this.centralizedUpdates(name, { ...resetProps });
     }
   }
 
   componentDidUpdate() {
     const { context } = this;
     const {
-      index, lng, lat, name = 'point',
+      index, name = 'point', ...resetProps
     } = this.props;
     if (context.updatePoint) {
-      context.updatePoint(index, { lng, lat });
+      context.updatePoint(index, { ...resetProps });
     } else {
-      this.centralizedUpdates(name, lng, lat);
+      this.centralizedUpdates(name, { ...resetProps });
     }
   }
 
@@ -44,13 +44,10 @@ export default class Point extends Common {
     }
   }
 
-  centralizedUpdates = (name, lng, lat) => {
+  centralizedUpdates = (name, item) => {
     this.context.centralizedUpdates({
       name,
-      data: {
-        lng,
-        lat,
-      },
+      data: item,
     });
   }
 }

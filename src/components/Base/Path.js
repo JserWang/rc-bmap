@@ -27,7 +27,7 @@ export default class Path extends PureComponent {
   componentDidMount() {
     const { context } = this;
     context.centralizedUpdates({
-      name: 'path',
+      name: this.props.name || 'path',
       data: [...this.items],
     });
   }
@@ -36,7 +36,7 @@ export default class Path extends PureComponent {
     const { context } = this;
     // filter undefined item
     context.centralizedUpdates({
-      name: 'path',
+      name: this.props.name || 'path',
       data: [...this.items.filter(i => i)],
     });
   }
@@ -44,7 +44,7 @@ export default class Path extends PureComponent {
   componentWillUnmount() {
     const { context } = this;
     context.centralizedUpdates({
-      name: 'path',
+      name: this.props.name || 'path',
       data: null,
     });
   }

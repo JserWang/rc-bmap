@@ -43,9 +43,10 @@ export { default as TileLayer } from './components/Layer/TileLayer';
 export { default as TrafficLayer } from './components/Layer/TrafficLayer';
 
 /**
- *
+ * 第三方开源库
  */
-export { default as DistanceTool } from './components/Library/DistanceTool/';
+export { default as DistanceTool } from './components/Library/DistanceTool';
+export { default as HeatMap } from './components/Library/HeatMap';
 
 export { default as Constants } from './core/constants';
 export { default as BMapUtil } from './core/utils/map';

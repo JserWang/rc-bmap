@@ -4,7 +4,7 @@ const getDistanceToolOptions = config => ({
   followText: config.followText || '单击确定地点，双击结束',
   unit: config.unit,
   lineColor: config.lineColor || 'red',
-  lineStroke: config.lineStroke,
+  lineStroke: config.lineStroke || 2,
   opacity: config.opacity,
   cursor: config.cursor,
   lineStyle: config.lineStyle,
@@ -20,7 +20,7 @@ class DistanceTool {
 
   init(config = {}) {
     const options = getDistanceToolOptions(config);
-    this.instance = new window.BMapLib.DistanceTool(this.map, options);
+    this.instance = new global.BMapLib.DistanceTool(this.map, options);
     this.processEvents(config.events);
   }
 
