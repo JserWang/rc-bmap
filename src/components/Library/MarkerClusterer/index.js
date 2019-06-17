@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {BMapUtil, Util} from '../../../core';
+import {Util} from '../../../core';
 import BMarkerClusterer from '../../../core/Library/MarkerClusterer'
 
 class MarkerClusterer extends PureComponent {
@@ -27,23 +27,7 @@ class MarkerClusterer extends PureComponent {
 
     const { children, ...resetProps } = this.props;
 
-    const markers = this.props.markers && this.props.markers.map(item => {
-      const point = Util.convert2BPoint(item);
-      return BMapUtil.BMarker(point);
-    });
-
-    const styles = this.props.styles && this.props.styles.map(item => {
-      return {
-        url: item.url,
-        size: item.size && BMapUtil.BSize({...item.size}),
-        anchor: item.anchor && BMapUtil.BSize({...item.anchor}),
-        offset: item.offset && BMapUtil.BSize({...item.offset}),
-        textSize: item.textSize,
-        textColor: item.textColor,
-      }
-    });
-
-    this.config = { ...this.config, ...resetProps, markers, styles};
+    this.config = { ...this.config, ...resetProps};
 
     Util.syncScript('https://api.map.baidu.com/library/TextIconOverlay/1.2/src/TextIconOverlay_min.js')
       .then(() => {
