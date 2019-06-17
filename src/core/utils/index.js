@@ -6,7 +6,7 @@ import BMapUtil from './map';
  * 是否为Marker
  * @param {*} marker
  */
-const isMarker = marker => !!marker.point;
+const isMarker = marker => marker.point;
 
 /**
  * 是否为BMap.Marker
