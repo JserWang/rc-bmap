@@ -1,6 +1,19 @@
 import isEqual from 'lodash.isequal';
 import BMapUtil from './map';
 
+
+/**
+ * 是否为Marker
+ * @param {*} marker
+ */
+const isMarker = marker => !!marker.point;
+
+/**
+ * 是否为BMap.Marker
+ * @param {*} marker
+ */
+const isBMarker = marker => isMarker(marker) && marker.equals;
+
 /**
  * 是否为Point
  * @param {*} point
@@ -142,6 +155,25 @@ const convert2BBounds = (bounds, propsName = 'bounds') => {
     bounds = BMapUtil.BBounds({ ...bounds });
   }
   return bounds;
+};
+
+/**
+ * 将传入值转换为 BMap.Marker
+ * @param {*} point 位置 { lng, lat }
+ * @param {*} propsName 用于错误提示
+ */
+const convert2BMarker = (marker, propsName = 'marker') => {
+  if (isNil(marker)) {
+    throw Error(`Missing property \`${propsName}\``);
+  }
+  if (!isMarker(marker)) {
+    throw Error(`The \`${propsName}\` property should be a literal value \`{ point }\``);
+  }
+  if (!isBMarker(marker)) {
+    const {point, ...opts} = marker;
+    marker = BMapUtil.BMarker(point, opts);
+  }
+  return marker;
 };
 
 /**
@@ -290,6 +322,8 @@ const syncScript = (src) => {
 
 export default {
   syncScript,
+  isMarker,
+  isBMarker,
   isPoint,
   isBPoint,
   isSize,
@@ -302,6 +336,7 @@ export default {
   convert2BPoint,
   convert2BSize,
   convert2BBounds,
+  convert2BMarker,
   bindEvents,
   unbindEvents,
   processSetOptions,
