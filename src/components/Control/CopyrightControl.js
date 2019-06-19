@@ -46,7 +46,6 @@ class CopyrightControl extends BaseControl {
   }
 
   getRealControl = () => {
-    console.log(this.config)
     this.config.copyrights = this.config.copyrights.filter(item => item);
     return new BCopyright(this.config, this.mapInstance)
   }
