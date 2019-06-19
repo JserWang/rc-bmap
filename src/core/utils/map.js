@@ -43,6 +43,7 @@ const BMapUtil = {
     return new global.BMap.CityListControl(opts);
   },
   BCopyrightControl(opts) {
+    console.log(opts)
     return new global.BMap.CopyrightControl(opts);
   },
   BNavigationControl(opts) {

@@ -9,17 +9,20 @@ class CopyrightControl extends BaseControl {
   static Copyright = Copyright;
 
   static childContextTypes = {
+    centralizedUpdates: PropTypes.func,
     addCopyright: PropTypes.func,
     updateCopyright: PropTypes.func,
     removeCopyright: PropTypes.func,
   }
 
-  config = {
-    copyrights: [],
+  constructor(props) {
+    super(props)
+    this.config.copyrights = [];
   }
 
   getChildContext() {
     return {
+      ...super.getChildContext(),
       addCopyright: this.addCopyright,
       updateCopyright: this.updateCopyright,
       removeCopyright: this.removeCopyright,
@@ -43,6 +46,7 @@ class CopyrightControl extends BaseControl {
   }
 
   getRealControl = () => {
+    console.log(this.config)
     this.config.copyrights = this.config.copyrights.filter(item => item);
     return new BCopyright(this.config, this.mapInstance)
   }
