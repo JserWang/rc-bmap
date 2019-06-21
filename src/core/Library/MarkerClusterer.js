@@ -38,12 +38,6 @@ class MarkerClusterer {
     });
 
     this.instance = new global.BMapLib.MarkerClusterer(this.map, {...options, markers, styles});
-    this.processEvents(config.events);
-  }
-
-  processEvents = (events) => {
-    Util.unbindEvents(this.instance);
-    Util.bindEvents(this.instance, events);
   }
 
   destroy = () => {

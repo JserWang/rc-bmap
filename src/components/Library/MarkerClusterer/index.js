@@ -48,7 +48,6 @@ class MarkerClusterer extends PureComponent {
     }
   }
 
-
   componentWillUnmount() {
     if (this.cluster) {
       this.cluster.destroy();

@@ -41,7 +41,6 @@ class HeatMap extends PureComponent {
     }
   }
 
-
   componentWillUnmount() {
     if (this.tool) {
       this.tool.destroy();
