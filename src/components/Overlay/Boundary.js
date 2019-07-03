@@ -18,6 +18,7 @@ class Boundary extends PureComponent {
 
   componentDidMount() {
     const { name } = this.props;
+    this.mounted = true;
     this.getPoints(name);
   }
 
@@ -28,13 +29,19 @@ class Boundary extends PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    this.mounted = false;
+  }
+
   getPoints = (name) => {
     Util.getBoundary(name).then(({ points, area }) => {
-      this.processAutoViewport(points);
-      this.setState({
-        name,
-        area,
-      });
+      if(this.mounted) {
+        this.processAutoViewport(points);
+        this.setState({
+          name,
+          area,
+        });
+      }
     });
   }
 

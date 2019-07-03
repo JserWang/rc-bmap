@@ -45,7 +45,6 @@ class DistanceTool extends PureComponent {
     }
   }
 
-
   componentWillUnmount() {
     if (this.tool) {
       this.tool.destroy();
