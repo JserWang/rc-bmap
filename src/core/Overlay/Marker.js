@@ -35,6 +35,8 @@ class Marker extends BaseOverlay {
 
     if (config.point) {
       config.position = Util.convert2BPoint(config.point);
+    } else {
+      return
     }
 
     Util.processSetOptions(this.instance, OPTIONS.SET, config);
