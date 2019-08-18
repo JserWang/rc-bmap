@@ -37,6 +37,10 @@ class BaseOverlay extends PureComponent {
     const { children, ...resetProps } = this.props;
     this.config = { ...this.config, ...resetProps };
     this.overlay.repaint({ ...this.config });
+    // fix: when the custom overlay change the point, overlay need redraw
+    if (this.draw) {
+      this.draw();
+    }
   }
 
   componentWillUnmount() {
