@@ -185,6 +185,10 @@ const BMapUtil = {
   getLocation(point) {
     return new Promise((resolve, reject) => {
       const geo = new global.BMap.Geocoder();
+      // change the point to bpoint
+      if (point.lng && point.lat) {
+        point = BMapUtil.BPoint(point);
+      }
       geo.getLocation(point, (result) => {
         if (result) {
           resolve(result);
