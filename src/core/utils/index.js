@@ -5,7 +5,7 @@ import BMapUtil from './map';
  * 是否为Point
  * @param {*} point
  */
-const isPoint = point => point.lng && point.lat;
+const isPoint = point => typeof point.lng === 'number' && typeof point.lng === 'number';
 
 /**
  * 是否为BMap.Point
@@ -17,7 +17,7 @@ const isBPoint = point => isPoint(point) && point.equals;
  * 是否为Size
  * @param {*} point
  */
-const isSize = size => size.width && size.height;
+const isSize = size => typeof size.width === 'number' && typeof size.height === 'number';
 
 /**
  * 是否为BMap.Size
@@ -29,7 +29,7 @@ const isBSize = size => isSize(size) && size.equals;
  * 是否为矩形范围
  * @param {*} bounds
  */
-const isBounds = bounds => bounds.sw && bounds.ne;
+const isBounds = bounds => typeof bounds.sw === 'number' && bounds.ne === 'number';
 
 /**
  * 是否为BMap.Bounds
