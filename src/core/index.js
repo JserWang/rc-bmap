@@ -28,6 +28,7 @@ import TileLayer from './Layer/TileLayer';
 import TrafficLayer from './Layer/TrafficLayer';
 import DistanceTool from './Library/DistanceTool';
 import HeatMap from './Library/HeatMap';
+import CurveLine from './Library/CurveLine';
 
 export {
   BMapUtil,
@@ -59,6 +60,7 @@ export {
   TrafficLayer,
   DistanceTool,
   HeatMap,
+  CurveLine,
 };
 
 const addBMapScript = (ak, version = 3) => {

@@ -47,6 +47,7 @@ export { default as TrafficLayer } from './components/Layer/TrafficLayer';
  */
 export { default as DistanceTool } from './components/Library/DistanceTool';
 export { default as HeatMap } from './components/Library/HeatMap';
+export { default as CurveLine } from './components/Library/CurveLine';
 
 export { default as Constants } from './core/constants';
 export { default as BMapUtil } from './core/utils/map';

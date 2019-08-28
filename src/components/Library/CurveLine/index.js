@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { HeatMap as BHeatMap, Util } from '../../../core';
+import { CurveLine as BCurveLine, Util } from '../../../core';
 
-class HeatMap extends PureComponent {
+class CurveLine extends PureComponent {
   static contextTypes = {
     getMapInstance: PropTypes.func,
   }
@@ -25,9 +25,9 @@ class HeatMap extends PureComponent {
     const { children, ...resetProps } = this.props;
     this.config = { ...this.config, ...resetProps };
 
-    Util.syncScript('https://api.map.baidu.com/library/Heatmap/2.0/src/Heatmap_min.js')
+    Util.syncScript('https://api.map.baidu.com/library/CurveLine/1.5/src/CurveLine.min.js')
       .then(() => {
-        this.tool = new BHeatMap({ ...this.config }, map);
+        this.tool = new BCurveLine({ ...this.config }, map);
         if (this.props.getInstance) {
           this.props.getInstance(this.tool.instance);
         }
@@ -64,4 +64,4 @@ class HeatMap extends PureComponent {
   }
 }
 
-export default HeatMap;
+export default CurveLine;

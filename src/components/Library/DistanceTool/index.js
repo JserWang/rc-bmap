@@ -40,7 +40,8 @@ class DistanceTool extends PureComponent {
 
   componentDidUpdate() {
     if (this.tool) {
-      this.config = { ...this.config };
+      const { children, ...resetProps } = this.props;
+      this.config = { ...this.config, ...resetProps };
       this.tool.init(this.config);
     }
   }
