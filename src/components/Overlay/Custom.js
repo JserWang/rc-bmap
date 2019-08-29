@@ -34,15 +34,15 @@ const CustomHOC = WrappedComponent => class extends BaseOverlay {
 
   draw = () => {
     const { container, mapInstance } = this;
-    const { point } = this.config;
+    const { point, offset = { width: 0, height: 0 } } = this.config;
     const bdPoint = Util.convert2BPoint({ ...point });
     // 当地图scroll时，container的高度为0 宽度为0，导致计算出现错误，所以存储上次有效宽高
     this.lastWidth = container.offsetWidth > 0 ? container.offsetWidth : this.lastWidth;
     this.lastHeight = container.offsetHeight > 0 ? container.offsetHeight : this.lastHeight;
 
     const position = mapInstance.pointToOverlayPixel(bdPoint);
-    container.style.left = `${position.x - (this.lastWidth / 2)}px`;
-    container.style.top = `${position.y - (this.lastHeight / 2)}px`;
+    container.style.left = `${position.x - this.lastWidth / 2 + offset.width / 2}px`;
+    container.style.top = `${position.y - this.lastHeight / 2 + offset.height / 2}px`;
   }
 
   render() {
