@@ -10,7 +10,7 @@
 
 ## 文档
 
-1.0.0文档地址:
+1.x文档地址:
 
 [http://jser.wang/bmap/](http://jser.wang/bmap/)
 
