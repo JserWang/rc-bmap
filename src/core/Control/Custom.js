@@ -36,7 +36,8 @@ class CustomControl {
   }
 
   destroy = () => {
-    this.map.removeControl(this);
+    // react will remove the node
+    // this.map.removeControl(this);
   }
 }
 
