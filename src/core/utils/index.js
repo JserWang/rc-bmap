@@ -7,7 +7,7 @@ const numberRe = /^[0-9]+.?[0-9]*/;
  * 是否为Point
  * @param {*} point
  */
-const isPoint = point => numberRe.test(point.lng) && typeof numberRe.test(point.lat);
+const isPoint = point => typeof point.lng === 'number' && typeof point.lat === 'number';
 
 /**
  * 是否为BMap.Point
@@ -19,7 +19,7 @@ const isBPoint = point => isPoint(point) && point.equals;
  * 是否为Size
  * @param {*} point
  */
-const isSize = size => numberRe.test(size.width) && typeof numberRe.test(size.height);
+const isSize = size => typeof size.width === 'number' && typeof size.height === 'number';
 
 /**
  * 是否为BMap.Size
@@ -31,7 +31,7 @@ const isBSize = size => isSize(size) && size.equals;
  * 是否为矩形范围
  * @param {*} bounds
  */
-const isBounds = bounds => numberRe.test(bounds.sw) && numberRe.test(bounds.ne);
+const isBounds = bounds => isPoint(bounds.sw) && isPoint(bounds.ne);
 
 /**
  * 是否为BMap.Bounds
