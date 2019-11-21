@@ -1,8 +1,6 @@
 import isEqual from 'lodash.isequal';
 import BMapUtil from './map';
 
-const numberRe = /^[0-9]+.?[0-9]*/;
-
 /**
  * 是否为Point
  * @param {*} point
