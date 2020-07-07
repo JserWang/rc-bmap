@@ -2,12 +2,13 @@ import isEqual from 'lodash.isequal';
 import BMapUtil from './map';
 
 const numberRe = /^[0-9]+.?[0-9]*/;
+const latLngRe = /^-?[0-9]+.?[0-9]*/;;
 
 /**
  * 是否为Point
  * @param {*} point
  */
-const isPoint = point => numberRe.test(point.lng) && typeof numberRe.test(point.lat);
+const isPoint = point => latLngRe.test(point.lng) && typeof latLngRe.test(point.lat);
 
 /**
  * 是否为BMap.Point
