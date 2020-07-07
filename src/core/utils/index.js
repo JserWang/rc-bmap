@@ -1,11 +1,14 @@
 import isEqual from 'lodash.isequal';
 import BMapUtil from './map';
 
+const numberRe = /^[0-9]+.?[0-9]*/;
+const latLngRe = /^-?[0-9]+.?[0-9]*/;;
+
 /**
  * 是否为Point
  * @param {*} point
  */
-const isPoint = point => typeof point.lng === 'number' && typeof point.lat === 'number';
+const isPoint = point => latLngRe.test(point.lng) && typeof latLngRe.test(point.lat);
 
 /**
  * 是否为BMap.Point
@@ -17,7 +20,7 @@ const isBPoint = point => isPoint(point) && point.equals;
  * 是否为Size
  * @param {*} point
  */
-const isSize = size => typeof size.width === 'number' && typeof size.height === 'number';
+const isSize = size => numberRe.test(size.width) && typeof numberRe.test(size.height);
 
 /**
  * 是否为BMap.Size
@@ -29,7 +32,7 @@ const isBSize = size => isSize(size) && size.equals;
  * 是否为矩形范围
  * @param {*} bounds
  */
-const isBounds = bounds => isPoint(bounds.sw) && isPoint(bounds.ne);
+const isBounds = bounds => numberRe.test(bounds.sw) && numberRe.test(bounds.ne);
 
 /**
  * 是否为BMap.Bounds
